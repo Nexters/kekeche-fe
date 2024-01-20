@@ -1,9 +1,7 @@
 import QueryClientContext from '@/context/QueryClientContext'
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import { pretendard } from '@/assets/fonts/pretendard'
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -79,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     rel="apple-touch-startup-image"
                 />
             </head>
-            <body className={inter.className}>
+            <body className={pretendard.className}>
                 <QueryClientContext>
                     <div
                         className="min-h-screen outline outline-1 outline-blue-500 md:w-[375px] flex flex-col mx-auto"
