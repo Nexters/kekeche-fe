@@ -1,7 +1,7 @@
+import QueryClientContext from '@/context/QueryClientContext'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import QueryClientContext from '@/context/QueryClientContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -80,7 +80,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 />
             </head>
             <body className={inter.className}>
-                <QueryClientContext>{children}</QueryClientContext>
+                <QueryClientContext>
+                    <div
+                        className="min-h-screen outline outline-1 outline-blue-500 md:w-[375px] flex flex-col mx-auto"
+                        style={{ minHeight: '100dvh' }}
+                    >
+                        {children}
+                    </div>
+                </QueryClientContext>
             </body>
         </html>
     )

@@ -1,7 +1,7 @@
 export default function Home() {
     return (
-        <main className="grid place-items-center min-h-screen">
+        <div className="grid place-items-center">
             <h1>캐릭캐릭 다이어리🧚‍♀️</h1>
-        </main>
+        </div>
     )
 }
