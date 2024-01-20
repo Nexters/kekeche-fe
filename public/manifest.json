@@ -1,0 +1,34 @@
+{
+    "id": "kekeche",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "name": "\uce90\ub9ad\uce90\ub9ad \ub2e4\uc774\uc5b4\ub9ac",
+    "short_name": "\uce90\ub9ad\uce90\ub9ad \ub2e4\uc774\uc5b4\ub9ac",
+    "description": "\ub098\ub9cc\uc758 \uc791\uc740 \uc138\uacc4\ub97c \ud3bc\uce58\ub294 \ud2b9\ubcc4\ud55c \uc77c\uae30",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/icons/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
