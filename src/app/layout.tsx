@@ -1,7 +1,7 @@
+import { pretendard } from '@/assets/fonts/pretendard'
 import QueryClientContext from '@/context/QueryClientContext'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import { pretendard } from '@/assets/fonts/pretendard'
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -78,14 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 />
             </head>
             <body className={pretendard.className}>
-                <QueryClientContext>
-                    <div
-                        className="min-h-screen outline outline-1 outline-blue-500 md:w-[375px] flex flex-col mx-auto"
-                        style={{ minHeight: '100dvh' }}
-                    >
-                        {children}
-                    </div>
-                </QueryClientContext>
+                <QueryClientContext>{children}</QueryClientContext>
             </body>
         </html>
     )
