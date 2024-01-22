@@ -15,7 +15,7 @@ export default function TabNavigator() {
     ]
 
     return (
-        <div className="w-full">
+        <nav className="w-full">
             <ul className="relative flex justify-around">
                 {Menus.map(({ name, IconComponent }, i) => (
                     <li key={i} className="flex-1 ">
@@ -28,6 +28,6 @@ export default function TabNavigator() {
                     </li>
                 ))}
             </ul>
-        </div>
+        </nav>
     )
 }
