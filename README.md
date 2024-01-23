@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 캐캐체 프론트 컨벤션 🧚
 
-## Getting Started
+code change tracking, 원활한 collabo를 위해 작성하였습니다.
 
-First, run the development server:
+# Git
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Step #1: GitHub Issue
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Issue Type은 `Bug`, `Feature`, `Chore` 세 가지로 나뉩니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- chore은 개발자를 위한 작업으로 정의되며 label을 활용하여 티켓을 관리합니다.
+- 프로젝트 시작 전, 수행해야 할 작업 목록을 이슈로 미리 생성하고 레이블을 적용합니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Step #3: Branch
 
-## Learn More
+하나의 이슈와 하나의 브랜치가 1대1 관계를 갖습니다.
 
-To learn more about Next.js, take a look at the following resources:
+merge conflict를 최소화하기 위해 마스터 브랜치에서 개인 브랜치로 자주 업데이트 해줍니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Backlog 중 작업할 이슈를 선택 후 담당자를를 자신으로 지정합니다.
+2. 보드에서 In Progress 탭으로 이동합니다.
+3. 이슈에 맞는 브랜치를 생성합니다.
+4. 브랜치 네이밍은 `{IssueType}/{IssueTitle}`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Step #4: Commit
 
-## Deploy on Vercel
+- 커밋 청크는 가능한 작게 유지하도록 노력합니다. 이는 코드 변경 내역을 파악하고 복구하기 원활한 범주로 본인이 판단합니다.
+- description은 짧고 간결하게 작성합니다.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Step #5: PR
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+브랜치가 완성되고 마스터 브랜치로 병합하기 전에 파트너에게 코드 리뷰를 신청하는 단계입니다.
+
+리뷰가 필요하면 PR을 생성하고 본문에 맥락 작성한 후 파트너에게 해당 사실을 알립니다.
+
+리뷰가 필요 없다면 직접 마스터 브랜치로 `Squash and merge`합니다.
+
+PR이 병합되면 이슈는 닫아줍니다.
+
+후작업이 남아있다면 유지합니다.
