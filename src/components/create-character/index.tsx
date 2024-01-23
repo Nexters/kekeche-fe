@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Header from './header';
 import Title from './title';
 import CreateCharacterProvider from '@/context/create-character-provider';
-import SelectShape from './select-shape/select-shape';
+import SelectShape from './steps/select-shape';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
 export default function CreateCharacterFunnel() {

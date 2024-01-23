@@ -1,12 +1,12 @@
 import { useContext } from 'react';
-import ShapeButton from './shape-button';
 import { CreateCharacterDispatchContext } from '@/context/create-character-provider';
+import { Shapes } from '@/components/create-character/constants/create-character-inputs';
 
 export default function SelectShape() {
     const dispatchContext = useContext(CreateCharacterDispatchContext);
 
     const handleClick = (colorId: number) => {
-        dispatchContext?.setValue('color', colorId);
+        dispatchContext?.setValue('shape', 0);
     };
 
     return (
@@ -14,8 +14,8 @@ export default function SelectShape() {
             {/**
              * TODO: 실제 색상 정보 추가
              */}
-            {[0, 1, 2, 3].map((colorId) => (
-                <ShapeButton key={colorId} onClick={() => handleClick(colorId)} colorId={colorId} />
+            {Shapes.map((shapeId) => (
+                <></>
             ))}
         </div>
     );
