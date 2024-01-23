@@ -34,6 +34,8 @@ export default function CreateCharacterProvider({ children }: Props) {
         [],
     );
 
+    console.log(createCharacterValues);
+
     // 렌더링 최적화
     const memoizedSetValue = useMemo(() => ({ setValue }), []);
 

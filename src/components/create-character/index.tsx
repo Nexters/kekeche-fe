@@ -8,6 +8,8 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import SelectShape from './steps/select-shape';
 import CtaButton from './cta-button';
 import Start from './steps/start';
+import SelectColor from './steps/select-color';
+import SetName from './steps/set-name';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -65,12 +67,13 @@ export default function CreateCharacterFunnel() {
                                 <Start />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center ">
+                                <SetName />
+                            </CarouselItem>
+                            <CarouselItem className="flex w-full flex-col items-center ">
                                 <SelectShape />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center">
-                                <Header onGoBack={handlePrevClick} />
-                                <Title text="캐릭터의 컬러를 고르세요" />
-                                <div>1</div> <button onClick={handleNextClick}>다음</button>
+                                <SelectColor />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center">
                                 <Header onGoBack={handlePrevClick} />
