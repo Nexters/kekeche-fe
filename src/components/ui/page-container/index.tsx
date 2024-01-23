@@ -8,7 +8,7 @@ type Props = {
 
 export default function PageContainer({ children, hasNavigator }: Props) {
     return (
-        <div className="bg-gray-100">
+        <div className="bg-[#f5f5f5]">
             <div
                 className="mx-auto flex min-h-screen w-full flex-col bg-white shadow-lg md:w-[375px]"
                 style={{ minHeight: '100dvh' }}
