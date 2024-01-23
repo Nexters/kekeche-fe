@@ -74,6 +74,7 @@ const config = {
         colors: {
             transparent: 'transparent',
             current: 'currentColor',
+            white: '#ffffff',
             gray: {
                 100: '#F8F8FB',
                 200: '#DFE2EA',
@@ -83,6 +84,7 @@ const config = {
                 600: '#4B4F58',
             },
             contentPrimaryLight: '#17171B',
+            backgroundSecondaryLight: '#F7F8F9',
         },
         fontSize: {
             bold24: [
