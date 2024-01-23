@@ -69,7 +69,113 @@ const config = {
             },
         },
         fontFamily: {
-            pretendard: ['var(--font-pretendard)'],
+            pretendard: ['var(--font-pretendard), -apple-system'],
+        },
+        colors: {
+            transparent: 'transparent',
+            current: 'currentColor',
+            gray: {
+                100: '#F8F8FB',
+                200: '#DFE2EA',
+                300: '#A6AAB4',
+                400: '#8E939E',
+                500: '#707683',
+                600: '#4B4F58',
+            },
+            contentPrimaryLight: '#17171B',
+        },
+        fontSize: {
+            bold24: [
+                '24px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '700',
+                },
+            ],
+            semibold24: [
+                '24px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '600',
+                },
+            ],
+            bold18: [
+                '18px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '700',
+                },
+            ],
+            semibold18: [
+                '18px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '600',
+                },
+            ],
+            regular18: [
+                '18px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '400',
+                },
+            ],
+            bold16: [
+                '16px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '700',
+                },
+            ],
+            semibold16: [
+                '16px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '600',
+                },
+            ],
+            regular16: [
+                '16px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '400',
+                },
+            ],
+            bold14: [
+                '14px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '700',
+                },
+            ],
+            semibold14: [
+                '14px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '600',
+                },
+            ],
+            regular14: [
+                '14px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '400',
+                },
+            ],
+            semibold10: [
+                '10px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '600',
+                },
+            ],
+            regular10: [
+                '10px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '400',
+                },
+            ],
         },
     },
     plugins: [require('tailwindcss-animate')],
