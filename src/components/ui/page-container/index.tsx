@@ -1,10 +1,10 @@
-import { ReactNode } from 'react'
-import TabNavigator from './tab-navigator'
+import { ReactNode } from 'react';
+import TabNavigator from './tab-navigator';
 
 type Props = {
-    children: ReactNode
-    hasNavigator?: boolean
-}
+    children: ReactNode;
+    hasNavigator?: boolean;
+};
 
 export default function PageContainer({ children, hasNavigator }: Props) {
     return (
@@ -21,5 +21,5 @@ export default function PageContainer({ children, hasNavigator }: Props) {
                 )}
             </div>
         </div>
-    )
+    );
 }

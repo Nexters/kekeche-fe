@@ -1,4 +1,3 @@
-import { Carousel, CarouselApi, CarouselContent } from '@/components/ui-shadcn/carousel';
 import { Colors, Shape, Personality } from '@/types/character';
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 
