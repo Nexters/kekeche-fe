@@ -6,6 +6,8 @@ import Title from './title';
 import CreateCharacterProvider from '@/context/create-character-provider';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import SelectShape from './steps/select-shape';
+import CtaButton from './cta-button';
+import Start from './steps/start';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -54,11 +56,15 @@ export default function CreateCharacterFunnel() {
         <>
             <CreateCharacterProvider>
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
-                    <Carousel setApi={setApi} opts={{ watchDrag: false, duration: 10 }}>
+                    <Carousel setApi={setApi} opts={{ watchDrag: false, duration: 20 }}>
                         <CarouselContent>
+                            <CarouselItem
+                                className="relative flex w-full flex-col items-center"
+                                style={{ minHeight: '100dvh' }}
+                            >
+                                <Start />
+                            </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center ">
-                                <Header onGoBack={() => router.push('/')} />
-                                <Title text="캐릭터의 모습을 고르세요" />
                                 <SelectShape />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center">
