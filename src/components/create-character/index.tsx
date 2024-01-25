@@ -1,8 +1,6 @@
 'use client';
 import { Carousel, CarouselContent, CarouselItem, CarouselApi } from '@/components/ui-shadcn/carousel';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import Header from './header';
-import Title from './title';
 import CreateCharacterProvider from '@/context/create-character-provider';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import SelectShape from './steps/select-shape';
@@ -10,6 +8,7 @@ import CtaButton from './cta-button';
 import Start from './steps/start';
 import SelectColor from './steps/select-color';
 import SetName from './steps/set-name';
+import SelectKeywords from './steps/select-keywords';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -51,14 +50,14 @@ export default function CreateCharacterFunnel() {
 
     useEffect(() => {
         // 뒤로가기 처리
-        api?.scrollTo(Number(searchParams.get('step')) ?? 0, true);
+        api?.scrollTo(Number(searchParams.get('step')) ?? 0);
     }, [searchParams]);
 
     return (
         <>
             <CreateCharacterProvider>
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
-                    <Carousel setApi={setApi} opts={{ watchDrag: false, duration: 20 }}>
+                    <Carousel setApi={setApi} >
                         <CarouselContent>
                             <CarouselItem
                                 className="relative flex w-full flex-col items-center"
@@ -66,7 +65,7 @@ export default function CreateCharacterFunnel() {
                             >
                                 <Start />
                             </CarouselItem>
-                            <CarouselItem className="flex w-full flex-col items-center ">
+                            <CarouselItem className="flex w-full flex-col ">
                                 <SetName />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center ">
@@ -76,9 +75,7 @@ export default function CreateCharacterFunnel() {
                                 <SelectColor />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center">
-                                <Header onGoBack={handlePrevClick} />
-                                <Title text="캐릭터의 성격을 고르세요" />
-                                <div>2</div> <button onClick={handleNextClick}>다음</button>
+                                    <SelectKeywords />
                             </CarouselItem>
                         </CarouselContent>
                     </Carousel>

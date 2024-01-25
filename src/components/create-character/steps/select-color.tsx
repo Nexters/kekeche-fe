@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { CarouselDispatchContext } from '..';
 import Header from '../header';
-import Title from '../title';
+import Intro from '../intro';
 import { Colors } from '../constants/create-character-inputs';
 import { CreateCharacterDispatchContext } from '@/context/create-character-provider';
 
@@ -21,7 +21,7 @@ export default React.memo(function SelectColor() {
                     carouselDispatch?.handlePrevClick();
                 }}
             />
-            <Title text="캐릭터의 컬러를 고르세요" />
+            <Intro title="캐릭터의 컬러를 고르세요" />
             <div className="grid grid-cols-2 gap-[16px]">
                 {Colors.map(({ id, hexClassName }) => (
                     <button

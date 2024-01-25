@@ -3,7 +3,7 @@ import CtaButton from '../cta-button';
 import Header from '../header';
 import { CarouselDispatchContext } from '..';
 import { CreateCharacterDispatchContext } from '@/context/create-character-provider';
-import Title from '../title';
+import Intro from '../intro';
 
 export default React.memo(function SetName() {
     const createCharacterDispatch = useContext(CreateCharacterDispatchContext);
@@ -27,16 +27,15 @@ export default React.memo(function SetName() {
                     carouselDispatch?.handlePrevClick();
                 }}
             />
-            <Title text="캐릭터의 이름을 정해 주세요." />
-            <p className="text-regular16 mt-[8px] w-[327px] text-left text-[#6B7180]">캐릭터의 이름을 작성해 주세요.</p>
+            <Intro title="캐릭터의 이름을 정해 주세요." description='한글, 영문 대소문자. 공백 포함 최대 8자.' />
             <input
-                className="mt-[24px] h-[48px] w-[312px] rounded-[12px] border border-[#E8EAEE] bg-[#F7F8F9] px-[16px] py-[12px]"
+                className="ml-[24px] h-[48px] w-[312px]  rounded-[12px] border border-[#E8EAEE] bg-[#F7F8F9] px-[16px] py-[12px]"
                 value={name}
                 onChange={handleNameChange}
                 placeholder="이름 작성"
             />
-            <p className="color-[#17171B] mt-[30px] w-[327px] text-[20px] font-[700]">예시</p>
-            <div className="mt-[32px] flex gap-[12px]">
+            <p className="ml-[24px]  color-[#17171B] mt-[30px] w-[327px] text-[20px] font-[700]">예시</p>
+            <div className="ml-[24px]  mt-[32px] flex gap-[12px]">
                 <div className="text-semibold16 flex h-[64px] w-[157.5px] items-center justify-center rounded-[12px] bg-[#F7F8F9] text-[#171718]">
                     나는야 패피
                 </div>
