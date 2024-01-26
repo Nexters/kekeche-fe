@@ -20,7 +20,7 @@ export default React.memo(function Start() {
             />
             <Intro title="캐릭터 만들기 시작할 거임" />
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton text="시작" onClick={handleNextClick} />
+                <CtaButton text="가자" onClick={handleNextClick} />
             </FixedBottomArea>
         </>
     );

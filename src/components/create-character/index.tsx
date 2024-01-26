@@ -12,7 +12,7 @@ import SelectItem from './steps/select-item';
 import ShowResult from './steps/show-result';
 import GuideToLogin from './steps/guide-to-login';
 import Login from './steps/login';
-import Step from './item';
+import StepContainer from './step-container';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -20,6 +20,18 @@ interface CarouselDispatch {
 }
 
 export const CarouselDispatchContext = createContext<null | CarouselDispatch>(null);
+
+const STEPS: React.ReactNode[] = [
+    <Start key={0} />,
+    <SetName key={1} />,
+    <SelectShape key={2} />,
+    <SelectColor key={3} />,
+    <SelectKeywords key={4} />,
+    <SelectItem key={5} />,
+    <ShowResult key={6} />,
+    <GuideToLogin key={7} />,
+    <Login key={8} />,
+];
 
 export default function CreateCharacter() {
     const router = useRouter();
@@ -67,33 +79,9 @@ export default function CreateCharacter() {
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
                     <Carousel setApi={setApi} opts={{ watchDrag: false, dragFree: true }}>
                         <CarouselContent style={{ minHeight: '100dvh' }}>
-                            <Step>
-                                <Start />
-                            </Step>
-                            <Step>
-                                <SetName />
-                            </Step>
-                            <Step>
-                                <SelectShape />
-                            </Step>
-                            <Step>
-                                <SelectColor />
-                            </Step>
-                            <Step>
-                                <SelectKeywords />
-                            </Step>
-                            <Step>
-                                <SelectItem />
-                            </Step>
-                            <Step>
-                                <ShowResult />
-                            </Step>
-                            <Step>
-                                <GuideToLogin />
-                            </Step>
-                            <Step>
-                                <Login />
-                            </Step>
+                            {STEPS.map((step, idx) => (
+                                <StepContainer key={idx}>{step}</StepContainer>
+                            ))}
                         </CarouselContent>
                     </Carousel>
                 </CarouselDispatchContext.Provider>
