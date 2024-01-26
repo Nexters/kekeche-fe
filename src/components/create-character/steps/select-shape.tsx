@@ -6,26 +6,26 @@ import { useRouter } from 'next/navigation';
 import Header from '../header';
 import React from 'react';
 import Intro from '../intro';
+import useCreateCharacter from '../hooks/useCreateCharacter';
+import useCarousel from '../hooks/useCarousel';
 
 export default React.memo(function SelectShape() {
-    const router = useRouter();
-
-    const characterDispatch = useContext(CreateCharacterDispatchContext);
-    const carouselDispatch = useContext(CarouselDispatchContext);
+    const { setValue } = useCreateCharacter();
+    const { handleNextClick } = useCarousel();
 
     const handleClick = (id: number) => {
-        characterDispatch?.setValue('shape', id);
-        carouselDispatch?.handleNextClick();
+        setValue('shape', id);
+        handleNextClick();
     };
 
     return (
         <>
-            <Header onGoBack={() => {carouselDispatch?.handlePrevClick()}} />
+            <Header onGoBack={handleNextClick} />
             <Intro title="캐릭터의 모습을 고르세요" />
             <div className="flex flex-col gap-[16px]">
                 {Shapes.map(({ id, icon: Icon }) => (
                     <button
-                          className="flex h-[129px] w-[279px] items-center justify-center rounded-[16px] bg-[#F7F8F9]"
+                        className="flex h-[129px] w-[279px] items-center justify-center rounded-[16px] bg-[#F7F8F9]"
                         key={id}
                         onClick={() => handleClick(id)}
                     >

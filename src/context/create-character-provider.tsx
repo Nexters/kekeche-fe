@@ -1,16 +1,16 @@
-import { Colors, Shape, Personality } from '@/types/character';
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useMemo, useState } from 'react';
 
 type Props = {
     children: React.ReactNode;
 };
 
 interface CreateCharacterValues {
-    userId?: string;
+    userId?: number;
     name?: string;
-    color?: Colors;
-    shape?: Shape;
-    personality?: Array<Personality>;
+    color?: number;
+    shape?: number;
+    personality?: Array<number>;
+    item?: number;
 }
 
 interface CreateCharacterDispatch {
@@ -37,7 +37,7 @@ export default function CreateCharacterProvider({ children }: Props) {
     console.log(createCharacterValues);
 
     // 렌더링 최적화
-    const memoizedSetValue = useMemo(() => ({ setValue }), []);
+    const memoizedSetValue = useMemo(() => ({ setValue }), [setValue]);
 
     return (
         <CreateCharacterValuesContext.Provider value={createCharacterValues}>

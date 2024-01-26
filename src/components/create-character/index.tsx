@@ -9,6 +9,7 @@ import Start from './steps/start';
 import SelectColor from './steps/select-color';
 import SetName from './steps/set-name';
 import SelectKeywords from './steps/select-keywords';
+import SelectItem from './steps/select-item';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -76,6 +77,9 @@ export default function CreateCharacterFunnel() {
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center">
                                     <SelectKeywords />
+                            </CarouselItem>
+                            <CarouselItem className="flex w-full flex-col items-center">
+                                    <SelectItem />
                             </CarouselItem>
                         </CarouselContent>
                     </Carousel>
