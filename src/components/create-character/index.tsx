@@ -2,7 +2,7 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselApi } from '@/components/ui-shadcn/carousel';
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import CreateCharacterProvider from '@/context/create-character-provider';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import SelectShape from './steps/select-shape';
 import Start from './steps/start';
 import SelectColor from './steps/select-color';
@@ -24,10 +24,9 @@ export const CarouselDispatchContext = createContext<null | CarouselDispatch>(nu
 export default function CreateCharacterFunnel() {
     const router = useRouter();
     const pathname = usePathname();
+    const searchParams = useSearchParams();
 
     const [api, setApi] = useState<CarouselApi>();
-
-    const [step, setStep] = useState(0);
 
     const handlePrevClick = useCallback(() => {
         api?.scrollPrev();
@@ -47,29 +46,35 @@ export default function CreateCharacterFunnel() {
 
     useEffect(() => {
         if (!api) return;
-        // api.on('select', () => {
+
         //     setStep(api.selectedScrollSnap() + 1);
         // });
-        api.on('scroll', () => {
+        api.on('select', () => {
             router.push(pathname + `?step=${api?.selectedScrollSnap()}`);
         });
-    }, [api?.selectedScrollSnap()]);
 
-    // useEffect(() => {
-    //     // 뒤로가기 처리
-    //     api?.scrollTo(Number(searchParams.get('step')) ?? 0);
-    // }, [searchParams]);
+        const step = searchParams.get('step') ? Number(searchParams.get('step')) : 0;
+
+        if (step > api.selectedScrollSnap()) {
+            // 앞선 과정을 뛰어넘는 것을 방지(ex. 새로고침)
+            router.push(pathname + `?step=${api?.selectedScrollSnap()}`);
+        }
+        if (step < api.selectedScrollSnap()) {
+            // 브라우저 상의 뒤로가기 처리
+            api?.scrollTo(Number(searchParams.get('step')), true);
+        }
+    }, [api?.selectedScrollSnap(), searchParams, pathname, router]);
 
     return (
         <>
             <CreateCharacterProvider>
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
-                    <Carousel setApi={setApi} opts={{ watchDrag: false }}>
+                    <Carousel setApi={setApi} opts={{ watchDrag: false, dragFree: true }}>
                         <CarouselContent style={{ minHeight: '100dvh' }}>
-                            <CarouselItem className="flex w-full flex-col ">
+                            <CarouselItem className="flex w-full flex-col items-center">
                                 <Start />
                             </CarouselItem>
-                            <CarouselItem className="flex w-full flex-col ">
+                            <CarouselItem className="flex w-full flex-col items-center">
                                 <SetName />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center ">

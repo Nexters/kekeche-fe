@@ -7,7 +7,7 @@ import useCarousel from '../hooks/useCarousel';
 
 export default React.memo(function SelectShape() {
     const { setValue } = useCreateCharacter();
-    const { handleNextClick } = useCarousel();
+    const { handlePrevClick, handleNextClick } = useCarousel();
 
     const handleClick = (id: number) => {
         setValue('shape', id);
@@ -16,7 +16,7 @@ export default React.memo(function SelectShape() {
 
     return (
         <>
-            <Header onGoBack={handleNextClick} />
+            <Header onGoBack={handlePrevClick} />
             <Intro title="캐릭터의 모습을 고르세요" />
             <div className="flex flex-col gap-[16px]">
                 {Shapes.map(({ id, icon: Icon }) => (
