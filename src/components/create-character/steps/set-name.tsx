@@ -21,19 +21,17 @@ export default React.memo(function SetName() {
     };
 
     const handleClick = () => {
-        if (!isError) {
-            setValue('name', name);
-            handleNextClick();
-        }
+        setValue('name', name);
+        handleNextClick();
     };
 
     return (
         <>
             <Header onGoBack={handlePrevClick} />
             <Intro title="캐릭터의 이름을 정해 주세요." description="한글, 영문 대소문자. 최대 8자." />
-            <div className="ml-[24px] flex flex-col gap-[8px]">
+            <div className="flex flex-col gap-[8px]">
                 <input
-                    className=" h-[48px] w-[312px]  rounded-[12px] border border-[#E8EAEE] bg-[#F7F8F9] px-[16px] py-[12px]"
+                    className={`h-[48px] w-[312px]  rounded-[12px] border bg-[#F7F8F9] px-[16px] py-[12px] outline-none ${isError ? 'border-2 border-[#F68277]' : 'border border-[#E8EAEE]'}`}
                     value={name}
                     onChange={handleNameChange}
                     placeholder="이름 작성"
@@ -50,7 +48,7 @@ export default React.memo(function SetName() {
                 </div>
             </div>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton text="다음" onClick={handleClick} />
+                <CtaButton disabled={isError} text="다음" onClick={handleClick} />
             </FixedBottomArea>
         </>
     );
