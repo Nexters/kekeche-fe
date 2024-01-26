@@ -21,7 +21,7 @@ interface CarouselDispatch {
 
 export const CarouselDispatchContext = createContext<null | CarouselDispatch>(null);
 
-export default function CreateCharacterFunnel() {
+export default function CreateCharacter() {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
