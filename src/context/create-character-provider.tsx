@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useCallback, useMemo, useState } from 'react';
 
 type Props = {

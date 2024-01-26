@@ -12,6 +12,7 @@ import SelectItem from './steps/select-item';
 import ShowResult from './steps/show-result';
 import GuideToLogin from './steps/guide-to-login';
 import Login from './steps/login';
+import Step from './item';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -45,18 +46,18 @@ export default function CreateCharacterFunnel() {
         //     setStep(api.selectedScrollSnap() + 1);
         // });
         api.on('select', () => {
-            router.push(pathname + `?step=${api?.selectedScrollSnap()}`);
+            router.push(pathname + `?step=${api.selectedScrollSnap()}`);
         });
 
         const step = searchParams.get('step') ? Number(searchParams.get('step')) : 0;
 
         if (step > api.selectedScrollSnap()) {
             // 앞선 과정을 뛰어넘는 것을 방지(ex. 새로고침)
-            router.push(pathname + `?step=${api?.selectedScrollSnap()}`);
+            router.push(pathname + `?step=${api.selectedScrollSnap()}`);
         }
         if (step < api.selectedScrollSnap()) {
             // 브라우저 상의 뒤로가기 처리
-            api.scrollTo(Number(searchParams.get('step')), true);
+            api.scrollTo(step, true);
         }
     }, [api?.selectedScrollSnap(), searchParams, pathname, router, api]);
 
@@ -66,33 +67,33 @@ export default function CreateCharacterFunnel() {
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
                     <Carousel setApi={setApi} opts={{ watchDrag: false, dragFree: true }}>
                         <CarouselContent style={{ minHeight: '100dvh' }}>
-                            <CarouselItem className="flex w-full flex-col items-center">
+                            <Step>
                                 <Start />
-                            </CarouselItem>
-                            <CarouselItem className="flex w-full flex-col items-center">
+                            </Step>
+                            <Step>
                                 <SetName />
-                            </CarouselItem>
-                            <CarouselItem className="flex w-full flex-col items-center ">
+                            </Step>
+                            <Step>
                                 <SelectShape />
-                            </CarouselItem>
-                            <CarouselItem className="flex w-full flex-col items-center">
+                            </Step>
+                            <Step>
                                 <SelectColor />
-                            </CarouselItem>
-                            <CarouselItem className="flex w-full flex-col items-center">
+                            </Step>
+                            <Step>
                                 <SelectKeywords />
-                            </CarouselItem>
-                            <CarouselItem className="flex w-full flex-col items-center">
+                            </Step>
+                            <Step>
                                 <SelectItem />
-                            </CarouselItem>
-                            <CarouselItem className="flex w-full flex-col items-center">
+                            </Step>
+                            <Step>
                                 <ShowResult />
-                            </CarouselItem>
-                            <CarouselItem className="flex w-full flex-col items-center">
+                            </Step>
+                            <Step>
                                 <GuideToLogin />
-                            </CarouselItem>
-                            <CarouselItem className="flex w-full flex-col items-center">
+                            </Step>
+                            <Step>
                                 <Login />
-                            </CarouselItem>
+                            </Step>
                         </CarouselContent>
                     </Carousel>
                 </CarouselDispatchContext.Provider>

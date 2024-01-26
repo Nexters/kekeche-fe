@@ -1,5 +1,4 @@
 import React from 'react';
-import CtaButton from './cta-button';
 import useCarousel from './hooks/useCarousel';
 
 type Props = {
@@ -8,7 +7,6 @@ type Props = {
 };
 
 export default function Intro({ title, description }: Props) {
-    const { handleNextClick } = useCarousel();
     return (
         <>
             <div className="w-[375px] whitespace-pre-line  p-[24px] ">
