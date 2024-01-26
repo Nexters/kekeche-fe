@@ -16,7 +16,6 @@ import Login from './steps/login';
 interface CarouselDispatch {
     handlePrevClick: () => void;
     handleNextClick: () => void;
-    restart: () => void;
 }
 
 export const CarouselDispatchContext = createContext<null | CarouselDispatch>(null);
@@ -35,13 +34,9 @@ export default function CreateCharacterFunnel() {
         api?.scrollNext();
     }, [api]);
 
-    const restart = useCallback(() => {
-        api?.scrollTo(0);
-    }, [api]);
-
     const memoizedCarouselDispatch = useMemo(
-        () => ({ handlePrevClick, handleNextClick, restart }),
-        [handlePrevClick, handleNextClick, restart],
+        () => ({ handlePrevClick, handleNextClick }),
+        [handlePrevClick, handleNextClick],
     );
 
     useEffect(() => {
@@ -61,9 +56,9 @@ export default function CreateCharacterFunnel() {
         }
         if (step < api.selectedScrollSnap()) {
             // 브라우저 상의 뒤로가기 처리
-            api?.scrollTo(Number(searchParams.get('step')), true);
+            api.scrollTo(Number(searchParams.get('step')), true);
         }
-    }, [api?.selectedScrollSnap(), searchParams, pathname, router]);
+    }, [api?.selectedScrollSnap(), searchParams, pathname, router, api]);
 
     return (
         <>

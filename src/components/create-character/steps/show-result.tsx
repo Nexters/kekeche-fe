@@ -19,7 +19,6 @@ export default function ShowResult() {
 
     const createCharacterValues = useContext(CreateCharacterValuesContext);
 
-    const { reset } = useCreateCharacter();
     const { handleNextClick } = useCarousel();
 
     const [isCreating, setIsCreating] = useState(true);
@@ -65,7 +64,7 @@ export default function ShowResult() {
                     <div className="ml-[40px] mt-[36px]  flex w-full flex-col gap-[12px] text-start ">
                         <p className="text-semibold18">성격</p>
                         <div className=" flex flex-wrap gap-[12px]">
-                            {[0, 1, 0, 1, 0, 1, 0, 0, 0].map((id, idx) => (
+                            {createCharacterValues?.keywords?.map((id, idx) => (
                                 <div
                                     className="flex h-auto w-auto items-center justify-center rounded-[8px] bg-[#F7F8F9] px-[12px] py-[10px] text-semibold10"
                                     key={idx}
