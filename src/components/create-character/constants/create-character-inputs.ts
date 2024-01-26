@@ -55,7 +55,7 @@ export const Colors = [
 
 export const Keywords = [
     { id: 0, name: '개성이 있는', icon: '' },
-    { id: 1, name: '결단력 있는', icon: '' },
+    { id: 1, name: '길게 한 번 테스트', icon: '' },
     //TODO: 확정되면 추가하기...
 ];
 

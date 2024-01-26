@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { CreateCharacterDispatchContext } from '@/context/create-character-provider';
 
 export default function useCreateCharacter() {
-    const createCharacterValues = useContext(CreateCharacterDispatchContext);
+    const createCharacterDispatch = useContext(CreateCharacterDispatchContext);
 
-    if (createCharacterValues === null) throw new Error('CreateCharacterValuesContext Provider를 감싸서 사용하세요');
+    if (createCharacterDispatch === null) throw new Error('CreateCharacter Provider를 감싸서 사용하세요');
 
-    return createCharacterValues;
+    return createCharacterDispatch;
 }

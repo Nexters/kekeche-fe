@@ -9,12 +9,13 @@ interface CreateCharacterValues {
     name?: string;
     color?: number;
     shape?: number;
-    personality?: Array<number>;
+    keywords?: Array<number>;
     item?: number;
 }
 
 interface CreateCharacterDispatch {
     setValue<T extends keyof CreateCharacterValues>(target: T, value: CreateCharacterValues[T]): void;
+    reset(): void;
 }
 
 export const CreateCharacterValuesContext = createContext<null | CreateCharacterValues>(null);
@@ -34,10 +35,12 @@ export default function CreateCharacterProvider({ children }: Props) {
         [],
     );
 
-    console.log(createCharacterValues);
+    const reset = useCallback(() => {
+        setCreateCharacterValues({});
+    }, []);
 
     // 렌더링 최적화
-    const memoizedSetValue = useMemo(() => ({ setValue }), [setValue]);
+    const memoizedSetValue = useMemo(() => ({ setValue, reset }), [setValue, reset]);
 
     return (
         <CreateCharacterValuesContext.Provider value={createCharacterValues}>

@@ -21,6 +21,9 @@ export default React.memo(function SetName() {
         handleNextClick();
     };
 
+    // TODO: 지우기. 리렌더링 체크용
+    console.log('name   ');
+
     return (
         <>
             <Header onGoBack={handlePrevClick} />

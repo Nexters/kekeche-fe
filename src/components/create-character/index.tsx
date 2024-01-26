@@ -2,23 +2,25 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselApi } from '@/components/ui-shadcn/carousel';
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import CreateCharacterProvider from '@/context/create-character-provider';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import SelectShape from './steps/select-shape';
 import Start from './steps/start';
 import SelectColor from './steps/select-color';
 import SetName from './steps/set-name';
 import SelectKeywords from './steps/select-keywords';
 import SelectItem from './steps/select-item';
+import ShowResult from './steps/show-result';
+import GuideToLogin from './steps/guide-to-login';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
     handleNextClick: () => void;
+    restart: () => void;
 }
 
 export const CarouselDispatchContext = createContext<null | CarouselDispatch>(null);
 
 export default function CreateCharacterFunnel() {
-    const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
 
@@ -33,36 +35,37 @@ export default function CreateCharacterFunnel() {
         api?.scrollNext();
     }, [api]);
 
+    const restart = useCallback(() => {
+        api?.scrollTo(0);
+    }, [api]);
+
     const memoizedCarouselDispatch = useMemo(
-        () => ({ handlePrevClick, handleNextClick }),
-        [handlePrevClick, handleNextClick],
+        () => ({ handlePrevClick, handleNextClick, restart }),
+        [handlePrevClick, handleNextClick, restart],
     );
 
     useEffect(() => {
         if (!api) return;
-        api.on('select', () => {
-            setStep(api.selectedScrollSnap() + 1);
-        });
-        api.on('settle', () => {
+        // api.on('select', () => {
+        //     setStep(api.selectedScrollSnap() + 1);
+        // });
+        api.on('scroll', () => {
             router.push(pathname + `?step=${api?.selectedScrollSnap()}`);
         });
-    }, [api]);
+    }, [api?.selectedScrollSnap()]);
 
-    useEffect(() => {
-        // 뒤로가기 처리
-        api?.scrollTo(Number(searchParams.get('step')) ?? 0);
-    }, [searchParams]);
+    // useEffect(() => {
+    //     // 뒤로가기 처리
+    //     api?.scrollTo(Number(searchParams.get('step')) ?? 0);
+    // }, [searchParams]);
 
     return (
         <>
             <CreateCharacterProvider>
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
-                    <Carousel setApi={setApi}>
-                        <CarouselContent>
-                            <CarouselItem
-                                className="relative flex w-full flex-col items-center"
-                                style={{ minHeight: '100dvh' }}
-                            >
+                    <Carousel setApi={setApi} opts={{ watchDrag: false }}>
+                        <CarouselContent style={{ minHeight: '100dvh' }}>
+                            <CarouselItem className="relative flex w-full flex-col items-center">
                                 <Start />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col ">
@@ -79,6 +82,12 @@ export default function CreateCharacterFunnel() {
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center">
                                 <SelectItem />
+                            </CarouselItem>
+                            <CarouselItem className="flex w-full flex-col items-center">
+                                <ShowResult />
+                            </CarouselItem>
+                            <CarouselItem className="flex w-full flex-col items-center">
+                                <GuideToLogin />
                             </CarouselItem>
                         </CarouselContent>
                     </Carousel>
