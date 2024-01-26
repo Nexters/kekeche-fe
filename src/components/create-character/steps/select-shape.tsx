@@ -1,8 +1,4 @@
-import { useContext } from 'react';
-import { CreateCharacterDispatchContext } from '@/context/create-character-provider';
 import { Shapes } from '@/components/create-character/constants/create-character-inputs';
-import { CarouselDispatchContext } from '..';
-import { useRouter } from 'next/navigation';
 import Header from '../header';
 import React from 'react';
 import Intro from '../intro';

@@ -1,10 +1,6 @@
-import { CreateCharacterDispatchContext } from '@/context/create-character-provider';
-import { useContext } from 'react';
-import { CarouselDispatchContext } from '..';
 import Header from '../header';
 import Intro from '../intro';
 import React from 'react';
-import CtaButton from '../cta-button';
 import { Items } from '../constants/create-character-inputs';
 import useCarousel from '../hooks/useCarousel';
 import useCreateCharacter from '../hooks/useCreateCharacter';

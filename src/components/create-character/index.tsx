@@ -1,10 +1,9 @@
 'use client';
 import { Carousel, CarouselContent, CarouselItem, CarouselApi } from '@/components/ui-shadcn/carousel';
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import CreateCharacterProvider from '@/context/create-character-provider';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import SelectShape from './steps/select-shape';
-import CtaButton from './cta-button';
 import Start from './steps/start';
 import SelectColor from './steps/select-color';
 import SetName from './steps/set-name';
@@ -58,7 +57,7 @@ export default function CreateCharacterFunnel() {
         <>
             <CreateCharacterProvider>
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
-                    <Carousel setApi={setApi} >
+                    <Carousel setApi={setApi}>
                         <CarouselContent>
                             <CarouselItem
                                 className="relative flex w-full flex-col items-center"
@@ -76,10 +75,10 @@ export default function CreateCharacterFunnel() {
                                 <SelectColor />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center">
-                                    <SelectKeywords />
+                                <SelectKeywords />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center">
-                                    <SelectItem />
+                                <SelectItem />
                             </CarouselItem>
                         </CarouselContent>
                     </Carousel>

@@ -2,8 +2,6 @@ import { useRouter } from 'next/navigation';
 import CtaButton from '../cta-button';
 import Header from '../header';
 import Intro from '../intro';
-import { useContext } from 'react';
-import { CarouselDispatchContext } from '..';
 import React from 'react';
 import useCarousel from '../hooks/useCarousel';
 
