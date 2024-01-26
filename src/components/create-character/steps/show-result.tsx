@@ -10,6 +10,7 @@ import CtaButton from '../cta-button';
 import useCreateCharacter from '../hooks/useCreateCharacter';
 import { useRouter } from 'next/navigation';
 import useCarousel from '../hooks/useCarousel';
+import FixedBottomArea from '../fixed-bottom-area';
 
 export default function ShowResult() {
     const router = useRouter();
@@ -74,14 +75,15 @@ export default function ShowResult() {
                             ))}
                         </div>
                     </div>
-                    <CtaButton text="다음" className="mb-[31px]" onClick={handleNextBtnClick}>
+                    <FixedBottomArea className="mb-[31px]">
+                        <CtaButton text="다음" onClick={handleNextClick} />
                         <button
                             onClick={handleRecreateClick}
                             className="mt-[12px] text-semibold14 text-[#7D7D7D] underline"
                         >
                             캐릭터 다시 만들래요
                         </button>
-                    </CtaButton>
+                    </FixedBottomArea>
                 </>
             )}
         </>

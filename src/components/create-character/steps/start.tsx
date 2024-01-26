@@ -4,6 +4,7 @@ import Header from '../header';
 import Intro from '../intro';
 import React from 'react';
 import useCarousel from '../hooks/useCarousel';
+import FixedBottomArea from '../fixed-bottom-area';
 
 export default React.memo(function Start() {
     const router = useRouter();
@@ -18,7 +19,9 @@ export default React.memo(function Start() {
                 }}
             />
             <Intro title="캐릭터 만들기 시작할 거임" />
-            <CtaButton text="시작" onClick={handleNextClick} className="mb-[31px]" />
+            <FixedBottomArea className="mb-[31px]">
+                <CtaButton text="시작" onClick={handleNextClick} />
+            </FixedBottomArea>
         </>
     );
 });

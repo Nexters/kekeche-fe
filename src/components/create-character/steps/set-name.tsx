@@ -4,6 +4,7 @@ import Header from '../header';
 import Intro from '../intro';
 import useCarousel from '../hooks/useCarousel';
 import useCreateCharacter from '../hooks/useCreateCharacter';
+import FixedBottomArea from '../fixed-bottom-area';
 
 export default React.memo(function SetName() {
     const { setValue } = useCreateCharacter();
@@ -43,7 +44,9 @@ export default React.memo(function SetName() {
                     사이드 플젝 인간
                 </div>
             </div>
-            <CtaButton text="다음" className="mb-[31px]" onClick={handleClick} />
+            <FixedBottomArea className="mb-[31px]">
+                <CtaButton text="다음" onClick={handleNextClick} />
+            </FixedBottomArea>
         </>
     );
 });

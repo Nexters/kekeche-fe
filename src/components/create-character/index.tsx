@@ -65,7 +65,7 @@ export default function CreateCharacterFunnel() {
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
                     <Carousel setApi={setApi} opts={{ watchDrag: false }}>
                         <CarouselContent style={{ minHeight: '100dvh' }}>
-                            <CarouselItem className="relative flex w-full flex-col items-center">
+                            <CarouselItem className="flex w-full flex-col ">
                                 <Start />
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col ">
