@@ -11,6 +11,7 @@ import SelectKeywords from './steps/select-keywords';
 import SelectItem from './steps/select-item';
 import ShowResult from './steps/show-result';
 import GuideToLogin from './steps/guide-to-login';
+import Login from './steps/login';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -88,6 +89,9 @@ export default function CreateCharacterFunnel() {
                             </CarouselItem>
                             <CarouselItem className="flex w-full flex-col items-center">
                                 <GuideToLogin />
+                            </CarouselItem>
+                            <CarouselItem className="flex w-full flex-col items-center">
+                                <Login />
                             </CarouselItem>
                         </CarouselContent>
                     </Carousel>

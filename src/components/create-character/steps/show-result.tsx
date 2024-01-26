@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import Intro from '../intro';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import EggImg from '@/assets/images/create-character/egg.png';
+import EggImg from '@/assets/images/egg.png';
 import Header from '../header';
 import { CreateCharacterValuesContext } from '@/context/create-character-provider';
 import { Keywords } from '../constants/create-character-inputs';
