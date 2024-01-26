@@ -8,33 +8,38 @@ import FixedBottomArea from '../fixed-bottom-area';
 
 export default React.memo(function SetName() {
     const { setValue } = useCreateCharacter();
+    const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z]{1,8}$/;
     const { handleNextClick, handlePrevClick } = useCarousel();
 
     const [name, setName] = useState('');
+    const [isError, setIsError] = useState(false);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const isValid = NAME_REGEX.test(e.currentTarget.value);
+        setIsError(!isValid);
         setName(e.currentTarget.value);
     };
 
     const handleClick = () => {
-        // TODO: name 유효성 검증 로직 추가
-        setValue('name', name);
-        handleNextClick();
+        if (!isError) {
+            setValue('name', name);
+            handleNextClick();
+        }
     };
-
-    // TODO: 지우기. 리렌더링 체크용
-    console.log('name   ');
 
     return (
         <>
             <Header onGoBack={handlePrevClick} />
-            <Intro title="캐릭터의 이름을 정해 주세요." description="한글, 영문 대소문자. 공백 포함 최대 8자." />
-            <input
-                className="ml-[24px] h-[48px] w-[312px]  rounded-[12px] border border-[#E8EAEE] bg-[#F7F8F9] px-[16px] py-[12px]"
-                value={name}
-                onChange={handleNameChange}
-                placeholder="이름 작성"
-            />
+            <Intro title="캐릭터의 이름을 정해 주세요." description="한글, 영문 대소문자. 최대 8자." />
+            <div className="ml-[24px] flex flex-col gap-[8px]">
+                <input
+                    className=" h-[48px] w-[312px]  rounded-[12px] border border-[#E8EAEE] bg-[#F7F8F9] px-[16px] py-[12px]"
+                    value={name}
+                    onChange={handleNameChange}
+                    placeholder="이름 작성"
+                />
+                <p className="ml-[2px] text-regular14 text-[#CF3644]">{isError && '올바른 이름 형식이 아니에요.'}</p>
+            </div>
             <p className="color-[#17171B]  ml-[24px] mt-[30px] w-[327px] text-[20px] font-[700]">예시</p>
             <div className="ml-[24px]  mt-[32px] flex gap-[12px]">
                 <div className="flex h-[64px] w-[157.5px] items-center justify-center rounded-[12px] bg-[#F7F8F9] text-semibold16 text-[#171718]">
@@ -45,7 +50,7 @@ export default React.memo(function SetName() {
                 </div>
             </div>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton text="다음" onClick={handleNextClick} />
+                <CtaButton text="다음" onClick={handleClick} />
             </FixedBottomArea>
         </>
     );
