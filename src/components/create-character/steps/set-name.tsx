@@ -6,9 +6,10 @@ import useCarousel from '../hooks/useCarousel';
 import useCreateCharacter from '../hooks/useCreateCharacter';
 import FixedBottomArea from '../fixed-bottom-area';
 
+const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;
+
 export default React.memo(function SetName() {
     const { setValue } = useCreateCharacter();
-    const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;
     const { handleNextClick, handlePrevClick } = useCarousel();
 
     const [name, setName] = useState('');
@@ -51,7 +52,7 @@ export default React.memo(function SetName() {
                 </div>
             </div>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton disabled={isError} text="다음" onClick={handleClick} />
+                <CtaButton disabled={isError || name.length === 0} text="다음" onClick={handleClick} />
             </FixedBottomArea>
         </>
     );
