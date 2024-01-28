@@ -11,15 +11,15 @@ const test = '/api/v1/memo/character/1?page=0&size=20&sort=createdAt,DESC';
 const test1 = '/api/v1/memo?page=0&size=20&sort=createdAt,DESC';
 export default function KakaoLoginButton({ callbackUrl }: Props) {
     const handleClick = async () => {
-        // window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${callbackUrl}`;
-        const accessToken = getCookie('accessToken');
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}${test}`, {
-            cache: 'no-cache',
-            headers: {
-                Authorization: `${accessToken}`,
-            },
-        });
-        console.log(response.json());
+        window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${callbackUrl}`;
+        // const accessToken = getCookie('accessToken');
+        // const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}${test}`, {
+        //     cache: 'no-cache',
+        //     headers: {
+        //         Authorization: `${accessToken}`,
+        //     },
+        // });
+        // console.log(response.json());
     };
 
     return (
