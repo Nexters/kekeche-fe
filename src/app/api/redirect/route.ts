@@ -21,11 +21,10 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const code = searchParams.get('code');
 
-    console.log('code: ', code);
     if (!code) throw new Error('요청에 문제 있음');
 
-    // const { memberId, accessToken } = await login(code);
-    cookies().set('accessToken', 'test', { maxAge: 1000000, httpOnly: false });
+    const { memberId, accessToken } = await login(code);
+    cookies().set('accessToken', accessToken, { maxAge: 1000000, httpOnly: false });
 
-    return redirect(`/testID`);
+    return redirect(`/${memberId}`);
 }
