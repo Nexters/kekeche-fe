@@ -4,9 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home(props: { params: { nickname: string } }) {
+    console.log(props);
+    const nickname = props.params.nickname;
+    console.log(nickname);
     return (
         <PageContainer hasNavigator>
-            <div className="mb-2 px-6 py-2 text-bold24">{props.params.nickname}님의 캐릭터</div>
+            <div className="mb-2 px-6 py-2 text-bold24">윤서님의 캐릭터</div>
             <div className="grid grid-cols-2 gap-3 px-6 py-2">
                 {Array(4)
                     .fill(0)
