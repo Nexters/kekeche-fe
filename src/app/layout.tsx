@@ -1,7 +1,7 @@
-import { pretendard } from '@/assets/fonts/pretendard'
-import QueryClientContext from '@/context/QueryClientContext'
-import type { Metadata, Viewport } from 'next'
-import './globals.css'
+import { pretendard } from '@/assets/fonts/pretendard';
+import QueryClientContext from '@/context/query-client-context';
+import type { Metadata, Viewport } from 'next';
+import './globals.css';
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -9,7 +9,7 @@ export const viewport: Viewport = {
     maximumScale: 1,
     userScalable: false,
     themeColor: '#ffffff',
-}
+};
 
 export const metadata: Metadata = {
     applicationName: '캐릭캐릭 다이어리',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         { rel: 'apple-touch-icon', url: '/icons/icon-128x128.png' },
         { rel: 'icon', url: '/icons/icon-128x128.png' },
     ],
-}
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -81,5 +81,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <QueryClientContext>{children}</QueryClientContext>
             </body>
         </html>
-    )
+    );
 }
