@@ -5,20 +5,19 @@ import HomeIcon from '@/assets/icons/home_24x24.svg';
 import PencilIcon from '@/assets/icons/pencil_24x24.svg';
 import UserProfileIcon from '@/assets/icons/user-profile_24x24.svg';
 import ROUTES from '@/constants/route';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function TabNavigator() {
     const fullPathname = usePathname();
     const router = useRouter();
-    const params = useSearchParams();
 
     const nickname = fullPathname.split('/')[1];
 
     const Menus = [
         { label: '홈', IconComponent: HomeIcon, path: `/${nickname}` },
         { label: '작성', IconComponent: PencilIcon, path: `${ROUTES.memoCreate}` },
-        { label: '기록', IconComponent: FileMultipleIcon, path: `${ROUTES.memo}` },
+        { label: '기록', IconComponent: FileMultipleIcon, path: `${ROUTES.memos}` },
         { label: '내 정보', IconComponent: UserProfileIcon, path: `${ROUTES.my}` },
     ] as const;
 
@@ -34,7 +33,7 @@ export default function TabNavigator() {
     };
 
     return (
-        <div className="border-top sticky bottom-0 left-0 right-0 z-10 border-t border-t-[#E8EAEE] bg-white">
+        <div className="border-top pb- sticky bottom-0 left-0 right-0 z-10 border-t border-t-[#E8EAEE] bg-white">
             <nav className="w-full">
                 <ul className="relative flex justify-around">
                     {Menus.map(({ label, IconComponent, path }) => (

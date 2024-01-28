@@ -3,7 +3,7 @@ import BottomTabNavigator from './bottom-tab-navigator';
 
 type Props = {
     children: ReactNode;
-    hasNavigator: boolean;
+    hasNavigator?: boolean;
 };
 
 export default function PageContainer({ children, hasNavigator }: Props) {
