@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import TabNavigator from './tab-navigator';
+import BottomTabNavigator from './bottom-tab-navigator';
 
 type Props = {
     children: ReactNode;
@@ -14,11 +14,7 @@ export default function PageContainer({ children, hasNavigator }: Props) {
                 style={{ minHeight: '100dvh' }}
             >
                 <div className="flex flex-1 flex-col overflow-auto">{children}</div>
-                {hasNavigator && (
-                    <div className="border-top sticky bottom-0 left-0 right-0 z-10 border-t border-t-[#E8EAEE] bg-white">
-                        <TabNavigator />
-                    </div>
-                )}
+                {hasNavigator && <BottomTabNavigator />}
             </div>
         </div>
     );
