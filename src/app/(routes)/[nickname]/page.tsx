@@ -25,7 +25,7 @@ export default function Home() {
                                     <span className="text-[12px] font-semibold leading-3 text-[#E57897]">Lv.5</span>
                                 </div>
                                 <div className="mb-1">
-                                    <Image alt="몰랑이" src={MockCharacterImage} />
+                                    <Image priority alt="몰랑이" src={MockCharacterImage} />
                                 </div>
                                 <p className="mb-1 text-semibold14 text-contentPrimaryLight">넥터 PM</p>
                                 <div className="h-[15px] w-full">
