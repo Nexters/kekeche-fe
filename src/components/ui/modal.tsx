@@ -1,46 +1,38 @@
-import {
-    Dialog,
-    DialogTrigger,
-    DialogContent,
-    DialogTitle,
-    DialogDescription,
-    DialogClose,
-} from '@radix-ui/react-dialog';
-import { DialogFooter, DialogHeader } from '../ui-shadcn/dialog';
-import { CopyIcon } from 'lucide-react';
-import { Button } from '../ui-shadcn/button';
+import { Dialog, DialogTrigger, DialogContent, DialogClose } from '@radix-ui/react-dialog';
+import { DialogOverlay } from '../ui-shadcn/dialog';
 
-export default function Modal() {
+type Props = {
+    triggerElement: React.ReactNode;
+    title?: string;
+    description?: string;
+    contents?: React.ReactNode;
+};
+
+export default function Modal({ triggerElement, title, description, contents }: Props) {
     return (
         <Dialog>
-            <DialogTrigger asChild>
-                <button>Share</button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                    <DialogTitle>Share link</DialogTitle>
-                    <DialogDescription>Anyone who has this link will be able to view this.</DialogDescription>
-                </DialogHeader>
-                <div className="flex items-center space-x-2">
-                    <div className="grid flex-1 gap-2">
-                        <label htmlFor="link" className="sr-only">
-                            Link
-                        </label>
-                        <input id="link" defaultValue="https://ui.shadcn.com/docs/installation" readOnly />
+            <DialogTrigger asChild>{triggerElement}</DialogTrigger>
+            <DialogClose>
+                <DialogContent>
+                    <div className="fixed left-0 top-0 z-[100] h-full w-full">
+                        <div
+                            className="mx-auto flex min-h-screen w-full flex-col items-center justify-center bg-[#0a0a0c4d] shadow-lg md:w-[375px] "
+                            style={{ minHeight: '100dvh' }}
+                        >
+                            <div
+                                className="flex h-auto w-[296px] flex-col items-center justify-center rounded-[20px] bg-[#ffffff] px-[24px] py-[56px] "
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <div className="mb-[20px] flex flex-col items-center gap-[4px]">
+                                    {title && <h2 className="text-[#17171B)] text-[20px] font-[700]">{title}</h2>}
+                                    {description && <h3 className="text-[#3D4350)] text-regular16">{description}</h3>}
+                                </div>
+                                {contents}
+                            </div>
+                        </div>
                     </div>
-                    <Button type="submit" size="sm" className="px-3">
-                        <span className="sr-only">Copy</span>
-                        <CopyIcon className="h-4 w-4" />
-                    </Button>
-                </div>
-                <DialogFooter className="sm:justify-start">
-                    <DialogClose asChild>
-                        <Button type="button" variant="secondary">
-                            Close
-                        </Button>
-                    </DialogClose>
-                </DialogFooter>
-            </DialogContent>
+                </DialogContent>
+            </DialogClose>
         </Dialog>
     );
 }
