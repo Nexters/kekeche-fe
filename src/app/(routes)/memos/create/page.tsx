@@ -1,61 +1,196 @@
-import MockCharacterImage from '@/assets/images/mock_chracter_80x80.png';
+'use client';
+
+import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
 import { PageContainer } from '@/components/ui';
-import Image from 'next/image';
-import Link from 'next/link';
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui-shadcn/select';
+import { useEffect, useRef, useState } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 
-export default function Home() {
+export default function MemoCreate() {
+    const [textareaValue, setTextareaValue] = useState('');
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    const regex = /#(\S+)(?=\s|\p{P}|$)/gu; // \S는 공백이 아닌 문자, \p{P}는 구두점을 나타냅니다.
+    const matches = [...textareaValue.matchAll(regex)];
+    const hashtags = matches.map((match) => match[0]).map((text) => text.replace('&nbsp;', ''));
+
+    useEffect(() => {
+        if (textareaRef.current) {
+            textareaRef.current.focus();
+        }
+    });
+
     return (
-        <PageContainer hasNavigator>
-            <div className="mb-2 px-6 py-2 text-bold24">윤서님의 캐릭터</div>
-            <div className="grid grid-cols-2 gap-3 px-6 py-2">
-                {Array(4)
-                    .fill(0)
-                    .map((_, i) => {
-                        return (
-                            <Link
-                                href=""
-                                key={i}
-                                className="flex h-[200px] w-40 flex-col items-center justify-center gap-1 rounded-xl bg-backgroundSecondaryLight px-4"
-                            >
-                                <div className="flex flex-col items-center text-semibold16 text-contentPrimaryLight">
-                                    <div>
-                                        <Image alt="몰랑이" src={MockCharacterImage} />
-                                    </div>
-                                    <div className="flex flex-col text-semibold16">
-                                        <span>책 읽어야대</span>
-                                        <span>Lv.12</span>
-                                    </div>
+        <PageContainer>
+            <header className="mb-[10px] flex justify-between gap-2">
+                <button aria-label="뒤로 가기 버튼" className="p-3">
+                    <BackArrowIcon stroke="#8E939E" />
+                </button>
+                <span className=" grid flex-1 place-items-center text-center text-[18px] font-semibold leading-7 text-gray-500">
+                    기록 작성
+                </span>
+                <button className="p-3 text-semibold16 text-[#1E73F3]">저장</button>
+            </header>
+            <Select>
+                <div className="flex flex-row items-center gap-[10px] px-6">
+                    <SelectTrigger className="w-[160px] border-none bg-gray-100">
+                        <SelectValue
+                            placeholder={
+                                <div className="felx-row flex gap-[6px]">
+                                    <span className="h-6 w-6 rounded-full bg-gray-200" />
+                                    <span>캐릭터 선택</span>
                                 </div>
-                                <div className="flex flex-wrap gap-[2.6px]">
-                                    <div className="grid h-[22px] place-items-center rounded-sm bg-gray-400 px-2">
-                                        <span className="min-w-fit text-[10px] text-gray-100">#열정적</span>
-                                    </div>
-                                    <div className="grid h-[22px] place-items-center rounded-sm  bg-gray-400 px-2">
-                                        <span className="text-[10px] text-gray-100">#꼼꼼한</span>
-                                    </div>
-
-                                    <div className="grid h-[22px] place-items-center rounded-sm  bg-gray-400 px-2">
-                                        <span className="min-w-fit text-[10px] text-gray-100">#열정적</span>
-                                    </div>
-                                </div>
-                            </Link>
-                        );
-                    })}
-                <CharacterCreateButton />
+                            }
+                        />
+                    </SelectTrigger>
+                    <span>의 말</span>
+                </div>
+                <SelectContent className="border-none bg-gray-100">
+                    <SelectGroup className="bg-gray-100">
+                        <SelectItem value="apple">
+                            <div className="felx-row flex gap-[6px]">
+                                <span className="h-6 w-6 rounded-full bg-gray-200" />
+                                <span>캐릭터1</span>
+                            </div>
+                        </SelectItem>
+                        <SelectItem value="apple">
+                            <div className="felx-row flex gap-[6px]">
+                                <span className="h-6 w-6 rounded-full bg-gray-200" />
+                                <span>캐릭터2</span>
+                            </div>
+                        </SelectItem>
+                    </SelectGroup>
+                </SelectContent>
+            </Select>
+            <TextareaAutosize
+                ref={textareaRef}
+                cacheMeasurements
+                placeholder="메모를 입력해주세요"
+                value={textareaValue}
+                onChange={(e) => {
+                    if (e.target.value.length > 200) return;
+                    setTextareaValue(e.target.value);
+                }}
+                className="min-h-[188px] px-6 py-[10px] focus:outline-none"
+            />
+            <p className="py-2 pr-6 text-right text-gray-300">{textareaValue.length}/200</p>
+            <div className="mt-2 h-[12px] bg-[#F7F8F9]" />
+            <div className="px-6 py-3 text-semibold14 text-gray-500">해시태그</div>
+            <div className="flex flex-wrap gap-[6px] px-6">
+                {hashtags.length === 0 ? (
+                    <span className="text-gray-400">
+                        해쉬태그로 키워드를 생성할 수 있어요.
+                        <br /> ex) #넥스터즈
+                    </span>
+                ) : (
+                    hashtags.map((hashtag, i) => (
+                        <span
+                            className="min-h-[37px] w-fit break-all rounded-full bg-[#ECEFF5] px-3 py-2 text-semibold14 text-gray-400"
+                            key={i}
+                        >
+                            {hashtag}
+                        </span>
+                    ))
+                )}
             </div>
         </PageContainer>
     );
 }
 
-function CharacterCreateButton() {
-    return (
-        <Link href="" className="grid h-[200px] w-40 place-items-center rounded-xl bg-backgroundSecondaryLight">
-            <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M56.75 32.1797H32.75V56.1797H24.75V32.1797H0.75V24.1797H24.75V0.179688H32.75V24.1797H56.75V32.1797Z"
-                    fill="#DCDCDC"
-                />
-            </svg>
-        </Link>
-    );
+/*
+// TODO: 에디터
+
+
+interface EditorState {
+    html: string;
+    textNodeCount: number;
 }
+
+class Editor extends React.Component<{}, EditorState> {
+    constructor(props: {}) {
+        super(props);
+        this.state = { html: '', textNodeCount: 0 };
+    }
+
+    private countTextNodes(html: string): number {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const textNodes = doc.body.childNodes;
+
+        let count = 0;
+
+        const countTextContent = (node: Node) => {
+            if (node.nodeType === 3) {
+                // TEXT_NODE
+                const textContent = (node as Text).textContent || '';
+                count += textContent.length;
+            } else {
+                for (let i = 0; i < node.childNodes.length; i++) {
+                    countTextContent(node.childNodes[i]);
+                }
+            }
+        };
+
+        textNodes.forEach((node) => countTextContent(node));
+
+        return count;
+    }
+
+    private handleChange = (event: ContentEditableEvent) => {
+        const html = event.target.value;
+        const textNodeCount = this.countTextNodes(html);
+
+        this.setState({ html, textNodeCount });
+    };
+
+    render = () => {
+        const { html, textNodeCount } = this.state;
+        const regex = /#(\S+)(?=\s|\p{P}|$)/gu; // \S는 공백이 아닌 문자, \p{P}는 구두점을 나타냅니다.
+        const matches = [...html.matchAll(regex)];
+        console.log(matches);
+        const hashtags = matches.map((match) => match[0]).map((text) => text.replace('&nbsp;', ''));
+
+        // hashtag 만들어질때마다 키워드 붙여주자.
+        console.log(hashtags);
+        let str = html;
+        hashtags.forEach((hashtag) => {
+            let idx = html.indexOf(hashtag);
+            if (html[idx - 1] === '>') return;
+            str = str.replace(hashtag, `<span class='keyword'>${hashtag}</span>`);
+        });
+        console.log(str);
+
+        //<span class="keyword">#${keyword}</span>
+
+        // <div> 태그를 <br> 태그로 변환하여 줄 바꿈이 발생하도록 함
+        //let formattedContent = updatedContent.replace(/<div>/g, '<br>');
+
+        return (
+            <div className="text-gray-500">
+                <ContentEditable
+                    className="mb-[10px] min-h-[188px] break-all px-6 pt-[10px] focus:outline-none"
+                    html={str}
+                    // @ts-ignore
+                    placeholder="메모를 입력해주세요"
+                    disabled={false}
+                    onChange={this.handleChange}
+                />
+                <style>{`
+           
+                    .keyword {
+                    text-decoration: underline;
+                    }
+                    `}</style>
+                <p className="py-2 pr-6 text-right text-gray-300">{textNodeCount}/200</p>
+            </div>
+        );
+    };
+}
+*/
