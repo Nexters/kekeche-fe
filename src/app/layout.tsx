@@ -2,6 +2,7 @@ import { pretendard } from '@/assets/fonts/pretendard';
 import QueryClientContext from '@/context/query-client-context';
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { Toaster } from '@/components/ui-shadcn/toast/toaster';
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </head>
             <body className={pretendard.className}>
                 <QueryClientContext>{children}</QueryClientContext>
+                <Toaster />
             </body>
         </html>
     );

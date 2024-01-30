@@ -13,7 +13,7 @@ export default React.memo(function Login() {
         <>
             <Intro title="로그인" />
             <FixedBottomArea className="mb-[31px]">
-                <KakaoLoginButton onClick={handleClick} />
+                <KakaoLoginButton callbackUrl={'http://localhost:3000/api/redirect'} />
             </FixedBottomArea>
         </>
     );
