@@ -14,7 +14,7 @@ export default function Home() {
              * TODO: 로고 추가
              */}
             <FixedBottomArea className="mb-[31px] gap-[16px]">
-                <KakaoLoginButton />
+                <KakaoLoginButton callbackUrl={'http://localhost:3000/api/redirect'} />
                 <Link href="/create">
                     <CtaButton text="시작" />
                 </Link>
