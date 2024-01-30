@@ -1,15 +1,24 @@
 import { PageContainer } from '@/components/ui';
 import SearchBox from './_components/search-box';
-import Memo from './_components/memo';
 import { Header } from './_components/Header';
-import MemosContainer from './_components/memos-container';
+import MemosContainer, { getAllMemos } from './_components/memos-container';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
-export default function MemosPage() {
+export default async function MemosPage() {
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchQuery({
+        queryKey: ['posts'],
+        queryFn: () => getAllMemos(),
+    });
+
     return (
         <PageContainer hasNavigator>
             <Header text="기록" />
             <SearchBox />
-            <MemosContainer />
+            <HydrationBoundary state={dehydrate(queryClient)}>
+                <MemosContainer />
+            </HydrationBoundary>
         </PageContainer>
     );
 }
