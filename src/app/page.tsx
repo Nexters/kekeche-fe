@@ -3,6 +3,7 @@ import FixedBottomArea from '@/components/create-character/fixed-bottom-area';
 import Intro from '@/components/create-character/intro';
 import { PageContainer } from '@/components/ui';
 import KakaoLoginButton from '@/components/ui/KakaoLoginButton';
+import Modal from '@/components/ui/modal';
 import Link from 'next/link';
 
 export default function Home() {
