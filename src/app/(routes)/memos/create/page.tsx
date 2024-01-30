@@ -40,7 +40,7 @@ export default function MemoCreate() {
             </header>
             <Select>
                 <div className="flex flex-row items-center gap-[10px] px-6">
-                    <SelectTrigger className="w-[160px] border-none bg-gray-100">
+                    <SelectTrigger className="w-[160px] border-none bg-gray-100 outline-none focus:outline-none focus:ring-0">
                         <SelectValue
                             placeholder={
                                 <div className="felx-row flex gap-[6px]">
