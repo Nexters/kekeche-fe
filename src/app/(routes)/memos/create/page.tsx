@@ -10,6 +10,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui-shadcn/select';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -21,6 +22,8 @@ export default function MemoCreate() {
     const matches = [...textareaValue.matchAll(regex)];
     const hashtags = matches.map((match) => match[0]).map((text) => text.replace('&nbsp;', ''));
 
+    const router = useRouter();
+
     useEffect(() => {
         if (textareaRef.current) {
             textareaRef.current.focus();
@@ -30,7 +33,13 @@ export default function MemoCreate() {
     return (
         <PageContainer>
             <header className="mb-[10px] flex justify-between gap-2">
-                <button aria-label="뒤로 가기 버튼" className="p-3">
+                <button
+                    onClick={() => {
+                        router.back();
+                    }}
+                    aria-label="뒤로 가기 버튼"
+                    className="p-3"
+                >
                     <BackArrowIcon stroke="#8E939E" />
                 </button>
                 <span className=" grid flex-1 place-items-center text-center text-[18px] font-semibold leading-7 text-gray-500">
