@@ -1,8 +1,10 @@
 import { pretendard } from '@/assets/fonts/pretendard';
-import QueryClientContext from '@/context/query-client-context';
-import type { Metadata, Viewport } from 'next';
-import './globals.css';
 import { Toaster } from '@/components/ui-shadcn/toast/toaster';
+import QueryClientContext from '@/context/query-client-context';
+import { GoogleAnalytics } from '@next/third-parties/google';
+import type { Metadata, Viewport } from 'next';
+
+import './globals.css';
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -81,6 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body className={pretendard.className}>
                 <QueryClientContext>{children}</QueryClientContext>
                 <Toaster />
+                <GoogleAnalytics gaId="G-3ZH553JMHM" />
             </body>
         </html>
     );

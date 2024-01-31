@@ -1,5 +1,5 @@
 const ROUTES = {
-    memoCreate: 'memo/create',
+    memoCreate: 'memos/create',
     memos: 'memos',
     my: 'my',
 } as const;

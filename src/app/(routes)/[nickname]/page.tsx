@@ -14,7 +14,7 @@ export default function Home() {
                     .map((_, i) => {
                         return (
                             <Link
-                                href=""
+                                href="/character/1"
                                 key={i}
                                 className="flex flex-col items-center justify-center rounded-2xl bg-[#FFF3F4] px-4 py-[18px] "
                             >
@@ -49,7 +49,7 @@ export default function Home() {
 
 function CharacterCreateButton() {
     return (
-        <Link href="" className="grid h-[236px]  place-items-center rounded-xl bg-backgroundSecondaryLight">
+        <Link href="/create" className="grid h-[236px]  place-items-center rounded-xl bg-backgroundSecondaryLight">
             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M56.75 32.1797H32.75V56.1797H24.75V32.1797H0.75V24.1797H24.75V0.179688H32.75V24.1797H56.75V32.1797Z"

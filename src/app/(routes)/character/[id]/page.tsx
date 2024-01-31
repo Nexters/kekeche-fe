@@ -7,6 +7,7 @@ import MockImage from '@/assets/images/mock_character_120x120.png';
 import { PageContainer } from '@/components/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui-shadcn/popover';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function CharacterDetail() {
     return (
@@ -79,9 +80,12 @@ export default function CharacterDetail() {
                     <div className="p-6 text-semibold18 text-contentPrimaryLight">메모 12</div>
                 </section>
                 <div className="fixed bottom-0 left-0 right-0 z-10 flex justify-center py-4">
-                    <button className="w-[340px] rounded-full bg-[#E57897] px-6 py-[14px] text-semibold18 text-white">
+                    <Link
+                        href="/memos/create"
+                        className="w-[340px] rounded-full bg-[#E57897] px-6 py-[14px] text-center text-semibold18 text-white"
+                    >
                         작성하기
-                    </button>
+                    </Link>
                 </div>
             </div>
         </PageContainer>
