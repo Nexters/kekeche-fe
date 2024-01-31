@@ -28,7 +28,7 @@ export default function MemoCreate() {
         if (textareaRef.current) {
             textareaRef.current.focus();
         }
-    });
+    }, []);
 
     return (
         <PageContainer>
@@ -63,13 +63,13 @@ export default function MemoCreate() {
                 </div>
                 <SelectContent className="border-none bg-gray-100">
                     <SelectGroup className="bg-gray-100">
-                        <SelectItem value="apple">
+                        <SelectItem value="character1">
                             <div className="felx-row flex gap-[6px]">
                                 <span className="h-6 w-6 rounded-full bg-gray-200" />
                                 <span>캐릭터1</span>
                             </div>
                         </SelectItem>
-                        <SelectItem value="apple">
+                        <SelectItem value="character2">
                             <div className="felx-row flex gap-[6px]">
                                 <span className="h-6 w-6 rounded-full bg-gray-200" />
                                 <span>캐릭터2</span>
