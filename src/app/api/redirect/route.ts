@@ -1,7 +1,7 @@
 import { ResponseBody } from '@/types/response-body';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { type NextRequest } from 'next/server';
-import { cookies } from 'next/headers';
 
 interface LoginResponse {
     memberId: number;
@@ -11,9 +11,8 @@ interface LoginResponse {
 
 const login = async (code: string) => {
     const res: ResponseBody<LoginResponse> = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/member/kakao/callback?code=${code}`,
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/auth/kakao/callback?code=${code}`,
     ).then((res) => res.json());
-    console.log(res.data);
     return res.data;
 };
 
