@@ -1715,8 +1715,6 @@ packages:
       react-remove-scroll: 2.5.5(@types/react@18.2.48)(react@18.2.0)
     dev: false
 
-<<<<<<< HEAD
-=======
   /@radix-ui/react-direction@1.0.1(@types/react@18.2.48)(react@18.2.0):
     resolution: {integrity: sha512-RXcvnXgyvYvBEOhCBuddKecVkoMiI10Jcm5cTI7abJRAHYfFxeu+FBQs/DvdxSYucxR5mna0dNsL6QFlds5TMA==}
     peerDependencies:
@@ -1731,7 +1729,6 @@ packages:
       react: 18.2.0
     dev: false
 
->>>>>>> 9c90c48170ce3d6332724d043687b3264a4a7689
   /@radix-ui/react-dismissable-layer@1.0.5(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-aJeDjQhywg9LBu2t/At58hCvr7pEm0o2Ke1x33B+MhjNmmZ17sy4KImo0KPLgsnc/zN7GPdce8Cnn0SWvwZO7g==}
     peerDependencies:
@@ -2092,8 +2089,6 @@ packages:
       react: 18.2.0
     dev: false
 
-<<<<<<< HEAD
-=======
   /@radix-ui/react-use-previous@1.0.1(@types/react@18.2.48)(react@18.2.0):
     resolution: {integrity: sha512-cV5La9DPwiQ7S0gf/0qiD6YgNqM5Fk97Kdrlc5yBcrF3jyEZQwm7vYFqMo4IfeHgJXsRaMvLABFtd0OVEmZhDw==}
     peerDependencies:
@@ -2108,7 +2103,6 @@ packages:
       react: 18.2.0
     dev: false
 
->>>>>>> 9c90c48170ce3d6332724d043687b3264a4a7689
   /@radix-ui/react-use-rect@1.0.1(@types/react@18.2.48)(react@18.2.0):
     resolution: {integrity: sha512-Cq5DLuSiuYVKNU8orzJMbl15TXilTnJKUCltMVQg53BQOF1/C5toAaGrowkgksdBQ9H+SRL23g0HDmg9tvmxXw==}
     peerDependencies:

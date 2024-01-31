@@ -21,7 +21,7 @@ export default function CharacterDetail() {
                         <span className="grid flex-1 place-items-center text-center text-[18px] font-semibold leading-7 text-contentPrimaryLight">
                             캐릭터 상세
                         </span>
-                        <Popover>
+                        <Popover modal>
                             <PopoverTrigger className="p-3">
                                 <MeatballIcon />
                             </PopoverTrigger>
