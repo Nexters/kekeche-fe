@@ -79,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
                     rel="apple-touch-startup-image"
                 />
+                <meta name="naver-site-verification" content="6f87b8170cef8604157538c5f66fffce3e688bc2" />
             </head>
             <body className={pretendard.className}>
                 <QueryClientContext>{children}</QueryClientContext>
