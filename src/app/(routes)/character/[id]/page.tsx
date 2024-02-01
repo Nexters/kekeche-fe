@@ -16,7 +16,7 @@ export default function CharacterDetail() {
                 <section>
                     <div className="mb-5 flex justify-between gap-2">
                         <button aria-label="뒤로 가기 버튼" className="p-3">
-                            <BackArrowIcon />
+                            <BackArrowIcon stroke="black" />
                         </button>
                         <span className="grid flex-1 place-items-center text-center text-[18px] font-semibold leading-7 text-contentPrimaryLight">
                             캐릭터 상세
