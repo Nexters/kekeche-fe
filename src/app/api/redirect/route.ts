@@ -1,4 +1,4 @@
-import { ResponseBody } from '@/types/response-body';
+import { createCharacter } from '@/components/create-character/steps/show-result';
 import { redirect } from 'next/navigation';
 import { type NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
@@ -15,13 +15,13 @@ export async function GET(request: NextRequest) {
     cookies().set('accessToken', accessToken, { maxAge: 1000000, httpOnly: false });
 
     // 캐릭터 생성
-    // const createCharacterValues = cookies().get('create-character')?.value;
-    // if (createCharacterValues !== undefined) {
-    //     const body = JSON.parse(createCharacterValues);
-    //     const { id } = await createCharacter(body, accessToken);
-    //     cookies().delete('create-character');
-    //     return redirect(`/character/${id}`);
-    // }
+    const createCharacterValues = cookies().get('create-character')?.value;
+    if (createCharacterValues !== undefined) {
+        const body = JSON.parse(createCharacterValues);
+        const { id } = await createCharacter(body, accessToken);
+        cookies().delete('create-character');
+        return redirect(`/character/${id}`);
+    }
 
     return redirect(`/${memberId}`);
 }
