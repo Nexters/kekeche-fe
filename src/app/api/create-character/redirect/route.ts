@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
         console.log('accessToken', accessToken);
         const createCharacterValues = cookies().get('create-character')?.value;
         console.log('dddddddd', createCharacterValues);
-        if (createCharacterValues !== undefined) {
+        if (createCharacterValues) {
             const body = JSON.parse(createCharacterValues);
             const { id } = await createCharacter(body, accessToken);
             console.log(id);
