@@ -40,14 +40,16 @@ export default React.memo(function SetName() {
                     onChange={handleNameChange}
                     placeholder="이름 작성"
                 />
-                <p className="ml-[2px] text-regular14 text-[#CF3644]">{isError && '올바른 이름 형식이 아니에요.'}</p>
+                <p className="ml-[2px] h-[15px] text-regular14 text-[#CF3644]">
+                    {isError && '올바른 이름 형식이 아니에요.'}
+                </p>
             </div>
             <p className="color-[#17171B]  mt-[30px] w-[327px] text-[20px] font-[700]">예시</p>
             <p className="ml-[78px] mt-[12px] w-full text-regular16 text-gray-500">
                 {'슈퍼디자이너, 맛집덕후, 헬스쪼렙, 착한 효녀'}
             </p>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton disabled={isError} text="다음" onClick={handleClick} />
+                <CtaButton disabled={isError || name.length === 0} text="다음" onClick={handleClick} />
             </FixedBottomArea>
         </>
     );

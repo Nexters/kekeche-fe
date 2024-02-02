@@ -77,6 +77,7 @@ const config = {
             white: '#ffffff',
             gray: {
                 100: '#F8F8FB',
+                150: '#ECEFF5',
                 200: '#DFE2EA',
                 300: '#A6AAB4',
                 400: '#8E939E',

@@ -2,7 +2,6 @@ import { ResponseBody } from '@/types/response-body';
 import { redirect } from 'next/navigation';
 import { type NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
-import { createCharacter } from '@/components/create-character/steps/show-result';
 
 interface LoginResponse {
     memberId: number;
@@ -16,6 +15,17 @@ export const login = async (code: string) => {
     ).then((res) => res.json());
     return res.data;
 };
+
+export const createCharacter = async (createCharacterValues: string, accessToken: string) =>
+    await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
+        method: 'POST',
+        body: createCharacterValues,
+        headers: {
+            Authorization: accessToken,
+        },
+    })
+        .then((res) => res.json())
+        .then((body) => body.data);
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
@@ -32,6 +42,7 @@ export async function GET(request: NextRequest) {
     if (createCharacterValues !== undefined) {
         console.log(JSON.parse(createCharacterValues));
         const { id } = await createCharacter(createCharacterValues, accessToken);
+        console.log('id', id);
         cookies().delete('create-character');
         return redirect(`/character/${id}`);
     }

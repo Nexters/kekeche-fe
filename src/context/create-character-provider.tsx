@@ -12,7 +12,7 @@ interface CreateCharacterValues {
     color?: number;
     shape?: number;
     keywords?: Array<number>;
-    item?: number;
+    item?: number | null;
 }
 
 interface CreateCharacterDispatch {

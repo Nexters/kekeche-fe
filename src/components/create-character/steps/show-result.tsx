@@ -1,6 +1,6 @@
 'use client';
 import { useContext, useEffect, useState } from 'react';
-import Intro from '../intro';
+import HomeBg from '@/assets/images/homeBg.jpg';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import EggImg from '@/assets/images/egg.png';
@@ -48,7 +48,6 @@ export default function ShowResult() {
         }
     };
     const handleRecreateClick = () => {
-        // 이거 말고 더 좋은 방법 없나?
         window.location.href = '/create';
     };
 
@@ -57,7 +56,7 @@ export default function ShowResult() {
             setTimeout(() => {
                 setIsCreating(false);
                 //TODO: 4초로 변경하기
-            }, 2000);
+            }, 3000);
         }
     }, [step]);
 
@@ -65,9 +64,9 @@ export default function ShowResult() {
         <>
             {isCreating ? (
                 <>
-                    <Intro title={<div className="h-full w-full text-center">캐릭터 생성중</div>} />
-                    <div className="mt-[40.75px] flex w-full justify-center">
-                        <Image src={EggImg} alt="캐릭터 생성중 이미지" />
+                    <Image alt="배경" src={HomeBg} fill className="opacity-50" />
+                    <div className="text-gray-700 z-[50] mt-[180px] h-full w-full text-center text-bold24">
+                        캐릭터 생성 중
                     </div>
                 </>
             ) : (
