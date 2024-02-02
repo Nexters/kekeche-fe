@@ -35,6 +35,9 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
                             href={`/character/${character.id}`}
                             key={character.id}
                             className="flex flex-col items-center justify-center rounded-2xl bg-[#F2F3FB] px-4 py-[18px] "
+                            style={{
+                                pointerEvents: charactersResponse.isMe ? 'initial' : 'none',
+                            }}
                         >
                             <div className="mb-2 flex items-center rounded-full bg-[#C4CAF7] px-2 py-[6px]">
                                 <span className="h-4 w-4">
@@ -71,7 +74,7 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
                         </Link>
                     );
                 })}
-                <CharacterCreateButton />
+                {charactersResponse?.isMe && <CharacterCreateButton />}
             </div>
         </PageContainer>
     );

@@ -18,6 +18,7 @@ import {
     DialogTrigger,
 } from '@/components/ui-shadcn/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui-shadcn/popover';
+import { useToast } from '@/components/ui-shadcn/toast/use-toast';
 import Modal from '@/components/ui/modal';
 import removeCharacterName from '@/services/deleteCharacterName';
 import editCharacterName from '@/services/editCharacterName';
@@ -34,6 +35,7 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
     const [detailData, setDetailData] = useState<GetCharacterDetailResponse | undefined>(undefined);
     const [popup, setPopup] = useState<'edit' | 'delete' | undefined>(undefined);
     const [draftName, setDraftName] = useState<string | undefined>(undefined);
+    const { toast } = useToast();
 
     const router = useRouter();
     useEffect(() => {
@@ -99,6 +101,10 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                                             <DialogClose
                                                 disabled={!draftName || draftName.length > 6}
                                                 onClick={() => {
+                                                    if (memberResponse?.characterCount === 1) {
+                                                        return;
+                                                    }
+
                                                     if (detailData?.id)
                                                         editCharacterName({
                                                             accessToken: `${getCookie('accessToken')}`,
@@ -135,6 +141,15 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                                             <DialogClose
                                                 disabled={!draftName || draftName.length > 6}
                                                 onClick={() => {
+                                                    if (
+                                                        memberResponse?.characterCount &&
+                                                        memberResponse?.characterCount === 1
+                                                    ) {
+                                                        toast({
+                                                            description: '마지막 캐릭터는 삭제할 수 없어요',
+                                                        });
+                                                        return;
+                                                    }
                                                     if (detailData?.id)
                                                         removeCharacterName({
                                                             accessToken: `${getCookie('accessToken')}`,

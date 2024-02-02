@@ -10,6 +10,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui-shadcn/select';
+import createMemo from '@/services/createMemo';
+import getCharacters, { GetCharactersResponse } from '@/services/getCharacters';
+import getMember, { GetMemberResponse } from '@/services/getMember';
+import { getCookie } from 'cookies-next';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -17,6 +22,10 @@ import TextareaAutosize from 'react-textarea-autosize';
 export default function MemoCreate() {
     const [textareaValue, setTextareaValue] = useState('');
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    const [charactersResponse, setCharactersResponse] = useState<GetCharactersResponse | undefined>(undefined);
+    const [memberResponse, setMemberResponse] = useState<GetMemberResponse | undefined>(undefined);
+    const [selectedCharacter, setSelectedCharacter] = useState('');
 
     const regex = /#(\S+)(?=\s|\p{P}|$)/gu; // \S는 공백이 아닌 문자, \p{P}는 구두점을 나타냅니다.
     const matches = [...textareaValue.matchAll(regex)];
@@ -29,6 +38,18 @@ export default function MemoCreate() {
             textareaRef.current.focus();
         }
     }, []);
+
+    useEffect(() => {
+        getMember({ accessToken: getCookie('accessToken') }).then((res) => setMemberResponse(res));
+    }, []);
+
+    useEffect(() => {
+        if (memberResponse?.memberId) {
+            getCharacters({ memberId: Number(memberResponse.memberId), accessToken: getCookie('accessToken') }).then(
+                (res) => setCharactersResponse(res),
+            );
+        }
+    }, [memberResponse?.memberId]);
 
     return (
         <PageContainer>
@@ -45,15 +66,33 @@ export default function MemoCreate() {
                 <span className=" grid flex-1 place-items-center text-center text-[18px] font-semibold leading-7 text-gray-500">
                     기록 작성
                 </span>
-                <button className="p-3 text-semibold16 text-[#1E73F3]">저장</button>
+                <button
+                    onClick={() => {
+                        createMemo({
+                            accessToken: `${getCookie('accessToken')}`,
+                            content: textareaValue,
+                            characterId: Number(selectedCharacter),
+                            hashtags: hashtags.map((text) => text.slice(1)),
+                        });
+                        router.push(`/memos`);
+                    }}
+                    disabled={textareaValue.length === 0 || selectedCharacter === ''}
+                    className="p-3 text-semibold16 text-[#1E73F3] transition-colors disabled:pointer-events-none disabled:text-gray-300"
+                >
+                    저장
+                </button>
             </header>
-            <Select>
+            <Select
+                onValueChange={(value) => {
+                    setSelectedCharacter(value);
+                }}
+            >
                 <div className="flex flex-row items-center gap-[10px] px-6">
                     <SelectTrigger className="w-[160px] border-none bg-gray-100 outline-none focus:outline-none focus:ring-0">
                         <SelectValue
                             placeholder={
                                 <div className="felx-row flex gap-[6px]">
-                                    <span className="h-6 w-6 rounded-full bg-gray-200" />
+                                    <span className="h-6 w-6 rounded-full bg-[#d7e7ff]" />
                                     <span>캐릭터 선택</span>
                                 </div>
                             }
@@ -63,18 +102,16 @@ export default function MemoCreate() {
                 </div>
                 <SelectContent className="border-none bg-gray-100">
                     <SelectGroup className="bg-gray-100">
-                        <SelectItem value="character1">
-                            <div className="felx-row flex gap-[6px]">
-                                <span className="h-6 w-6 rounded-full bg-gray-200" />
-                                <span>캐릭터1</span>
-                            </div>
-                        </SelectItem>
-                        <SelectItem value="character2">
-                            <div className="felx-row flex gap-[6px]">
-                                <span className="h-6 w-6 rounded-full bg-gray-200" />
-                                <span>캐릭터2</span>
-                            </div>
-                        </SelectItem>
+                        {charactersResponse?.characters.map((chracter, i) => (
+                            <SelectItem value={chracter.id + ''} key={i}>
+                                <div className="felx-row flex gap-[6px]">
+                                    <span className="h-6 w-6 rounded-full bg-[#d7e7ff]">
+                                        <Image width={24} height={24} alt="" src={chracter.characterImage} />
+                                    </span>
+                                    <span>{chracter.name}</span>
+                                </div>
+                            </SelectItem>
+                        ))}
                     </SelectGroup>
                 </SelectContent>
             </Select>

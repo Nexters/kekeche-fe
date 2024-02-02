@@ -96,7 +96,13 @@ export default function My() {
                     </button>
                 </li>
                 <li>
-                    <button className="flex w-full items-center justify-between p-6">
+                    <button
+                        onClick={() => {
+                            deleteCookie('accessToken');
+                            router.push('/');
+                        }}
+                        className="flex w-full items-center justify-between p-6"
+                    >
                         <span className="text-regular16 text-[#4B4F58]">회원탈퇴</span>
                         <ChevronRightIcon />
                     </button>
