@@ -2,21 +2,7 @@ import { ResponseBody } from '@/types/response-body';
 import { redirect } from 'next/navigation';
 import { type NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
-import { CreateCharacterValues } from '@/context/create-character-provider';
-import { createCharacter } from '@/components/create-character/steps/show-result';
-
-interface LoginResponse {
-    memberId: number;
-    nickname: string;
-    accessToken: string;
-}
-
-export const login = async (code: string) => {
-    const res: ResponseBody<LoginResponse> = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/auth/kakao/callback?code=${code}`,
-    ).then((res) => res.json());
-    return res.data;
-};
+import { login } from '@/services/login';
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
