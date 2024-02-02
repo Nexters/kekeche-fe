@@ -33,7 +33,10 @@ export default function MemoCreate() {
 
     const router = useRouter();
 
-    const replacedText = textareaValue.replace(regex, '<span style="text-decoration:underline;">$&</span>');
+    const replacedText = textareaValue.replace(
+        regex,
+        '<span style="background-color:#4cf05e; text-decoration:underline; opacity: 0.4;">$&</span>',
+    );
 
     useEffect(() => {
         if (textareaRef.current) {
