@@ -12,9 +12,7 @@ export default function Memo({ memo: { content, createdAt } }: Props) {
                 <div className="font-400 flex h-[28px] w-[53px] items-center justify-center rounded-[8px] bg-[#FFE3E7] text-[12px] text-[#E57897] ">
                     넥터 PM
                 </div>
-                <button>
-                    <ActionButton />
-                </button>
+                <button>{/* <ActionButton /> */}</button>
             </div>
             <p className="text-regular16 leading-[24px] text-[#4B4F58]">
                 <div dangerouslySetInnerHTML={{ __html: content }} />
