@@ -34,7 +34,7 @@ export default React.memo(function Story() {
                 </FixedBottomArea>
             ) : (
                 <FixedBottomArea className="mb-[31px] gap-[16px]">
-                    <StoryBox text={'내 안의 다양한 공룡들을 키워서, \n 나의 공룡들과 함께 다같이 레벨업해요.'} />
+                    <StoryBox text={'내 안의 다양한 공룡들을 키워서, 나의 공룡들과 \n 함께 다같이 레벨업해요.'} />
                     <CtaButton text="다음" onClick={handleNextClick} />
                 </FixedBottomArea>
             )}
