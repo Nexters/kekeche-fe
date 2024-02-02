@@ -24,7 +24,9 @@ const createCharacter = async (createCharacterValues: CreateCharacterValues, acc
             'Content-Type': 'application/json',
             Authorization: accessToken,
         },
-    }).then((res) => res.json());
+    })
+        .then((res) => res.json())
+        .then((json) => json.data);
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
