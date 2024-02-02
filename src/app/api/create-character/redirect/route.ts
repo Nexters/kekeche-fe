@@ -1,7 +1,7 @@
-import { type NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-import { ResponseBody } from '@/types/response-body';
 import { CreateCharacterValues } from '@/context/create-character-provider';
+import { ResponseBody } from '@/types/response-body';
+import { cookies } from 'next/headers';
+import { NextResponse, type NextRequest } from 'next/server';
 
 interface LoginResponse {
     memberId: number;
@@ -38,13 +38,13 @@ export async function GET(request: NextRequest) {
     try {
         const { memberId, accessToken } = await login(code);
         cookies().set('accessToken', accessToken, { maxAge: 1000000, httpOnly: false });
-        console.log('accessToken', accessToken);
+
         const createCharacterValues = cookies().get('create-character')?.value;
-        console.log('dddddddd', createCharacterValues);
+
         if (createCharacterValues) {
             const body = JSON.parse(createCharacterValues);
             const { id } = await createCharacter(body, accessToken);
-            console.log(id);
+
             cookies().delete('create-character');
             return NextResponse.redirect(new URL(`/character/${id}`, request.url));
         }

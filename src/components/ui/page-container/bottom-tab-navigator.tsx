@@ -23,8 +23,6 @@ export default function TabNavigator() {
         { label: '내 정보', IconComponent: UserProfileIcon, path: `${ROUTES.my}` },
     ] as const;
 
-    console.log(Menus[0].path);
-
     type LabelType = (typeof Menus)[number]['label'];
 
     const [currentLocation, setCurrentLocation] = useState<LabelType | undefined>(() => {
@@ -43,8 +41,6 @@ export default function TabNavigator() {
                     Authorization: `${getCookie('accessToken')}`,
                 },
             }).then((res) => res.json());
-
-            console.log(res.data.memberId);
 
             setMemberId(res.data.memberId);
 

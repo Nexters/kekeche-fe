@@ -1,17 +1,16 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
-import HomeBg from '@/assets/images/homeBg.jpg';
-import { useSearchParams } from 'next/navigation';
-import Image from 'next/image';
-import Header from '../header';
-import { CreateCharacterValues, CreateCharacterValuesContext } from '@/context/create-character-provider';
 import FlowerIcon from '@/assets/icons/flower_pink_20x20.svg';
-import CtaButton from '../cta-button';
-import { useRouter } from 'next/navigation';
-import useCarousel from '../hooks/useCarousel';
-import FixedBottomArea from '../fixed-bottom-area';
-import { setCookie, getCookie } from 'cookies-next';
+import HomeBg from '@/assets/images/homeBg.jpg';
+import { CreateCharacterValues, CreateCharacterValuesContext } from '@/context/create-character-provider';
+import { getCookie, setCookie } from 'cookies-next';
+import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useContext, useEffect, useState } from 'react';
 import { Keywords } from '../constants/create-character-inputs';
+import CtaButton from '../cta-button';
+import FixedBottomArea from '../fixed-bottom-area';
+import Header from '../header';
+import useCarousel from '../hooks/useCarousel';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -50,8 +49,7 @@ export default function ShowResult() {
         try {
             // 캐릭터 생성 api...
             const { id } = await createCharacter(createCharacterValues, `${getCookie('accessToken')}`);
-            console.log('here');
-            console.log(id);
+
             router.push(`/character/${id}`);
         } catch (err) {
             // 로그인 안 한 사람->'앗' 페이지

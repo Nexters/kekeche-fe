@@ -33,6 +33,8 @@ export default function MemoCreate() {
 
     const router = useRouter();
 
+    const replacedText = textareaValue.replace(regex, '<span style="text-decoration:underline;">$&</span>');
+
     useEffect(() => {
         if (textareaRef.current) {
             textareaRef.current.focus();
@@ -70,7 +72,7 @@ export default function MemoCreate() {
                     onClick={() => {
                         createMemo({
                             accessToken: `${getCookie('accessToken')}`,
-                            content: textareaValue,
+                            content: replacedText,
                             characterId: Number(selectedCharacter),
                             hashtags: hashtags.map((text) => text.slice(1)),
                         });
@@ -149,94 +151,3 @@ export default function MemoCreate() {
         </PageContainer>
     );
 }
-
-/*
-// TODO: 에디터
-
-
-interface EditorState {
-    html: string;
-    textNodeCount: number;
-}
-
-class Editor extends React.Component<{}, EditorState> {
-    constructor(props: {}) {
-        super(props);
-        this.state = { html: '', textNodeCount: 0 };
-    }
-
-    private countTextNodes(html: string): number {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const textNodes = doc.body.childNodes;
-
-        let count = 0;
-
-        const countTextContent = (node: Node) => {
-            if (node.nodeType === 3) {
-                // TEXT_NODE
-                const textContent = (node as Text).textContent || '';
-                count += textContent.length;
-            } else {
-                for (let i = 0; i < node.childNodes.length; i++) {
-                    countTextContent(node.childNodes[i]);
-                }
-            }
-        };
-
-        textNodes.forEach((node) => countTextContent(node));
-
-        return count;
-    }
-
-    private handleChange = (event: ContentEditableEvent) => {
-        const html = event.target.value;
-        const textNodeCount = this.countTextNodes(html);
-
-        this.setState({ html, textNodeCount });
-    };
-
-    render = () => {
-        const { html, textNodeCount } = this.state;
-        const regex = /#(\S+)(?=\s|\p{P}|$)/gu; // \S는 공백이 아닌 문자, \p{P}는 구두점을 나타냅니다.
-        const matches = [...html.matchAll(regex)];
-        console.log(matches);
-        const hashtags = matches.map((match) => match[0]).map((text) => text.replace('&nbsp;', ''));
-
-        // hashtag 만들어질때마다 키워드 붙여주자.
-        console.log(hashtags);
-        let str = html;
-        hashtags.forEach((hashtag) => {
-            let idx = html.indexOf(hashtag);
-            if (html[idx - 1] === '>') return;
-            str = str.replace(hashtag, `<span class='keyword'>${hashtag}</span>`);
-        });
-        console.log(str);
-
-        //<span class="keyword">#${keyword}</span>
-
-        // <div> 태그를 <br> 태그로 변환하여 줄 바꿈이 발생하도록 함
-        //let formattedContent = updatedContent.replace(/<div>/g, '<br>');
-
-        return (
-            <div className="text-gray-500">
-                <ContentEditable
-                    className="mb-[10px] min-h-[188px] break-all px-6 pt-[10px] focus:outline-none"
-                    html={str}
-                    // @ts-ignore
-                    placeholder="메모를 입력해주세요"
-                    disabled={false}
-                    onChange={this.handleChange}
-                />
-                <style>{`
-           
-                    .keyword {
-                    text-decoration: underline;
-                    }
-                    `}</style>
-                <p className="py-2 pr-6 text-right text-gray-300">{textNodeCount}/200</p>
-            </div>
-        );
-    };
-}
-*/
