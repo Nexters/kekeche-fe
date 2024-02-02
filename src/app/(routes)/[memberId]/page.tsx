@@ -74,7 +74,7 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
                         </Link>
                     );
                 })}
-                {charactersResponse?.isMe && <CharacterCreateButton />}
+                {charactersResponse?.isMe && charactersResponse.characters.length < 6 && <CharacterCreateButton />}
             </div>
         </PageContainer>
     );
