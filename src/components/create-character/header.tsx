@@ -6,7 +6,7 @@ type Props = {
 
 export default function Header({ onGoBack }: Props) {
     return (
-        <div className="fixed top-0 left-0 w-full h-[48px] flex justify-center items-center relative w-[327px]">
+        <div className="fixed relative left-0 top-0 flex h-[48px] w-[327px] w-full items-center justify-center">
             <h2 className="text-[16px] font-semibold">캐릭터 생성</h2>
             {onGoBack && (
                 <button className="absolute left-[12px]" onClick={onGoBack}>
