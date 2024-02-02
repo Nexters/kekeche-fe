@@ -14,7 +14,7 @@ export default function Home() {
                 <Image alt={'로고'} src={Logo} width={256} height={77} />
             </div>
             <FixedBottomArea
-                className="mb-[10px] gap-[16px]"
+                className="mb-[31px] gap-[16px]"
                 style={{ boxShadow: 'inset 0px -200px 200px -200px #ffffff' }}
             >
                 <Link href="/create">
