@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { ResponseBody } from './types/response-body';
 
 const HOME_PATH = '/';

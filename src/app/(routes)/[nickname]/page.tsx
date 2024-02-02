@@ -1,10 +1,46 @@
+'use client';
+
 import BeanIcon from '@/assets/icons/bean_pink.svg';
 import MockCharacterImage from '@/assets/images/mock_character_120x120.png';
 import { PageContainer } from '@/components/ui';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-export default function Home() {
+interface Character {
+    id: number;
+    name: string;
+    level: number;
+    exp: number;
+    nextLevel: number;
+    characterImage: string;
+    itemImage: string;
+    keywords: number[];
+}
+
+interface GetCharactersResponse {
+    characters: Character[];
+    isMe: boolean;
+}
+
+export default function Home({ params: { nickname } }: { params: { nickname: string } }) {
+    const [charactersData, setCharactersData] = useState<GetCharactersResponse | undefined>(undefined);
+
+    useEffect(() => {
+        const getCharacters = async () => {
+            try {
+                const res = await fetch(
+                    `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character/member/${nickname}`,
+                );
+                const json = await res.json();
+                return json;
+            } catch {
+                return null;
+            }
+        };
+        getCharacters();
+    }, [nickname]);
+
     return (
         <PageContainer hasNavigator>
             <div className="mb-2 py-5 text-center text-[24px] font-bold leading-8">준근의 도감</div>
@@ -14,7 +50,7 @@ export default function Home() {
                     .map((_, i) => {
                         return (
                             <Link
-                                href=""
+                                href="/character/1"
                                 key={i}
                                 className="flex flex-col items-center justify-center rounded-2xl bg-[#FFF3F4] px-4 py-[18px] "
                             >
@@ -49,7 +85,7 @@ export default function Home() {
 
 function CharacterCreateButton() {
     return (
-        <Link href="" className="grid h-[236px]  place-items-center rounded-xl bg-backgroundSecondaryLight">
+        <Link href="/create" className="grid h-[236px]  place-items-center rounded-xl bg-backgroundSecondaryLight">
             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M56.75 32.1797H32.75V56.1797H24.75V32.1797H0.75V24.1797H24.75V0.179688H32.75V24.1797H56.75V32.1797Z"

@@ -7,6 +7,7 @@ import MockImage from '@/assets/images/mock_character_120x120.png';
 import { PageContainer } from '@/components/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui-shadcn/popover';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function CharacterDetail() {
     return (
@@ -15,12 +16,12 @@ export default function CharacterDetail() {
                 <section>
                     <div className="mb-5 flex justify-between gap-2">
                         <button aria-label="뒤로 가기 버튼" className="p-3">
-                            <BackArrowIcon />
+                            <BackArrowIcon stroke="black" />
                         </button>
                         <span className="grid flex-1 place-items-center text-center text-[18px] font-semibold leading-7 text-contentPrimaryLight">
                             캐릭터 상세
                         </span>
-                        <Popover>
+                        <Popover modal>
                             <PopoverTrigger className="p-3">
                                 <MeatballIcon />
                             </PopoverTrigger>
@@ -79,9 +80,12 @@ export default function CharacterDetail() {
                     <div className="p-6 text-semibold18 text-contentPrimaryLight">메모 12</div>
                 </section>
                 <div className="fixed bottom-0 left-0 right-0 z-10 flex justify-center py-4">
-                    <button className="w-[340px] rounded-full bg-[#E57897] px-6 py-[14px] text-semibold18 text-white">
+                    <Link
+                        href="/memos/create"
+                        className="w-[340px] rounded-full bg-[#E57897] px-6 py-[14px] text-center text-semibold18 text-white"
+                    >
                         작성하기
-                    </button>
+                    </Link>
                 </div>
             </div>
         </PageContainer>
