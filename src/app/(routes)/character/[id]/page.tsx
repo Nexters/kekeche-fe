@@ -172,7 +172,7 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                     <div className="flex flex-col items-center">
                         <div className="mb-5 flex w-[87px] items-center justify-center gap-1 rounded-full bg-[#C4CAF7]  px-[14px] py-[6px]">
                             <FlowerIcon fill={'#606FD8'} />
-                            <span className="text-bold16 font-bold text-[#606FD8]">Lv.5</span>
+                            <span className="text-bold16 font-bold text-[#606FD8]">Lv.{detailData?.level}</span>
                         </div>
                         <div className="mb-5 h-[280px] w-[280px] rounded-[20px] bg-[#F7F7FB]">
                             {detailData?.characterImage ? (

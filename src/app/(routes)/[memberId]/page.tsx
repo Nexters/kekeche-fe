@@ -22,12 +22,14 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
     }, [memberId]);
 
     useEffect(() => {
-        getMember({ accessToken: getCookie('accessToken') });
-    });
+        getMember({ accessToken: getCookie('accessToken') }).then((res) => setMemberResponse(res));
+    }, []);
+
+    console.log(charactersResponse);
 
     return (
         <PageContainer hasNavigator>
-            <div className="mb-2 py-5 text-center text-[24px] font-bold leading-8">준근의 도감</div>
+            <div className="mb-2 py-5 text-center text-[24px] font-bold leading-8">나의 도감</div>
             <div className="grid grid-cols-2 gap-3 px-6 py-4">
                 {charactersResponse?.characters?.map((character, i) => {
                     return (
