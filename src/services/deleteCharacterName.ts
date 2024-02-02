@@ -1,17 +1,14 @@
-export type EditCharacterNameRequest = {
+export type RemoveCharacterNameRequest = {
     accessToken: string;
-    characterName: string;
     characterId: number;
 };
 
-export default async function editCharacterName(request: EditCharacterNameRequest) {
+export default async function removeCharacterName(request: RemoveCharacterNameRequest) {
     const option = {
-        method: 'PUT',
+        method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json',
             Authorization: `${request.accessToken}`,
         },
-        body: JSON.stringify({ name: request.characterName }),
     };
 
     try {

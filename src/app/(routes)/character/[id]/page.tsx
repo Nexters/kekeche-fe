@@ -19,6 +19,7 @@ import {
 } from '@/components/ui-shadcn/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui-shadcn/popover';
 import Modal from '@/components/ui/modal';
+import removeCharacterName from '@/services/deleteCharacterName';
 import editCharacterName from '@/services/editCharacterName';
 import getCharacterDetail, { GetCharacterDetailResponse } from '@/services/getCharacterDetail';
 import getMember, { GetMemberResponse } from '@/services/getMember';
@@ -96,7 +97,7 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                                                 취소
                                             </DialogClose>
                                             <DialogClose
-                                                disabled={!draftName}
+                                                disabled={!draftName || draftName.length > 6}
                                                 onClick={() => {
                                                     if (detailData?.id)
                                                         editCharacterName({
@@ -105,7 +106,7 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                                                             characterName: `${draftName}`,
                                                         });
 
-                                                    router.refresh();
+                                                    location.reload();
                                                 }}
                                                 className="flex-1 rounded-xl bg-[#606fd8] py-3 text-white disabled:bg-[#c4caf8]"
                                             >
@@ -120,14 +121,33 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                                         <TrashIcon stroke="#F04141" />
                                         <span className="text-semibold16 text-[#F04141]">삭제</span>
                                     </DialogTrigger>
-                                    <DialogContent>
+                                    <DialogContent className="w-[300px] px-6 py-9">
                                         <DialogHeader>
-                                            <DialogTitle>Are you absolutely sure?</DialogTitle>
-                                            <DialogDescription>
-                                                This action cannot be undone. This will permanently delete your account
-                                                and remove your data from our servers.
+                                            <DialogTitle className="mb-5 text-center">캐릭터를 삭제할까요?</DialogTitle>
+                                            <DialogDescription className="text-center">
+                                                삭제한 캐릭터는 되돌릴 수 없어요
                                             </DialogDescription>
                                         </DialogHeader>
+                                        <DialogFooter className="flex gap-3">
+                                            <DialogClose className="flex-1  rounded-xl bg-gray-200 py-3">
+                                                취소
+                                            </DialogClose>
+                                            <DialogClose
+                                                disabled={!draftName || draftName.length > 6}
+                                                onClick={() => {
+                                                    if (detailData?.id)
+                                                        removeCharacterName({
+                                                            accessToken: `${getCookie('accessToken')}`,
+                                                            characterId: detailData?.id,
+                                                        });
+                                                    location.reload();
+                                                    router.push(`/${memberResponse?.memberId}`);
+                                                }}
+                                                className="flex-1 rounded-xl  bg-[#f06371] py-3 text-white"
+                                            >
+                                                삭제
+                                            </DialogClose>
+                                        </DialogFooter>
                                     </DialogContent>
                                 </Dialog>
                             </PopoverContent>
