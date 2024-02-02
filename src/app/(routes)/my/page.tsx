@@ -71,7 +71,14 @@ export default function My() {
                     </button>
                 </li>
                 <li>
-                    <button className="flex w-full items-center justify-between p-6">
+                    <button
+                        onClick={() => {
+                            toast({
+                                description: '준근 태환 윤서 경리 순영 은솔 만세 ✋',
+                            });
+                        }}
+                        className="flex w-full items-center justify-between p-6"
+                    >
                         <span className="text-regular16 text-[#4B4F58]">만든 사람</span>
                         <ChevronRightIcon />
                     </button>
