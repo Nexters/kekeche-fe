@@ -1,16 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CarouselDispatchContext } from '..';
 import Header from '../header';
 import Intro from '../intro';
 import { Colors } from '../constants/create-character-inputs';
 import { CreateCharacterDispatchContext } from '@/context/create-character-provider';
+import CtaButton from '../cta-button';
+import CheckCircle from '@/assets/icons/check-circle.svg';
+import FixedBottomArea from '../fixed-bottom-area';
 
 export default React.memo(function SelectColor() {
+    const [selected, setSelected] = useState<null | number>(null);
     const createCharacterDispatch = useContext(CreateCharacterDispatchContext);
     const carouselDispatch = useContext(CarouselDispatchContext);
 
-    const handleClick = (id: number) => {
-        createCharacterDispatch?.setValue('color', id);
+    const handleClick = () => {
+        if (selected === null) return;
+
+        createCharacterDispatch?.setValue('color', selected);
         carouselDispatch?.handleNextClick();
     };
 
@@ -26,11 +32,20 @@ export default React.memo(function SelectColor() {
                 {Colors.map(({ id, hexClassName }) => (
                     <button
                         key={id}
-                        className={`${hexClassName} h-[72px] w-[156px] rounded-[12px]`}
-                        onClick={() => handleClick(id)}
-                    />
+                        className={`${hexClassName} relative h-[72px] w-[156px] rounded-[12px]`}
+                        onClick={() => setSelected(id)}
+                    >
+                        {selected === id && (
+                            <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-[12px] bg-[#8D98E6] opacity-50">
+                                <CheckCircle />
+                            </div>
+                        )}
+                    </button>
                 ))}
             </div>
+            <FixedBottomArea className="mb-[31px]">
+                <CtaButton disabled={selected === null} text="다음" onClick={handleClick} />
+            </FixedBottomArea>
         </>
     );
 });

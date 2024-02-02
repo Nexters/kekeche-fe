@@ -54,34 +54,22 @@ export const Colors = [
 ];
 
 export const Keywords = [
-    { id: 0, name: '개성이 뚜렷한' },
-    { id: 1, name: '결단력 있는' },
-    { id: 2, name: '경청하는' },
-    { id: 3, name: '계획적인' },
-    { id: 4, name: '공감 능력이 좋은' },
+    { id: 0, name: '열정적인' },
+    { id: 1, name: '꼼꼼한' },
+    { id: 2, name: '사려깊은' },
+    { id: 3, name: '창의적인' },
+    { id: 4, name: '사교적인' },
     { id: 5, name: '긍정적인' },
-    { id: 6, name: '꼼꼼한' },
-    { id: 7, name: '논리적인' },
-    { id: 8, name: '눈치 빠른' },
-    { id: 9, name: '도전적인' },
-    { id: 10, name: '리더십 있는' },
-    { id: 11, name: '사교적인' },
-    { id: 12, name: '사기를 불어넣는' },
-    { id: 13, name: '성실한' },
-    { id: 14, name: '열정적인' },
-    { id: 15, name: '완벽주의적인' },
-    { id: 16, name: '융통성 있는' },
-    { id: 17, name: '적응력 좋은' },
-    { id: 18, name: '주관있는' },
-    { id: 19, name: '창의적인' },
-    { id: 20, name: '책임감 강한' },
-    { id: 21, name: '추진력 있는' },
-    { id: 22, name: '통찰력 있는' },
-    { id: 23, name: '트렌드 빠른' },
-    { id: 24, name: '현실적인' },
-    { id: 25, name: '협력적인' },
-
-    //TODO: 확정되면 추가하기...
+    { id: 6, name: '유연한' },
+    { id: 7, name: '책임감 있는' },
+    { id: 8, name: '비판적인' },
+    { id: 9, name: '성실한' },
+    { id: 10, name: '관대한' },
+    { id: 11, name: '자신감 있는' },
+    { id: 12, name: '협력적인' },
+    { id: 13, name: '여유로운' },
+    { id: 14, name: '따뜻한' },
+    { id: 15, name: '냉철한' },
 ];
 
 export const Items = [
@@ -91,7 +79,7 @@ export const Items = [
     },
     {
         id: 1,
-        name: '운동',
+        name: '아령',
     },
     {
         id: 2,
@@ -104,10 +92,5 @@ export const Items = [
     {
         id: 4,
         name: '책',
-    },
-    {
-        id: 5,
-        name: '없음',
-        // TODO: '없음'을 어떻게 처리할지 백엔드와 협의 필요
     },
 ];

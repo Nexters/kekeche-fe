@@ -4,15 +4,14 @@ import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import CreateCharacterProvider from '@/context/create-character-provider';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import SelectShape from './steps/select-shape';
-import Start from './steps/start';
 import SelectColor from './steps/select-color';
 import SetName from './steps/set-name';
 import SelectKeywords from './steps/select-keywords';
 import SelectItem from './steps/select-item';
 import ShowResult from './steps/show-result';
 import GuideToLogin from './steps/guide-to-login';
-import Login from './steps/login';
 import StepContainer from './step-container';
+import Story from './steps/story';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -22,7 +21,7 @@ interface CarouselDispatch {
 export const CarouselDispatchContext = createContext<null | CarouselDispatch>(null);
 
 const STEPS: React.ReactNode[] = [
-    <Start key={0} />,
+    <Story key={0} />,
     <SetName key={1} />,
     <SelectShape key={2} />,
     <SelectColor key={3} />,
@@ -30,7 +29,6 @@ const STEPS: React.ReactNode[] = [
     <SelectItem key={5} />,
     <ShowResult key={6} />,
     <GuideToLogin key={7} />,
-    <Login key={8} />,
 ];
 
 export default function CreateCharacter() {

@@ -6,13 +6,13 @@ type Props = {
     children: React.ReactNode;
 };
 
-interface CreateCharacterValues {
+export interface CreateCharacterValues {
     userId?: number;
     name?: string;
     color?: number;
     shape?: number;
     keywords?: Array<number>;
-    item?: number;
+    item?: number | null;
 }
 
 interface CreateCharacterDispatch {

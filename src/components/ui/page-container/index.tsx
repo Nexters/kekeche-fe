@@ -8,12 +8,12 @@ type Props = {
 
 export default function PageContainer({ children, hasNavigator }: Props) {
     return (
-        <div className="bg-[#f5f5f5]">
+        <div className=" bg-[#f5f5f5]">
             <div
-                className="mx-auto flex min-h-screen min-w-[375px] max-w-[400px]  flex-col bg-white shadow-lg "
+                className=" mx-auto flex min-h-screen  min-w-[375px] max-w-[400px] flex-col bg-white "
                 style={{ minHeight: '100dvh' }}
             >
-                <div className="flex flex-1 flex-col overflow-auto">{children}</div>
+                <div className=" relative flex h-full flex-1 flex-col overflow-auto">{children}</div>
                 {hasNavigator && <BottomTabNavigator />}
             </div>
         </div>

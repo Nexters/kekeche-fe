@@ -7,17 +7,11 @@ import useCarousel from '../hooks/useCarousel';
 import FixedBottomArea from '../fixed-bottom-area';
 
 export default React.memo(function Start() {
-    const router = useRouter();
-
-    const { handleNextClick } = useCarousel();
+    const { handleNextClick, handlePrevClick } = useCarousel();
 
     return (
         <>
-            <Header
-                onGoBack={() => {
-                    router.push('/');
-                }}
-            />
+            <Header onGoBack={handlePrevClick} />
             <Intro title="캐릭터 만들기 시작할 거임" />
             <FixedBottomArea className="mb-[31px]">
                 <CtaButton text="가자" onClick={handleNextClick} />

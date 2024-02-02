@@ -77,11 +77,16 @@ const config = {
             white: '#ffffff',
             gray: {
                 100: '#F8F8FB',
+                150: '#ECEFF5',
                 200: '#DFE2EA',
                 300: '#A6AAB4',
                 400: '#8E939E',
                 500: '#707683',
                 600: '#4B4F58',
+            },
+            purple: {
+                100: '#C4CAF7',
+                200: '#606FD8',
             },
             contentPrimaryLight: '#17171B',
             backgroundSecondaryLight: '#F7F8F9',
