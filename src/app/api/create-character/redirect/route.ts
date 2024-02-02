@@ -25,6 +25,8 @@ export async function GET(request: NextRequest) {
 
     // 로그인 로직
     try {
+        const response = await login(code);
+        console.log(response);
         const { memberId, accessToken } = await login(code);
         cookies().set('accessToken', accessToken, { maxAge: 1000000, httpOnly: false });
         console.log('accessToken', accessToken);
