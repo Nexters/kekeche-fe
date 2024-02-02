@@ -13,6 +13,7 @@ import ShowResult from './steps/show-result';
 import GuideToLogin from './steps/guide-to-login';
 import Login from './steps/login';
 import StepContainer from './step-container';
+import Story from './steps/story';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -22,7 +23,7 @@ interface CarouselDispatch {
 export const CarouselDispatchContext = createContext<null | CarouselDispatch>(null);
 
 const STEPS: React.ReactNode[] = [
-    <Start key={0} />,
+    <Story key={9} />,
     <SetName key={1} />,
     <SelectShape key={2} />,
     <SelectColor key={3} />,
