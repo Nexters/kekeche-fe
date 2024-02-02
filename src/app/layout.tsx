@@ -70,6 +70,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta property="og:url" content={'https://kekeche-deploy.vercel.app/'} />
                 <meta property="og:image" content={'/icons/og.png'} />
                 <meta property="og:site_name" content={'Another Me'} />
+
+                <link rel="apple-touch-icon" sizes="192x192" href="/assets/icons/icon-192x192.png" />
+                <link rel="apple-touch-icon" sizes="512x512" href="/assets/icons/icon-512x512.png" />
             </head>
             <body className={pretendard.className}>
                 <QueryClientContext>{children}</QueryClientContext>
