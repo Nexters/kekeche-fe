@@ -3,43 +3,26 @@
 import BeanIcon from '@/assets/icons/bean_pink.svg';
 import MockCharacterImage from '@/assets/images/mock_character_120x120.png';
 import { PageContainer } from '@/components/ui';
+import getCharacters, { GetCharactersResponse } from '@/services/getCharacters';
+import getMember, { GetMemberResponse } from '@/services/getMember';
+import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-interface Character {
-    id: number;
-    name: string;
-    level: number;
-    exp: number;
-    nextLevel: number;
-    characterImage: string;
-    itemImage: string;
-    keywords: number[];
-}
-
-interface GetCharactersResponse {
-    characters: Character[];
-    isMe: boolean;
-}
-
-export default function Home({ params: { nickname } }: { params: { nickname: string } }) {
-    const [charactersData, setCharactersData] = useState<GetCharactersResponse | undefined>(undefined);
+export default function Home({ params: { memberId } }: { params: { memberId: string } }) {
+    const [charactersResponse, setCharactersResponse] = useState<GetCharactersResponse | undefined>(undefined);
+    const [memberResponse, setMemberResponse] = useState<GetMemberResponse | undefined>(undefined);
 
     useEffect(() => {
-        const getCharacters = async () => {
-            try {
-                const res = await fetch(
-                    `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character/member/${nickname}`,
-                );
-                const json = await res.json();
-                return json;
-            } catch {
-                return null;
-            }
-        };
-        getCharacters();
-    }, [nickname]);
+        if (memberId) {
+            getCharacters({ memberId: Number(memberId), accessToken: getCookie('accessToken') });
+        }
+    }, [memberId]);
+
+    useEffect(() => {
+        getMember({ accessToken: getCookie('accessToken') });
+    });
 
     return (
         <PageContainer hasNavigator>
