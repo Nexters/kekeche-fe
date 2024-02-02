@@ -29,7 +29,7 @@ export default React.memo(function Story() {
             />
             {storyNum === 1 ? (
                 <FixedBottomArea className="mb-[31px] gap-[16px]">
-                    <StoryBox text={'깊고 깊은 머릿속에 자리잡은 더미공원. \n 이곳에는 다양한 내가 살고 있어요.'} />
+                    <StoryBox text={'깊고 깊은 머릿속에는 \n 다양한 내가 살고 있어요.'} />
                     <CtaButton text="다음" onClick={() => setStoryNum(2)} />
                 </FixedBottomArea>
             ) : (
