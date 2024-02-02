@@ -1,3 +1,4 @@
+'use client';
 import { useContext, useEffect, useState } from 'react';
 import Intro from '../intro';
 import { useSearchParams } from 'next/navigation';
@@ -7,10 +8,21 @@ import Header from '../header';
 import { CreateCharacterValuesContext } from '@/context/create-character-provider';
 import { Keywords } from '../constants/create-character-inputs';
 import CtaButton from '../cta-button';
-import useCreateCharacter from '../hooks/useCreateCharacter';
 import { useRouter } from 'next/navigation';
 import useCarousel from '../hooks/useCarousel';
 import FixedBottomArea from '../fixed-bottom-area';
+import { setCookie, getCookie } from 'cookies-next';
+
+export const createCharacter = async (createCharacterValues: string, accessToken: string) =>
+    await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
+        method: 'POST',
+        body: createCharacterValues,
+        headers: {
+            Authorization: accessToken,
+        },
+    })
+        .then((res) => res.json())
+        .then((body) => body.data);
 
 export default function ShowResult() {
     const router = useRouter();
@@ -23,13 +35,17 @@ export default function ShowResult() {
 
     const [isCreating, setIsCreating] = useState(true);
 
-    console.log(createCharacterValues);
+    const handleNextBtnClick = async () => {
+        try {
+            // 캐릭터 생성 api...
+            const { id } = await createCharacter(JSON.stringify(createCharacterValues), `${getCookie('accessToken')}`);
 
-    const handleNextBtnClick = () => {
-        // 캐릭터 생성 api...
-        // 로그인 안 한 사람->'앗' 페이지
-        handleNextClick();
-        // 로그인 한 사람 -> 생성된 캐릭터 생세 페이지로 이동
+            router.push(`/character/${id}`);
+        } catch (err) {
+            // 로그인 안 한 사람->'앗' 페이지
+            setCookie('create-character', JSON.stringify(createCharacterValues));
+            handleNextClick();
+        }
     };
     const handleRecreateClick = () => {
         // 이거 말고 더 좋은 방법 없나?
@@ -75,7 +91,7 @@ export default function ShowResult() {
                         </div>
                     </div>
                     <FixedBottomArea className="mb-[31px]">
-                        <CtaButton text="다음" onClick={handleNextClick} />
+                        <CtaButton text="다음" onClick={handleNextBtnClick} />
                         <button
                             onClick={handleRecreateClick}
                             className="mt-[12px] text-semibold14 text-[#7D7D7D] underline"

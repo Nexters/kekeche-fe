@@ -80,8 +80,6 @@ export const Keywords = [
     { id: 23, name: '트렌드 빠른' },
     { id: 24, name: '현실적인' },
     { id: 25, name: '협력적인' },
-
-    //TODO: 확정되면 추가하기...
 ];
 
 export const Items = [

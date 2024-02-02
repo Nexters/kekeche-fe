@@ -3,7 +3,7 @@
 import { ResponseBody } from '@/types/response-body';
 import Memo from './memo';
 import { useSearchParams } from 'next/navigation';
-import { IAllMemos, IMemo } from '@/types/memo';
+import { IAllMemos } from '@/types/memo';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 
