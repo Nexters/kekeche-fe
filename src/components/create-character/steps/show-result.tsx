@@ -38,9 +38,10 @@ export default function ShowResult() {
     }
 
     const { color, shape, name, keywords, item } = createCharacterValues;
+    console.log(item);
     const characterImg = `https://kr.object.ncloudstorage.com/kekeche-character/character/${shape}/0/${color}.png`;
-    const itemImg = item ? `https://kr.object.ncloudstorage.com/kekeche-character/item/${item}.png` : null;
-
+    const itemImg = item !== null ? `https://kr.object.ncloudstorage.com/kekeche-character/item/${item}.png` : null;
+    console.log(itemImg);
     const { handleNextClick } = useCarousel();
 
     const [isCreating, setIsCreating] = useState(true);
