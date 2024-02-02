@@ -25,8 +25,6 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
         getMember({ accessToken: getCookie('accessToken') }).then((res) => setMemberResponse(res));
     }, []);
 
-    console.log(charactersResponse);
-
     return (
         <PageContainer hasNavigator>
             <div className="mb-2 py-5 text-center text-[24px] font-bold leading-8">나의 도감</div>
