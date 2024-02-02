@@ -1,11 +1,11 @@
 'use client';
 
-import Memo from './memo';
 import { useSearchParams } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { getAllMemos } from '@/services/getAllMemos';
+import { useQuery } from '@tanstack/react-query';
 import NoMemo from './no-memo';
+import Memo from './memo';
 
 type SortOrders = 'DESC' | 'ASC';
 type SortTypes = 'createdAt' | 'modifiedAt';
@@ -26,12 +26,11 @@ export default function MemosContainer() {
     return (
         <section className="mx-auto w-full">
             <div className="flex w-[375px] flex-col items-center gap-[16px] ">
-                <NoMemo />
-                {/* {allMemos?.memos.length === 0 ? (
-                    <></>
+                {allMemos?.memos.length === 0 ? (
+                    <NoMemo />
                 ) : (
                     allMemos?.memos.map((memo) => <Memo key={memo.memoId} memo={memo} />)
-                )} */}
+                )}
             </div>
         </section>
     );

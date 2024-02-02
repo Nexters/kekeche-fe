@@ -62,7 +62,7 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
                                         <span
                                             className="inest-0 absolute h-full  rounded-full bg-[#606FD8]"
                                             style={{
-                                                width: `${character.nextExp / character.currentExp}%`,
+                                                width: `${(character.currentExp / character.nextExp) * 100}%`,
                                             }}
                                         />
                                     </span>
