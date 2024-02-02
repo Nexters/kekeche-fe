@@ -45,16 +45,23 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
                                 </span>
                                 <span className="text-[12px] font-semibold leading-3 text-[#606FD8]">{`Lv.${character.level}`}</span>
                             </div>
-                            <div className="mb-1 h-[120px] w-[120px] rounded-lg bg-white">
+                            <div className="relative mb-1 h-[120px] w-[120px] rounded-lg bg-white">
                                 <Image
                                     width={120}
                                     height={120}
                                     priority
                                     alt="몰랑이"
                                     src={character.characterImage}
-                                    className="object-fit"
+                                    className="absolute left-0 top-0"
                                 />
-                                {character.itemImage && <Image src={character.itemImage} alt="" />}
+                                <Image
+                                    priority
+                                    src={character.itemImage}
+                                    alt={'아이템 미리보기'}
+                                    className="absolute left-0 top-0"
+                                    width={120}
+                                    height={120}
+                                />
                             </div>
                             <p className="mb-1 text-semibold14 text-contentPrimaryLight">넥터 PM</p>
                             <div className="h-[15px] w-full">

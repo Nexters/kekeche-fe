@@ -174,7 +174,7 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                             <FlowerIcon fill={'#606FD8'} />
                             <span className="text-bold16 font-bold text-[#606FD8]">Lv.{detailData?.level}</span>
                         </div>
-                        <div className="mb-5 h-[280px] w-[280px] rounded-[20px] bg-[#F7F7FB]">
+                        <div className="relative mb-5 h-[280px] w-[280px] rounded-[20px] bg-[#F7F7FB]">
                             {detailData?.characterImage ? (
                                 <Image
                                     priority
@@ -184,6 +184,16 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                                     alt={detailData?.name || ''}
                                 />
                             ) : null}
+                            {detailData?.itemImage && (
+                                <Image
+                                    priority
+                                    src={detailData.itemImage}
+                                    alt={'아이템 미리보기'}
+                                    className="absolute left-0 top-0"
+                                    width={280}
+                                    height={280}
+                                />
+                            )}
                         </div>
                         <div className="mb-4 rounded-2xl p-5">
                             <div className="mb-[10px] flex items-center justify-center gap-2">
