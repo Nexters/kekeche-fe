@@ -203,7 +203,7 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                                     <span
                                         className="inest-0 absolute h-full rounded-full bg-[#606FD8]"
                                         style={{
-                                            width: `${(detailData?.currentExp ?? 0 / (detailData?.nextExp ?? 0)) * 100}%`,
+                                            width: `${((detailData?.currentExp ?? 0) / (detailData?.nextExp ?? 0)) * 100}%`,
                                         }}
                                     />
                                 </span>
