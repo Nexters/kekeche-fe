@@ -75,7 +75,7 @@ export default function CreateCharacter() {
         <>
             <CreateCharacterProvider>
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
-                    <Carousel setApi={setApi} opts={{ watchDrag: false, dragFree: true, duration: 10 }}>
+                    <Carousel setApi={setApi} opts={{ watchDrag: false, dragFree: true }}>
                         <CarouselContent style={{ minHeight: '100dvh' }}>
                             {STEPS.map((step, idx) => (
                                 <StepContainer key={idx}>{step}</StepContainer>

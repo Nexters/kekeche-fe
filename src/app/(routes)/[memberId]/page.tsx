@@ -1,7 +1,6 @@
 'use client';
 
 import BeanIcon from '@/assets/icons/bean_pink.svg';
-import MockCharacterImage from '@/assets/images/mock_character_120x120.png';
 import { PageContainer } from '@/components/ui';
 import getCharacters, { GetCharactersResponse } from '@/services/getCharacters';
 import getMember, { GetMemberResponse } from '@/services/getMember';
@@ -16,7 +15,9 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
 
     useEffect(() => {
         if (memberId) {
-            getCharacters({ memberId: Number(memberId), accessToken: getCookie('accessToken') });
+            getCharacters({ memberId: Number(memberId), accessToken: getCookie('accessToken') }).then((res) =>
+                setCharactersResponse(res),
+            );
         }
     }, [memberId]);
 
@@ -28,38 +29,48 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
         <PageContainer hasNavigator>
             <div className="mb-2 py-5 text-center text-[24px] font-bold leading-8">준근의 도감</div>
             <div className="grid grid-cols-2 gap-3 px-6 py-4">
-                {Array(4)
-                    .fill(0)
-                    .map((_, i) => {
-                        return (
-                            <Link
-                                href="/character/1"
-                                key={i}
-                                className="flex flex-col items-center justify-center rounded-2xl bg-[#FFF3F4] px-4 py-[18px] "
-                            >
-                                <div className="mb-2 flex items-center rounded-full bg-[#FFC9D0] px-2 py-[6px]">
-                                    <span className="h-4 w-4">
-                                        <BeanIcon />
+                {charactersResponse?.characters?.map((character, i) => {
+                    return (
+                        <Link
+                            href={`/character/${character.id}`}
+                            key={character.id}
+                            className="flex flex-col items-center justify-center rounded-2xl bg-[#F2F3FB] px-4 py-[18px] "
+                        >
+                            <div className="mb-2 flex items-center rounded-full bg-[#C4CAF7] px-2 py-[6px]">
+                                <span className="h-4 w-4">
+                                    <BeanIcon fill="#606FD8" />
+                                </span>
+                                <span className="text-[12px] font-semibold leading-3 text-[#606FD8]">{`Lv.${character.level}`}</span>
+                            </div>
+                            <div className="mb-1 h-[120px] w-[120px] rounded-lg bg-white">
+                                <Image
+                                    width={120}
+                                    height={120}
+                                    priority
+                                    alt="몰랑이"
+                                    src={character.characterImage}
+                                    className="object-fit"
+                                />
+                            </div>
+                            <p className="mb-1 text-semibold14 text-contentPrimaryLight">넥터 PM</p>
+                            <div className="h-[15px] w-full">
+                                <div className="flex items-center gap-1">
+                                    <span className="relative h-2 flex-1 rounded-full bg-gray-200">
+                                        <span
+                                            className="inest-0 absolute h-full  rounded-full bg-[#606FD8]"
+                                            style={{
+                                                width: `${character.nextExp / character.currentExp}%`,
+                                            }}
+                                        />
                                     </span>
-                                    <span className="text-[12px] font-semibold leading-3 text-[#E57897]">Lv.5</span>
+                                    <span className="text-[10px] font-semibold leading-[15px] text-[#565E71]">
+                                        {character.currentExp}/{character.nextExp}
+                                    </span>
                                 </div>
-                                <div className="mb-1">
-                                    <Image priority alt="몰랑이" src={MockCharacterImage} />
-                                </div>
-                                <p className="mb-1 text-semibold14 text-contentPrimaryLight">넥터 PM</p>
-                                <div className="h-[15px] w-full">
-                                    <div className="flex items-center gap-1">
-                                        <span className="relative h-2 flex-1 rounded-full bg-gray-200">
-                                            <span className="inest-0 absolute h-full w-1/3 rounded-full bg-[#E57897]" />
-                                        </span>
-                                        <span className="text-[10px] font-semibold leading-[15px] text-[#565E71]">
-                                            00/10
-                                        </span>
-                                    </div>
-                                </div>
-                            </Link>
-                        );
-                    })}
+                            </div>
+                        </Link>
+                    );
+                })}
                 <CharacterCreateButton />
             </div>
         </PageContainer>

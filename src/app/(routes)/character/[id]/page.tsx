@@ -1,24 +1,56 @@
+'use client';
+
 import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
 import FlowerIcon from '@/assets/icons/flower_pink_20x20.svg';
 import MeatballIcon from '@/assets/icons/meatball_20x20.svg';
 import PencilIcon from '@/assets/icons/pencil_24x24.svg';
 import TrashIcon from '@/assets/icons/trash_24x24.svg';
-import MockImage from '@/assets/images/mock_character_120x120.png';
+import { Keywords } from '@/components/create-character/constants/create-character-inputs';
 import { PageContainer } from '@/components/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui-shadcn/popover';
+import Modal from '@/components/ui/modal';
+import getCharacterDetail, { GetCharacterDetailResponse } from '@/services/getCharacterDetail';
+import getMember, { GetMemberResponse } from '@/services/getMember';
+import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-export default function CharacterDetail() {
+export default function CharacterDetail({ params: { id } }: { params: { id: number } }) {
+    const [memberResponse, setMemberResponse] = useState<GetMemberResponse | undefined>(undefined);
+    const [detailData, setDetailData] = useState<GetCharacterDetailResponse | undefined>(undefined);
+    const [popup, setPopup] = useState<'edit' | 'delete' | undefined>(undefined);
+
+    const router = useRouter();
+    useEffect(() => {
+        getMember({ accessToken: getCookie('accessToken') }).then((res) => setMemberResponse(res));
+    }, []);
+
+    useEffect(() => {
+        if (id) {
+            getCharacterDetail({
+                accessToken: getCookie('accessToken'),
+                characterId: id,
+            }).then((res) => setDetailData(res));
+        }
+    }, [id]);
+
     return (
         <PageContainer>
             <div className="relative pb-24">
                 <section>
                     <div className="mb-5 flex justify-between gap-2">
-                        <button aria-label="뒤로 가기 버튼" className="p-3">
-                            <BackArrowIcon stroke="black" />
+                        <button
+                            onClick={() => {
+                                router.push(`/${memberResponse?.memberId}`);
+                            }}
+                            aria-label="뒤로 가기 버튼"
+                            className="p-3"
+                        >
+                            <BackArrowIcon fill="#3D4350" />
                         </button>
-                        <span className="grid flex-1 place-items-center text-center text-[18px] font-semibold leading-7 text-contentPrimaryLight">
+                        <span className="mb-[-1px] grid flex-1 place-items-center text-center text-[18px] font-semibold leading-7 text-contentPrimaryLight">
                             캐릭터 상세
                         </span>
                         <Popover modal>
@@ -44,33 +76,41 @@ export default function CharacterDetail() {
                             </PopoverContent>
                         </Popover>
                     </div>
+
                     <div className="flex flex-col items-center">
-                        <div className="mb-5 flex w-[87px] items-center justify-center gap-1 rounded-full bg-[#FFC9D0] px-[14px] py-[6px]">
-                            <FlowerIcon />
-                            <span className="text-bold16 font-bold text-[#E57897]">Lv.5</span>
+                        <div className="mb-5 flex w-[87px] items-center justify-center gap-1 rounded-full bg-[#C4CAF7]  px-[14px] py-[6px]">
+                            <FlowerIcon fill={'#606FD8'} />
+                            <span className="text-bold16 font-bold text-[#606FD8]">Lv.5</span>
                         </div>
-                        <div className="mb-5">
-                            <Image priority width={164} height={164} src={MockImage} alt="몰랑이" />
+                        <div className="mb-5 h-[280px] w-[280px] rounded-[20px] bg-[#F7F7FB]">
+                            <Image
+                                priority
+                                width={280}
+                                height={280}
+                                src={detailData?.characterImage || ''}
+                                alt={detailData?.name || ''}
+                            />
                         </div>
-                        <div className="mb-4 rounded-2xl bg-gray-100 p-5">
+                        <div className="mb-4 rounded-2xl p-5">
                             <div className="mb-[10px] flex items-center justify-center gap-2">
-                                <p className="text-semibold24 text-gray-600">이름최대8자인데</p>
-                                <button aria-label="이름 수정하기 버튼">
-                                    <PencilIcon stroke="#A6AAB4" />
-                                </button>
+                                <p className="text-semibold24 text-gray-600">{detailData?.name}</p>
                             </div>
                             <div className="flex gap-[6px] text-semibold14 text-gray-300">
-                                <span className="rounded-full bg-gray-200 px-3 py-1">열정적</span>
-                                <span className="rounded-full bg-gray-200 px-3 py-1">성실한</span>
-                                <span className="rounded-full bg-gray-200 px-3 py-1">미래지향적</span>
+                                {detailData?.keywords.map((keyword, i) => (
+                                    <span key={i} className="rounded-full bg-gray-200 px-3 py-1">
+                                        {Keywords[keyword].name}
+                                    </span>
+                                ))}
                             </div>
                         </div>
                         <div className="h-[24px]">
                             <div className="flex items-center gap-2">
                                 <span className="relative h-[18px] w-[210px] flex-1 rounded-full bg-gray-200">
-                                    <span className="inest-0 absolute h-full w-1/3 rounded-full bg-[#FF97A0]" />
+                                    <span className="inest-0 absolute h-full w-1/3 rounded-full bg-[#606FD8]" />
                                 </span>
-                                <span className="text-bold16 text-[#8E939E]">00/10</span>
+                                <span className="text-bold16 text-[#8E939E]">
+                                    {detailData?.currentExp}/{detailData?.nextExp}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -82,12 +122,18 @@ export default function CharacterDetail() {
                 <div className="fixed bottom-0 left-0 right-0 z-10 flex justify-center py-4">
                     <Link
                         href="/memos/create"
-                        className="w-[340px] rounded-full bg-[#E57897] px-6 py-[14px] text-center text-semibold18 text-white"
+                        className="w-[340px] rounded-full bg-[#606FD8] px-6 py-[14px] text-center text-semibold18 text-white"
                     >
                         작성하기
                     </Link>
                 </div>
             </div>
+            <Modal
+                triggerElement={<button>모달 ㄱ</button>}
+                title="모달 테스트중.."
+                description="모달이 잘 작동할까요"
+                contents={'asd'}
+            />
         </PageContainer>
     );
 }

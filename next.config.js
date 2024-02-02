@@ -12,6 +12,17 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 });
 
 const nextConfig = {
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'kr.object.ncloudstorage.com',
+                port: '',
+                pathname: '/**',
+            },
+        ],
+    },
+
     webpack(config) {
         // Grab the existing rule that handles SVG imports
         const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
