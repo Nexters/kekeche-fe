@@ -7,8 +7,19 @@ import PencilIcon from '@/assets/icons/pencil_24x24.svg';
 import TrashIcon from '@/assets/icons/trash_24x24.svg';
 import { Keywords } from '@/components/create-character/constants/create-character-inputs';
 import { PageContainer } from '@/components/ui';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui-shadcn/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui-shadcn/popover';
 import Modal from '@/components/ui/modal';
+import editCharacterName from '@/services/editCharacterName';
 import getCharacterDetail, { GetCharacterDetailResponse } from '@/services/getCharacterDetail';
 import getMember, { GetMemberResponse } from '@/services/getMember';
 import { getCookie } from 'cookies-next';
@@ -21,6 +32,7 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
     const [memberResponse, setMemberResponse] = useState<GetMemberResponse | undefined>(undefined);
     const [detailData, setDetailData] = useState<GetCharacterDetailResponse | undefined>(undefined);
     const [popup, setPopup] = useState<'edit' | 'delete' | undefined>(undefined);
+    const [draftName, setDraftName] = useState<string | undefined>(undefined);
 
     const router = useRouter();
     useEffect(() => {
@@ -32,9 +44,12 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
             getCharacterDetail({
                 accessToken: getCookie('accessToken'),
                 characterId: id,
-            }).then((res) => setDetailData(res));
+            }).then((res) => {
+                setDetailData(res);
+                setDraftName(detailData?.name);
+            });
         }
-    }, [id]);
+    }, [id, detailData?.name]);
 
     return (
         <PageContainer>
@@ -58,21 +73,63 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                                 <MeatballIcon />
                             </PopoverTrigger>
                             <PopoverContent className="shadow-[0_4px_16px_0_rgba(0, 0, 0, 0.16)] mr-3 w-fit rounded-[8px] border-none p-3">
-                                <ul>
-                                    <li>
-                                        <button className="flex items-center gap-1">
-                                            <PencilIcon stroke="#4B4F58" />
-                                            <span className="text-semibold16 text-gray-600">수정</span>
-                                        </button>
-                                    </li>
-                                    <div className="mx-[-12px] my-1 h-[1px] bg-gray-200" />
-                                    <li>
-                                        <button className="flex items-center gap-1">
-                                            <TrashIcon stroke="#F04141" />
-                                            <span className="text-semibold16 text-[#F04141]">삭제</span>
-                                        </button>
-                                    </li>
-                                </ul>
+                                <Dialog>
+                                    <DialogTrigger className="flex items-center gap-1">
+                                        <PencilIcon stroke="#4B4F58" />
+                                        <span className="text-semibold16 text-gray-600">수정</span>
+                                    </DialogTrigger>
+                                    <DialogContent className="w-[300px] px-6 py-9">
+                                        <DialogHeader>
+                                            <DialogTitle className="mb-5 text-center">이름 수정</DialogTitle>
+                                            <DialogDescription className="flex justify-center">
+                                                <input
+                                                    className="h-[48px] w-full rounded-lg px-4 outline outline-[#E8EAEE]"
+                                                    value={draftName}
+                                                    onChange={(e) => {
+                                                        setDraftName(e.target.value);
+                                                    }}
+                                                />
+                                            </DialogDescription>
+                                        </DialogHeader>
+                                        <DialogFooter className="flex gap-3">
+                                            <DialogClose className="flex-1  rounded-xl bg-gray-200 py-3">
+                                                취소
+                                            </DialogClose>
+                                            <DialogClose
+                                                disabled={!draftName}
+                                                onClick={() => {
+                                                    if (detailData?.id)
+                                                        editCharacterName({
+                                                            accessToken: `${getCookie('accessToken')}`,
+                                                            characterId: detailData?.id,
+                                                            characterName: `${draftName}`,
+                                                        });
+
+                                                    router.refresh();
+                                                }}
+                                                className="flex-1 rounded-xl bg-[#606fd8] py-3 text-white disabled:bg-[#c4caf8]"
+                                            >
+                                                완료
+                                            </DialogClose>
+                                        </DialogFooter>
+                                    </DialogContent>
+                                </Dialog>
+                                <div className="mx-[-12px] my-1 h-[1px] bg-gray-200" />
+                                <Dialog>
+                                    <DialogTrigger className="flex items-center gap-1">
+                                        <TrashIcon stroke="#F04141" />
+                                        <span className="text-semibold16 text-[#F04141]">삭제</span>
+                                    </DialogTrigger>
+                                    <DialogContent>
+                                        <DialogHeader>
+                                            <DialogTitle>Are you absolutely sure?</DialogTitle>
+                                            <DialogDescription>
+                                                This action cannot be undone. This will permanently delete your account
+                                                and remove your data from our servers.
+                                            </DialogDescription>
+                                        </DialogHeader>
+                                    </DialogContent>
+                                </Dialog>
                             </PopoverContent>
                         </Popover>
                     </div>
@@ -83,13 +140,15 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                             <span className="text-bold16 font-bold text-[#606FD8]">Lv.5</span>
                         </div>
                         <div className="mb-5 h-[280px] w-[280px] rounded-[20px] bg-[#F7F7FB]">
-                            <Image
-                                priority
-                                width={280}
-                                height={280}
-                                src={detailData?.characterImage || ''}
-                                alt={detailData?.name || ''}
-                            />
+                            {detailData?.characterImage ? (
+                                <Image
+                                    priority
+                                    width={280}
+                                    height={280}
+                                    src={detailData?.characterImage}
+                                    alt={detailData?.name || ''}
+                                />
+                            ) : null}
                         </div>
                         <div className="mb-4 rounded-2xl p-5">
                             <div className="mb-[10px] flex items-center justify-center gap-2">
@@ -106,7 +165,12 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                         <div className="h-[24px]">
                             <div className="flex items-center gap-2">
                                 <span className="relative h-[18px] w-[210px] flex-1 rounded-full bg-gray-200">
-                                    <span className="inest-0 absolute h-full w-1/3 rounded-full bg-[#606FD8]" />
+                                    <span
+                                        className="inest-0 absolute h-full rounded-full bg-[#606FD8]"
+                                        style={{
+                                            width: `${(detailData?.nextExp ?? 0) / (detailData?.currentExp ?? 0)}%`,
+                                        }}
+                                    />
                                 </span>
                                 <span className="text-bold16 text-[#8E939E]">
                                     {detailData?.currentExp}/{detailData?.nextExp}
@@ -128,12 +192,22 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                     </Link>
                 </div>
             </div>
-            <Modal
-                triggerElement={<button>모달 ㄱ</button>}
-                title="모달 테스트중.."
-                description="모달이 잘 작동할까요"
-                contents={'asd'}
-            />
+            {popup === 'edit' && (
+                <Modal
+                    triggerElement={<button>모달 ㄱ</button>}
+                    title="모달 테스트중.."
+                    description="모달이 잘 작동할까요"
+                    contents={'asd'}
+                />
+            )}
+            {popup === 'delete' && (
+                <Modal
+                    triggerElement={<button>모달 ㄱ</button>}
+                    title="모달 테스트중.."
+                    description="모달이 잘 작동할까요"
+                    contents={'asd'}
+                />
+            )}
         </PageContainer>
     );
 }
