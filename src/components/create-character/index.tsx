@@ -1,16 +1,16 @@
 'use client';
-import { Carousel, CarouselContent, CarouselItem, CarouselApi } from '@/components/ui-shadcn/carousel';
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { Carousel, CarouselApi, CarouselContent } from '@/components/ui-shadcn/carousel';
 import CreateCharacterProvider from '@/context/create-character-provider';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import SelectShape from './steps/select-shape';
-import SelectColor from './steps/select-color';
-import SetName from './steps/set-name';
-import SelectKeywords from './steps/select-keywords';
-import SelectItem from './steps/select-item';
-import ShowResult from './steps/show-result';
-import GuideToLogin from './steps/guide-to-login';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import StepContainer from './step-container';
+import GuideToLogin from './steps/guide-to-login';
+import SelectColor from './steps/select-color';
+import SelectItem from './steps/select-item';
+import SelectKeywords from './steps/select-keywords';
+import SelectShape from './steps/select-shape';
+import SetName from './steps/set-name';
+import ShowResult from './steps/show-result';
 import Story from './steps/story';
 
 interface CarouselDispatch {
@@ -75,7 +75,7 @@ export default function CreateCharacter() {
         <>
             <CreateCharacterProvider>
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
-                    <Carousel setApi={setApi} opts={{ watchDrag: false, dragFree: true }}>
+                    <Carousel setApi={setApi} opts={{ watchDrag: false, dragFree: true, duration: 10 }}>
                         <CarouselContent style={{ minHeight: '100dvh' }}>
                             {STEPS.map((step, idx) => (
                                 <StepContainer key={idx}>{step}</StepContainer>
