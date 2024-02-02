@@ -84,6 +84,10 @@ const config = {
                 500: '#707683',
                 600: '#4B4F58',
             },
+            purple: {
+                100: '#C4CAF7',
+                200: '#606FD8',
+            },
             contentPrimaryLight: '#17171B',
             backgroundSecondaryLight: '#F7F8F9',
         },

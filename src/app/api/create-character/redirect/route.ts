@@ -13,18 +13,22 @@ interface LoginResponse {
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const code = searchParams.get('code');
-    console.log('ddd');
 
     if (!code) throw new Error('요청에 문제 있음');
 
     // 로그인 로직
     const { memberId, accessToken } = await login(code);
     cookies().set('accessToken', accessToken, { maxAge: 1000000, httpOnly: false });
-
+    console.log('accessToken', accessToken);
     // 캐릭터 생성
-    const createCharacterValues = cookies().get('create-character')?.value as string;
-    console.log(JSON.parse(createCharacterValues));
-    await createCharacter(createCharacterValues, accessToken);
+    const createCharacterValues = cookies().get('create-character')?.value;
+    if (createCharacterValues !== undefined) {
+        const body = JSON.parse(createCharacterValues);
+        const { id } = await createCharacter(body, accessToken);
+        console.log(id);
+        cookies().delete('create-character');
+        return redirect(`/character/${id}`);
+    }
 
     return redirect(`/${memberId}`);
 }

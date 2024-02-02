@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import EggImg from '@/assets/images/egg.png';
 import Header from '../header';
-import { CreateCharacterValuesContext } from '@/context/create-character-provider';
+import { CreateCharacterValues, CreateCharacterValuesContext } from '@/context/create-character-provider';
 import { Keywords } from '../constants/create-character-inputs';
 import CtaButton from '../cta-button';
 import { useRouter } from 'next/navigation';
@@ -13,11 +13,12 @@ import useCarousel from '../hooks/useCarousel';
 import FixedBottomArea from '../fixed-bottom-area';
 import { setCookie, getCookie } from 'cookies-next';
 
-export const createCharacter = async (createCharacterValues: string, accessToken: string) =>
+export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
         method: 'POST',
-        body: createCharacterValues,
+        body: JSON.stringify(createCharacterValues),
         headers: {
+            'Content-Type': 'application/json',
             Authorization: accessToken,
         },
     })
@@ -36,13 +37,20 @@ export default function ShowResult() {
     const [isCreating, setIsCreating] = useState(true);
 
     const handleNextBtnClick = async () => {
+        if (createCharacterValues === null) {
+            alert('처음부터 하세요.');
+            router.push('/');
+            return;
+        }
         try {
             // 캐릭터 생성 api...
-            const { id } = await createCharacter(JSON.stringify(createCharacterValues), `${getCookie('accessToken')}`);
-
+            const { id } = await createCharacter(createCharacterValues, `${getCookie('accessToken')}`);
+            console.log('here');
+            console.log(id);
             router.push(`/character/${id}`);
         } catch (err) {
             // 로그인 안 한 사람->'앗' 페이지
+            console.log(err);
             setCookie('create-character', JSON.stringify(createCharacterValues));
             handleNextClick();
         }

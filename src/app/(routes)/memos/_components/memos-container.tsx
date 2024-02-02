@@ -44,9 +44,11 @@ export default function MemosContainer() {
     return (
         <section className="mx-auto w-full">
             <div className="flex w-[375px] flex-col items-center gap-[16px] ">
-                {allMemos.memos.map((memo) => (
-                    <Memo key={memo.memoId} memo={memo} />
-                ))}
+                {allMemos.memos.length === 0 ? (
+                    <></>
+                ) : (
+                    allMemos.memos.map((memo) => <Memo key={memo.memoId} memo={memo} />)
+                )}
             </div>
         </section>
     );

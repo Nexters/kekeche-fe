@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../header';
 import useCarousel from '../hooks/useCarousel';
 import Intro from '../intro';
-import CtaButton from '../cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
 import Image from 'next/image';
 import HomeBg from '@/assets/images/homeBg.jpg';
@@ -17,7 +16,7 @@ export default React.memo(function GuideToLogin() {
             <Header onGoBack={handlePrevClick} withText={false} />
             <Intro title={'캐릭터에 기록을 남기러 가보아요.'} description="저희가 기록을 안전하게 보관해 드릴게요." />
             <FixedBottomArea className="mb-[31px]">
-                <KakaoLoginButton callbackUrl={'http://localhost:3000/api/redirect'} />
+                <KakaoLoginButton callbackUrl={process.env.NEXT_PUBLIC_REDIRECT_FROM_CREATE_CHARACTER_URL as string} />
             </FixedBottomArea>
         </>
     );
