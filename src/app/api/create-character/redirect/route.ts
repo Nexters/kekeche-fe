@@ -29,18 +29,18 @@ export async function GET(request: NextRequest) {
         cookies().set('accessToken', accessToken, { maxAge: 1000000, httpOnly: false });
         console.log('accessToken', accessToken);
         const createCharacterValues = cookies().get('create-character')?.value;
-
+        console.log('dddddddd', createCharacterValues);
         if (createCharacterValues !== undefined) {
             const body = JSON.parse(createCharacterValues);
             const { id } = await createCharacter(body, accessToken);
             console.log(id);
             cookies().delete('create-character');
-            return NextResponse.redirect(`/character/${id}`);
+            return NextResponse.redirect(new URL(`/character/${id}`, request.url));
         }
-        return NextResponse.redirect(`/${memberId}`);
+        return NextResponse.redirect(new URL(`/${memberId}`, request.url));
     } catch (error) {
         console.log('error', error);
     }
-    return NextResponse.redirect(`/`);
+    return NextResponse.redirect(new URL('/', request.url));
     // 캐릭터 생성
 }
