@@ -5,7 +5,7 @@ export type DeleteMemoRequest = {
 
 export default async function deleteMemo(request: DeleteMemoRequest) {
     const option = {
-        method: 'Delete',
+        method: 'DELETE',
         headers: {
             Authorization: `${request.accessToken}`,
         },
