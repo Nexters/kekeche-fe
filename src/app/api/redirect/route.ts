@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
         const body = JSON.parse(createCharacterValues);
         const { id } = await createCharacter(body, accessToken);
         cookies().delete('create-character');
-        return redirect(`/character/${id}`);
+        return redirect(`/${memberId}`);
     }
 
     return redirect(`/${memberId}`);

@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
             const { id } = await createCharacter(body, accessToken);
 
             cookies().delete('create-character');
-            return NextResponse.redirect(new URL(`/character/${id}`, request.url));
+            return NextResponse.redirect(new URL(`/${memberId}`, request.url));
         }
         return NextResponse.redirect(new URL(`/${memberId}`, request.url));
     } catch (error) {

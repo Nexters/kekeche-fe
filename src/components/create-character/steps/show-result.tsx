@@ -38,7 +38,6 @@ export default function ShowResult() {
     }
 
     const { color, shape, name, keywords, item } = createCharacterValues;
-    console.log(item);
     const characterImg = `https://kr.object.ncloudstorage.com/kekeche-character/character/${shape}/0/${color}.png`;
     const itemImg = item !== null ? `https://kr.object.ncloudstorage.com/kekeche-character/item/${item}.png` : null;
     console.log(itemImg);
@@ -50,7 +49,6 @@ export default function ShowResult() {
         try {
             // 캐릭터 생성 api...
             const { id } = await createCharacter(createCharacterValues, `${getCookie('accessToken')}`);
-
             router.push(`/character/${id}`);
         } catch (err) {
             // 로그인 안 한 사람->'앗' 페이지
