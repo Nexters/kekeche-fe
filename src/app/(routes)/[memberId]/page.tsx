@@ -26,7 +26,7 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
     }, []);
 
     return (
-        <PageContainer hasNavigator>
+        <PageContainer hasNavigator={charactersResponse?.isMe}>
             <div className="mb-2 py-5 text-center text-[24px] font-bold leading-8">나의 도감</div>
             <div className="grid grid-cols-2 gap-3 px-6 py-4">
                 {charactersResponse?.characters?.map((character, i) => {
@@ -54,6 +54,7 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
                                     src={character.characterImage}
                                     className="object-fit"
                                 />
+                                {character.itemImage && <Image src={character.itemImage} alt="" />}
                             </div>
                             <p className="mb-1 text-semibold14 text-contentPrimaryLight">넥터 PM</p>
                             <div className="h-[15px] w-full">
@@ -75,6 +76,16 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
                     );
                 })}
                 {charactersResponse?.isMe && charactersResponse.characters.length < 6 && <CharacterCreateButton />}
+                {!charactersResponse?.isMe && (
+                    <div className="fixed bottom-0 left-0 right-0 z-10 flex justify-center py-4">
+                        <Link
+                            href="/"
+                            className="w-[340px] rounded-full bg-[#606FD8] px-6 py-[14px] text-center text-semibold18 text-white"
+                        >
+                            나도 캐릭터 만들러 가기
+                        </Link>
+                    </div>
+                )}
             </div>
         </PageContainer>
     );
