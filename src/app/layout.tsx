@@ -15,9 +15,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-    applicationName: '어나더 미',
-    title: '어나더 미',
-    description: '나만의 작은 세계를 펼치는 특별한 일기',
+    applicationName: 'AnotherMe',
+    title: '다양한 나를 키우는 AnotherMe',
+    description: '나의 캐릭터별 성장기록 서비스',
     manifest: '/manifest.json',
     icons: [
         { rel: 'apple-touch-icon', url: '/icons/icon-128x128.png' },
@@ -100,6 +100,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     rel="apple-touch-startup-image"
                 />
                 <meta name="naver-site-verification" content="6f87b8170cef8604157538c5f66fffce3e688bc2" />
+                <meta property="og:title" content={'다양한 나를 키우는 AnotherMe'} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={'https://kekeche-deploy.vercel.app/'} />
+                <meta property="og:image" content={'/icons/og.png'} />
+                <meta property="og:site_name" content={'Another Me'} />
             </head>
             <body className={pretendard.className}>
                 <QueryClientContext>{children}</QueryClientContext>
