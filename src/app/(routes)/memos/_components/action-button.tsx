@@ -5,7 +5,6 @@ import { PencilIcon, TrashIcon } from 'lucide-react';
 import MeatballIcon from '@/assets/icons/meatball_20x20.svg';
 
 export default function ActionButton() {
-    const handleClick = () => {};
     return (
         <Popover modal>
             <PopoverTrigger className="p-3">
@@ -14,7 +13,7 @@ export default function ActionButton() {
             <PopoverContent className="mr-[10px] w-fit rounded-[8px] border-none bg-[#fff] p-3 shadow-lg">
                 <ul>
                     <li>
-                        <button onClick={handleClick} className="flex items-center gap-1">
+                        <button className="flex items-center gap-1">
                             <PencilIcon stroke="#4B4F58" />
                             <span className="text-semibold16 text-gray-600">기록 수정</span>
                         </button>
