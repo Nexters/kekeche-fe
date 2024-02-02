@@ -1,10 +1,10 @@
+import HomeBg from '@/assets/images/homeBg.jpg';
+import Logo from '@/assets/images/logo.png';
 import CtaButton from '@/components/create-character/cta-button';
 import FixedBottomArea from '@/components/create-character/fixed-bottom-area';
 import { PageContainer } from '@/components/ui';
-import Link from 'next/link';
-import HomeBg from '@/assets/images/homeBg.jpg';
-import Logo from '@/assets/images/logo.png';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
     return (
