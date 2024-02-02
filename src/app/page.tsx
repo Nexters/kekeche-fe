@@ -15,7 +15,7 @@ export default function Home() {
             </div>
             <FixedBottomArea
                 className="mb-[31px] gap-[16px]"
-                style={{ boxShadow: 'inset 0px -200px 200px -200px #ffffff' }}
+                // style={{ boxShadow: 'inset 0px -200px 200px -200px #ffffff' }}
             >
                 <Link href="/create">
                     <CtaButton text="내 캐릭터 만들기" />

@@ -24,32 +24,32 @@ export const Colors = [
     {
         id: 0,
         name: 'red',
-        hexClassName: 'bg-[#FA6A6A]',
+        hexClassName: 'bg-[#FF7864]',
     },
     {
         id: 1,
         name: 'orange',
-        hexClassName: 'bg-[#FAB86A]',
+        hexClassName: 'bg-[#757EF7]',
     },
     {
         id: 2,
         name: 'yellow',
-        hexClassName: 'bg-[#FAE36A]',
+        hexClassName: 'bg-[#FFD557]',
     },
     {
         id: 3,
         name: 'green',
-        hexClassName: 'bg-[#8FFA6A]',
+        hexClassName: 'bg-[#BF6DFF]',
     },
     {
         id: 4,
         name: 'blue',
-        hexClassName: 'bg-[#6AC6FA]',
+        hexClassName: 'bg-[#A6EC49]',
     },
     {
         id: 5,
         name: 'purple',
-        hexClassName: 'bg-[#EE6AFA]',
+        hexClassName: 'bg-[#EC6BDF]',
     },
 ];
 
