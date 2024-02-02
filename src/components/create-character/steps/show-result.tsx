@@ -3,15 +3,15 @@ import { useContext, useEffect, useState } from 'react';
 import HomeBg from '@/assets/images/homeBg.jpg';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import EggImg from '@/assets/images/egg.png';
 import Header from '../header';
 import { CreateCharacterValues, CreateCharacterValuesContext } from '@/context/create-character-provider';
-import { Keywords } from '../constants/create-character-inputs';
+import FlowerIcon from '@/assets/icons/flower_pink_20x20.svg';
 import CtaButton from '../cta-button';
 import { useRouter } from 'next/navigation';
 import useCarousel from '../hooks/useCarousel';
 import FixedBottomArea from '../fixed-bottom-area';
 import { setCookie, getCookie } from 'cookies-next';
+import { Keywords } from '../constants/create-character-inputs';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -32,16 +32,21 @@ export default function ShowResult() {
 
     const createCharacterValues = useContext(CreateCharacterValuesContext);
 
+    if (createCharacterValues === null) {
+        alert('처음부터 하세요.');
+        router.push('/');
+        throw new Error('');
+    }
+
+    const { color, shape, name, keywords, item } = createCharacterValues;
+    const characterImg = `https://kr.object.ncloudstorage.com/kekeche-character/character/${shape}/0/${color}.png`;
+    const itemImg = item ? `https://kr.object.ncloudstorage.com/kekeche-character/item/${item}.png` : null;
+
     const { handleNextClick } = useCarousel();
 
     const [isCreating, setIsCreating] = useState(true);
 
     const handleNextBtnClick = async () => {
-        if (createCharacterValues === null) {
-            alert('처음부터 하세요.');
-            router.push('/');
-            return;
-        }
         try {
             // 캐릭터 생성 api...
             const { id } = await createCharacter(createCharacterValues, `${getCookie('accessToken')}`);
@@ -64,7 +69,7 @@ export default function ShowResult() {
             setTimeout(() => {
                 setIsCreating(false);
                 //TODO: 4초로 변경하기
-            }, 3000);
+            }, 0);
         }
     }, [step]);
 
@@ -78,35 +83,62 @@ export default function ShowResult() {
                     </div>
                 </>
             ) : (
-                <>
+                <div className="mx-auto flex h-full w-full flex-col items-center bg-[#F2F3FB]">
                     <Header />
-                    <div className="flex h-[333px] w-[327px] flex-col gap-[10px] rounded-[20px] bg-[#F5F5F5] px-[24px] py-[32px] text-center">
-                        <Image src={EggImg} alt="이미지 추가 예정" width={190.2} height={190.2} />
-                        <p className="font-600 whitespace-pre-line text-[28px]">{'사이드 플젝 인간 \n Lv.0'}</p>
+                    <div className="mb-5 mt-[45px] flex w-[87px] items-center justify-center gap-1 rounded-full bg-[#C4CAF7]  px-[14px] py-[6px]">
+                        <FlowerIcon fill={'#606FD8'} />
+                        <span className="text-bold16 font-bold text-[#606FD8]">Lv.1</span>
                     </div>
-                    <div className="ml-[40px] mt-[36px]  flex w-full flex-col gap-[12px] text-start ">
-                        <p className="text-semibold18">성격</p>
-                        <div className=" flex flex-wrap gap-[12px]">
-                            {createCharacterValues?.keywords?.map((id, idx) => (
-                                <div
-                                    className="flex h-auto w-auto items-center justify-center rounded-[8px] bg-[#F7F8F9] px-[12px] py-[10px] text-semibold10"
-                                    key={idx}
-                                >
-                                    #{Keywords.find((keyword) => keyword.id === id)?.name}
-                                </div>
+                    <div>
+                        <div className="relative mb-5 h-[280px] w-[280px] rounded-[20px] bg-[#F7F7FB]">
+                            <Image
+                                priority
+                                width={280}
+                                height={280}
+                                src={characterImg}
+                                alt={'캐릭터 미리보기'}
+                                className="absolute left-0 top-0"
+                            />
+                            {itemImg && (
+                                <Image
+                                    priority
+                                    width={280}
+                                    height={280}
+                                    src={itemImg}
+                                    alt={'아이템 미리보기'}
+                                    className="absolute left-0 top-0"
+                                />
+                            )}
+                        </div>
+                    </div>
+                    <div className="mb-4 rounded-2xl p-5">
+                        <div className="mb-[10px] flex items-center justify-center gap-2">
+                            <p className="text-semibold24 text-gray-600">{name}</p>
+                        </div>
+                        <div className="flex gap-[6px] text-semibold14 text-gray-300">
+                            {keywords?.map((keyword, i) => (
+                                <span key={i} className="rounded-full bg-gray-200 px-3 py-1">
+                                    {Keywords[keyword].name}
+                                </span>
                             ))}
+                        </div>
+                    </div>
+                    <div className="h-[24px]">
+                        <div className="flex items-center gap-2">
+                            <span className="text-bold16 text-[#8E939E]">0/10</span>
+                            <span className="relative h-[18px] w-[210px] flex-1 rounded-full bg-gray-200"></span>
                         </div>
                     </div>
                     <FixedBottomArea className="mb-[31px]">
                         <CtaButton text="다음" onClick={handleNextBtnClick} />
                         <button
                             onClick={handleRecreateClick}
-                            className="mt-[12px] text-semibold14 text-[#7D7D7D] underline"
+                            className="text-purple-200 mt-[12px] text-semibold14 text-[#7D7D7D] underline"
                         >
                             캐릭터 다시 만들래요
                         </button>
                     </FixedBottomArea>
-                </>
+                </div>
             )}
         </>
     );
