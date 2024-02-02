@@ -14,6 +14,7 @@ export default function MemosContainer() {
     const searchParams = useSearchParams();
 
     const search = searchParams.get('search');
+    console.log(search);
 
     const sortOrder = (searchParams.get('order') as SortOrders) ?? 'DESC';
     const sortType = (searchParams.get('type') as SortTypes) ?? 'createdAt';

@@ -1,14 +1,18 @@
 'use client';
 
 import SearchIcon from '@/assets/icons/search_20x20.svg';
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function SearchBox() {
     const [value, setValue] = useState('');
+    const searchParams = useSearchParams();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value);
     };
+
+    useEffect(() => {}, [value]);
 
     return (
         <section className="w-full px-[24px] py-[16px]">
