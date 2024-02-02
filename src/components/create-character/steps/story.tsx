@@ -29,12 +29,12 @@ export default React.memo(function Story() {
             />
             {storyNum === 1 ? (
                 <FixedBottomArea className="mb-[31px] gap-[16px]">
-                    <StoryBox text={'깊고 깊은 머릿속에 자리잡은 더미공원. \n 이곳에는 다양한 내가 살고 있어요.'} />
+                    <StoryBox text={'깊고 깊은 머릿속에는 \n 다양한 내가 살고 있어요.'} />
                     <CtaButton text="다음" onClick={() => setStoryNum(2)} />
                 </FixedBottomArea>
             ) : (
                 <FixedBottomArea className="mb-[31px] gap-[16px]">
-                    <StoryBox text={'내 안의 다양한 공룡들을 키워서, \n 나의 공룡들과 함께 다같이 레벨업해요.'} />
+                    <StoryBox text={'내 안의 다양한 공룡들을 키워서, 나의 공룡들과 \n 함께 다같이 레벨업해요.'} />
                     <CtaButton text="다음" onClick={handleNextClick} />
                 </FixedBottomArea>
             )}
