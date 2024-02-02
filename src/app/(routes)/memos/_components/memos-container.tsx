@@ -29,7 +29,7 @@ export default function MemosContainer() {
                 {allMemos?.memos.length === 0 ? (
                     <NoMemo />
                 ) : (
-                    allMemos?.memos.map((memo) => <Memo key={memo.memoId} memo={memo} />)
+                    allMemos?.memos.map((memo) => <Memo key={memo.id} memo={memo} />)
                 )}
             </div>
         </section>

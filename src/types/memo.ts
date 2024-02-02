@@ -11,8 +11,13 @@ export interface IAllMemos {
 }
 
 export interface IMemo {
-    memoId: number;
-    characterId: number;
+    id: number;
+    character: {
+        id: number;
+        name: string;
+    };
     content: string;
     createdAt: string;
+    hastags: string[];
+    modified: boolean;
 }

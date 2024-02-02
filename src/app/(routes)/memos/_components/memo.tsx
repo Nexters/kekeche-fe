@@ -9,8 +9,8 @@ type Props = {
     memo: IMemo;
 };
 
-export default function Memo({ memo: { content, createdAt, memoId } }: Props) {
-    console.log(memoId);
+export default function Memo({ memo: { content, createdAt, id } }: Props) {
+    console.log(id);
     return (
         <div className="flex h-auto w-[327px] flex-col gap-[12px] rounded-[16px] bg-[#F8F8FB] p-[24px]">
             <div className=" flex justify-between ">
@@ -22,7 +22,7 @@ export default function Memo({ memo: { content, createdAt, memoId } }: Props) {
                         onClick={async () => {
                             await deleteMemo({
                                 accessToken: `${getCookie('accessToken')}`,
-                                memoId: memoId,
+                                memoId: id,
                             });
                             location.reload();
                         }}
