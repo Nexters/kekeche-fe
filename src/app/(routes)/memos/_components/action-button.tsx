@@ -5,6 +5,9 @@ import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover
 import { PencilIcon, TrashIcon } from 'lucide-react';
 
 export default function ActionButton({ onClick }: { onClick: () => void }) {
+    const handleClick = () => {
+        alert('개발 중');
+    };
     return (
         <Popover modal>
             <PopoverTrigger className="p-3">
@@ -13,12 +16,7 @@ export default function ActionButton({ onClick }: { onClick: () => void }) {
             <PopoverContent className="mr-[10px] w-fit rounded-[8px] border-none bg-[#fff] p-3 shadow-lg">
                 <ul>
                     <li>
-                        <button
-                            onClick={() => {
-                                alert('개발 중');
-                            }}
-                            className="flex items-center gap-1"
-                        >
+                        <button onClick={handleClick} className="flex items-center gap-1">
                             <PencilIcon stroke="#4B4F58" />
                             <span className="text-semibold16 text-gray-600">기록 수정</span>
                         </button>

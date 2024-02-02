@@ -24,7 +24,7 @@ export default function Memo({ memo: { content, createdAt, memoId } }: Props) {
                                 accessToken: `${getCookie('accessToken')}`,
                                 memoId: memoId,
                             });
-                            // location.reload();
+                            location.reload();
                         }}
                     />
                 </button>
