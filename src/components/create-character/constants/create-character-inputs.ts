@@ -1,22 +1,22 @@
-import CircleIcon from '@/assets/icons/circle_101x101.svg';
-import SqaureIcon from '@/assets/icons/square_101x101.svg';
-import TriangleIcon from '@/assets/icons/triangle_120x103.svg';
+import Circle from '@/assets/images/circle.png';
+import Sqaure from '@/assets/images/square.png';
+import Triangle from '@/assets/images/triangle.png';
 
 export const Shapes = [
     {
         id: 0,
         name: 'circle',
-        icon: CircleIcon,
+        image: Circle,
     },
     {
         id: 1,
         name: 'square',
-        icon: SqaureIcon,
+        image: Sqaure,
     },
     {
         id: 2,
         name: 'triangle',
-        icon: TriangleIcon,
+        image: Triangle,
     },
 ];
 

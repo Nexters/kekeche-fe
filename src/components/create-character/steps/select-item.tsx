@@ -17,6 +17,10 @@ export default React.memo(function SelectItem() {
         handleNextClick();
     };
 
+    const handleSelect = (id: number) => {
+        setSelected((prev) => (prev === id ? null : id));
+    };
+
     return (
         <>
             <Header onGoBack={handlePrevClick} />
@@ -24,7 +28,7 @@ export default React.memo(function SelectItem() {
             <div className="flex flex-col gap-[16px]">
                 {Items.map(({ id, name }) => (
                     <button
-                        onClick={() => setSelected(id)}
+                        onClick={() => handleSelect(id)}
                         key={id}
                         className={`color-[#17171B] w-[329px] rounded-[12px] rounded-[90px] px-[24px] py-[20px] text-left text-semibold16 ${selected === id ? 'bg-[#8D98E6] text-[#F8F8FB]' : 'bg-[#F8F8FB] text-gray-400'}`}
                     >

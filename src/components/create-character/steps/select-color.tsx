@@ -20,6 +20,10 @@ export default React.memo(function SelectColor() {
         carouselDispatch?.handleNextClick();
     };
 
+    const handleSelect = (id: number) => {
+        setSelected((prev) => (prev === id ? null : id));
+    };
+
     return (
         <>
             <Header
@@ -33,7 +37,7 @@ export default React.memo(function SelectColor() {
                     <button
                         key={id}
                         className={`${hexClassName} relative h-[72px] w-[156px] rounded-[12px]`}
-                        onClick={() => setSelected(id)}
+                        onClick={() => handleSelect(id)}
                     >
                         {selected === id && (
                             <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-[12px] bg-[#8D98E6] opacity-50">
