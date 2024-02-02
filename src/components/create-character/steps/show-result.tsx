@@ -68,8 +68,7 @@ export default function ShowResult() {
         if (step === '6') {
             setTimeout(() => {
                 setIsCreating(false);
-                //TODO: 4초로 변경하기
-            }, 0);
+            }, 3000);
         }
     }, [step]);
 
