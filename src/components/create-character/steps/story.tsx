@@ -25,6 +25,7 @@ export default React.memo(function Story() {
                 onGoBack={() => {
                     router.push('/');
                 }}
+                withText={false}
             />
             {storyNum === 1 ? (
                 <FixedBottomArea className="mb-[31px] gap-[16px]">
