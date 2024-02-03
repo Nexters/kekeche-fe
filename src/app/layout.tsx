@@ -5,6 +5,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 
 import './globals.css';
+import { Suspense } from 'react';
 
 export const viewport: Viewport = {
     width: 'device-width',
