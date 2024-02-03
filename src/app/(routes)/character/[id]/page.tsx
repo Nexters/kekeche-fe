@@ -101,10 +101,6 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                                             <DialogClose
                                                 disabled={!draftName || draftName.length > 6}
                                                 onClick={() => {
-                                                    if (memberResponse?.characterCount === 1) {
-                                                        return;
-                                                    }
-
                                                     if (detailData?.id)
                                                         editCharacterName({
                                                             accessToken: `${getCookie('accessToken')}`,
