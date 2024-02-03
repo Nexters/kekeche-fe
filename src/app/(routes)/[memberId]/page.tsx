@@ -7,7 +7,7 @@ import getMember, { GetMemberResponse } from '@/services/getMember';
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 export default function Home({ params: { memberId } }: { params: { memberId: string } }) {
     const [charactersResponse, setCharactersResponse] = useState<GetCharactersResponse | undefined>(undefined);
