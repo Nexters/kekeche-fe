@@ -23,12 +23,16 @@ import Modal from '@/components/ui/modal';
 import removeCharacterName from '@/services/deleteCharacterName';
 import editCharacterName from '@/services/editCharacterName';
 import getCharacterDetail, { GetCharacterDetailResponse } from '@/services/getCharacterDetail';
+import { getCharacterMemos } from '@/services/getCharacterMemos';
 import getMember, { GetMemberResponse } from '@/services/getMember';
+import { IAllMemos } from '@/types/memo';
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Memo from '../../memos/_components/memo';
+import NoMemo from '../../memos/_components/no-memo';
 
 export default function CharacterDetail({ params: { id } }: { params: { id: number } }) {
     const [memberResponse, setMemberResponse] = useState<GetMemberResponse | undefined>(undefined);
@@ -36,6 +40,17 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
     const [popup, setPopup] = useState<'edit' | 'delete' | undefined>(undefined);
     const [draftName, setDraftName] = useState<string | undefined>(undefined);
     const { toast } = useToast();
+
+    const [memosResponse, setMemosResponse] = useState<IAllMemos | undefined>(undefined);
+
+    useEffect(() => {
+        if (detailData?.id) {
+            getCharacterMemos({
+                accessToken: `${getCookie('accessToken')}`,
+                characterId: detailData?.id,
+            }).then((res) => setMemosResponse(res));
+        }
+    }, [detailData?.id]);
 
     const router = useRouter();
     useEffect(() => {
@@ -53,6 +68,8 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
             });
         }
     }, [id, detailData?.name]);
+
+    console.log(memosResponse);
 
     return (
         <PageContainer>
@@ -222,7 +239,16 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                 </section>
                 <div className="mt-10 h-[12px] w-full bg-[#F0F1F7]" />
                 <section>
-                    <div className="p-6 text-semibold18 text-contentPrimaryLight">메모 12</div>
+                    <div className="p-6 text-semibold18 text-contentPrimaryLight">
+                        메모 {memosResponse?.memos.length ?? 0}
+                    </div>
+                    <div className="flex flex-col items-center gap-[16px] ">
+                        {memosResponse?.memos.length === 0 ? (
+                            <NoMemo />
+                        ) : (
+                            memosResponse?.memos.map((memo) => <Memo key={memo.id} memo={memo} />)
+                        )}
+                    </div>
                 </section>
                 <div className="fixed bottom-0 left-0 right-0 z-10 flex justify-center py-4">
                     <Link
