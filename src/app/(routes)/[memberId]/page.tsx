@@ -84,8 +84,10 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
                         </Link>
                     );
                 })}
-                {charactersResponse?.isMe && charactersResponse.characters.length < 6 && <CharacterCreateButton />}
-                {!charactersResponse?.isMe && (
+                {charactersResponse && charactersResponse?.isMe && charactersResponse.characters.length < 6 && (
+                    <CharacterCreateButton />
+                )}
+                {charactersResponse && !charactersResponse?.isMe && (
                     <div className="fixed bottom-0 left-0 right-0 z-10 flex justify-center py-4">
                         <Link
                             href="/"
