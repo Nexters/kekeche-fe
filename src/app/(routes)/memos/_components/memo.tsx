@@ -14,7 +14,7 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
     return (
         <div className="flex h-auto w-[327px] flex-col gap-[12px] rounded-[16px] bg-[#F8F8FB] p-[24px]">
             <div className=" flex justify-between ">
-                <div className="font-400 flex h-[28px] w-[53px] items-center justify-center rounded-[8px] bg-[#FFE3E7] text-[12px] text-[#E57897] ">
+                <div className="font-400 flex h-[28px] items-center justify-center rounded-[8px] bg-purple-100 px-[4px] text-[12px] text-purple-200 ">
                     {character.name}
                 </div>
                 <button>
