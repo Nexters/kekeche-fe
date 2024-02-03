@@ -13,6 +13,7 @@ export type Character = {
 export type GetCharactersResponse = {
     characters: Character[];
     isMe: boolean;
+    memberNickname: string;
 };
 
 export type GetCharactersRequest = {

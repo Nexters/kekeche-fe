@@ -7,7 +7,7 @@ import getMember, { GetMemberResponse } from '@/services/getMember';
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home({ params: { memberId } }: { params: { memberId: string } }) {
     const [charactersResponse, setCharactersResponse] = useState<GetCharactersResponse | undefined>(undefined);
@@ -25,10 +25,12 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
         getMember({ accessToken: getCookie('accessToken') }).then((res) => setMemberResponse(res));
     }, []);
 
+    console.log(charactersResponse);
+
     return (
         <PageContainer hasNavigator={charactersResponse?.isMe}>
             <div className="mb-2 py-5 text-center text-[24px] font-bold leading-8">
-                {!charactersResponse ? '' : charactersResponse?.isMe ? '나' : '누군가'}의 도감
+                {!charactersResponse ? '' : `${charactersResponse?.memberNickname}의 도감`}
             </div>
             <div className="grid grid-cols-2 gap-3 px-6 py-4">
                 {charactersResponse?.characters?.map((character, i) => {
