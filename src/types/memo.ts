@@ -17,6 +17,7 @@ export interface IMemo {
         name: string;
     };
     content: string;
+    htmlContent: string;
     createdAt: string;
     hastags: string[];
     modified: boolean;
