@@ -65,7 +65,7 @@ export default function Home({ params: { memberId } }: { params: { memberId: str
                                     height={120}
                                 />
                             </div>
-                            <p className="mb-1 text-semibold14 text-contentPrimaryLight">넥터 PM</p>
+                            <p className="mb-1 text-semibold14 text-contentPrimaryLight">{character.name}</p>
                             <div className="h-[15px] w-full">
                                 <div className="flex items-center gap-1">
                                     <span className="relative h-2 flex-1 rounded-full bg-gray-200">
