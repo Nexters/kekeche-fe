@@ -75,7 +75,8 @@ export default function MemoCreate() {
                     onClick={() => {
                         createMemo({
                             accessToken: `${getCookie('accessToken')}`,
-                            content: replacedText,
+                            content: textareaValue,
+                            htmlContent: replacedText,
                             characterId: Number(selectedCharacter),
                             hashtags: hashtags.map((text) => text.slice(1)),
                         });

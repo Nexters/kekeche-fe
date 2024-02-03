@@ -3,6 +3,7 @@ export type CreateMemoRequest = {
     content: string;
     characterId: number;
     hashtags: string[];
+    htmlContent: string;
 };
 
 export default async function createMemo(request: CreateMemoRequest) {
@@ -16,6 +17,7 @@ export default async function createMemo(request: CreateMemoRequest) {
             content: request.content,
             characterId: request.characterId,
             hashtags: request.hashtags,
+            htmlContent: request.htmlContent,
         }),
     };
 
