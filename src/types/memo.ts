@@ -1,3 +1,5 @@
+import { Character } from './character';
+
 export type SortOrders = 'DESC' | 'ASC';
 export type SortTypes = 'createdAt' | 'modifiedAt';
 
@@ -15,10 +17,7 @@ export interface IAllMemos {
 
 export interface IMemo {
     id: number;
-    character: {
-        id: number;
-        name: string;
-    };
+    character: Pick<Character, 'id' | 'name'>;
     content: string;
     htmlContent: string;
     createdAt: string;
