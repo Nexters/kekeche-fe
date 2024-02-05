@@ -7,17 +7,19 @@ import { useEffect, useState } from 'react';
 
 export default function SearchBox() {
     const [value, setValue] = useState('');
+    const [isDirty, setIsDirty] = useState(false);
     const queryValue = useDebounce(value, 500);
 
     const setQueryParam = useSetQueryParam();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsDirty(true);
         setValue(e.currentTarget.value);
     };
 
     useEffect(() => {
-        queryValue.length >= 0 && setQueryParam('search', queryValue);
-    }, [queryValue, setQueryParam]);
+        (queryValue.length > 0 || isDirty) && setQueryParam('search', queryValue);
+    }, [queryValue, setQueryParam, isDirty]);
 
     return (
         <section className="w-full px-[24px] py-[16px]">
