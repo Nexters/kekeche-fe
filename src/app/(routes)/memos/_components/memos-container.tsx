@@ -32,7 +32,7 @@ export default function MemosContainer() {
 
     return (
         <section className="mx-auto w-full pb-11">
-            <div className="flex w-[375px] flex-col items-center gap-[16px] ">
+            <div className="flex w-full flex-col items-center gap-[16px] px-[24px] ">
                 {searchValue && searchedMemos ? (
                     searchedMemos.memos.map((memo) => <Memo key={memo.id} memo={memo} />)
                 ) : allMemos?.memos.length === 0 ? (
