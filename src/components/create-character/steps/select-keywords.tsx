@@ -4,17 +4,19 @@ import React, { useState } from 'react';
 import CtaButton from '../cta-button';
 import useCarousel from '../hooks/useCarousel';
 import FixedBottomArea from '../fixed-bottom-area';
-import { Keywords } from '../constants/create-character-inputs';
 import useCreateCharacter from '../hooks/useCreateCharacter';
+import { Keywords } from '@/constants/character-info';
+
+type KeywordId = (typeof Keywords)[number]['id'];
 
 export default React.memo(function SelectKeywords() {
     const { handlePrevClick, handleNextClick } = useCarousel();
 
     const { setValue } = useCreateCharacter();
 
-    const [selected, setSelected] = useState<Array<number>>([]);
+    const [selected, setSelected] = useState<Array<KeywordId>>([]);
 
-    const handleClick = (id: number) => {
+    const handleClick = (id: KeywordId) => {
         setSelected((prev) =>
             prev.includes(id)
                 ? prev.filter((selectedId) => selectedId !== id)

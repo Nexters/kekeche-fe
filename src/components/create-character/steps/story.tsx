@@ -21,7 +21,6 @@ export default React.memo(function Story() {
     return (
         <>
             <Image alt={'홈 배경'} src={HomeBg} fill objectFit="fill" />
-            <Image alt={'홈 배경'} src={HomeBg} fill />
             <Header
                 onGoBack={() => {
                     router.push('/');

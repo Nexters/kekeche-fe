@@ -6,11 +6,11 @@ import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
-import { Keywords } from '../constants/create-character-inputs';
 import CtaButton from '../cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
 import Header from '../header';
 import useCarousel from '../hooks/useCarousel';
+import { Keywords } from '@/constants/character-info';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -129,7 +129,7 @@ export default function ShowResult() {
                         <CtaButton text="다음" onClick={handleNextBtnClick} />
                         <button
                             onClick={handleRecreateClick}
-                            className="text-purple-200 mt-[12px] text-semibold14 text-[#7D7D7D] underline"
+                            className="mt-[12px] text-semibold14 text-[#7D7D7D] text-purple-200 underline"
                         >
                             캐릭터 다시 만들래요
                         </button>

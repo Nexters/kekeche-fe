@@ -1,4 +1,3 @@
-import { Shapes } from '@/components/create-character/constants/create-character-inputs';
 import Header from '../header';
 import React, { useState } from 'react';
 import Intro from '../intro';
@@ -8,14 +7,17 @@ import CheckCircle from '@/assets/icons/check-circle.svg';
 import CtaButton from '../cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
 import Image from 'next/image';
+import { Shapes } from '@/constants/character-info';
+
+type ShapeId = (typeof Shapes)[number]['id'];
 
 export default React.memo(function SelectShape() {
-    const [selected, setSelected] = useState<null | number>(null);
+    const [selected, setSelected] = useState<null | ShapeId>(null);
 
     const { setValue } = useCreateCharacter();
     const { handlePrevClick, handleNextClick } = useCarousel();
 
-    const handleSelect = (id: number) => {
+    const handleSelect = (id: ShapeId) => {
         setSelected((prev) => (prev === id ? null : id));
     };
 
