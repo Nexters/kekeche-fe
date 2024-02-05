@@ -1,6 +1,6 @@
 'use client';
 
-import deleteMemo from '@/services/deleteMemo';
+import deleteMemo from '@/services/memo/deleteMemo';
 import { IMemo } from '@/types/memo';
 import { getCookie } from 'cookies-next';
 import dayjs from 'dayjs';

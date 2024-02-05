@@ -10,9 +10,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui-shadcn/select';
-import createMemo from '@/services/createMemo';
-import getCharacters, { GetCharactersResponse } from '@/services/getCharacters';
-import getMember, { GetMemberResponse } from '@/services/getMember';
+import getMember, { GetMemberResponse } from '@/services/auth/getMember';
+import getCharacters, { GetCharactersResponse } from '@/services/character/getCharacters';
+import createMemo from '@/services/memo/createMemo';
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';

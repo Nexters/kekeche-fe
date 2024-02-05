@@ -1,8 +1,8 @@
 import { createCharacter } from '@/components/create-character/steps/show-result';
+import { login } from '@/services/auth/login';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { type NextRequest } from 'next/server';
-import { cookies } from 'next/headers';
-import { login } from '@/services/login';
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;

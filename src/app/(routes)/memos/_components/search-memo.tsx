@@ -1,4 +1,4 @@
-import { searchMemos } from '@/services/searchMemos';
+import { searchMemos } from '@/services/memo/searchMemos';
 import { useQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import Memo from './memo';
