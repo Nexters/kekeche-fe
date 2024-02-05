@@ -1,12 +1,12 @@
 'use client';
 
-import { getAllMemos } from '@/services/getAllMemos';
+import { getAllMemos } from '@/services/memo/getAllMemos';
+import { SortOrders, SortTypes } from '@/types/memo';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { useSearchParams } from 'next/navigation';
 import Memo from './memo';
 import NoMemo from './no-memo';
-import { SortOrders, SortTypes } from '@/types/memo';
 
 export default function MemosContainer() {
     const searchParams = useSearchParams();

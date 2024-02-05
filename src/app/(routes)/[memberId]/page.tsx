@@ -2,8 +2,8 @@
 
 import BeanIcon from '@/assets/icons/bean_pink.svg';
 import { PageContainer } from '@/components/ui';
-import getCharacters, { GetCharactersResponse } from '@/services/getCharacters';
-import getMember, { GetMemberResponse } from '@/services/getMember';
+import getMember, { GetMemberResponse } from '@/services/auth/getMember';
+import getCharacters, { GetCharactersResponse } from '@/services/character/getCharacters';
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';

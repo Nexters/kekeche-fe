@@ -20,11 +20,11 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui-shadcn/popover';
 import { useToast } from '@/components/ui-shadcn/toast/use-toast';
 import Modal from '@/components/ui/modal';
-import removeCharacterName from '@/services/deleteCharacterName';
-import editCharacterName from '@/services/editCharacterName';
-import getCharacterDetail, { GetCharacterDetailResponse } from '@/services/getCharacterDetail';
-import { getCharacterMemos } from '@/services/getCharacterMemos';
-import getMember, { GetMemberResponse } from '@/services/getMember';
+import getMember, { GetMemberResponse } from '@/services/auth/getMember';
+import removeCharacterName from '@/services/character/deleteCharacterName';
+import editCharacterName from '@/services/character/editCharacterName';
+import getCharacterDetail, { GetCharacterDetailResponse } from '@/services/character/getCharacterDetail';
+import { getCharacterMemos } from '@/services/character/getCharacterMemos';
 import { IAllMemos } from '@/types/memo';
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';

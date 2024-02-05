@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import getMember from './services/auth/getMember';
 import { ResponseBody } from './types/response-body';
-import getMember from './services/getMember';
 
 const HOME_PATH = '/';
 const AUTH_PATHS = ['/characters', '/memos', '/my'];

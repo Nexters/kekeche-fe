@@ -3,7 +3,7 @@
 import ChevronRightIcon from '@/assets/icons/chevron-right_20x20.svg';
 import { PageContainer } from '@/components/ui';
 import { useToast } from '@/components/ui-shadcn/toast/use-toast';
-import getMember, { GetMemberResponse } from '@/services/getMember';
+import getMember, { GetMemberResponse } from '@/services/auth/getMember';
 import { deleteCookie, getCookie } from 'cookies-next';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
