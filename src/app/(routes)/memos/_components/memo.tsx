@@ -33,7 +33,7 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
                 <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
             </div>
             <div className="text-regular14 text-[#8E939E]">
-                {dayjs(createdAt).format('YYYY. MM. DD HH:mm A')} {modified && '(수정 됨)'}
+                {dayjs(createdAt).format('YYYY.MM.DD HH:mm A')} {modified && '(수정 됨)'}
             </div>
         </div>
     );

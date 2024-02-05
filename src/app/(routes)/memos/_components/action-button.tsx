@@ -13,7 +13,7 @@ export default function ActionButton({ onClick }: { onClick: () => void }) {
             <PopoverTrigger className="p-3">
                 <MeatballIcon />
             </PopoverTrigger>
-            <PopoverContent className="mr-[10px] w-fit rounded-[8px] border-none bg-[#fff] p-3 shadow-lg">
+            <PopoverContent className="z-10 mr-[10px] w-fit rounded-[8px] border-none bg-[#fff] p-3 shadow-lg">
                 <ul>
                     <li>
                         <button className="flex items-center gap-1">
