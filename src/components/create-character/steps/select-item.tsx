@@ -1,14 +1,16 @@
 import Header from '../header';
 import Intro from '../intro';
 import React, { useState } from 'react';
-import { Items } from '../constants/create-character-inputs';
 import useCarousel from '../hooks/useCarousel';
 import useCreateCharacter from '../hooks/useCreateCharacter';
 import CtaButton from '../cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
+import { Items } from '@/constants/character-info';
+
+type ItemId = (typeof Items)[number]['id'];
 
 export default React.memo(function SelectItem() {
-    const [selected, setSelected] = useState<null | number>(null);
+    const [selected, setSelected] = useState<null | ItemId>(null);
     const { setValue } = useCreateCharacter();
     const { handleNextClick, handlePrevClick } = useCarousel();
 
@@ -17,7 +19,7 @@ export default React.memo(function SelectItem() {
         handleNextClick();
     };
 
-    const handleSelect = (id: number) => {
+    const handleSelect = (id: ItemId) => {
         setSelected((prev) => (prev === id ? null : id));
     };
 

@@ -18,7 +18,7 @@ export const Shapes = [
         name: 'triangle',
         image: Triangle,
     },
-];
+] as const;
 
 export const Colors = [
     {
@@ -51,7 +51,7 @@ export const Colors = [
         name: 'purple',
         hexClassName: 'bg-[#EC6BDF]',
     },
-];
+] as const;
 
 export const Keywords = [
     { id: 0, name: '열정적인' },
@@ -70,7 +70,7 @@ export const Keywords = [
     { id: 13, name: '여유로운' },
     { id: 14, name: '따뜻한' },
     { id: 15, name: '냉철한' },
-];
+] as const;
 
 export const Items = [
     {
@@ -93,4 +93,4 @@ export const Items = [
         id: 4,
         name: '책',
     },
-];
+] as const;

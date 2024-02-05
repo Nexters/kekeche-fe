@@ -5,7 +5,6 @@ import FlowerIcon from '@/assets/icons/flower_pink_20x20.svg';
 import MeatballIcon from '@/assets/icons/meatball_20x20.svg';
 import PencilIcon from '@/assets/icons/pencil_24x24.svg';
 import TrashIcon from '@/assets/icons/trash_24x24.svg';
-import { Keywords } from '@/components/create-character/constants/create-character-inputs';
 import { PageContainer } from '@/components/ui';
 import {
     Dialog,
@@ -33,6 +32,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Memo from '../../memos/_components/memo';
 import NoMemo from '../../memos/_components/no-memo';
+import { Keywords } from '@/constants/character-info';
 
 export default function CharacterDetail({ params: { id } }: { params: { id: number } }) {
     const [memberResponse, setMemberResponse] = useState<GetMemberResponse | undefined>(undefined);
