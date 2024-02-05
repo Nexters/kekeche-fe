@@ -1,18 +1,23 @@
 'use client';
 
 import SearchIcon from '@/assets/icons/search_20x20.svg';
-import { useSearchParams } from 'next/navigation';
+import useDebounce from '@/hooks/useDebounce';
+import useSetQueryParam from '@/hooks/useSetQueryParam';
 import { useEffect, useState } from 'react';
 
 export default function SearchBox() {
     const [value, setValue] = useState('');
-    const searchParams = useSearchParams();
+    const queryValue = useDebounce(value, 500);
+
+    const setQueryParam = useSetQueryParam();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value);
     };
 
-    useEffect(() => {}, [value]);
+    useEffect(() => {
+        queryValue.length >= 0 && setQueryParam('search', queryValue);
+    }, [queryValue, setQueryParam]);
 
     return (
         <section className="w-full px-[24px] py-[16px]">
