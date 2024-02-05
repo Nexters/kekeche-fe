@@ -74,9 +74,3 @@
         @apply bg-background text-foreground;
     }
 }
-
-[contenteditable='true']:empty::before {
-    content: attr(placeholder);
-    color: #a6aab4;
-    cursor: 'pointer';
-}
