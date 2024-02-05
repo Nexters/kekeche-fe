@@ -1,13 +1,13 @@
 'use client';
 
 import deleteMemo from '@/services/memo/deleteMemo';
-import { IMemo } from '@/types/memo';
+import { Memo } from '@/types/memo';
 import { getCookie } from 'cookies-next';
 import dayjs from 'dayjs';
 import ActionButton from './action-button';
 
 type Props = {
-    memo: IMemo;
+    memo: Memo;
 };
 
 export default function Memo({ memo: { content, createdAt, id, character, modified, htmlContent } }: Props) {

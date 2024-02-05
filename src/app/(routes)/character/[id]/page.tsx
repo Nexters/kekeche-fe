@@ -24,7 +24,7 @@ import removeCharacterName from '@/services/character/deleteCharacterName';
 import editCharacterName from '@/services/character/editCharacterName';
 import getCharacterDetail, { GetCharacterDetailResponse } from '@/services/character/getCharacterDetail';
 import { getCharacterMemos } from '@/services/character/getCharacterMemos';
-import { IAllMemos } from '@/types/memo';
+import { AllMemos } from '@/types/memo';
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -41,7 +41,7 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
     const [draftName, setDraftName] = useState<string | undefined>(undefined);
     const { toast } = useToast();
 
-    const [memosResponse, setMemosResponse] = useState<IAllMemos | undefined>(undefined);
+    const [memosResponse, setMemosResponse] = useState<AllMemos | undefined>(undefined);
 
     useEffect(() => {
         if (detailData?.id) {

@@ -3,7 +3,7 @@ import { getAllMemos } from '@/services/memo/getAllMemos';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import { cookies } from 'next/headers';
 import { Suspense } from 'react';
-import Header from './_components/Header';
+import Header from './_components/header';
 import MemosContainer from './_components/memos-container';
 import SearchBox from './_components/search-box';
 

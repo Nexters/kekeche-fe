@@ -3,8 +3,8 @@ import { Character } from './character';
 export type SortOrders = 'DESC' | 'ASC';
 export type SortTypes = 'createdAt' | 'modifiedAt';
 
-export interface IAllMemos {
-    memos: IMemo[];
+export interface AllMemos {
+    memos: Memo[];
     total_pages: number;
     total_count: number;
     page: number;
@@ -15,7 +15,7 @@ export interface IAllMemos {
     is_last_page: boolean;
 }
 
-export interface IMemo {
+export interface Memo {
     id: number;
     character: Pick<Character, 'id' | 'name'>;
     content: string;

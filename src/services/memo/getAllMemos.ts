@@ -1,8 +1,5 @@
-import { IAllMemos } from '@/types/memo';
+import { AllMemos, SortOrders, SortTypes } from '@/types/memo';
 import { ResponseBody } from '@/types/response-body';
-
-type SortOrders = 'DESC' | 'ASC';
-type SortTypes = 'createdAt' | 'modifiedAt';
 
 export const getAllMemos = async (
     accessToken: string,
@@ -19,7 +16,7 @@ export const getAllMemos = async (
         },
     )
         .then((res) => res.json())
-        .then((body: ResponseBody<IAllMemos>) => body.data);
+        .then((body: ResponseBody<AllMemos>) => body.data);
 
     return allMemos;
 };
