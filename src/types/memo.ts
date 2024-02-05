@@ -1,3 +1,6 @@
+export type SortOrders = 'DESC' | 'ASC';
+export type SortTypes = 'createdAt' | 'modifiedAt';
+
 export interface IAllMemos {
     memos: IMemo[];
     total_pages: number;

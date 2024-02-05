@@ -1,26 +1,23 @@
 'use client';
 
 import { getAllMemos } from '@/services/getAllMemos';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { useSearchParams } from 'next/navigation';
 import Memo from './memo';
 import NoMemo from './no-memo';
-
-type SortOrders = 'DESC' | 'ASC';
-type SortTypes = 'createdAt' | 'modifiedAt';
+import { SortOrders, SortTypes } from '@/types/memo';
 
 export default function MemosContainer() {
     const searchParams = useSearchParams();
 
     const search = searchParams.get('search');
-    console.log(search);
 
     const sortOrder = (searchParams.get('order') as SortOrders) ?? 'DESC';
     const sortType = (searchParams.get('type') as SortTypes) ?? 'createdAt';
 
-    const { data: allMemos } = useQuery({
-        queryKey: ['allMemos', sortOrder, sortType],
+    const { data: allMemos } = useSuspenseQuery({
+        queryKey: ['allMemos'],
         queryFn: () => getAllMemos(`${getCookie('accessToken')}`, 0, sortOrder, sortType),
     });
 

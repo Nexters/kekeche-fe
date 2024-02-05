@@ -14,10 +14,10 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
     return (
         <div className="flex h-auto w-[327px] flex-col gap-[12px] rounded-[16px] bg-[#F8F8FB] p-[24px]">
             <div className=" flex justify-between ">
-                <div className="font-400 bg-purple-100 text-purple-200 flex h-[28px] items-center justify-center rounded-[8px] px-[4px] text-[12px] ">
+                <div className="font-400 flex h-[28px] items-center justify-center rounded-[8px] bg-purple-100 px-[4px] text-[12px] text-purple-200 ">
                     {character.name}
                 </div>
-                <button>
+                <div>
                     <ActionButton
                         onClick={async () => {
                             await deleteMemo({
@@ -27,11 +27,11 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
                             location.reload();
                         }}
                     />
-                </button>
+                </div>
             </div>
-            <p className="text-regular16 leading-[24px] text-[#4B4F58]">
+            <div className="text-regular16 leading-[24divx] text-[#4B4F58]">
                 <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-            </p>
+            </div>
             <div className="text-regular14 text-[#8E939E]">
                 {dayjs(createdAt).format('YYYY. MM. DD HH:mm A')} {modified && '(수정 됨)'}
             </div>
