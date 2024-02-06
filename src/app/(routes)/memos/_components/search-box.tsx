@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 export default function SearchBox() {
     const [value, setValue] = useState('');
     const [isDirty, setIsDirty] = useState(false);
-    const queryValue = useDebounce(value, 500);
+    const queryValue = useDebounce(value, 300);
 
     const setQueryParam = useSetQueryParam();
 
