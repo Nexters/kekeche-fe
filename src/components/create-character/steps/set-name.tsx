@@ -5,12 +5,14 @@ import Intro from '../intro';
 import useCarousel from '../hooks/useCarousel';
 import useCreateCharacter from '../hooks/useCreateCharacter';
 import FixedBottomArea from '../fixed-bottom-area';
+import { useRouter } from 'next/navigation';
 
 const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;
 
 export default React.memo(function SetName() {
     const { setValue } = useCreateCharacter();
-    const { handleNextClick, handlePrevClick } = useCarousel();
+    const router = useRouter();
+    const { handleNextClick } = useCarousel();
 
     const [name, setName] = useState('');
     const [isError, setIsError] = useState(false);
@@ -30,7 +32,7 @@ export default React.memo(function SetName() {
 
     return (
         <>
-            <Header onGoBack={handlePrevClick} />
+            <Header onGoBack={() => router.back()} />
             <Intro
                 title="캐릭터의 이름을 정해 주세요."
                 description="한글, 영문 대소문자. 공백 포함 최대 8자로 해주세요."

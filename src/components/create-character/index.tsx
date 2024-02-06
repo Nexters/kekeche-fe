@@ -12,6 +12,7 @@ import SelectShape from './steps/select-shape';
 import SetName from './steps/set-name';
 import ShowResult from './steps/show-result';
 import Story from './steps/story';
+import { Steps } from './types/steps';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -21,15 +22,15 @@ interface CarouselDispatch {
 export const CarouselDispatchContext = createContext<null | CarouselDispatch>(null);
 
 const STEPS: React.ReactNode[] = [
-    <Story key={0} />,
-    <SetName key={1} />,
-    <SelectShape key={2} />,
-    <SelectColor key={3} />,
-    <SelectKeywords key={4} />,
-    <SelectItem key={5} />,
-    <ShowResult key={6} />,
-    <GuideToLogin key={7} />,
-];
+    <Story key={Steps.Story} />,
+    <SetName key={Steps.SetName} />,
+    <SelectShape key={Steps.SelectShape} />,
+    <SelectColor key={Steps.SelectColor} />,
+    <SelectKeywords key={Steps.SelectKeywords} />,
+    <SelectItem key={Steps.SelectItem} />,
+    <ShowResult key={Steps.ShowResult} />,
+    <GuideToLogin key={Steps.GuideToLogin} />,
+] as const;
 
 export default function CreateCharacter() {
     const router = useRouter();
@@ -37,6 +38,11 @@ export default function CreateCharacter() {
     const searchParams = useSearchParams();
 
     const [api, setApi] = useState<CarouselApi>();
+
+    /**
+     * 로그인한 유저는 스토리(step=1)을 건너뛰도록 합니다.
+     */
+    const startIndex = useMemo(() => (searchParams.get('step') === '1' ? Steps.SetName : Steps.Story), []);
 
     const handlePrevClick = useCallback(() => {
         api?.scrollPrev();
@@ -63,6 +69,7 @@ export default function CreateCharacter() {
 
         if (step > api.selectedScrollSnap()) {
             // 앞선 과정을 뛰어넘는 것을 방지(ex. 새로고침)
+
             router.push(pathname + `?step=${api.selectedScrollSnap()}`);
         }
         if (step < api.selectedScrollSnap()) {
@@ -75,7 +82,14 @@ export default function CreateCharacter() {
         <>
             <CreateCharacterProvider>
                 <CarouselDispatchContext.Provider value={memoizedCarouselDispatch}>
-                    <Carousel setApi={setApi} opts={{ watchDrag: false, dragFree: true }}>
+                    <Carousel
+                        setApi={setApi}
+                        opts={{
+                            watchDrag: false,
+                            dragFree: true,
+                            startIndex,
+                        }}
+                    >
                         <CarouselContent style={{ minHeight: '100dvh' }}>
                             {STEPS.map((step, idx) => (
                                 <StepContainer key={idx}>{step}</StepContainer>
