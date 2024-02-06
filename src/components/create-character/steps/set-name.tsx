@@ -16,9 +16,9 @@ export default React.memo(function SetName() {
     const [isError, setIsError] = useState(false);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const isValid = NAME_REGEX.test(e.currentTarget.value);
+        const isValid = NAME_REGEX.test(e.currentTarget.value.trim());
         setIsError(!isValid);
-        setName(e.currentTarget.value);
+        setName(e.currentTarget.value.trim());
     };
 
     const handleClick = () => {
