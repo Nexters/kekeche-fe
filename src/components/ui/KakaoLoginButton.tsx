@@ -1,14 +1,15 @@
 'use client';
 import Image from 'next/image';
 import KakaoLogo from '@/assets/images/kakao-logo.png';
-import { useLogin } from '@/hooks/useLogin';
 
 type Props = {
     callbackUrl: string;
 };
 
 export default function KakaoLoginButton({ callbackUrl }: Props) {
-    const handleLogin = useLogin(callbackUrl);
+    const handleLogin = async () => {
+        window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${callbackUrl}`;
+    };
 
     return (
         <button
