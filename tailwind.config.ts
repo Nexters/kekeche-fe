@@ -126,6 +126,69 @@ const config = {
             backgroundSecondaryLight: '#F7F8F9',
         },
         fontSize: {
+            H1: [
+                '24px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '700',
+                },
+            ],
+            H2: [
+                '22px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '700',
+                },
+            ],
+            H3: [
+                '18px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '600',
+                },
+            ],
+            Subtitle1: [
+                '16px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '600',
+                },
+            ],
+            Subtitle2: [
+                '16px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '400',
+                },
+            ],
+            Body1: [
+                '14px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '600',
+                },
+            ],
+            Body2: [
+                '14px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '400',
+                },
+            ],
+            Body3: [
+                '12px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '500',
+                },
+            ],
+            Caption1: [
+                '10px',
+                {
+                    lineHeight: '1.5',
+                    fontWeight: '600',
+                },
+            ],
             bold24: [
                 '24px',
                 {
