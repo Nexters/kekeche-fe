@@ -33,6 +33,7 @@ import { useEffect, useState } from 'react';
 import Memo from '../../memos/_components/memo';
 import NoMemo from '../../memos/_components/no-memo';
 import { Keywords } from '@/constants/character-info';
+import TopBar from '@/components/ui/top-bar';
 
 export default function CharacterDetail({ params: { id } }: { params: { id: number } }) {
     const [memberResponse, setMemberResponse] = useState<GetMemberResponse | undefined>(undefined);
@@ -75,113 +76,116 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
         <PageContainer>
             <div className="relative pb-24">
                 <section>
-                    <div className="mb-5 flex justify-between gap-2">
-                        <button
-                            onClick={() => {
-                                router.push(`/${memberResponse?.memberId}`);
-                            }}
-                            aria-label="뒤로 가기 버튼"
-                            className="p-3"
-                        >
-                            <BackArrowIcon fill="#3D4350" />
-                        </button>
-                        <span className="mb-[-1px] grid flex-1 place-items-center text-center text-[18px] font-semibold leading-7 text-contentPrimaryLight">
-                            캐릭터 상세
-                        </span>
-                        <Popover modal>
-                            <PopoverTrigger className="p-3">
-                                <MeatballIcon />
-                            </PopoverTrigger>
-                            <PopoverContent className="shadow-[0_4px_16px_0_rgba(0, 0, 0, 0.16)] mr-3 w-fit rounded-[8px] border-none p-3">
-                                <Dialog>
-                                    <DialogTrigger className="flex items-center gap-1">
-                                        <PencilIcon stroke="#4B4F58" />
-                                        <span className="text-semibold16 text-gray-600">수정</span>
-                                    </DialogTrigger>
-                                    <DialogContent className="w-[300px] px-6 py-9">
-                                        <DialogHeader>
-                                            <DialogTitle className="mb-5 text-center">이름 수정</DialogTitle>
-                                            <DialogDescription className="flex justify-center">
-                                                <input
-                                                    className="h-[48px] w-full rounded-lg px-4 outline outline-[#E8EAEE]"
-                                                    value={draftName}
-                                                    onChange={(e) => {
-                                                        setDraftName(e.target.value);
+                    <TopBar>
+                        <TopBar.Left>
+                            <button
+                                onClick={() => {
+                                    router.push(`/${memberResponse?.memberId}`);
+                                }}
+                                aria-label="뒤로 가기 버튼"
+                                className="p-3"
+                            >
+                                <BackArrowIcon fill="#3D4350" />
+                            </button>
+                        </TopBar.Left>
+                        <TopBar.Text>캐릭터 상세</TopBar.Text>
+                        <TopBar.Right>
+                            <Popover modal>
+                                <PopoverTrigger className="p-3">
+                                    <MeatballIcon />
+                                </PopoverTrigger>
+                                <PopoverContent className="shadow-[0_4px_16px_0_rgba(0, 0, 0, 0.16)] mr-3 w-fit rounded-[8px] border-none p-3">
+                                    <Dialog>
+                                        <DialogTrigger className="flex items-center gap-1">
+                                            <PencilIcon stroke="#4B4F58" />
+                                            <span className="text-semibold16 text-gray-600">수정</span>
+                                        </DialogTrigger>
+                                        <DialogContent className="w-[300px] px-6 py-9">
+                                            <DialogHeader>
+                                                <DialogTitle className="mb-5 text-center">이름 수정</DialogTitle>
+                                                <DialogDescription className="flex justify-center">
+                                                    <input
+                                                        className="h-[48px] w-full rounded-lg px-4 outline outline-[#E8EAEE]"
+                                                        value={draftName}
+                                                        onChange={(e) => {
+                                                            setDraftName(e.target.value);
+                                                        }}
+                                                    />
+                                                </DialogDescription>
+                                            </DialogHeader>
+                                            <DialogFooter className="flex gap-3">
+                                                <DialogClose className="flex-1  rounded-xl bg-gray-200 py-3">
+                                                    취소
+                                                </DialogClose>
+                                                <DialogClose
+                                                    disabled={!draftName || draftName.length > 6}
+                                                    onClick={() => {
+                                                        if (detailData?.id)
+                                                            editCharacterName({
+                                                                accessToken: `${getCookie('accessToken')}`,
+                                                                characterId: detailData?.id,
+                                                                characterName: `${draftName}`,
+                                                            });
+
+                                                        location.reload();
                                                     }}
-                                                />
-                                            </DialogDescription>
-                                        </DialogHeader>
-                                        <DialogFooter className="flex gap-3">
-                                            <DialogClose className="flex-1  rounded-xl bg-gray-200 py-3">
-                                                취소
-                                            </DialogClose>
-                                            <DialogClose
-                                                disabled={!draftName || draftName.length > 6}
-                                                onClick={() => {
-                                                    if (detailData?.id)
-                                                        editCharacterName({
-                                                            accessToken: `${getCookie('accessToken')}`,
-                                                            characterId: detailData?.id,
-                                                            characterName: `${draftName}`,
-                                                        });
-
-                                                    location.reload();
-                                                }}
-                                                className="flex-1 rounded-xl bg-[#606fd8] py-3 text-white disabled:bg-[#c4caf8]"
-                                            >
-                                                완료
-                                            </DialogClose>
-                                        </DialogFooter>
-                                    </DialogContent>
-                                </Dialog>
-                                <div className="mx-[-12px] my-1 h-[1px] bg-gray-200" />
-                                <Dialog>
-                                    <DialogTrigger className="flex items-center gap-1">
-                                        <TrashIcon stroke="#F04141" />
-                                        <span className="text-semibold16 text-[#F04141]">삭제</span>
-                                    </DialogTrigger>
-                                    <DialogContent className="w-[300px] px-6 py-9">
-                                        <DialogHeader>
-                                            <DialogTitle className="mb-5 text-center">캐릭터를 삭제할까요?</DialogTitle>
-                                            <DialogDescription className="text-center">
-                                                삭제한 캐릭터는 되돌릴 수 없어요
-                                            </DialogDescription>
-                                        </DialogHeader>
-                                        <DialogFooter className="flex gap-3">
-                                            <DialogClose className="flex-1  rounded-xl bg-gray-200 py-3">
-                                                취소
-                                            </DialogClose>
-                                            <DialogClose
-                                                disabled={!draftName || draftName.length > 6}
-                                                onClick={() => {
-                                                    if (
-                                                        memberResponse?.characterCount &&
-                                                        memberResponse?.characterCount === 1
-                                                    ) {
-                                                        toast({
-                                                            description: '마지막 캐릭터는 삭제할 수 없어요',
-                                                        });
-                                                        return;
-                                                    }
-                                                    if (detailData?.id)
-                                                        removeCharacterName({
-                                                            accessToken: `${getCookie('accessToken')}`,
-                                                            characterId: detailData?.id,
-                                                        });
-                                                    location.reload();
-                                                    router.push(`/${memberResponse?.memberId}`);
-                                                }}
-                                                className="flex-1 rounded-xl  bg-[#f06371] py-3 text-white"
-                                            >
-                                                삭제
-                                            </DialogClose>
-                                        </DialogFooter>
-                                    </DialogContent>
-                                </Dialog>
-                            </PopoverContent>
-                        </Popover>
-                    </div>
-
+                                                    className="flex-1 rounded-xl bg-[#606fd8] py-3 text-white disabled:bg-[#c4caf8]"
+                                                >
+                                                    완료
+                                                </DialogClose>
+                                            </DialogFooter>
+                                        </DialogContent>
+                                    </Dialog>
+                                    <div className="mx-[-12px] my-1 h-[1px] bg-gray-200" />
+                                    <Dialog>
+                                        <DialogTrigger className="flex items-center gap-1">
+                                            <TrashIcon stroke="#F04141" />
+                                            <span className="text-semibold16 text-[#F04141]">삭제</span>
+                                        </DialogTrigger>
+                                        <DialogContent className="w-[300px] px-6 py-9">
+                                            <DialogHeader>
+                                                <DialogTitle className="mb-5 text-center">
+                                                    캐릭터를 삭제할까요?
+                                                </DialogTitle>
+                                                <DialogDescription className="text-center">
+                                                    삭제한 캐릭터는 되돌릴 수 없어요
+                                                </DialogDescription>
+                                            </DialogHeader>
+                                            <DialogFooter className="flex gap-3">
+                                                <DialogClose className="flex-1  rounded-xl bg-gray-200 py-3">
+                                                    취소
+                                                </DialogClose>
+                                                <DialogClose
+                                                    disabled={!draftName || draftName.length > 6}
+                                                    onClick={() => {
+                                                        if (
+                                                            memberResponse?.characterCount &&
+                                                            memberResponse?.characterCount === 1
+                                                        ) {
+                                                            toast({
+                                                                description: '마지막 캐릭터는 삭제할 수 없어요',
+                                                            });
+                                                            return;
+                                                        }
+                                                        if (detailData?.id)
+                                                            removeCharacterName({
+                                                                accessToken: `${getCookie('accessToken')}`,
+                                                                characterId: detailData?.id,
+                                                            });
+                                                        location.reload();
+                                                        router.push(`/${memberResponse?.memberId}`);
+                                                    }}
+                                                    className="flex-1 rounded-xl  bg-[#f06371] py-3 text-white"
+                                                >
+                                                    삭제
+                                                </DialogClose>
+                                            </DialogFooter>
+                                        </DialogContent>
+                                    </Dialog>
+                                </PopoverContent>
+                            </Popover>
+                        </TopBar.Right>
+                    </TopBar>
                     <div className="flex flex-col items-center">
                         <div className="mb-5 flex w-[87px] items-center justify-center gap-1 rounded-full bg-[#C4CAF7]  px-[14px] py-[6px]">
                             <FlowerIcon fill={'#606FD8'} />
