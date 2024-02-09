@@ -9,10 +9,10 @@ type Props = {
 export interface CreateCharacterValues {
     userId?: number;
     name?: string;
-    color?: number;
-    shape?: number;
+    colorIdx?: number;
+    shapeIdx?: number;
     keywords?: Array<number>;
-    item?: number | null;
+    itemIdx?: number | null;
 }
 
 interface CreateCharacterDispatch {

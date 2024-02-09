@@ -15,7 +15,7 @@ export default React.memo(function SelectItem() {
     const { handleNextClick, handlePrevClick } = useCarousel();
 
     const handleClick = () => {
-        setValue('item', selected);
+        setValue('itemIdx', selected);
         handleNextClick();
     };
 

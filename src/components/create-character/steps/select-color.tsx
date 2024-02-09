@@ -18,7 +18,7 @@ export default React.memo(function SelectColor() {
     const handleClick = () => {
         if (selected === null) return;
 
-        createCharacterDispatch?.setValue('color', selected);
+        createCharacterDispatch?.setValue('colorIdx', selected);
         carouselDispatch?.handleNextClick();
     };
 

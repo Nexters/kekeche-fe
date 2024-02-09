@@ -24,7 +24,7 @@ export default React.memo(function SelectShape() {
     const handleClick = () => {
         if (selected === null) return;
 
-        setValue('shape', selected);
+        setValue('shapeIdx', selected);
         handleNextClick();
     };
 
