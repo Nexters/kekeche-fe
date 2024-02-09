@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import CtaButton from '../cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
-import Link from 'next/link';
 import StoryBox from '../story-box';
 import Header from '../header';
 import Image from 'next/image';

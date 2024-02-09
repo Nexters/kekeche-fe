@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import CtaButton from '../cta-button';
-import Header from '../header';
 import Intro from '../intro';
 import useCarousel from '../hooks/useCarousel';
 import useCreateCharacter from '../hooks/useCreateCharacter';
 import FixedBottomArea from '../fixed-bottom-area';
 import { useRouter } from 'next/navigation';
+import Header from '../header';
 
 const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;
 

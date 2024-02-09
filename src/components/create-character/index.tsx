@@ -90,7 +90,7 @@ export default function CreateCharacter() {
                             startIndex,
                         }}
                     >
-                        <CarouselContent style={{ minHeight: '100dvh' }}>
+                        <CarouselContent style={{ minHeight: '100dvh' }} className="m-0 p-0">
                             {STEPS.map((step, idx) => (
                                 <StepContainer key={idx}>{step}</StepContainer>
                             ))}
