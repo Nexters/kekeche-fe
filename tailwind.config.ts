@@ -72,6 +72,7 @@ const config = {
             pretendard: ['var(--font-pretendard), -apple-system'],
         },
         colors: {
+            black: '#17171B',
             transparent: 'transparent',
             current: 'currentColor',
             white: '#ffffff',
@@ -83,6 +84,39 @@ const config = {
                 400: '#8E939E',
                 500: '#707683',
                 600: '#4B4F58',
+            },
+            newGray: {
+                100: '#F6F8FC',
+                200: '#ECEFF5',
+                300: '#DFE2EA',
+                400: '#C6CBD8',
+                500: '#AEB5C5',
+                600: '#8B92A0',
+                700: '#707683',
+                800: '#5B616E',
+                900: '#494E59',
+            },
+            red: {
+                500: '#EA2727',
+            },
+            orange: {
+                100: '#FF7864',
+            },
+            green: {
+                100: '#8DDC27',
+            },
+            violet: {
+                100: '#757EF7',
+            },
+            newPurple: {
+                100: '#BF6DFF',
+            },
+            pink: {
+                100: '#EC6BDF',
+            },
+            primary: {
+                100: '#E0ECFF',
+                500: '#2777EA',
             },
             purple: {
                 100: '#C4CAF7',
