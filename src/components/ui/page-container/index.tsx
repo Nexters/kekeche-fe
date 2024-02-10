@@ -10,7 +10,7 @@ export default function PageContainer({ children, hasNavigator }: Props) {
     return (
         <div className=" bg-[#f5f5f5]">
             <div
-                className=" mx-auto flex min-h-screen  min-w-[375px] max-w-[400px] flex-col bg-white "
+                className=" mx-auto flex min-h-screen  min-w-[375px] max-w-[400px] flex-col bg-white"
                 style={{ minHeight: '100dvh' }}
             >
                 <div className=" relative flex h-full flex-1 flex-col overflow-auto">{children}</div>

@@ -5,12 +5,12 @@ export default function CharacterCreateButton() {
     return (
         <Link
             href={`/create?step=${Steps.SetName}`}
-            className="grid h-[236px]  place-items-center rounded-xl bg-backgroundSecondaryLight"
+            className="grid h-[215px] place-items-center  rounded-2xl  bg-white"
         >
-            <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
-                    d="M56.75 32.1797H32.75V56.1797H24.75V32.1797H0.75V24.1797H24.75V0.179688H32.75V24.1797H56.75V32.1797Z"
-                    fill="#DCDCDC"
+                    d="M32 18.7857H18.2857V32.5H13.7143V18.7857H0V14.2143H13.7143V0.5H18.2857V14.2143H32V18.7857Z"
+                    fill="#DFE2EA"
                 />
             </svg>
         </Link>
