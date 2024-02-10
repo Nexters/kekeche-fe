@@ -57,10 +57,12 @@ export default function TabNavigator() {
                         <button onClick={handleLocationChange(label, path)} key={label} className="flex-1">
                             <div className="flex flex-col items-center justify-center gap-1 pb-3 pt-2">
                                 <span>
-                                    <IconComponent stroke={currentLocation === label ? '#1b1b1e' : '#afafaf'} />
+                                    <IconComponent
+                                        className={currentLocation === label ? 'fill-primary-500' : 'fill-newGray-400'}
+                                    />
                                 </span>
                                 <span
-                                    className={`text-[12px] leading-4  ${currentLocation === label ? 'text-[#1b1b1e]' : 'text-[#afafaf]'}`}
+                                    className={`text-[12px] leading-4  ${currentLocation === label ? 'text-primary-500' : 'text-newGray-400'}`}
                                 >
                                     {label}
                                 </span>
