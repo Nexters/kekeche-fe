@@ -10,16 +10,14 @@ const MAXIMUM_CHARACTER = 6;
 
 export default async function Home({ params: { memberId } }: { params: { memberId: string } }) {
     const accessToken = cookies().get('accessToken')?.value;
+
     const characters = await getCharacters({
         memberId: Number(memberId),
         accessToken,
     });
 
-    console.log(characters);
-
     const isMyPage = characters?.isMe;
     const headerText = !characters ? '' : `${characters?.memberNickname}의 도감`;
-
     const showCharacterCreateButton = isMyPage && characters.characters.length < MAXIMUM_CHARACTER;
 
     return (
