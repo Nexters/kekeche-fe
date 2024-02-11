@@ -72,6 +72,8 @@ export const Keywords = [
     { id: 15, name: '냉철한' },
 ] as const;
 
+export const NO_ITEM_IDX = -1;
+
 export const Items = [
     {
         id: 0,

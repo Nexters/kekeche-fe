@@ -10,7 +10,7 @@ import CtaButton from '../cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
 import Header from '../header';
 import useCarousel from '../hooks/useCarousel';
-import { Keywords } from '@/constants/character-info';
+import { Keywords, NO_ITEM_IDX } from '@/constants/character-info';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -40,7 +40,7 @@ export default function ShowResult() {
     const { colorIdx, shapeIdx, name, keywords, itemIdx } = createCharacterValues;
     const characterImg = `https://kr.object.ncloudstorage.com/kekeche-character/character/${shapeIdx}/0/${colorIdx}.png`;
     const itemImg =
-        itemIdx !== null ? `https://kr.object.ncloudstorage.com/kekeche-character/item/${itemIdx}.png` : null;
+        itemIdx !== NO_ITEM_IDX ? `https://kr.object.ncloudstorage.com/kekeche-character/item/${itemIdx}.png` : null;
     const { handleNextClick } = useCarousel();
 
     const [isCreating, setIsCreating] = useState(true);

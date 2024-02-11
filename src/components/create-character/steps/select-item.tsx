@@ -5,11 +5,9 @@ import useCarousel from '../hooks/useCarousel';
 import useCreateCharacter from '../hooks/useCreateCharacter';
 import CtaButton from '../cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
-import { Items } from '@/constants/character-info';
+import { Items, NO_ITEM_IDX } from '@/constants/character-info';
 
 type ItemId = (typeof Items)[number]['id'];
-
-const NO_ITEM_IDX = -1;
 
 export default React.memo(function SelectItem() {
     const [selected, setSelected] = useState<null | ItemId>(null);
