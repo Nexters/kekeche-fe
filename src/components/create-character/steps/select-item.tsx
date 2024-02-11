@@ -9,13 +9,15 @@ import { Items } from '@/constants/character-info';
 
 type ItemId = (typeof Items)[number]['id'];
 
+const NO_ITEM_IDX = -1;
+
 export default React.memo(function SelectItem() {
     const [selected, setSelected] = useState<null | ItemId>(null);
     const { setValue } = useCreateCharacter();
     const { handleNextClick, handlePrevClick } = useCarousel();
 
     const handleClick = () => {
-        setValue('itemIdx', selected);
+        setValue('itemIdx', selected === null ? NO_ITEM_IDX : selected);
         handleNextClick();
     };
 
