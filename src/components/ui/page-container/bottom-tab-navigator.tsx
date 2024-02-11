@@ -17,7 +17,7 @@ export default function TabNavigator() {
     const nickname = fullPathname.split('/')[1];
 
     const Menus = [
-        { label: '홈', IconComponent: HomeIcon, path: `/${memberId ?? nickname}` },
+        { label: '홈', IconComponent: HomeIcon, path: ROUTES.characters(Number(memberId) ?? nickname) },
         { label: '작성', IconComponent: PencilIcon, path: `${ROUTES.memoCreate}` },
         { label: '기록', IconComponent: FileMultipleIcon, path: `${ROUTES.memos}` },
         { label: '내 정보', IconComponent: UserProfileIcon, path: `${ROUTES.my}` },

@@ -1,5 +1,6 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import ROUTES from './constants/route';
 import { ResponseBody } from './types/response-body';
 
 const HOME_PATH = '/';
@@ -30,7 +31,7 @@ export async function middleware(request: NextRequest) {
             data: { memberId },
         }: ResponseBody<MemberInfo> = await response.json();
 
-        return NextResponse.redirect(new URL(`/${memberId}`, request.url));
+        return NextResponse.redirect(new URL(ROUTES.characters(memberId), request.url));
     }
 
     // 유저 인증이 필요한 페이지들 진입

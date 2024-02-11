@@ -1,3 +1,4 @@
+import ROUTES from '@/constants/route';
 import { CreateCharacterValues } from '@/context/create-character-provider';
 import { ResponseBody } from '@/types/response-body';
 import { cookies } from 'next/headers';
@@ -46,9 +47,9 @@ export async function GET(request: NextRequest) {
             const { id } = await createCharacter(body, accessToken);
 
             cookies().delete('create-character');
-            return NextResponse.redirect(new URL(`/${memberId}`, request.url));
+            return NextResponse.redirect(new URL(ROUTES.characters(memberId), request.url));
         }
-        return NextResponse.redirect(new URL(`/${memberId}`, request.url));
+        return NextResponse.redirect(new URL(ROUTES.characters(memberId), request.url));
     } catch (error) {
         console.log('error', error);
     }

@@ -19,6 +19,9 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui-shadcn/popover';
 import { useToast } from '@/components/ui-shadcn/toast/use-toast';
 import Modal from '@/components/ui/modal';
+import TopBar from '@/components/ui/top-bar';
+import { Keywords } from '@/constants/character-info';
+import ROUTES from '@/constants/route';
 import getMember, { GetMemberResponse } from '@/services/auth/getMember';
 import removeCharacterName from '@/services/character/deleteCharacterName';
 import editCharacterName from '@/services/character/editCharacterName';
@@ -28,12 +31,10 @@ import { AllMemos } from '@/types/memo';
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Memo from '../../memos/_components/memo';
 import NoMemo from '../../memos/_components/no-memo';
-import { Keywords } from '@/constants/character-info';
-import TopBar from '@/components/ui/top-bar';
 
 export default function CharacterDetail({ params: { id } }: { params: { id: number } }) {
     const [memberResponse, setMemberResponse] = useState<GetMemberResponse | undefined>(undefined);
@@ -72,6 +73,8 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
 
     console.log(memosResponse);
 
+    if (!memberResponse) redirect('/');
+
     return (
         <PageContainer>
             <div className="relative pb-24">
@@ -80,7 +83,7 @@ export default function CharacterDetail({ params: { id } }: { params: { id: numb
                         <TopBar.Left>
                             <button
                                 onClick={() => {
-                                    router.push(`/${memberResponse?.memberId}`);
+                                    router.push(ROUTES.characters(memberResponse.memberId));
                                 }}
                                 aria-label="뒤로 가기 버튼"
                                 className="p-3"

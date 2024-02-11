@@ -1,4 +1,5 @@
 import { createCharacter } from '@/components/create-character/steps/show-result';
+import ROUTES from '@/constants/route';
 import { login } from '@/services/auth/login';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -20,8 +21,8 @@ export async function GET(request: NextRequest) {
         const body = JSON.parse(createCharacterValues);
         const { id } = await createCharacter(body, accessToken);
         cookies().delete('create-character');
-        return redirect(`/${memberId}`);
+        return redirect(ROUTES.characters(memberId));
     }
 
-    return redirect(`/${memberId}`);
+    return redirect(ROUTES.characters(memberId));
 }

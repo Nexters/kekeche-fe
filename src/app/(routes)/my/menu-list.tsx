@@ -2,6 +2,7 @@
 
 import ChevronRightIcon from '@/assets/icons/chevron-right_20x20.svg';
 import { useToast } from '@/components/ui-shadcn/toast/use-toast';
+import ROUTES from '@/constants/route';
 import { Member } from '@/services/auth/getMember';
 import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
@@ -32,7 +33,7 @@ export default function MenuList({ member }: Props) {
                         const shareData = {
                             title: '다양한 나를 키우는 AnotherMe',
                             text: '나의 캐릭터별 성장기록 서비스',
-                            url: `${location.origin}/${member.memberId}`,
+                            url: `${location.origin}/${ROUTES.characters(member.memberId)}`,
                         };
 
                         if (navigator.canShare && navigator.canShare(shareData)) {
