@@ -24,13 +24,15 @@ export default function CharacterCard({ character }: Props) {
                         src={character.characterImage}
                         className="absolute left-0 right-0"
                     />
-                    <Image
-                        src={character.itemImage}
-                        alt={character.name}
-                        className="absolute left-0 top-0"
-                        width={100}
-                        height={100}
-                    />
+                    {character.itemImage && (
+                        <Image
+                            src={character.itemImage}
+                            alt={character.name}
+                            className="absolute left-0 top-0"
+                            width={100}
+                            height={100}
+                        />
+                    )}
                 </div>
             </div>
             <p className="text-bold14 text-contentPrimaryLight">{character.name}</p>
