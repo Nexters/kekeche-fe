@@ -1,4 +1,4 @@
-import { Character } from './getCharacters';
+import { Character } from '@/types/character';
 
 export type GetCharacterDetailResponse = Character;
 export type GetCharacterDetailRequest = {

@@ -1,14 +1,4 @@
-export type Character = {
-    id: number;
-    name: string;
-    level: number;
-    totalExp: number;
-    currentExp: number;
-    nextExp: number;
-    characterImage: string;
-    itemImage: string;
-    keywords: number[];
-};
+import { Character } from '@/types/character';
 
 export type GetCharactersResponse = {
     characters: Character[];

@@ -6,6 +6,6 @@ export interface Character {
     currentExp: number;
     nextExp: number;
     characterImage: string;
-    itemImage: string;
+    itemImage?: string; // NOTE: 아이템 선택 안한 경우, 해당 필드가 없을 수 있음.
     keywords: number[];
 }
