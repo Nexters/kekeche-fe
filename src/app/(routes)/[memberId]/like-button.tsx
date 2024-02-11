@@ -7,18 +7,23 @@ import { useState } from 'react';
 
 export function LikeButtonWithTooltip() {
     return (
-        <TooltipProvider delayDuration={0}>
-            <Tooltip defaultOpen open={true}>
+        <TooltipProvider>
+            <Tooltip defaultOpen>
                 <TooltipTrigger asChild>
                     <div>
                         <LikeButton />
                     </div>
                 </TooltipTrigger>
-                <TooltipContent sideOffset={3} align="end" className="relative rounded-none bg-transparent p-0">
+                <TooltipContent
+                    alignOffset={-10}
+                    sideOffset={4}
+                    align="end"
+                    className="rounded-none bg-transparent p-0"
+                >
                     <p className="rounded-2xl bg-[#2777ea] px-4 py-2 text-semibold14 text-white">
                         하트를 눌러 응원해주세요!
                     </p>
-                    <TooltipArrow width={12} height={10} className="TooltipArrow" />
+                    <TooltipArrow width={12} height={10} fill="#2777ea" />
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>
