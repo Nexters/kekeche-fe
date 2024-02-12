@@ -10,12 +10,14 @@ interface Keyword {
 interface Context {
     keywords: Keyword[] | undefined;
     content: string;
+    selectedCharacterId: string | undefined;
     changeContent: (value: string) => void;
     addKeywords: (keyword: Keyword) => void;
     deleteKeyword: (id: number) => void;
+    changeCharacter: (id: string) => void;
 }
 
-const CreateMemoContext = createContext<Context | null>(null);
+export const CreateMemoContext = createContext<Context | null>(null);
 
 interface Props {
     children: ReactNode;
@@ -24,6 +26,11 @@ interface Props {
 export default function CreateMemoProvider({ children }: Props) {
     const [keywords, setKeywords] = useState<Keyword[] | undefined>(undefined);
     const [content, setContent] = useState('');
+    const [selectedCharacterId, setSelectedCharacterId] = useState<string | undefined>(undefined);
+
+    const changeCharacter = (id: string) => {
+        setSelectedCharacterId(id);
+    };
 
     const changeContent = (value: string) => {
         setContent(value);
@@ -43,9 +50,11 @@ export default function CreateMemoProvider({ children }: Props) {
     const context = {
         keywords,
         content,
+        selectedCharacterId,
         changeContent,
         addKeywords,
         deleteKeyword,
+        changeCharacter,
     };
 
     return <CreateMemoContext.Provider value={context}>{children}</CreateMemoContext.Provider>;
