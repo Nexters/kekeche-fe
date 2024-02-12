@@ -1,5 +1,5 @@
 import { PageContainer } from '@/components/ui';
-import CharacterDetail from './_components/character-detail';
+import CharacterDetailContainer from './_components/character-detail';
 import Header from './_components/header';
 import { Suspense } from 'react';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
@@ -25,14 +25,14 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
 
     return (
         <PageContainer>
-            <div className="relative  pb-24">
+            <div className="relative pb-24">
                 <section>
                     <HydrationBoundary state={dehydrate(queryClient)}>
                         <Suspense>
                             <Header />
                         </Suspense>
                         <Suspense>
-                            <CharacterDetail />
+                            <CharacterDetailContainer />
                         </Suspense>
                     </HydrationBoundary>
                 </section>
