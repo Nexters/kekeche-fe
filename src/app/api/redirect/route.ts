@@ -3,7 +3,7 @@ import ROUTES from '@/constants/route';
 import { login } from '@/services/auth/login';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { type NextRequest } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 
     console.log('응답', res);
 
-    return redirect('/');
+    return NextResponse.redirect('/');
 
     // cookies().set('accessToken', accessToken, { maxAge: 1000000, httpOnly: false });
 
