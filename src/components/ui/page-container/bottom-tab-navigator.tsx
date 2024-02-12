@@ -14,10 +14,8 @@ export default function TabNavigator() {
     const router = useRouter();
     const [memberId, setMemberId] = useState<undefined | number>(undefined);
 
-    const nickname = fullPathname.split('/')[1];
-
     const Menus = [
-        { label: '홈', IconComponent: HomeIcon, path: ROUTES.characters(Number(memberId) ?? nickname) },
+        { label: '홈', IconComponent: HomeIcon, path: ROUTES.characters(Number(memberId)) },
         { label: '작성', IconComponent: PencilIcon, path: `${ROUTES.memoCreate}` },
         { label: '기록', IconComponent: FileMultipleIcon, path: `${ROUTES.memos}` },
         { label: '내 정보', IconComponent: UserProfileIcon, path: `${ROUTES.my}` },
@@ -26,7 +24,7 @@ export default function TabNavigator() {
     type LabelType = (typeof Menus)[number]['label'];
 
     const [currentLocation, setCurrentLocation] = useState<LabelType | undefined>(() => {
-        return [...Menus].reverse().find(({ label, path }) => fullPathname.includes(path))?.label;
+        return [...Menus].reverse().find(({ label, path }) => fullPathname.includes(path))?.label ?? '홈';
     });
 
     const handleLocationChange = (label: LabelType, path: string) => () => {
