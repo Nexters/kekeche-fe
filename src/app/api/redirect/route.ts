@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 
     console.log('응답', res);
 
-    return NextResponse.redirect('/');
+    return NextResponse.redirect(new URL('/', request.url));
 
     // cookies().set('accessToken', accessToken, { maxAge: 1000000, httpOnly: false });
 
