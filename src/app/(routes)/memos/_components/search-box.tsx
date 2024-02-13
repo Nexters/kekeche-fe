@@ -26,8 +26,8 @@ export default function SearchBox() {
             <div className="flex h-[48px] w-full gap-[10px] rounded-[30px] border-[1.4px] border-solid border-[#-[#DFE2EA]] bg-[#FCFDFF] px-[16px] py-[12px]">
                 <input
                     type="text"
-                    className="text-black h-full w-full border-none text-regular16 outline-none"
-                    placeholder="해시태그를 입력하세요"
+                    className="h-full w-full border-none bg-[#FCFDFF] text-regular16 text-black outline-none"
+                    placeholder="검색어를 입력하세요"
                     value={value}
                     onChange={handleChange}
                 />
