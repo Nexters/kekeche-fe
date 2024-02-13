@@ -4,7 +4,7 @@ import getCharacterDetail from '@/services/character/getCharacterDetail';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import { getCookie } from 'cookies-next';
-import CharacterDetail from '@/components/character-detail/character-detail';
+import CharacterDetail from '@/components/character-detail';
 
 export default function CharacterDetailContainer() {
     const pathname = usePathname();

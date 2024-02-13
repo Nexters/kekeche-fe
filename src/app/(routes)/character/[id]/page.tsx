@@ -8,6 +8,8 @@ import getCharacterDetail from '@/services/character/getCharacterDetail';
 import { cookies } from 'next/headers';
 import Specialties from './_components/specialties';
 import CharacterMemos from './_components/character-memos';
+import CtaButton from '@/components/create-character/cta-button';
+import CTAButton from '@/components/ui/cta-button';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
     const queryClient = new QueryClient();
@@ -27,7 +29,7 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
 
     return (
         <PageContainer>
-            <div className={`gradation-bg relative min-h-screen pb-24`}>
+            <div className={`gradation-bg relative min-h-screen pb-[106px] text-[18px] font-[600]`}>
                 <section>
                     <HydrationBoundary state={dehydrate(queryClient)}>
                         <Suspense>
@@ -44,6 +46,7 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
                         </Suspense>
                     </HydrationBoundary>
                 </section>
+                <CTAButton text="메모 작성" />
             </div>
         </PageContainer>
     );
