@@ -36,6 +36,7 @@ export default function Header() {
                         specialtyIds: [],
                     });
                     router.push(`/memos`);
+                    router.refresh();
                 }}
                 disabled={context?.content.length === 0 || context?.selectedCharacterId === ''}
                 className="p-3 text-semibold16 text-[#1E73F3] transition-colors disabled:pointer-events-none disabled:text-gray-300"
