@@ -1,7 +1,6 @@
 import { PageContainer } from '@/components/ui';
 import getCharacters from '@/services/character/getCharacters';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
 import CharacterCard from './character-card';
 import CharacterCreateButton from './character-create-button';
 import CharacterCreateLink from './character-create-link';
@@ -16,7 +15,6 @@ export default async function Home({ params: { memberId } }: { params: { memberI
         memberId: Number(memberId),
         accessToken,
     });
-
     const isMyPage = characters?.isMe;
     const headerText = `${characters?.memberNickname}의 도감`;
     const showCharacterCreateButton = isMyPage && characters.characters.length < MAXIMUM_CHARACTER;
@@ -32,15 +30,14 @@ export default async function Home({ params: { memberId } }: { params: { memberI
                     {characters?.characters?.map((character) => {
                         if (isMyPage)
                             return (
-                                <Link key={character.id} href={`/character/${character.id}`}>
-                                    <CharacterCard character={character} />
-                                </Link>
+                                <CharacterCard
+                                    key={character.id}
+                                    component="link"
+                                    href={`/character/${character.id}`}
+                                    character={character}
+                                />
                             );
-                        return (
-                            <div key={character.id}>
-                                <CharacterCard character={character} />
-                            </div>
-                        );
+                        return <CharacterCard key={character.id} component="div" character={character} />;
                     })}
                     {showCharacterCreateButton && <CharacterCreateButton />}
                 </section>

@@ -1,6 +1,7 @@
 'use client';
 import FlowerIcon from '@/assets/icons/flower_pink_20x20.svg';
 import HomeBg from '@/assets/images/homeBg.jpg';
+import { Keywords, NO_ITEM_IDX } from '@/constants/character-info';
 import { CreateCharacterValues, CreateCharacterValuesContext } from '@/context/create-character-provider';
 import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
@@ -10,7 +11,6 @@ import CtaButton from '../cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
 import Header from '../header';
 import useCarousel from '../hooks/useCarousel';
-import { Keywords, NO_ITEM_IDX } from '@/constants/character-info';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -50,6 +50,7 @@ export default function ShowResult() {
             // 캐릭터 생성 api...
             const { id } = await createCharacter(createCharacterValues, `${getCookie('accessToken')}`);
             router.push(`/character/${id}`);
+            router.refresh();
         } catch (err) {
             // 로그인 안 한 사람->'앗' 페이지
             console.log(err);

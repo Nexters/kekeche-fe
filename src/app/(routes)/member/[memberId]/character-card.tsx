@@ -1,17 +1,34 @@
 import BeanIcon from '@/assets/icons/bean_16x16.svg';
+import { Colors } from '@/constants/character-info';
 import { Character } from '@/types/character';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Props {
     character: Character;
+    component: 'div' | 'link';
+    href?: string;
 }
 
-export default function CharacterCard({ character }: Props) {
+export default function CharacterCard({ character, component, href }: Props) {
+    const getColorFromUrl = (url: string) => {
+        const match = url.match(/\/(\d+)\.webp$/);
+
+        if (!match) return;
+
+        const colorEnum = parseInt(match[1], 10);
+        return Colors[colorEnum].hexClassName;
+    };
+
+    const bgColor = getColorFromUrl(character.characterImage);
+
     const content = (
         <>
-            <div className="mx-auto mb-2 flex w-fit items-center gap-[2px] rounded-full bg-[#2777ea] px-2 py-1">
+            <div
+                className={`mx-auto mb-2 flex w-fit items-center gap-[2px] rounded-full px-2 py-1 ${bgColor ?? 'bg-[#2777ea]'}`}
+            >
                 <span className="h-4 w-4">
-                    <BeanIcon fill="#606FD8" />
+                    <BeanIcon />
                 </span>
                 <span className="text-[12px] font-semibold leading-[11px] text-white">{`Lv.${character.level}`}</span>
             </div>
@@ -39,9 +56,15 @@ export default function CharacterCard({ character }: Props) {
         </>
     );
 
-    return (
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-[#f3f4f6] bg-[#ffffff]  py-[18px]">
-            {content}
-        </div>
-    );
+    const layoutClassNames =
+        'flex flex-col items-center justify-center rounded-2xl border border-[#f3f4f6] bg-[#ffffff]  py-[18px]';
+
+    if (component === 'link' && href) {
+        return (
+            <Link href={href} className={layoutClassNames}>
+                {content}
+            </Link>
+        );
+    }
+    return <div className={layoutClassNames}>{content}</div>;
 }
