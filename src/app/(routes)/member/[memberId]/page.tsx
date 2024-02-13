@@ -24,7 +24,11 @@ export default async function Home({ params: { memberId } }: { params: { memberI
             <div className="flex-1 bg-[#F6F8FC]">
                 <header className="flex items-center justify-between py-5 pl-6 pr-7">
                     <h1 className="text-bold24">{headerText}</h1>
-                    {isMyPage ? <LikeButton /> : <LikeButtonWithTooltip />}
+                    {isMyPage ? (
+                        <LikeButton cheerCount={characters.cheerCount} />
+                    ) : (
+                        <LikeButtonWithTooltip cheerCount={characters?.cheerCount ?? 0} />
+                    )}
                 </header>
                 <section className="grid grid-cols-2 gap-3 px-6 pb-[90px] pt-4">
                     {characters?.characters?.map((character) => {

@@ -4,6 +4,7 @@ export type GetCharactersResponse = {
     characters: Character[];
     isMe: boolean;
     memberNickname: string;
+    cheerCount: number;
 };
 
 export type GetCharactersRequest = {
@@ -12,15 +13,16 @@ export type GetCharactersRequest = {
 };
 
 export default async function getCharacters(request: GetCharactersRequest): Promise<GetCharactersResponse | undefined> {
-    const authOption = {
-        headers: {
-            Authorization: `${request.accessToken}`,
-        },
-    };
-
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character/member/${request.memberId}`,
-        request.accessToken ? authOption : undefined,
+        request.accessToken
+            ? {
+                  headers: {
+                      Authorization: `${request.accessToken}`,
+                  },
+                  cache: 'no-store',
+              }
+            : { cache: 'no-store' },
     );
     if (res.ok) {
         const json = await res.json();

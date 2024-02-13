@@ -2,16 +2,22 @@
 
 import HeartFilled from '@/assets/icons/heart_filled_20x20.svg';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui-shadcn/tooltip';
+import IncreaseCheerCount from '@/services/member/increaseCheerCount';
 import { TooltipArrow } from '@radix-ui/react-tooltip';
+import { getCookie } from 'cookies-next';
+import { useParams } from 'next/navigation';
 import { useState } from 'react';
+interface Props {
+    cheerCount: number;
+}
 
-export function LikeButtonWithTooltip() {
+export function LikeButtonWithTooltip({ cheerCount }: Props) {
     return (
         <TooltipProvider>
             <Tooltip defaultOpen>
                 <TooltipTrigger asChild>
                     <div>
-                        <LikeButton />
+                        <LikeButton cheerCount={cheerCount} />
                     </div>
                 </TooltipTrigger>
                 <TooltipContent
@@ -30,8 +36,19 @@ export function LikeButtonWithTooltip() {
     );
 }
 
-export function LikeButton() {
-    const [count, setCount] = useState(0);
+export function LikeButton({ cheerCount }: Props) {
+    const [count, setCount] = useState(cheerCount);
+    const { memberId } = useParams();
+
+    /*
+    const { isPending, error, data } = useQuery({
+        queryKey: ['repoData'],
+        queryFn: () =>
+          getCharacters({
+            memberId: Number(memberId),
+            accessToken          
+      })
+    */
 
     const countNumberMinWidth = () => {
         const baseWidth = 20;
@@ -41,8 +58,9 @@ export function LikeButton() {
         return `${baseWidth + perDigitIncrement * (digitCount - 1)}px`;
     };
 
-    const handleLikeClick = () => {
+    const handleLikeClick = async () => {
         setCount((prev) => prev + 1);
+        await IncreaseCheerCount({ accessToken: `${getCookie('accessToken')}`, memberId: +memberId });
     };
 
     return (
