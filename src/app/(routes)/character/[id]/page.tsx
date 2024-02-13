@@ -6,6 +6,8 @@ import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query
 import getMember from '@/services/auth/getMember';
 import getCharacterDetail from '@/services/character/getCharacterDetail';
 import { cookies } from 'next/headers';
+import Specialties from './_components/specialties';
+import CharacterMemos from './_components/character-memos';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
     const queryClient = new QueryClient();
@@ -25,7 +27,7 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
 
     return (
         <PageContainer>
-            <div className={`gradation-bg relative h-[1500px] pb-24`}>
+            <div className={`gradation-bg relative min-h-screen pb-24`}>
                 <section>
                     <HydrationBoundary state={dehydrate(queryClient)}>
                         <Suspense>
@@ -33,6 +35,12 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
                         </Suspense>
                         <Suspense>
                             <CharacterDetailContainer />
+                        </Suspense>
+                        <Suspense>
+                            <Specialties />
+                        </Suspense>
+                        <Suspense>
+                            <CharacterMemos />
                         </Suspense>
                     </HydrationBoundary>
                 </section>
