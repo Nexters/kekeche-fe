@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-
+import plugin from 'tailwindcss/plugin';
 const config = {
     darkMode: ['class'],
     content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
@@ -282,7 +282,17 @@ const config = {
             ],
         },
     },
-    plugins: [require('tailwindcss-animate')],
+    plugins: [
+        require('tailwindcss-animate'),
+        plugin(function ({ addUtilities }: any) {
+            addUtilities({
+                '.gradation-bg': {
+                    background:
+                        'linear-gradient(180deg, #F6F8FC 0%, rgba(246, 248, 252, 0.00) 100%), linear-gradient(0deg, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0.20) 100%), linear-gradient(180deg, #B8EFFF 0%, #74C4FF 100%)',
+                },
+            });
+        }),
+    ],
 } satisfies Config;
 
 export default config;
