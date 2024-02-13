@@ -27,7 +27,7 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
     });
 
     return (
-        <div className="flex h-auto w-full flex-col  gap-[12px] rounded-[16px] bg-[#F8F8FB] px-[24px] pb-[24px] pt-[10px]">
+        <div className="flex h-auto w-full flex-col  gap-[12px] rounded-[16px] bg-white px-[24px] pb-[24px] pt-[10px]">
             <div className=" flex items-center justify-between ">
                 <CharacterLabel character={character} />
                 <div>
