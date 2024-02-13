@@ -5,14 +5,14 @@ export type SortTypes = 'createdAt' | 'modifiedAt';
 
 export interface AllMemos {
     memos: Memo[];
-    total_pages: number;
-    total_count: number;
+    totalPages: number;
+    totalCount: number;
     page: number;
     size: number;
     has_next: boolean;
     has_previous: boolean;
-    is_first_page: boolean;
-    is_last_page: boolean;
+    isFirstPage: boolean;
+    isLastPage: boolean;
 }
 
 export interface Memo {
