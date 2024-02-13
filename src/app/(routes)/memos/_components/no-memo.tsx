@@ -10,7 +10,7 @@ export default function NoMemo() {
         <div className=" mt-[155px] flex w-full flex-col items-center">
             <NoMemoFallback />
             <Link href={'/memos/create'}>
-                <button className="mt-[25px] h-[48px] w-[118px] rounded-[12px] bg-purple-200 text-semibold16 text-[#ffffff]">
+                <button className="mt-[25px] h-[48px] w-[118px] rounded-[12px] bg-primary-500 text-semibold16 text-[#ffffff]">
                     기록하러 가기
                 </button>
             </Link>
