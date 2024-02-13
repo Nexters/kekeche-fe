@@ -9,15 +9,16 @@ import { useParams } from 'next/navigation';
 import { useState } from 'react';
 interface Props {
     cheerCount: number;
+    component: 'div' | 'button';
 }
 
-export function LikeButtonWithTooltip({ cheerCount }: Props) {
+export function LikeButtonWithTooltip({ cheerCount, component }: Props) {
     return (
         <TooltipProvider>
             <Tooltip defaultOpen>
                 <TooltipTrigger asChild>
                     <div>
-                        <LikeButton cheerCount={cheerCount} />
+                        <LikeButton component={component} cheerCount={cheerCount} />
                     </div>
                 </TooltipTrigger>
                 <TooltipContent
@@ -36,19 +37,9 @@ export function LikeButtonWithTooltip({ cheerCount }: Props) {
     );
 }
 
-export function LikeButton({ cheerCount }: Props) {
+export function LikeButton({ cheerCount, component = 'div' }: Props) {
     const [count, setCount] = useState(cheerCount);
     const { memberId } = useParams();
-
-    /*
-    const { isPending, error, data } = useQuery({
-        queryKey: ['repoData'],
-        queryFn: () =>
-          getCharacters({
-            memberId: Number(memberId),
-            accessToken          
-      })
-    */
 
     const countNumberMinWidth = () => {
         const baseWidth = 20;
@@ -63,12 +54,10 @@ export function LikeButton({ cheerCount }: Props) {
         await IncreaseCheerCount({ accessToken: `${getCookie('accessToken')}`, memberId: +memberId });
     };
 
-    return (
-        <button
-            onClick={handleLikeClick}
-            aria-label="좋아요 버튼"
-            className="flex h-[35px]  min-w-[35px] items-center gap-1 rounded-full bg-[#DBE0EA] px-[10px]"
-        >
+    const layoutClassNames = 'flex h-[35px]  min-w-[35px] items-center gap-1 rounded-full bg-[#DBE0EA] px-[10px]';
+
+    const content = (
+        <>
             <HeartFilled />
             <span
                 style={{
@@ -78,6 +67,19 @@ export function LikeButton({ cheerCount }: Props) {
             >
                 {count}
             </span>
-        </button>
+        </>
+    );
+
+    if (component === 'button') {
+        return (
+            <button onClick={handleLikeClick} aria-label="좋아요 버튼" className={layoutClassNames}>
+                {content}
+            </button>
+        );
+    }
+    return (
+        <div aria-label="좋아요 버튼" className={layoutClassNames}>
+            {content}
+        </div>
     );
 }
