@@ -8,6 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import Memo from './memo';
 import NoMemo from './no-memo';
 import { searchMemos } from '@/services/memo/searchMemos';
+import Memos from '@/components/memos';
 
 export default function MemosContainer() {
     const searchParams = useSearchParams();
@@ -31,16 +32,14 @@ export default function MemosContainer() {
     });
 
     return (
-        <section className="mx-auto w-full pb-11">
-            <div className="flex w-full flex-col items-center gap-[16px] px-[24px] ">
-                {searchValue && searchedMemos ? (
-                    searchedMemos.memos.map((memo) => <Memo key={memo.id} memo={memo} />)
-                ) : allMemos?.memos.length === 0 ? (
-                    <NoMemo />
-                ) : (
-                    allMemos?.memos.map((memo) => <Memo key={memo.id} memo={memo} />)
-                )}
-            </div>
-        </section>
+        <Memos>
+            {searchValue && searchedMemos ? (
+                searchedMemos.memos.map((memo) => <Memo key={memo.id} memo={memo} />)
+            ) : allMemos?.memos.length === 0 ? (
+                <NoMemo />
+            ) : (
+                allMemos?.memos.map((memo) => <Memo key={memo.id} memo={memo} />)
+            )}
+        </Memos>
     );
 }
