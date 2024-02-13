@@ -20,7 +20,7 @@ export default function MemosContainer() {
     const { data: allMemos } = useSuspenseQuery({
         queryKey: ['allMemos'],
         queryFn: () => getAllMemos(`${getCookie('accessToken')}`, 0, sortOrder, sortType),
-        staleTime: 1000 * 60,
+        staleTime: 1000 * 60 * 5,
     });
 
     const { data: searchedMemos } = useQuery({
