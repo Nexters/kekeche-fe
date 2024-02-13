@@ -2,8 +2,7 @@ export type CreateMemoRequest = {
     accessToken: string;
     content: string;
     characterId: number;
-    hashtags: string[];
-    htmlContent: string;
+    specialtyIds: number[];
 };
 
 export default async function createMemo(request: CreateMemoRequest) {
@@ -16,8 +15,7 @@ export default async function createMemo(request: CreateMemoRequest) {
         body: JSON.stringify({
             content: request.content,
             characterId: request.characterId,
-            hashtags: request.hashtags,
-            htmlContent: request.htmlContent,
+            specialtyIds: [],
         }),
     };
 

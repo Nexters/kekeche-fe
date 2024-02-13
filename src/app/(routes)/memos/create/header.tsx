@@ -32,9 +32,8 @@ export default function Header() {
                     createMemo({
                         accessToken: `${getCookie('accessToken')}`,
                         content: context.content,
-                        htmlContent: context.content,
                         characterId: Number(context.selectedCharacterId),
-                        hashtags: [],
+                        specialtyIds: [],
                     });
                     router.push(`/memos`);
                 }}
