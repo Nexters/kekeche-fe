@@ -17,7 +17,7 @@ export default async function MemosPage() {
     });
 
     return (
-        <PageContainer hasNavigator>
+        <PageContainer bgColor="bg-[#F8F8FB]" hasNavigator>
             <Header text="기록" />
             <SearchBox />
             <Suspense>
