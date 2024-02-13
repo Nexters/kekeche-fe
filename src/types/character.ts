@@ -15,3 +15,9 @@ export interface CharacterWithThumbnail {
     name: string;
     characterImage: string;
 }
+
+export interface CharacterSpecialty {
+    id: number;
+    content: string;
+    memoCnt: number;
+}

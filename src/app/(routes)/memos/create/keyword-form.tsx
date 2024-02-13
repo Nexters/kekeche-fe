@@ -1,4 +1,24 @@
+'use client';
+
+import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
+import { useQuery } from '@tanstack/react-query';
+import { getCookie } from 'cookies-next';
+import { useContext } from 'react';
+import { CreateMemoContext } from './create-memo-context';
+
 export default function KeywordForm() {
+    const context = useContext(CreateMemoContext);
+
+    const { data } = useQuery({
+        queryKey: ['specialty', context?.selectedCharacterId],
+        enabled: !!context?.selectedCharacterId,
+        queryFn: () =>
+            getCharacterSpecialty({
+                accessToken: getCookie('accessToken'),
+                characterId: Number(context?.selectedCharacterId),
+            }),
+    });
+
     return (
         <div>
             <div className="flex gap-1 px-6 py-3">
@@ -13,11 +33,22 @@ export default function KeywordForm() {
                 </svg>
                 <span className="text-semibold14 text-[#8B92A0]">주특기</span>
             </div>
-            <div className="px-6">
-                <span className="rounded-full bg-[#c6cbd8] px-3 py-[6px] text-[12px] font-semibold leading-[18px] text-white">
-                    기획서 작성
-                </span>
-            </div>
+            {data?.specialties && data?.specialties.length > 0 ? (
+                <div className="flex flex-wrap gap-2 px-6">
+                    {data.specialties.map((item, i) => (
+                        <span
+                            key={item.id}
+                            className="rounded-full bg-[#c6cbd8] px-3 py-[6px] text-[12px] font-semibold leading-[18px] text-white"
+                        >
+                            {item.content}
+                        </span>
+                    ))}
+                </div>
+            ) : (
+                <div className="mx-6 rounded-[12px] bg-[#f6f8fc] p-4">
+                    <p className="text-semibold14 text-[#aeb5c5]">아직 생성된 주특기가 하나도 없어요!</p>
+                </div>
+            )}
         </div>
     );
 }
