@@ -10,7 +10,7 @@ type Props = {
     memo: Memo;
 };
 
-export default function Memo({ memo: { content, createdAt, id, character, modified, htmlContent } }: Props) {
+export default function Memo({ memo: { content, createdAt, id, character, modified } }: Props) {
     return (
         <div className="flex h-auto w-full flex-col gap-[12px] rounded-[16px] bg-[#F8F8FB] p-[24px]">
             <div className=" flex justify-between ">
@@ -30,7 +30,7 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
                 </div>
             </div>
             <div className="text-regular16 leading-[24divx] text-[#4B4F58]">
-                <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+                <div dangerouslySetInnerHTML={{ __html: content }} />
             </div>
             <div className="text-regular14 text-[#8E939E]">
                 {dayjs(createdAt).format('YYYY.MM.DD HH:mm A')} {modified && '(수정 됨)'}

@@ -19,8 +19,11 @@ export interface Memo {
     id: number;
     character: Pick<Character, 'id' | 'name'>;
     content: string;
-    htmlContent: string;
+    specialties: {
+        id: number;
+        content: string;
+        memoCnt: number;
+    }[];
     createdAt: string;
-    hastags: string[];
     modified: boolean;
 }
