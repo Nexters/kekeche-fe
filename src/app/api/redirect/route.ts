@@ -11,22 +11,18 @@ export async function GET(request: NextRequest) {
 
     if (!code) throw new Error('요청에 문제 있음');
 
-    const res = await login(code);
+    const { memberId, accessToken } = await login(code);
 
-    console.log('응답', res);
+    cookies().set('accessToken', accessToken, { maxAge: 1000000, httpOnly: false });
 
-    return NextResponse.redirect(new URL('/', request.url));
+    // 캐릭터 생성
+    const createCharacterValues = cookies().get('create-character')?.value;
+    if (createCharacterValues !== undefined) {
+        const body = JSON.parse(createCharacterValues);
+        const { id } = await createCharacter(body, accessToken);
+        cookies().delete('create-character');
+        return redirect(ROUTES.characters(memberId));
+    }
 
-    // cookies().set('accessToken', accessToken, { maxAge: 1000000, httpOnly: false });
-
-    // // 캐릭터 생성
-    // const createCharacterValues = cookies().get('create-character')?.value;
-    // if (createCharacterValues !== undefined) {
-    //     const body = JSON.parse(createCharacterValues);
-    //     const { id } = await createCharacter(body, accessToken);
-    //     cookies().delete('create-character');
-    //     return redirect(ROUTES.characters(memberId));
-    // }
-
-    // return redirect(ROUTES.characters(memberId));
+    return redirect(ROUTES.characters(memberId));
 }
