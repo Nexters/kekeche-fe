@@ -10,6 +10,8 @@ import Specialties from './_components/specialties';
 import CharacterMemos from './_components/character-memos';
 import CTAButton from '@/components/ui/cta-button';
 import { getCharacterMemos } from '@/services/character/getCharacterMemos';
+import FixedBottomArea from '@/components/fixed-bottom-area';
+import Link from 'next/link';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
     const queryClient = new QueryClient();
@@ -52,7 +54,11 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
                         <CharacterMemos />
                     </Suspense>
                 </HydrationBoundary>
-                <CTAButton text="메모 작성" />
+                <FixedBottomArea>
+                    <Link href="/memos/create">
+                        <CTAButton text="메모 작성" />
+                    </Link>
+                </FixedBottomArea>
             </div>
         </PageContainer>
     );
