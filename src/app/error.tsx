@@ -14,16 +14,16 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
     return (
         <PageContainer>
             <div className=" flex h-screen  w-full translate-y-[300px] flex-col items-center">
-                <div className=" text-H1 text-black">{error.message}</div>
+                <div className=" text-H1 text-black">{'네트워크에 문제가 생겼어요!'}</div>
                 <div className="flex-2 mt-[40px] flex gap-[10px]">
                     <button
-                        className="h-[40px] w-[100px] rounded-[10px] bg-newGray-600 text-Subtitle1 text-white"
+                        className="bg-newGray-600 text-Subtitle1 h-[40px] w-[100px] rounded-[10px] text-white"
                         onClick={() => router.push('/')}
                     >
                         홈
                     </button>
                     <button
-                        className="h-[40px] w-[100px] rounded-[10px] bg-primary-500 text-Subtitle1 text-white"
+                        className="bg-primary-500 text-Subtitle1 h-[40px] w-[100px] rounded-[10px] text-white"
                         onClick={() => reset()}
                     >
                         다시 시도

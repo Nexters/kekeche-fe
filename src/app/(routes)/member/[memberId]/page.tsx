@@ -15,6 +15,7 @@ export default async function Home({ params: { memberId } }: { params: { memberI
         memberId: Number(memberId),
         accessToken,
     });
+
     const isMyPage = characters?.isMe;
     const headerText = `${characters?.memberNickname}의 도감`;
     const showCharacterCreateButton = isMyPage && characters.characters.length < MAXIMUM_CHARACTER;

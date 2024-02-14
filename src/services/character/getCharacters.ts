@@ -1,4 +1,5 @@
 import { Character } from '@/types/character';
+import { redirect } from 'next/navigation';
 
 export type GetCharactersResponse = {
     characters: Character[];
@@ -13,21 +14,25 @@ export type GetCharactersRequest = {
 };
 
 export default async function getCharacters(request: GetCharactersRequest): Promise<GetCharactersResponse | undefined> {
-    const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character/member/${request.memberId}`,
-        request.accessToken
-            ? {
-                  headers: {
-                      Authorization: `${request.accessToken}`,
-                  },
-                  cache: 'no-store',
-              }
-            : { cache: 'no-store' },
-    );
-    if (res.ok) {
-        const json = await res.json();
-        return json.data;
-    } else {
-        throw new Error('존재하지 않는 유저 페이지에요!');
+    try {
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character/member/${request.memberId}`,
+            request.accessToken
+                ? {
+                      headers: {
+                          Authorization: `${request.accessToken}`,
+                      },
+                      cache: 'no-store',
+                  }
+                : { cache: 'no-store' },
+        );
+        if (res.ok) {
+            const json = await res.json();
+            return json.data;
+        } else {
+            throw new Error('존재하지 않는 유저 페이지에요!');
+        }
+    } catch {
+        redirect('/');
     }
 }
