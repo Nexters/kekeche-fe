@@ -17,7 +17,7 @@ export interface AllMemos {
 
 export interface Memo {
     id: number;
-    character: Pick<Character, 'id' | 'name'>;
+    character: Pick<Character, 'id' | 'name'> & { characterImage: string };
     content: string;
     specialties: {
         id: number;

@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function CharacterDetail({ className, character }: Props) {
-    const { name, keywords, characterImage, currentExp, nextExp, level } = character;
+    const { name, keywords, characterImage, currentExp, nextExp, level, itemImage } = character;
 
     return (
         <div className={twMerge('flex h-auto w-full flex-col items-center', className)}>
@@ -24,7 +24,24 @@ export default function CharacterDetail({ className, character }: Props) {
                     </li>
                 ))}
             </ul>
-            <Image alt="캐릭터 이미지" src={characterImage} width={328} height={299} />
+            <div className="relative h-[299px] w-[328px]">
+                <Image
+                    alt="캐릭터 이미지"
+                    src={characterImage}
+                    width={328}
+                    height={299}
+                    className="absolute left-0 top-0"
+                />
+                {itemImage && (
+                    <Image
+                        alt="아이템 이미지"
+                        src={itemImage}
+                        width={328}
+                        height={299}
+                        className="absolute left-0 top-0"
+                    />
+                )}
+            </div>
             <div className="mt-[20px] flex h-[56px] w-[327px] items-center justify-center gap-[20px] rounded-[16px] bg-white">
                 <span className="text-[16px] font-bold text-primary-500">{`LV.${level}`}</span>
                 <div className="relative h-[24px] w-[233px] rounded-full bg-newGray-400">

@@ -23,6 +23,7 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
             }),
         onMutate: () => {
             queryClient.invalidateQueries({ queryKey: ['allMemos'] });
+            queryClient.invalidateQueries({ queryKey: ['character', 'memos'] });
         },
     });
 
