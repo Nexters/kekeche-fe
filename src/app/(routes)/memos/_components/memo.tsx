@@ -21,9 +21,9 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
                 accessToken: `${getCookie('accessToken')}`,
                 memoId: id,
             }),
-        onMutate: () => {
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['allMemos'] });
-            queryClient.invalidateQueries({ queryKey: ['character', 'memos'] });
+            queryClient.invalidateQueries({ queryKey: ['character', 'memos', character.id] });
         },
     });
 

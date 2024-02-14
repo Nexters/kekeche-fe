@@ -1,22 +1,24 @@
 import { Dialog, DialogTrigger, DialogContent, DialogClose } from '@radix-ui/react-dialog';
-import { DialogOverlay } from '../ui-shadcn/dialog';
+import { Dispatch, SetStateAction } from 'react';
 
 type Props = {
-    triggerElement: React.ReactNode;
+    triggerElement?: React.ReactNode;
     title?: string;
     description?: string;
     contents?: React.ReactNode;
+    open?: boolean;
+    onOpenChange?: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function Modal({ triggerElement, title, description, contents }: Props) {
+export default function Modal({ open, onOpenChange, triggerElement, title, description, contents }: Props) {
     return (
-        <Dialog>
-            <DialogTrigger asChild>{triggerElement}</DialogTrigger>
+        <Dialog modal open={open} onOpenChange={onOpenChange}>
+            {triggerElement && <DialogTrigger asChild>{triggerElement}</DialogTrigger>}
             <DialogClose>
                 <DialogContent>
-                    <div className="fixed left-0 top-0 z-[100] h-full w-full">
+                    <div className="fixed right-0 top-0 z-[999] h-[100vh] w-full">
                         <div
-                            className="mx-auto flex min-h-screen w-full flex-col items-center justify-center bg-[#0a0a0c4d] shadow-lg md:w-[375px] "
+                            className="mx-auto flex min-h-screen  w-[400px] flex-col items-center justify-center bg-[#0a0a0c4d] shadow-lg "
                             style={{ minHeight: '100dvh' }}
                         >
                             <div

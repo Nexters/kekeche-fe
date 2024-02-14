@@ -11,7 +11,7 @@ export default function CharacterDetailContainer() {
     const characterId = Number(pathname.split('character/')[1]);
 
     const { data: character } = useSuspenseQuery({
-        queryKey: ['character', characterId],
+        queryKey: ['character', 'detail', characterId],
         queryFn: () => getCharacterDetail({ accessToken: `${getCookie('accessToken')}`, characterId }),
         staleTime: 1000 * 60 * 5,
     });
