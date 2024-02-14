@@ -4,7 +4,7 @@ import MeatballIcon from '@/assets/icons/meatball_20x20.svg';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { PencilIcon, TrashIcon } from 'lucide-react';
 
-export default function ActionButton({ onClick }: { onClick: () => void }) {
+export default function ActionButton({ onClick, onEdit }: { onClick: () => void; onEdit: () => void }) {
     return (
         <Popover>
             <PopoverTrigger className="p-3">
@@ -13,7 +13,7 @@ export default function ActionButton({ onClick }: { onClick: () => void }) {
             <PopoverContent className="z-10 mr-[10px] w-fit rounded-[8px] border-none bg-[#fff] p-3 shadow-lg">
                 <ul>
                     <li>
-                        <button className="flex items-center gap-1">
+                        <button onClick={onEdit} className="flex items-center gap-1">
                             <PencilIcon stroke="#4B4F58" />
                             <span className="text-semibold16 text-gray-600">기록 수정</span>
                         </button>

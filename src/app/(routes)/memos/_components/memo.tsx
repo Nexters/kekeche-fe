@@ -1,12 +1,13 @@
 'use client';
 
+import CharacterLabel from '@/components/character-label';
 import deleteMemo from '@/services/memo/deleteMemo';
 import { Memo } from '@/types/memo';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import dayjs from 'dayjs';
+import { useRouter } from 'next/navigation';
 import ActionButton from './action-button';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import CharacterLabel from '@/components/character-label';
 
 type Props = {
     memo: Memo;
@@ -14,6 +15,7 @@ type Props = {
 
 export default function Memo({ memo: { content, createdAt, id, character, modified, specialties } }: Props) {
     const queryClient = useQueryClient();
+    const router = useRouter();
 
     const { mutate: deleteMemos } = useMutation({
         mutationFn: () =>
@@ -32,7 +34,12 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
             <div className=" flex items-center justify-between ">
                 <CharacterLabel character={character} />
                 <div>
-                    <ActionButton onClick={deleteMemos} />
+                    <ActionButton
+                        onClick={deleteMemos}
+                        onEdit={() => {
+                            router.push(`/memos/edit/${id}`);
+                        }}
+                    />
                 </div>
             </div>
             <div className="text-regular16 leading-[24divx] text-[#4B4F58]">

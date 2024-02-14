@@ -39,12 +39,18 @@ export default function CharacterCard({ character, component, href }: Props) {
                         width={100}
                         height={100}
                         alt={character.name}
+                        style={{
+                            objectFit: 'cover',
+                        }}
                         src={character.characterImage}
                         className="absolute left-0 right-0"
                     />
                     {character.itemImage && (
                         <Image
                             priority
+                            style={{
+                                objectFit: 'cover',
+                            }}
                             src={character.itemImage}
                             alt={character.name}
                             className="absolute left-0 top-0"

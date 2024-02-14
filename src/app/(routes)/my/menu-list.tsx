@@ -45,7 +45,7 @@ export default function MenuList({ member }: Props) {
                         const shareData = {
                             title: '다양한 나를 키우는 AnotherMe',
                             text: '나의 캐릭터별 성장기록 서비스',
-                            url: `${location.origin}/${ROUTES.characters(member.memberId)}`,
+                            url: `${location.origin}${ROUTES.characters(member.memberId)}`,
                         };
 
                         if (navigator.canShare && navigator.canShare(shareData)) {
