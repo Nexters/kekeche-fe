@@ -24,7 +24,7 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
             queryFn: () => getMember({ accessToken: `${cookies().get('accessToken')?.value}` }),
         }),
         queryClient.prefetchQuery({
-            queryKey: ['character', characterId],
+            queryKey: ['character', 'detail', characterId],
             queryFn: () => getCharacterDetail({ accessToken: `${cookies().get('accessToken')?.value}`, characterId }),
         }),
         queryClient.prefetchQuery({
@@ -39,7 +39,7 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
 
     return (
         <PageContainer>
-            <div className={`gradation-bg relative min-h-screen text-[18px]  font-[600]`}>
+            <div className={`relative min-h-screen p-0 text-[18px]  font-[600] gradation-bg`}>
                 <HydrationBoundary state={dehydrate(queryClient)}>
                     <Suspense>
                         <Header />
