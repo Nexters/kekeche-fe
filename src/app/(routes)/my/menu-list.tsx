@@ -1,6 +1,16 @@
 'use client';
 
 import ChevronRightIcon from '@/assets/icons/chevron-right_20x20.svg';
+import { Button } from '@/components/ui-shadcn/button';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui-shadcn/dialog';
 import { useToast } from '@/components/ui-shadcn/toast/use-toast';
 import ROUTES from '@/constants/route';
 import { Member } from '@/services/auth/getMember';
@@ -77,16 +87,28 @@ export default function MenuList({ member }: Props) {
                 </button>
             </li>
             <li>
-                <button
-                    onClick={() => {
-                        deleteCookie('accessToken');
-                        router.push('/');
-                    }}
-                    className="flex w-full items-center justify-between p-6"
-                >
-                    <span className="text-regular16 text-[#4B4F58]">회원탈퇴</span>
-                    <ChevronRightIcon />
-                </button>
+                <Dialog>
+                    <DialogTrigger onClick={() => {}} className="flex w-full items-center justify-between p-6">
+                        <span className="text-regular16 text-[#4B4F58]">회원탈퇴</span>
+                        <ChevronRightIcon />
+                    </DialogTrigger>
+                    <DialogContent className="grid h-[232px] w-[296px] items-center rounded-[20px]">
+                        <DialogHeader>
+                            <DialogTitle className="text-center">회원탈퇴 하시겠습니까?</DialogTitle>
+                            <DialogDescription className="text-center">
+                                기존의 데이터가 모두 삭제됩니다.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter className="mx-auto">
+                            <Button className="h-[48px] w-[118px] bg-[#eceff5] text-center text-semibold16 text-[#8b92a0]">
+                                취소
+                            </Button>
+                            <Button className="h-[48px] w-[118px] bg-[#ea2727] text-center text-semibold16 text-white">
+                                회원탈퇴
+                            </Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </li>
         </ul>
     );

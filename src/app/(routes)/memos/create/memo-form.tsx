@@ -69,7 +69,14 @@ export default function MemoForm({ characters }: Props) {
                             <SelectItem value={chracter.id + ''} key={i}>
                                 <div className="felx-row flex gap-[6px]">
                                     <span className="h-6 w-6 rounded-full bg-[#d7e7ff]">
-                                        <Image width={24} height={24} alt="" src={chracter.characterImage} />
+                                        <Image
+                                            width={24}
+                                            height={24}
+                                            alt=""
+                                            objectFit="cover"
+                                            className="rounded-full"
+                                            src={chracter.characterImage}
+                                        />
                                     </span>
                                     <span className="text-semibold14 text-[#333333]">{chracter.name}</span>
                                 </div>
