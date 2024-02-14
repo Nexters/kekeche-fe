@@ -6,6 +6,8 @@ import CreateMemoProvider from './create-memo-context';
 import Header from './header';
 import KeywordForm from './keyword-form';
 import MemoForm from './memo-form';
+import NoCharacter from './no-character';
+import NoCharacterHeader from './no-character-header';
 
 export default async function MemoCreate() {
     const accessToken = CookieManager.getServerAccessToken();
@@ -16,6 +18,15 @@ export default async function MemoCreate() {
     }
 
     const charactersThumbnailResponse = await getCharactersThumbnail({ accessToken });
+
+    if (charactersThumbnailResponse?.length === 0) {
+        return (
+            <PageContainer>
+                <NoCharacterHeader />
+                <NoCharacter />
+            </PageContainer>
+        );
+    }
 
     return (
         <PageContainer>
