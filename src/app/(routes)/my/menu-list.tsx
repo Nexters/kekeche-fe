@@ -4,6 +4,7 @@ import ChevronRightIcon from '@/assets/icons/chevron-right_20x20.svg';
 import { Button } from '@/components/ui-shadcn/button';
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -13,8 +14,9 @@ import {
 } from '@/components/ui-shadcn/dialog';
 import { useToast } from '@/components/ui-shadcn/toast/use-toast';
 import ROUTES from '@/constants/route';
+import deregister from '@/services/auth/deregister';
 import { Member } from '@/services/auth/getMember';
-import { deleteCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 
 interface Props {
@@ -92,20 +94,30 @@ export default function MenuList({ member }: Props) {
                         <span className="text-regular16 text-[#4B4F58]">회원탈퇴</span>
                         <ChevronRightIcon />
                     </DialogTrigger>
-                    <DialogContent className="grid h-[232px] w-[296px] items-center rounded-[20px]">
-                        <DialogHeader>
+                    <DialogContent className="grid w-[296px] items-center rounded-[20px]">
+                        <DialogHeader className="pt-4">
                             <DialogTitle className="text-center">회원탈퇴 하시겠습니까?</DialogTitle>
                             <DialogDescription className="text-center">
                                 기존의 데이터가 모두 삭제됩니다.
                             </DialogDescription>
                         </DialogHeader>
-                        <DialogFooter className="mx-auto">
-                            <Button className="h-[48px] w-[118px] bg-[#eceff5] text-center text-semibold16 text-[#8b92a0]">
-                                취소
-                            </Button>
-                            <Button className="h-[48px] w-[118px] bg-[#ea2727] text-center text-semibold16 text-white">
-                                회원탈퇴
-                            </Button>
+                        <DialogFooter className="pb-4">
+                            <div className="flex gap-3">
+                                <DialogClose className="h-[48px] w-[118px] bg-[#eceff5] text-center text-semibold16 text-[#8b92a0]">
+                                    취소
+                                </DialogClose>
+                                <Button
+                                    onClick={async () => {
+                                        await deregister({ accessToken: `${getCookie('accessToken')}` });
+                                        deleteCookie('accessToken');
+                                        router.push('/');
+                                        router.refresh();
+                                    }}
+                                    className="h-[48px] w-[118px] bg-[#ea2727] text-center text-semibold16 text-white"
+                                >
+                                    회원탈퇴
+                                </Button>
+                            </div>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
