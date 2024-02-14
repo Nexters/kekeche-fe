@@ -1,5 +1,6 @@
-import { Dialog, DialogTrigger, DialogContent, DialogClose } from '@radix-ui/react-dialog';
+import { Dialog, DialogTrigger, DialogContent, DialogClose, DialogOverlay } from '@radix-ui/react-dialog';
 import { Dispatch, SetStateAction } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type Props = {
     triggerElement?: React.ReactNode;
@@ -8,11 +9,12 @@ type Props = {
     contents?: React.ReactNode;
     open?: boolean;
     onOpenChange?: Dispatch<SetStateAction<boolean>>;
+    className?: string;
 };
 
-export default function Modal({ open, onOpenChange, triggerElement, title, description, contents }: Props) {
+export default function Modal({ open, onOpenChange, triggerElement, className, title, description, contents }: Props) {
     return (
-        <Dialog modal open={open} onOpenChange={onOpenChange}>
+        <Dialog open={open} onOpenChange={onOpenChange}>
             {triggerElement && <DialogTrigger asChild>{triggerElement}</DialogTrigger>}
             <DialogClose>
                 <DialogContent>
@@ -22,12 +24,19 @@ export default function Modal({ open, onOpenChange, triggerElement, title, descr
                             style={{ minHeight: '100dvh' }}
                         >
                             <div
-                                className="flex h-auto w-[296px] flex-col items-center justify-center rounded-[20px] bg-[#ffffff] px-[24px] py-[56px] "
+                                className={twMerge(
+                                    'flex h-auto w-[296px] flex-col items-center justify-center rounded-[20px] bg-[#ffffff] px-[24px] py-[56px] ',
+                                    className,
+                                )}
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <div className="mb-[20px] flex flex-col items-center gap-[4px]">
                                     {title && <h2 className="text-[#17171B)] text-[20px] font-[700]">{title}</h2>}
-                                    {description && <h3 className="text-[#3D4350)] text-regular16">{description}</h3>}
+                                    {description && (
+                                        <h3 className="whitespace-pre-line text-Subtitle2 text-newGray-800">
+                                            {description}
+                                        </h3>
+                                    )}
                                 </div>
                                 {contents}
                             </div>

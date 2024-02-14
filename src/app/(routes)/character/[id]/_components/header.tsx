@@ -1,19 +1,10 @@
 'use client';
 
-import { DialogHeader, DialogFooter } from '@/components/ui-shadcn/dialog';
-import { toast } from '@/components/ui-shadcn/toast/use-toast';
 import TopBar from '@/components/ui/top-bar';
 import ROUTES from '@/constants/route';
 import removeCharacterName from '@/services/character/deleteCharacterName';
 import editCharacterName from '@/services/character/editCharacterName';
-import {
-    Dialog,
-    DialogTrigger,
-    DialogContent,
-    DialogTitle,
-    DialogDescription,
-    DialogClose,
-} from '@radix-ui/react-dialog';
+import { DialogClose } from '@radix-ui/react-dialog';
 import { Popover, PopoverTrigger, PopoverContent } from '@radix-ui/react-popover';
 import { getCookie } from 'cookies-next';
 import { usePathname, useRouter } from 'next/navigation';

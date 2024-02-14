@@ -11,7 +11,7 @@ export type GetCharacterSpecialtyRequest = {
 
 export default async function getCharacterSpecialty(
     request: GetCharacterSpecialtyRequest,
-): Promise<GetCharacterSpecialtyResponse | undefined> {
+): Promise<GetCharacterSpecialtyResponse> {
     const authOption = {
         headers: {
             Authorization: `${request.accessToken}`,
