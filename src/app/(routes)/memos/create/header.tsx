@@ -33,7 +33,7 @@ export default function Header() {
                         accessToken: `${getCookie('accessToken')}`,
                         content: context.content,
                         characterId: Number(context.selectedCharacterId),
-                        specialtyIds: [],
+                        specialtyIds: context?.keywords ?? [],
                     });
                     router.push(`/memos`);
                     router.refresh();

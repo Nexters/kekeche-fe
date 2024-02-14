@@ -26,22 +26,25 @@ export default function KeywordForm() {
                     <path
                         d="M7.58301 17.3853C14.6541 21.6279 20.3109 15.971 19.6038 5.36449C8.99743 4.65737 3.34082 10.3144 7.58301 17.3853ZM7.58301 17.3853C7.58293 17.3851 7.58309 17.3854 7.58301 17.3853ZM7.58301 17.3853L5.75391 19.2137M7.58301 17.3853L11.4108 13.5569"
                         stroke="#8B92A0"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 </svg>
                 <span className="text-semibold14 text-[#8B92A0]">주특기</span>
             </div>
             {data?.specialties && data?.specialties.length > 0 ? (
                 <div className="flex flex-wrap gap-2 px-6">
-                    {data.specialties.map((item, i) => (
-                        <span
+                    {data.specialties.map((item) => (
+                        <button
+                            onClick={() => {
+                                context?.toggleKeyword(item.id);
+                            }}
                             key={item.id}
-                            className="rounded-full bg-[#c6cbd8] px-3 py-[6px] text-[12px] font-semibold leading-[18px] text-white"
+                            className={`rounded-full px-3 py-[6px] text-[12px] font-semibold leading-[18px] text-white transition-colors ${context?.keywords?.includes(item.id) ? 'bg-[#2777EA]' : 'bg-[#c6cbd8]'}`}
                         >
                             {item.content}
-                        </span>
+                        </button>
                     ))}
                 </div>
             ) : (

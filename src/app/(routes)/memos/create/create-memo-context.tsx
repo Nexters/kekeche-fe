@@ -2,18 +2,12 @@
 
 import { ReactNode, createContext, useState } from 'react';
 
-interface Keyword {
-    id: number;
-    keyword: string;
-}
-
 interface Context {
-    keywords: Keyword[] | undefined;
+    keywords: number[] | undefined;
     content: string;
     selectedCharacterId: string | undefined;
     changeContent: (value: string) => void;
-    addKeywords: (keyword: Keyword) => void;
-    deleteKeyword: (id: number) => void;
+    toggleKeyword: (id: number) => void;
     changeCharacter: (id: string) => void;
 }
 
@@ -24,7 +18,7 @@ interface Props {
 }
 
 export default function CreateMemoProvider({ children }: Props) {
-    const [keywords, setKeywords] = useState<Keyword[] | undefined>(undefined);
+    const [keywords, setKeywords] = useState<number[]>([]);
     const [content, setContent] = useState('');
     const [selectedCharacterId, setSelectedCharacterId] = useState<string | undefined>(undefined);
 
@@ -36,24 +30,20 @@ export default function CreateMemoProvider({ children }: Props) {
         setContent(value);
     };
 
-    const addKeywords = (keyword: Keyword) => {
-        if (keywords) {
-            setKeywords([...keywords, keyword]);
+    const toggleKeyword = (keywordId: number) => {
+        if (keywords?.includes(keywordId)) {
+            setKeywords(keywords.filter((id) => keywordId !== id));
+        } else {
+            setKeywords([...keywords, keywordId]);
         }
-        setKeywords([keyword]);
-    };
-    const deleteKeyword = (id: number) => {
-        if (!keywords) return;
-        setKeywords(keywords.filter((keyword) => keyword.id !== id));
     };
 
     const context = {
         keywords,
         content,
         selectedCharacterId,
+        toggleKeyword,
         changeContent,
-        addKeywords,
-        deleteKeyword,
         changeCharacter,
     };
 

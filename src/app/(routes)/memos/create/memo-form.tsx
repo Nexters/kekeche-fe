@@ -54,7 +54,7 @@ export default function MemoForm({ characters }: Props) {
                     <SelectTrigger className="w-[160px] border-none bg-gray-100 outline-none focus:outline-none focus:ring-0">
                         <SelectValue
                             placeholder={
-                                <div className="felx-row flex gap-[6px]">
+                                <div className="felx-row flex items-center gap-[6px]">
                                     <span className="h-6 w-6 rounded-full bg-[#d7e7ff]" />
                                     <span className="text-semibold14 text-[#a6aab4]">캐릭터 선택</span>
                                 </div>
