@@ -4,7 +4,7 @@ import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
 import editMemo from '@/services/memo/editMemo';
 import { useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { CreateMemoContext } from './create-memo-context';
 
@@ -12,6 +12,7 @@ export default function Header() {
     const router = useRouter();
     const context = useContext(CreateMemoContext);
     const queryClient = useQueryClient();
+    const { ID } = useParams();
 
     if (!context) return;
 
@@ -32,6 +33,7 @@ export default function Header() {
             <button
                 onClick={async () => {
                     await editMemo({
+                        memoId: Number(ID),
                         accessToken: `${getCookie('accessToken')}`,
                         content: context.content,
                         specialtyIds: context?.keywords ?? [],
