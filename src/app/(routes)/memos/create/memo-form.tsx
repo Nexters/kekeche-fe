@@ -73,7 +73,7 @@ export default function MemoForm({ characters }: Props) {
                                             width={24}
                                             height={24}
                                             alt=""
-                                            objectFit="cover"
+                                            style={{ objectFit: 'cover' }}
                                             className="rounded-full"
                                             src={chracter.characterImage}
                                         />
