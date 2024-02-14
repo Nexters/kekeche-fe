@@ -35,6 +35,7 @@ export default function CharacterCard({ character, component, href }: Props) {
             <div className="mb-1 h-[120px] w-[120px] rounded-lg bg-white">
                 <div className="relative mx-auto h-[100px] w-[100px]">
                     <Image
+                        priority
                         width={100}
                         height={100}
                         alt={character.name}
@@ -43,6 +44,7 @@ export default function CharacterCard({ character, component, href }: Props) {
                     />
                     {character.itemImage && (
                         <Image
+                            priority
                             src={character.itemImage}
                             alt={character.name}
                             className="absolute left-0 top-0"
