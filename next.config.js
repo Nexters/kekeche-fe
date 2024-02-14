@@ -2,14 +2,14 @@
 
 const withPWA = require('@ducanh2912/next-pwa').default({
     dest: 'public',
-    cacheOnFrontEndNav: false,
-    aggressiveFrontEndNavCaching: false,
+    cacheOnFrontEndNav: true,
+    aggressiveFrontEndNavCaching: true,
     reloadOnOnline: true,
     disable: false,
     workboxOptions: {
         disableDevLogs: true,
     },
-    register: false,
+    register: true,
 });
 
 const nextConfig = {
