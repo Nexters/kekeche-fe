@@ -2,6 +2,7 @@
 
 import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
 import createMemo from '@/services/memo/createMemo';
+import { useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
@@ -10,6 +11,7 @@ import { CreateMemoContext } from './create-memo-context';
 export default function Header() {
     const router = useRouter();
     const context = useContext(CreateMemoContext);
+    const queryClient = useQueryClient();
 
     if (!context) return;
 
@@ -28,12 +30,16 @@ export default function Header() {
                 기록 작성
             </span>
             <button
-                onClick={() => {
-                    createMemo({
+                onClick={async () => {
+                    await createMemo({
                         accessToken: `${getCookie('accessToken')}`,
                         content: context.content,
                         characterId: Number(context.selectedCharacterId),
                         specialtyIds: context?.keywords ?? [],
+                    });
+                    await queryClient.invalidateQueries({ queryKey: ['allMemos'] });
+                    await queryClient.invalidateQueries({
+                        queryKey: ['character', 'memos', Number(context.selectedCharacterId)],
                     });
                     router.push(`/memos`);
                     router.refresh();
