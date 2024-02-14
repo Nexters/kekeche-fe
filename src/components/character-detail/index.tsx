@@ -17,7 +17,7 @@ export default function CharacterDetail({ className, character }: Props) {
             <ul className="mt-[6px] flex gap-[4px]">
                 {keywords.map((keywordIdx) => (
                     <li
-                        className="rounded-[8px] bg-[#E0ECFF] px-[12px] py-[4px] text-[12px] font-[500] text-primary-500"
+                        className="text-primary-500 rounded-[8px] bg-[#E0ECFF] px-[12px] py-[4px] text-[12px] font-[500]"
                         key={keywordIdx}
                     >
                         {Keywords[keywordIdx].name}
@@ -26,6 +26,7 @@ export default function CharacterDetail({ className, character }: Props) {
             </ul>
             <div className="relative h-[299px] w-[328px]">
                 <Image
+                    priority
                     alt="캐릭터 이미지"
                     src={characterImage}
                     width={328}
@@ -34,6 +35,7 @@ export default function CharacterDetail({ className, character }: Props) {
                 />
                 {itemImage && (
                     <Image
+                        priority
                         alt="아이템 이미지"
                         src={itemImage}
                         width={328}
@@ -43,11 +45,11 @@ export default function CharacterDetail({ className, character }: Props) {
                 )}
             </div>
             <div className="mt-[20px] flex h-[56px] w-[327px] items-center justify-center gap-[20px] rounded-[16px] bg-white">
-                <span className="text-[16px] font-bold text-primary-500">{`LV.${level}`}</span>
-                <div className="relative h-[24px] w-[233px] rounded-full bg-newGray-400">
+                <span className="text-primary-500 text-[16px] font-bold">{`LV.${level}`}</span>
+                <div className="bg-newGray-400 relative h-[24px] w-[233px] rounded-full">
                     <div
                         style={{ width: `${(currentExp / nextExp) * 100}%` }}
-                        className={`absolute left-0 top-0 h-full rounded-full bg-primary-500 `}
+                        className={`bg-primary-500 absolute left-0 top-0 h-full rounded-full `}
                     />
                     <div className="absolute right-[14.4px] my-auto flex h-full items-center">
                         <span className="text-[12px] font-semibold text-white">{`${currentExp}/${nextExp}`}</span>

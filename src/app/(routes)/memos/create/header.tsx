@@ -5,13 +5,14 @@ import createMemo from '@/services/memo/createMemo';
 import { useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CreateMemoContext } from './create-memo-context';
 
 export default function Header() {
     const router = useRouter();
     const context = useContext(CreateMemoContext);
     const queryClient = useQueryClient();
+    const [loading, setLoading] = useState(false);
 
     if (!context) return;
 
@@ -31,6 +32,7 @@ export default function Header() {
             </span>
             <button
                 onClick={async () => {
+                    setLoading(true);
                     await createMemo({
                         accessToken: `${getCookie('accessToken')}`,
                         content: context.content,
@@ -44,7 +46,7 @@ export default function Header() {
                     router.push(`/memos`);
                     router.refresh();
                 }}
-                disabled={context?.content.length === 0 || context?.selectedCharacterId === ''}
+                disabled={context?.content.length === 0 || context?.selectedCharacterId === '' || loading}
                 className="p-3 text-semibold16 text-[#1E73F3] transition-colors disabled:pointer-events-none disabled:text-gray-300"
             >
                 저장
