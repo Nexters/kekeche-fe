@@ -1,7 +1,7 @@
 'use client';
 
 import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
-import createMemo from '@/services/memo/createMemo';
+import editMemo from '@/services/memo/editMemo';
 import { useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
@@ -31,10 +31,9 @@ export default function Header() {
             </span>
             <button
                 onClick={async () => {
-                    await createMemo({
+                    await editMemo({
                         accessToken: `${getCookie('accessToken')}`,
                         content: context.content,
-                        characterId: Number(context.selectedCharacterId),
                         specialtyIds: context?.keywords ?? [],
                     });
                     await queryClient.invalidateQueries({ queryKey: ['allMemos'] });
@@ -44,7 +43,7 @@ export default function Header() {
                     router.push(`/memos`);
                     router.refresh();
                 }}
-                disabled={context?.content.length === 0 || context?.selectedCharacterId === ''}
+                disabled={context?.content.length === 0 || !context?.selectedCharacterId}
                 className="p-3 text-semibold16 text-[#1E73F3] transition-colors disabled:pointer-events-none disabled:text-gray-300"
             >
                 저장

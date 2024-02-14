@@ -46,6 +46,7 @@ export default function MemoForm({ characters }: Props) {
     return (
         <div>
             <Select
+                disabled
                 defaultValue={context.selectId}
                 onValueChange={(value) => {
                     context.changeCharacter(value);
