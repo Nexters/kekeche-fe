@@ -12,6 +12,8 @@ import CTAButton from '@/components/ui/cta-button';
 import { getCharacterMemos } from '@/services/character/getCharacterMemos';
 import FixedBottomArea from '@/components/fixed-bottom-area';
 import Link from 'next/link';
+import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
+import { getCookie } from 'cookies-next';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
     const queryClient = new QueryClient();
@@ -26,6 +28,11 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
         queryClient.prefetchQuery({
             queryKey: ['character', 'detail', characterId],
             queryFn: () => getCharacterDetail({ accessToken: `${cookies().get('accessToken')?.value}`, characterId }),
+        }),
+        queryClient.prefetchQuery({
+            queryKey: ['character', 'specialties', characterId],
+            queryFn: () =>
+                getCharacterSpecialty({ accessToken: `${cookies().get('accessToken')?.value}`, characterId }),
         }),
         queryClient.prefetchQuery({
             queryKey: ['character', 'memos', characterId],
