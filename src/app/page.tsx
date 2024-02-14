@@ -10,7 +10,15 @@ import Link from 'next/link';
 export default function Home() {
     return (
         <PageContainer>
-            <Image priority alt={'홈 배경'} src={HomeBg} fill objectFit="fill" />
+            <Image
+                priority
+                alt={'홈 배경'}
+                src={HomeBg}
+                fill
+                style={{
+                    objectFit: 'cover',
+                }}
+            />
             <Image alt={'safe'} src={Safe} width={400} height={80} className="absolute top-0 " />
             <div className="z-[2] mt-[200px] flex w-full justify-center">
                 <Image alt={'로고'} src={Logo} width={256} height={77} />
