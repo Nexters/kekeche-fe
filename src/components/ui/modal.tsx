@@ -16,8 +16,12 @@ export default function Modal({ open, onOpenChange, triggerElement, className, t
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             {triggerElement && <DialogTrigger asChild>{triggerElement}</DialogTrigger>}
-            <DialogClose>
-                <DialogContent>
+            <DialogClose onKeyUp={(e) => e.preventDefault()}>
+                <DialogContent
+                    onCloseAutoFocus={(e) => e.preventDefault()}
+                    onKeyDown={(e) => e.stopPropagation()}
+                    onEscapeKeyDown={(e) => e.preventDefault()}
+                >
                     <div className="fixed right-0 top-0 z-[999] h-[100vh] w-full">
                         <div
                             className="mx-auto flex min-h-screen  w-[400px] flex-col items-center justify-center bg-[#0a0a0c4d] shadow-lg "
