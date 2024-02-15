@@ -5,7 +5,16 @@ export type CreateMemoRequest = {
     specialtyIds: number[];
 };
 
-export default async function createMemo(request: CreateMemoRequest) {
+export type CreateMemoResponse = {
+    id: number;
+    name: string;
+    level: number;
+    isLevelUp: boolean;
+    characterImage: string;
+    keywords: number[];
+};
+
+export default async function createMemo(request: CreateMemoRequest): Promise<CreateMemoResponse | undefined> {
     const option = {
         method: 'POST',
         headers: {
