@@ -5,9 +5,10 @@ type Props = {
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onDelete: () => void;
+    canDelete: boolean;
 };
 
-export default function SpecialtyInput({ value, onChange, onDelete }: Props) {
+export default function SpecialtyInput({ value, onChange, onDelete, canDelete }: Props) {
     return (
         <SpecialtyBox>
             <div className="flex w-full justify-between ">
@@ -18,9 +19,11 @@ export default function SpecialtyInput({ value, onChange, onDelete }: Props) {
                     onChange={onChange}
                     maxLength={10}
                 />
-                <button onClick={onDelete}>
-                    <ExitIcon />
-                </button>
+                {canDelete && (
+                    <button onClick={onDelete}>
+                        <ExitIcon />
+                    </button>
+                )}{' '}
             </div>
         </SpecialtyBox>
     );

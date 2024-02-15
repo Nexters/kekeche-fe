@@ -3,7 +3,7 @@ import { CarouselDispatchContext } from '..';
 import Header from '../header';
 import Intro from '../intro';
 import { CreateCharacterDispatchContext } from '@/context/create-character-provider';
-import CtaButton from '../cta-button';
+import CtaButton from '@/components/ui/cta-button';
 import CheckCircle from '@/assets/icons/check-circle.svg';
 import FixedBottomArea from '../fixed-bottom-area';
 import { Colors } from '@/constants/character-info';
@@ -42,7 +42,7 @@ export default React.memo(function SelectColor() {
                         onClick={() => handleSelect(id)}
                     >
                         {selected === id && (
-                            <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-[12px] bg-[#8D98E6] opacity-50">
+                            <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-[12px] bg-primary-500 opacity-50">
                                 <CheckCircle />
                             </div>
                         )}
@@ -50,7 +50,7 @@ export default React.memo(function SelectColor() {
                 ))}
             </div>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton disabled={selected === null} text="다음" onClick={handleClick} />
+                <CtaButton shadow={false} disabled={selected === null} text="다음" onClick={handleClick} />
             </FixedBottomArea>
         </>
     );
