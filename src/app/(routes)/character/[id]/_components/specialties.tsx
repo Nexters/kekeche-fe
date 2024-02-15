@@ -93,13 +93,6 @@ export default function Specialties() {
                             {newSpecialties.map(({ content }, idx) => (
                                 <SpecialtyBox key={idx}>
                                     <input
-                                        onKeyDown={(e) => {
-                                            if (e.key === ' ') {
-                                                console.log('dd');
-                                                e.stopPropagation();
-                                                e.preventDefault();
-                                            }
-                                        }}
                                         className="bg-inherit flex h-full w-full items-center border-none bg-newGray-100 p-0 text-Subtitle2 text-newGray-900 outline-none outline-newGray-100"
                                         placeholder="공백 포함 최대 10자"
                                         value={content}
@@ -113,18 +106,12 @@ export default function Specialties() {
                                 </button>
                             )}
                         </div>
-                        <div className="mt-[24px] flex w-full  gap-[8px]">
-                            <button
-                                onKeyDown={(e) => e.stopPropagation()}
-                                className="h-[48px]  flex-1 rounded-[8px] bg-newGray-200 text-[16px] font-[600] text-newGray-800 "
-                            >
-                                취소
+                        <div className="mt-[24px] flex w-full gap-[8px]">
+                            <button className="h-[48px] w-full flex-1 rounded-[8px] bg-newGray-200 text-[16px] font-[600] text-newGray-800 ">
+                                <DialogClose onKeyUp={(e) => e.preventDefault()}>취소</DialogClose>
                             </button>
-                            <button
-                                onKeyDown={(e) => e.stopPropagation()}
-                                className="h-[48px] flex-1 rounded-[8px] bg-primary-500  text-[16px] font-[600] text-white disabled:bg-[#c4caf8]"
-                            >
-                                저장
+                            <button className="h-[48px] w-full flex-1 rounded-[8px] bg-primary-500  text-[16px] font-[600] text-white disabled:bg-[#c4caf8]">
+                                <DialogClose onKeyUp={(e) => e.preventDefault()}>저장</DialogClose>
                             </button>
                         </div>
                     </>
