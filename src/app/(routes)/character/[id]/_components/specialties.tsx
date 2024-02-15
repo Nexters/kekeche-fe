@@ -13,6 +13,8 @@ import { useState } from 'react';
 import SpecialtyBox from './specialty-box';
 import deleteCharacterSpecialty from '@/services/character/deleteCharacterSpecialty';
 import SpecialtyInput from './specialty-input';
+import { NewSpecialty, Specialty } from '@/types/specialty';
+import addCharacterSpecialties from '@/services/character/addCharacterSpecialties';
 
 export default function Specialties() {
     const pathname = usePathname();
@@ -25,6 +27,7 @@ export default function Specialties() {
     } = useSuspenseQuery({
         queryKey: ['character', 'specialties', characterId],
         queryFn: () => getCharacterSpecialty({ accessToken: `${getCookie('accessToken')}`, characterId }),
+        staleTime: 1000 * 60 * 5,
     });
 
     const { mutate: deleteSpecialty } = useMutation({
@@ -32,7 +35,7 @@ export default function Specialties() {
             deleteCharacterSpecialty({
                 accessToken: `${getCookie('accessToken')}`,
                 characterId,
-                specialtyId: deleteId as number,
+                specialtyId: deleteId as number, //NOTE: deleteId가 null인 경우에 mutation이 일어날 수가 없음.
             }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['character', 'specialties', characterId] });
@@ -40,11 +43,26 @@ export default function Specialties() {
         },
     });
 
+    const { mutate: addSpecialties } = useMutation({
+        mutationFn: (newSpecialties: NewSpecialty[]) =>
+            addCharacterSpecialties({
+                accessToken: `${getCookie('accessToken')}`,
+                characterId,
+                specialties: newSpecialties,
+            }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['character', 'specialties', characterId] });
+        },
+    });
+
     const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [deleteId, setDeleteId] = useState<null | number>(null);
-    const [newSpecialties, setNewSpecialties] = useState<{ content: string }[]>([{ content: '' }]);
+    const [newSpecialties, setNewSpecialties] = useState<NewSpecialty[]>([{ content: '' }]);
+    const isNewSpecialtiesClean =
+        (newSpecialties.length === 1 && newSpecialties[0].content === '') || newSpecialties.length === 0;
 
+    console.log(newSpecialties);
     const handleAddSpecailtyInput = () => {
         setNewSpecialties((prev) => [...prev, { content: '' }]);
     };
@@ -54,6 +72,7 @@ export default function Specialties() {
             const copy = [...prev.slice(0, idx), ...prev.slice(idx + 1, prev.length)];
             return copy;
         });
+        setIsModifyModalOpen(false);
     };
 
     const handleNewSpecialty = (value: string, idx: number) => {
@@ -64,7 +83,13 @@ export default function Specialties() {
         });
     };
 
-    console.log(newSpecialties);
+    const handleSubmitNewSpecialties = () => {
+        if (!isNewSpecialtiesClean) {
+            // 입력값이 없는 인풋은 뮤테이션에 포함시키지 않습니다.
+            const copy = [...newSpecialties].filter((specialty) => specialty.content.length > 0);
+            addSpecialties(copy);
+        }
+    };
 
     return (
         <>
@@ -127,7 +152,10 @@ export default function Specialties() {
                             <button className="h-[48px] w-full flex-1 rounded-[8px] bg-newGray-200 text-[16px] font-[600] text-newGray-800 ">
                                 <DialogClose onKeyUp={(e) => e.preventDefault()}>취소</DialogClose>
                             </button>
-                            <button className="h-[48px] w-full flex-1 rounded-[8px] bg-primary-500  text-[16px] font-[600] text-white disabled:bg-[#c4caf8]">
+                            <button
+                                onClick={handleSubmitNewSpecialties}
+                                className="h-[48px] w-full flex-1 rounded-[8px] bg-primary-500  text-[16px] font-[600] text-white disabled:bg-[#c4caf8]"
+                            >
                                 <DialogClose onKeyUp={(e) => e.preventDefault()}>저장</DialogClose>
                             </button>
                         </div>
