@@ -8,7 +8,7 @@
     "short_name": "AnotherMe",
     "description": "다양한 나를 키우는 AnotherMe",
     "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "background_color": "#2777eb",
     "icons": [
         {
             "src": "/icons/icon-192x192.png",
