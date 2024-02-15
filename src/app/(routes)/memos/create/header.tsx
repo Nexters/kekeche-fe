@@ -76,7 +76,9 @@ export default function Header() {
                     router.push(`/memos`);
                     router.refresh();
                 }}
-                disabled={context?.content.length === 0 || !context?.selectedCharacterId || loading}
+                disabled={
+                    context?.memoInvalid || context?.content.length === 0 || !context?.selectedCharacterId || loading
+                }
                 className="p-3 text-semibold16 text-[#1E73F3] transition-colors disabled:pointer-events-none disabled:text-gray-300"
             >
                 저장

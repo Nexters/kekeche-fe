@@ -30,11 +30,17 @@ export default function MemoForm({ characters }: Props) {
 
     if (!context) return;
 
+    const isCharacterMemoInValid =
+        !!context.selectedCharacterId &&
+        !characters.find((c) => Number(context.selectedCharacterId) === c.id)?.isMemoValid;
+
     const errorText = (() => {
         switch (true) {
-            case context.selectedCharacterId &&
-                !characters.find((c) => Number(context.selectedCharacterId) === c.id)?.isMemoValid:
-                return <p className="text-semibold14 text-[#F04141]">최대 메모 개수를 넘어갔어요!</p>;
+            case !!context.selectedCharacterId &&
+                !characters.find((c) => Number(context.selectedCharacterId) === c.id)?.isMemoValid: {
+                context.setMemoInvalid(isCharacterMemoInValid);
+                return <p className="text-semibold14 text-[#F04141]">캐릭터당 하루 최대 메모 개수는 3개예요!</p>;
+            }
 
             case !context.selectedCharacterId: {
                 return <p className="text-semibold14 text-[#F04141]">캐릭터를 선택해야 저장이 됩니다.</p>;
@@ -51,6 +57,7 @@ export default function MemoForm({ characters }: Props) {
         <div>
             <Select
                 onValueChange={(value) => {
+                    context.setMemoInvalid(false);
                     context.changeCharacter(value);
                 }}
             >

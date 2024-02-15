@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, createContext, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, createContext, useState } from 'react';
 
 interface Context {
     keywords: number[] | undefined;
@@ -9,6 +9,8 @@ interface Context {
     changeContent: (value: string) => void;
     toggleKeyword: (id: number) => void;
     changeCharacter: (id: string) => void;
+    memoInvalid: boolean;
+    setMemoInvalid: Dispatch<SetStateAction<boolean>>;
 }
 
 export const CreateMemoContext = createContext<Context | null>(null);
@@ -21,6 +23,7 @@ export default function CreateMemoProvider({ children }: Props) {
     const [keywords, setKeywords] = useState<number[]>([]);
     const [content, setContent] = useState('');
     const [selectedCharacterId, setSelectedCharacterId] = useState<string | undefined>(undefined);
+    const [memoInvalid, setMemoInvalid] = useState(false);
 
     const changeCharacter = (id: string) => {
         setSelectedCharacterId(id);
@@ -45,6 +48,8 @@ export default function CreateMemoProvider({ children }: Props) {
         toggleKeyword,
         changeContent,
         changeCharacter,
+        memoInvalid,
+        setMemoInvalid,
     };
 
     return <CreateMemoContext.Provider value={context}>{children}</CreateMemoContext.Provider>;
