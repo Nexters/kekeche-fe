@@ -32,9 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta name="naver-site-verification" content="6f87b8170cef8604157538c5f66fffce3e688bc2" />
                 <meta property="og:title" content={'다양한 나를 키우는 AnotherMe'} />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content={'https://kekeche-deploy.vercel.app/'} />
+                <meta property="og:url" content={'https://anotherme.today'} />
                 <meta property="og:image" content={'/icons/og.png'} />
-                <meta property="og:site_name" content={'Another Me'} />
+                <meta property="og:site_name" content={'AnotherMe'} />
                 <meta name="apple-mobile-web-app-capable" content="yes"></meta>
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></meta>
                 <link rel="apple-touch-icon" sizes="192x192" href="/assets/icons/icon-192x192.png" />
