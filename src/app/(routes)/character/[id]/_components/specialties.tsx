@@ -12,6 +12,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import SpecialtyBox from './specialty-box';
 import deleteCharacterSpecialty from '@/services/character/deleteCharacterSpecialty';
+import SpecialtyInput from './specialty-input';
 
 export default function Specialties() {
     const pathname = usePathname();
@@ -44,13 +45,26 @@ export default function Specialties() {
     const [deleteId, setDeleteId] = useState<null | number>(null);
     const [newSpecialties, setNewSpecialties] = useState<{ content: string }[]>([{ content: '' }]);
 
-    const handleNewSpecialty = (value: string, idx: number) => {
+    const handleAddSpecailtyInput = () => {
+        setNewSpecialties((prev) => [...prev, { content: '' }]);
+    };
+
+    const handleDeleteSpecialtyInput = (idx: number) => {
         setNewSpecialties((prev) => {
-            const copy = [...prev];
-            copy[idx].content = value;
+            const copy = [...prev.slice(0, idx), ...prev.slice(idx + 1, prev.length)];
             return copy;
         });
     };
+
+    const handleNewSpecialty = (value: string, idx: number) => {
+        setNewSpecialties((prev) => {
+            const copy = [...prev];
+            copy[idx].content = value.trimStart();
+            return copy;
+        });
+    };
+
+    console.log(newSpecialties);
 
     return (
         <>
@@ -91,17 +105,20 @@ export default function Specialties() {
                         </div>
                         <div className="mt-[12px] flex w-full flex-col gap-[12px]">
                             {newSpecialties.map(({ content }, idx) => (
-                                <SpecialtyBox key={idx}>
-                                    <input
-                                        className="bg-inherit flex h-full w-full items-center border-none bg-newGray-100 p-0 text-Subtitle2 text-newGray-900 outline-none outline-newGray-100"
-                                        placeholder="공백 포함 최대 10자"
-                                        value={content}
-                                        onChange={(e) => handleNewSpecialty(e.currentTarget.value, idx)}
-                                    />
-                                </SpecialtyBox>
+                                <SpecialtyInput
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                        handleNewSpecialty(e.currentTarget.value, idx)
+                                    }
+                                    onDelete={() => handleDeleteSpecialtyInput(idx)}
+                                    value={content}
+                                    key={idx}
+                                />
                             ))}
                             {newSpecialties.length + specialties.length < 4 && (
-                                <button className="flex h-[48px] w-[296px] items-center justify-center rounded-[12px] bg-newGray-200 ">
+                                <button
+                                    onClick={handleAddSpecailtyInput}
+                                    className="flex h-[48px] w-[296px] items-center justify-center rounded-[12px] bg-newGray-200 "
+                                >
                                     <PlusIcon />
                                 </button>
                             )}
