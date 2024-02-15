@@ -155,6 +155,7 @@ export default function Specialties() {
                                     onDelete={() => handleDeleteSpecialtyInput(idx)}
                                     value={content}
                                     key={idx}
+                                    canDelete={idx !== 0}
                                 />
                             ))}
                             {newSpecialties.length + specialties.length < 4 && (
