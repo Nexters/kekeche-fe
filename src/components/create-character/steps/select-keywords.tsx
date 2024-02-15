@@ -44,7 +44,7 @@ export default React.memo(function SelectKeywords() {
             <div className="flex w-full flex-wrap gap-[16px] px-[26px]">
                 {Keywords.map(({ id, name }) => (
                     <button
-                        className={`flex h-auto w-auto items-center justify-center rounded-[8px] rounded-full px-[12px] py-[8px] text-semibold14 ${selected.includes(id) ? 'bg-primary-500 text-[##F6F8FC]' : 'bg-[#ECEFF5] text-[#C6CBD8] '}`}
+                        className={`flex h-auto w-auto items-center justify-center rounded-[8px] rounded-full px-[12px] py-[8px] text-semibold14 ${selected.includes(id) ? 'bg-primary-500 text-[#F6F8FC]' : 'bg-[#ECEFF5] text-[#C6CBD8] '}`}
                         key={id}
                         onClick={() => handleClick(id)}
                     >

@@ -17,7 +17,10 @@ export default function CharacterDetail({ className, character }: Props) {
             <ul className="mt-[6px] flex gap-[4px]">
                 {keywords.map((keywordIdx) => (
                     <li
-                        className="text-primary-500 rounded-[8px] bg-[#E0ECFF] px-[12px] py-[4px] text-[12px] font-[500]"
+                        className={twMerge(
+                            'rounded-[8px] px-[12px] py-[4px] text-[12px] font-[500]',
+                            Keywords[keywordIdx].colorClassname,
+                        )}
                         key={keywordIdx}
                     >
                         {Keywords[keywordIdx].name}
@@ -45,11 +48,11 @@ export default function CharacterDetail({ className, character }: Props) {
                 )}
             </div>
             <div className="mt-[20px] flex h-[56px] w-[327px] items-center justify-center gap-[20px] rounded-[16px] bg-white">
-                <span className="text-primary-500 text-[16px] font-bold">{`LV.${level}`}</span>
-                <div className="bg-newGray-400 relative h-[24px] w-[233px] rounded-full">
+                <span className="text-[16px] font-bold text-primary-500">{`LV.${level}`}</span>
+                <div className="relative h-[24px] w-[233px] rounded-full bg-newGray-400">
                     <div
                         style={{ width: `${(currentExp / nextExp) * 100}%` }}
-                        className={`bg-primary-500 absolute left-0 top-0 h-full rounded-full `}
+                        className={`absolute left-0 top-0 h-full rounded-full bg-primary-500 `}
                     />
                     <div className="absolute right-[14.4px] my-auto flex h-full items-center">
                         <span className="text-[12px] font-semibold text-white">{`${currentExp}/${nextExp}`}</span>

@@ -54,11 +54,11 @@ export const Colors = [
 ] as const;
 
 export const Keywords = [
-    { id: 0, name: '다정한', colorClassname: 'bg-[#FFEEFD] text-[#EC6BDF]' },
-    { id: 1, name: '귀여운', colorClassname: 'bg-[#FFEEFD] text-[#EC6BDF]' },
-    { id: 2, name: '느긋한', colorClassname: 'bg-[#FFEEFD] text-[#EC6BDF]' },
-    { id: 3, name: '감성적', colorClassname: 'bg-[#FFEEFD] text-[#EC6BDF]' },
-    { id: 4, name: '낭만적', colorClassname: 'bg-[#FFEEFD] text-[#EC6BDF]' },
+    { id: 0, name: '다정한', colorClassname: 'bg-[#FFE4E4] text-[#EC6BDF]' },
+    { id: 1, name: '귀여운', colorClassname: 'bg-[#FFE4E4] text-[#EC6BDF]' },
+    { id: 2, name: '느긋한', colorClassname: 'bg-[#FFE4E4] text-[#EC6BDF]' },
+    { id: 3, name: '감성적', colorClassname: 'bg-[#FFE4E4] text-[#EC6BDF]' },
+    { id: 4, name: '낭만적', colorClassname: 'bg-[#FFE4E4] text-[#EC6BDF]' },
     { id: 5, name: '열정적', colorClassname: 'bg-[#FFF4F2] text-[#FF7864]' },
     { id: 6, name: '대담한', colorClassname: 'bg-[#FFF4F2] text-[#FF7864]' },
     { id: 7, name: '욕심 많은', colorClassname: 'bg-[#FFF4F2] text-[#FF7864]' },
