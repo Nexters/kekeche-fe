@@ -1,16 +1,16 @@
 'use client';
 import HomeBg from '@/assets/images/homeBg.jpg';
+import CharacterDetail from '@/components/character-detail';
+import CtaButton from '@/components/ui/cta-button';
 import { NO_ITEM_IDX } from '@/constants/character-info';
 import { CreateCharacterValues, CreateCharacterValuesContext } from '@/context/create-character-provider';
+import { Character } from '@/types/character';
 import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import FixedBottomArea from '../fixed-bottom-area';
 import useCarousel from '../hooks/useCarousel';
-import { Character } from '@/types/character';
-import CharacterDetail from '@/components/character-detail';
-import CtaButton from '@/components/ui/cta-button';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -86,7 +86,7 @@ export default function ShowResult() {
         <>
             {isCreating ? (
                 <>
-                    <Image alt="배경" src={HomeBg} fill className="opacity-50" />
+                    <Image quality={100} alt="배경" src={HomeBg} fill className="opacity-50" />
                     <div className="text-gray-700 z-[50] mt-[180px] h-full w-full text-center text-bold24">
                         캐릭터 생성 중
                     </div>

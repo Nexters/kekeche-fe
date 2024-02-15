@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function NoMemoFallback() {
     return (
         <div className="mt-[12px] flex w-full flex-col items-center gap-[10px] py-[20px]">
-            <Image alt="대체 이미지" src={NoMemoBadgeImg} width={80} height={80} />
+            <Image quality={100} alt="대체 이미지" src={NoMemoBadgeImg} width={80} height={80} />
             <p className="text-[18px] font-[500] text-newGray-500">{'아직 작성한 기록이 없어요'}</p>
         </div>
     );

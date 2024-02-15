@@ -72,6 +72,7 @@ export default function MemoForm({ characters }: Props) {
                                 <div className="felx-row flex gap-[6px]">
                                     <span className="h-6 w-6 rounded-full bg-[#d7e7ff]">
                                         <Image
+                                            quality={100}
                                             style={{
                                                 objectFit: 'cover',
                                             }}

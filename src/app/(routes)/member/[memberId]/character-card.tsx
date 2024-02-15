@@ -36,6 +36,7 @@ export default function CharacterCard({ character, component, href }: Props) {
                 <div className="relative mx-auto h-[100px] w-[100px]">
                     <Image
                         priority
+                        quality={100}
                         width={100}
                         height={100}
                         alt={character.name}
@@ -47,6 +48,7 @@ export default function CharacterCard({ character, component, href }: Props) {
                     />
                     {character.itemImage && (
                         <Image
+                            quality={100}
                             priority
                             style={{
                                 objectFit: 'cover',

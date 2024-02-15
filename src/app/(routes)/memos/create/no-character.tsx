@@ -11,12 +11,12 @@ export default function NoCharacter() {
     return (
         <div className=" mt-[155px] flex w-full flex-col items-center">
             <div className="mt-[12px] flex w-full flex-col items-center gap-[10px] py-[20px]">
-                <Image alt="대체 이미지" src={NoMemoBadgeImg} width={80} height={80} />
-                <p className="text-newGray-500 text-[18px] font-[500]">{'아직 캐릭터가 없어요'}</p>
+                <Image quality={100} alt="대체 이미지" src={NoMemoBadgeImg} width={80} height={80} />
+                <p className="text-[18px] font-[500] text-newGray-500">{'아직 캐릭터가 없어요'}</p>
             </div>
 
             <Link href={'/create'}>
-                <button className="bg-primary-500 mt-[25px] h-[48px] w-fit rounded-[12px] px-6 text-semibold16 text-[#ffffff]">
+                <button className="mt-[25px] h-[48px] w-fit rounded-[12px] bg-primary-500 px-6 text-semibold16 text-[#ffffff]">
                     캐릭터 만들러 가기
                 </button>
             </Link>

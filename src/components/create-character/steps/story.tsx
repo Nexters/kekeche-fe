@@ -1,10 +1,10 @@
 'use client';
 
 import HomeBg from '@/assets/images/homeBg.jpg';
+import CtaButton from '@/components/ui/cta-button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import CtaButton from '@/components/ui/cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
 import Header from '../header';
 import useCarousel from '../hooks/useCarousel';
@@ -19,7 +19,7 @@ export default React.memo(function Story() {
 
     return (
         <>
-            <Image alt={'홈 배경'} src={HomeBg} fill />
+            <Image quality={100} alt={'홈 배경'} src={HomeBg} fill />
             <Header
                 onGoBack={() => {
                     router.push('/');

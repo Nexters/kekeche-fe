@@ -29,6 +29,7 @@ export default function CharacterDetail({ className, character }: Props) {
             </ul>
             <div className="relative h-[299px] w-[328px]">
                 <Image
+                    quality={100}
                     priority
                     alt="캐릭터 이미지"
                     src={characterImage}
@@ -38,6 +39,7 @@ export default function CharacterDetail({ className, character }: Props) {
                 />
                 {itemImage && (
                     <Image
+                        quality={100}
                         priority
                         alt="아이템 이미지"
                         src={itemImage}

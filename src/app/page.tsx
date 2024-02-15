@@ -1,19 +1,19 @@
 import HomeBg from '@/assets/images/homeBg.jpg';
 import Logo from '@/assets/images/logo.png';
 import Safe from '@/assets/images/safe.png';
-import CtaButton from '@/components/ui/cta-button';
 import FixedBottomArea from '@/components/create-character/fixed-bottom-area';
 import { PageContainer } from '@/components/ui';
+import CtaButton from '@/components/ui/cta-button';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
     return (
         <PageContainer>
-            <Image priority alt={'홈 배경'} src={HomeBg} fill />
-            <Image alt={'safe'} src={Safe} width={400} height={80} className="absolute top-0 " />
+            <Image quality={100} priority alt={'홈 배경'} src={HomeBg} fill />
+            <Image quality={100} alt={'safe'} src={Safe} width={400} height={80} className="absolute top-0 " />
             <div className="z-[2] mt-[200px] flex w-full justify-center">
-                <Image alt={'로고'} src={Logo} width={256} height={77} />
+                <Image quality={100} alt={'로고'} src={Logo} width={256} height={77} />
             </div>
             <FixedBottomArea className="mb-[31px] gap-[16px]">
                 <Link href="/create">

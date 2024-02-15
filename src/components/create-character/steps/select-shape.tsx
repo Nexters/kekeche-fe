@@ -1,13 +1,13 @@
-import Header from '../header';
-import React, { useState } from 'react';
-import Intro from '../intro';
-import useCreateCharacter from '../hooks/useCreateCharacter';
-import useCarousel from '../hooks/useCarousel';
 import CheckCircle from '@/assets/icons/check-circle.svg';
 import CtaButton from '@/components/ui/cta-button';
-import FixedBottomArea from '../fixed-bottom-area';
-import Image from 'next/image';
 import { Shapes } from '@/constants/character-info';
+import Image from 'next/image';
+import React, { useState } from 'react';
+import FixedBottomArea from '../fixed-bottom-area';
+import Header from '../header';
+import useCarousel from '../hooks/useCarousel';
+import useCreateCharacter from '../hooks/useCreateCharacter';
+import Intro from '../intro';
 
 type ShapeId = (typeof Shapes)[number]['id'];
 
@@ -39,7 +39,7 @@ export default React.memo(function SelectShape() {
                         key={id}
                         onClick={() => handleSelect(id)}
                     >
-                        <Image alt="캐릭터" src={image} width={90} height={90} />
+                        <Image quality={100} alt="캐릭터" src={image} width={90} height={90} />
                         {selected === id && (
                             <div className="absolute flex h-full w-full items-center justify-center rounded-[16px] bg-primary-500 opacity-50">
                                 <CheckCircle />
