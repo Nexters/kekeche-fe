@@ -72,7 +72,6 @@ export default function Specialties() {
             const copy = [...prev.slice(0, idx), ...prev.slice(idx + 1, prev.length)];
             return copy;
         });
-        setIsModifyModalOpen(false);
     };
 
     const handleNewSpecialty = (value: string, idx: number) => {

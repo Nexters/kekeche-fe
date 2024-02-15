@@ -13,7 +13,6 @@ import { getCharacterMemos } from '@/services/character/getCharacterMemos';
 import FixedBottomArea from '@/components/fixed-bottom-area';
 import Link from 'next/link';
 import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
-import { getCookie } from 'cookies-next';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
     const queryClient = new QueryClient();

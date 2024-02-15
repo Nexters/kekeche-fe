@@ -5,9 +5,7 @@ import Memos from '@/components/memos';
 import { getCharacterMemos } from '@/services/character/getCharacterMemos';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import NoMemoBadgeImg from '@/assets/images/no-memo-character.png';
 import NoMemoFallback from '@/components/no-memo-fallback';
 
 export default function CharacterMemos() {
