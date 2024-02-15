@@ -103,7 +103,19 @@ export default function Specialties() {
                         <PlusIcon />
                     </button>
                 </div>
-                {specialties.length === 0 && (
+                {specialties.length > 0 ? (
+                    <div className="mt-[8px] flex w-full flex-col gap-[4px]">
+                        {specialties.map(({ id, content, memoCnt }) => (
+                            <div
+                                key={id}
+                                className="flex h-[53px] w-full gap-[130px] rounded-[12px] bg-[#F8F8F8] p-[16px] text-[14px] font-[600] text-primary-500 "
+                            >
+                                <span>{content}</span>
+                                <span>{memoCnt}</span>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
                     <div className="mb-[12px] mt-[8px] flex h-[74px] w-full rounded-[12px] border border-newGray-200 bg-newGray-100 px-[16px] py-[16px]">
                         <span className="whitespace-pre-line text-[14px] font-[600] text-newGray-500">
                             {'아직 생성된 주특기가 하나도 없어요!\n플러스를 눌러 만들어주세요.'}

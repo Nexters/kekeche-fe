@@ -1,8 +1,19 @@
 import { PropsWithChildren } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-export default function SpecialtyBox({ children }: PropsWithChildren) {
+type Props = {
+    children: React.ReactNode;
+    className?: string;
+};
+
+export default function SpecialtyBox({ children, className }: Props) {
     return (
-        <div className="h-[48px] w-[296px] rounded-[12px] border border-newGray-200 bg-newGray-100 px-[16px] py-[12px]">
+        <div
+            className={twMerge(
+                'h-[48px] w-[296px] rounded-[12px] border border-newGray-200 bg-newGray-100 px-[16px] py-[12px]',
+                className,
+            )}
+        >
             {children}
         </div>
     );
