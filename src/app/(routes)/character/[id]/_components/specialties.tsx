@@ -13,7 +13,7 @@ import { useState } from 'react';
 import SpecialtyBox from './specialty-box';
 import deleteCharacterSpecialty from '@/services/character/deleteCharacterSpecialty';
 import SpecialtyInput from './specialty-input';
-import { NewSpecialty, Specialty } from '@/types/specialty';
+import { NewSpecialty } from '@/types/specialty';
 import addCharacterSpecialties from '@/services/character/addCharacterSpecialties';
 
 export default function Specialties() {
@@ -103,6 +103,13 @@ export default function Specialties() {
                         <PlusIcon />
                     </button>
                 </div>
+                {specialties.length === 0 && (
+                    <div className="mb-[12px] mt-[8px] flex h-[74px] w-full rounded-[12px] border border-newGray-200 bg-newGray-100 px-[16px] py-[16px]">
+                        <span className="whitespace-pre-line text-[14px] font-[600] text-newGray-500">
+                            {'아직 생성된 주특기가 하나도 없어요!\n플러스를 눌러 만들어주세요.'}
+                        </span>
+                    </div>
+                )}
             </div>
             <Modal
                 className="h-auto w-[328px] px-[16px] pb-[32px] pt-[40px]"
@@ -149,15 +156,24 @@ export default function Specialties() {
                             )}
                         </div>
                         <div className="mt-[24px] flex w-full gap-[8px]">
-                            <button className="h-[48px] w-full flex-1 rounded-[8px] bg-newGray-200 text-[16px] font-[600] text-newGray-800 ">
-                                <DialogClose onKeyUp={(e) => e.preventDefault()}>취소</DialogClose>
-                            </button>
-                            <button
+                            <DialogClose
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setIsModifyModalOpen(false);
+                                    setNewSpecialties([{ content: '' }]);
+                                }}
+                                onKeyUp={(e) => e.preventDefault()}
+                                className="h-[48px] w-full flex-1 rounded-[8px] bg-newGray-200 text-[16px] font-[600] text-newGray-800 "
+                            >
+                                취소
+                            </DialogClose>
+                            <DialogClose
+                                onKeyUp={(e) => e.preventDefault()}
                                 onClick={handleSubmitNewSpecialties}
                                 className="h-[48px] w-full flex-1 rounded-[8px] bg-primary-500  text-[16px] font-[600] text-white disabled:bg-[#c4caf8]"
                             >
-                                <DialogClose onKeyUp={(e) => e.preventDefault()}>저장</DialogClose>
-                            </button>
+                                저장
+                            </DialogClose>
                         </div>
                     </>
                 }
