@@ -59,7 +59,7 @@ export default function Header() {
                         accessToken: `${getCookie('accessToken')}`,
                         content: context.content,
                         characterId: Number(context.selectedCharacterId),
-                        specialtyIds: context?.keywords ?? [],
+                        specialtyIds: context.keywords ?? [],
                     });
                     await queryClient.invalidateQueries({ queryKey: ['allMemos'] });
                     await queryClient.invalidateQueries({

@@ -25,7 +25,7 @@ export default async function createMemo(request: CreateMemoRequest): Promise<Cr
         body: JSON.stringify({
             content: request.content,
             characterId: request.characterId,
-            specialtyIds: [],
+            specialtyIds: request.specialtyIds,
         }),
     };
 
