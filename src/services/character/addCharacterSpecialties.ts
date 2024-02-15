@@ -23,7 +23,9 @@ export default async function addCharacterSpecialties({
                 method: 'POST',
                 headers: {
                     Authorization: `${accessToken}`,
+                    'Content-Type': 'application/json',
                 },
+
                 body: JSON.stringify({
                     specialties: newSpecialty,
                 }),

@@ -1,7 +1,7 @@
 import Header from '../header';
 import Intro from '../intro';
 import React, { useState } from 'react';
-import CtaButton from '../cta-button';
+import CtaButton from '@/components/ui/cta-button';
 import useCarousel from '../hooks/useCarousel';
 import FixedBottomArea from '../fixed-bottom-area';
 import useCreateCharacter from '../hooks/useCreateCharacter';
@@ -44,7 +44,7 @@ export default React.memo(function SelectKeywords() {
             <div className="flex w-full flex-wrap gap-[16px] px-[26px]">
                 {Keywords.map(({ id, name }) => (
                     <button
-                        className={`flex h-auto w-auto items-center justify-center rounded-[8px] rounded-full px-[12px] py-[8px] text-semibold14 ${selected.includes(id) ? 'bg-[#8D98E6] text-gray-100' : 'bg-gray-150 text-gray-400 '}`}
+                        className={`flex h-auto w-auto items-center justify-center rounded-[8px] rounded-full px-[12px] py-[8px] text-semibold14 ${selected.includes(id) ? 'bg-primary-500 text-[##F6F8FC]' : 'bg-[#ECEFF5] text-[#C6CBD8] '}`}
                         key={id}
                         onClick={() => handleClick(id)}
                     >
@@ -53,7 +53,12 @@ export default React.memo(function SelectKeywords() {
                 ))}
             </div>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton disabled={selected.length === 0} text="다음" onClick={handleNextButtonClick} />
+                <CtaButton
+                    shadow={false}
+                    disabled={selected.length === 0}
+                    text="다음"
+                    onClick={handleNextButtonClick}
+                />
             </FixedBottomArea>
         </>
     );

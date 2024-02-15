@@ -4,7 +4,7 @@ import HomeBg from '@/assets/images/homeBg.jpg';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import CtaButton from '../cta-button';
+import CtaButton from '@/components/ui/cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
 import Header from '../header';
 import useCarousel from '../hooks/useCarousel';

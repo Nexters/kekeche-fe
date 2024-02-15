@@ -1,16 +1,15 @@
 'use client';
 
 type Props = {
-    onClick?: () => void;
     text: string | React.ReactNode;
     shadow?: boolean;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function CTAButton({ onClick, text, shadow = true }: Props) {
+export default function CTAButton({ text, shadow = true, disabled, ...props }: Props) {
     return (
         <button
-            className={`h-[56px] w-[343px] rounded-[16px] bg-primary-500 text-[18px] font-[600] text-white ${shadow && 'shadow-[0_0_4px_0_rgba(0,0,0,0.25)]'}`}
-            onClick={onClick}
+            {...props}
+            className={`h-[56px] w-[343px] rounded-[16px] text-[18px] font-[600] text-white ${shadow && 'shadow-[0_0_4px_0_rgba(0,0,0,0.25)]'} ${disabled ? 'bg-[#7D7D7D]' : ' bg-primary-500'}`}
         >
             {text}
         </button>
