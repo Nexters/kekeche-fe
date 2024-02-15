@@ -129,7 +129,7 @@ export default function Header() {
                                     <ul className="mt-[6px] flex gap-[4px]">
                                         {character?.keywords.map((keywordIdx) => (
                                             <li
-                                                className="rounded-[8px] bg-[#E0ECFF] px-[12px] py-[4px] text-[12px] font-[500] text-primary-500"
+                                                className={`rounded-[8px] bg-[#E0ECFF] px-[12px] py-[4px] text-[12px] font-[500] ${Keywords[keywordIdx].colorClassname}`}
                                                 key={keywordIdx}
                                             >
                                                 {Keywords[keywordIdx].name}
