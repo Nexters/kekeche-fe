@@ -3,9 +3,9 @@ import Intro from '../intro';
 import React, { useState } from 'react';
 import useCarousel from '../hooks/useCarousel';
 import useCreateCharacter from '../hooks/useCreateCharacter';
-import CtaButton from '../cta-button';
 import FixedBottomArea from '../fixed-bottom-area';
 import { Items, NO_ITEM_IDX } from '@/constants/character-info';
+import CtaButton from '@/components/ui/cta-button';
 
 type ItemId = (typeof Items)[number]['id'];
 
@@ -26,20 +26,20 @@ export default React.memo(function SelectItem() {
     return (
         <>
             <Header onGoBack={handlePrevClick} />
-            <Intro title={'캐릭터의 능력을 올려줄 \n 아이템을 고르세요 (선택)'} />
+            <Intro title={'(선택) 캐릭터의 능력을 올려줄 \n 아이템을 고르세요 '} />
             <div className="flex flex-col gap-[16px]">
                 {Items.map(({ id, name }) => (
                     <button
                         onClick={() => handleSelect(id)}
                         key={id}
-                        className={`color-[#17171B] w-[329px] rounded-[12px] rounded-[90px] px-[24px] py-[20px] text-left text-semibold16 ${selected === id ? 'bg-[#8D98E6] text-[#F8F8FB]' : 'bg-[#F8F8FB] text-gray-400'}`}
+                        className={`w-[329px] rounded-[16px] px-[24px] py-[20px] text-left text-[16px] font-[500] ${selected === id ? 'bg-primary-500 text-white' : 'bg-[#ECEFF5] text-[#707683]'}`}
                     >
                         {name}
                     </button>
                 ))}
             </div>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton text="완료" onClick={handleClick} />
+                <CtaButton shadow={false} text="완료" onClick={handleClick} />
             </FixedBottomArea>
         </>
     );
