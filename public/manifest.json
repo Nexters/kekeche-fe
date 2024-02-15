@@ -1,7 +1,8 @@
 {
-    "id": "AnotherMe",
+    "id": "10",
     "start_url": "/",
     "display": "standalone",
+    "scope": "/",
     "orientation": "portrait",
     "name": "AnotherMe",
     "short_name": "AnotherMe",
@@ -10,28 +11,15 @@
     "background_color": "#ffffff",
     "icons": [
         {
-            "src": "/icons/icon-128x128.png",
-            "sizes": "128x128",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
             "src": "/icons/icon-192x192.png",
             "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
+            "type": "image/png"
         },
-        {
-            "src": "/icons/icon-256x256.png",
-            "sizes": "256x256",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
+
         {
             "src": "/icons/icon-512x512.png",
             "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any"
+            "type": "image/png"
         }
     ]
 }
