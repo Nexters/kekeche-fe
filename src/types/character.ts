@@ -14,6 +14,7 @@ export interface CharacterWithThumbnail {
     id: number;
     name: string;
     characterImage: string;
+    isMemoValid: boolean;
 }
 
 export interface CharacterSpecialty {

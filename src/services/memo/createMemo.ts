@@ -11,6 +11,7 @@ export type CreateMemoResponse = {
     level: number;
     isLevelUp: boolean;
     characterImage: string;
+    itemImage: string;
     keywords: number[];
 };
 

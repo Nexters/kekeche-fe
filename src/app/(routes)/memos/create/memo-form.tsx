@@ -32,6 +32,10 @@ export default function MemoForm({ characters }: Props) {
 
     const errorText = (() => {
         switch (true) {
+            case context.selectedCharacterId &&
+                !characters.find((c) => Number(context.selectedCharacterId) === c.id)?.isMemoValid:
+                return <p className="text-semibold14 text-[#F04141]">최대 메모 개수를 넘어갔어요!</p>;
+
             case !context.selectedCharacterId: {
                 return <p className="text-semibold14 text-[#F04141]">캐릭터를 선택해야 저장이 됩니다.</p>;
             }
