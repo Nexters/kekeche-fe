@@ -1,4 +1,4 @@
-import { Dialog, DialogTrigger, DialogContent, DialogClose, DialogOverlay } from '@radix-ui/react-dialog';
+import { Dialog, DialogTrigger, DialogContent, DialogClose } from '@radix-ui/react-dialog';
 import { Dispatch, SetStateAction } from 'react';
 import { twMerge } from 'tailwind-merge';
 
