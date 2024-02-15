@@ -48,7 +48,7 @@ export default function TabNavigator() {
     }, []);
 
     return (
-        <div className="border-top sticky bottom-0 left-0 right-0 z-10 border-t border-t-[#E8EAEE] bg-white">
+        <div className="border-top nav-bar sticky bottom-0 left-0 right-0 z-10 border-t border-t-[#E8EAEE] bg-white">
             <nav className="w-full">
                 <ul className="relative flex justify-around">
                     {Menus.map(({ label, IconComponent, path }) => (

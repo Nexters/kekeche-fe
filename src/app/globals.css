@@ -84,3 +84,7 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.nav-bar {
+    padding-bottom: env(safe-area-inset-top);
+}
