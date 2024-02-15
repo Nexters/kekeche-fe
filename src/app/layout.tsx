@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     manifest: '/manifest.json',
     icons: [
         { rel: 'apple-touch-icon', url: '/icons/icon-192x192.png' },
+        { rel: 'apple-touch-icon', url: '/icons/icon-512x512.png' },
         { rel: 'icon', url: '/icons/icon-128x128.png' },
     ],
 };
