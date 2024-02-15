@@ -52,13 +52,16 @@ export default function Specialties() {
             }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['character', 'specialties', characterId] });
+            setNewSpecialties([{ content: '' }]);
         },
     });
 
     const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [deleteId, setDeleteId] = useState<null | number>(null);
-    const [newSpecialties, setNewSpecialties] = useState<NewSpecialty[]>([{ content: '' }]);
+    const [newSpecialties, setNewSpecialties] = useState<NewSpecialty[]>(
+        specialties.length === 4 ? [] : [{ content: '' }],
+    );
     const isNewSpecialtiesClean =
         (newSpecialties.length === 1 && newSpecialties[0].content === '') || newSpecialties.length === 0;
 
@@ -107,7 +110,7 @@ export default function Specialties() {
                         {specialties.map(({ id, content, memoCnt }) => (
                             <div
                                 key={id}
-                                className="flex h-[53px] w-full gap-[130px] rounded-[12px] bg-[#F8F8F8] p-[16px] text-[14px] font-[600] text-primary-500 "
+                                className="mr-[9.95px] flex h-[53px] w-full justify-between rounded-[12px] bg-[#F8F8F8] p-[16px] text-[14px] font-[600] text-primary-500 "
                             >
                                 <span>{content}</span>
                                 <span>{memoCnt}</span>
