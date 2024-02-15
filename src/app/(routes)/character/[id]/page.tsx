@@ -13,6 +13,7 @@ import { getCharacterMemos } from '@/services/character/getCharacterMemos';
 import FixedBottomArea from '@/components/fixed-bottom-area';
 import Link from 'next/link';
 import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
+import NoteEditIcon from '@/assets/icons/note-edit_24x24.svg';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
     const queryClient = new QueryClient();
@@ -62,7 +63,11 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
                 </HydrationBoundary>
                 <FixedBottomArea>
                     <Link href="/memos/create">
-                        <CTAButton text="메모 작성" />
+                        <CTAButton>
+                            <div className=" flex w-full items-center justify-center gap-[8px]">
+                                <NoteEditIcon /> <span>먹이주기</span>
+                            </div>
+                        </CTAButton>
                     </Link>
                 </FixedBottomArea>
             </div>
