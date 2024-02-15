@@ -1,11 +1,11 @@
 {
-    "id": "kekeche",
+    "id": "AnotherMe",
     "start_url": "/",
     "display": "standalone",
     "orientation": "portrait",
-    "name": "\uce90\ub9ad\uce90\ub9ad \ub2e4\uc774\uc5b4\ub9ac",
-    "short_name": "\uce90\ub9ad\uce90\ub9ad \ub2e4\uc774\uc5b4\ub9ac",
-    "description": "\ub098\ub9cc\uc758 \uc791\uc740 \uc138\uacc4\ub97c \ud3bc\uce58\ub294 \ud2b9\ubcc4\ud55c \uc77c\uae30",
+    "name": "AnotherMe",
+    "short_name": "AnotherMe",
+    "description": "다양한 나를 키우는 AnotherMe",
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "icons": [
