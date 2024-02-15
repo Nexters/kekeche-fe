@@ -65,7 +65,6 @@ export default function Specialties() {
     const isNewSpecialtiesClean =
         (newSpecialties.length === 1 && newSpecialties[0].content === '') || newSpecialties.length === 0;
 
-    console.log(newSpecialties);
     const handleAddSpecailtyInput = () => {
         setNewSpecialties((prev) => [...prev, { content: '' }]);
     };
