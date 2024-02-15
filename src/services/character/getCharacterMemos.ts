@@ -16,8 +16,6 @@ export const getCharacterMemos = async ({
     sortOrder = 'DESC',
     sortType = 'createdAt',
 }: getCharacterMemosRequest) => {
-    console.log(page);
-
     const allMemos = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/memo/character/${characterId}?page=${page}&size=20&sort=${sortType},${sortOrder}`,
         {

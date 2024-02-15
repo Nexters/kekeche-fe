@@ -1,10 +1,10 @@
 'use client';
 
+import CharacterDetail from '@/components/character-detail';
 import getCharacterDetail from '@/services/character/getCharacterDetail';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { usePathname } from 'next/navigation';
 import { getCookie } from 'cookies-next';
-import CharacterDetail from '@/components/character-detail';
+import { usePathname } from 'next/navigation';
 
 export default function CharacterDetailContainer() {
     const pathname = usePathname();
