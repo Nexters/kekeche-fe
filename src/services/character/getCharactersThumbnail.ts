@@ -15,10 +15,7 @@ export default async function getCharactersThumbnail(
         },
     };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character/thumbnail`, {
-        ...authOption,
-        cache: 'no-store',
-    });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character/thumbnail`, authOption);
     if (res.ok) {
         const json = await res.json();
         return json.data;

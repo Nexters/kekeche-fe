@@ -22,9 +22,8 @@ export default async function getCharacters(request: GetCharactersRequest): Prom
                       headers: {
                           Authorization: `${request.accessToken}`,
                       },
-                      cache: 'no-store',
                   }
-                : { cache: 'no-store' },
+                : undefined,
         );
         if (res.ok) {
             const json = await res.json();
