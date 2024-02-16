@@ -37,7 +37,7 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
                     <ActionButton
                         onClick={deleteMemos}
                         onEdit={() => {
-                            router.push(`/memos/edit/${id}`);
+                            router.push(`?edit=${id}`);
                         }}
                     />
                 </div>
