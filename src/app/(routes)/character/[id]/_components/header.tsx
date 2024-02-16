@@ -1,22 +1,23 @@
 'use client';
 
-import TopBar from '@/components/ui/top-bar';
-import ROUTES from '@/constants/route';
-import removeCharacterName from '@/services/character/deleteCharacterName';
-import editCharacterName from '@/services/character/editCharacterName';
-import { DialogClose } from '@radix-ui/react-dialog';
-import { Popover, PopoverTrigger, PopoverContent } from '@radix-ui/react-popover';
-import { getCookie } from 'cookies-next';
-import { usePathname, useRouter } from 'next/navigation';
 import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
-import { useMutation, useQueryClient, useSuspenseQueries } from '@tanstack/react-query';
-import getMember from '@/services/auth/getMember';
-import React, { useState } from 'react';
-import getCharacterDetail from '@/services/character/getCharacterDetail';
 import MeatballIcon from '@/assets/icons/meatball_20x20.svg';
 import PencilIcon from '@/assets/icons/pencil_24x24.svg';
 import TrashIcon from '@/assets/icons/trash_24x24.svg';
 import Modal from '@/components/ui/modal';
+import TopBar from '@/components/ui/top-bar';
+import ROUTES from '@/constants/route';
+import getMember from '@/services/auth/getMember';
+import removeCharacterName from '@/services/character/deleteCharacterName';
+import editCharacterName from '@/services/character/editCharacterName';
+import getCharacterDetail from '@/services/character/getCharacterDetail';
+import { sendGTMEvent } from '@next/third-parties/google';
+import { DialogClose } from '@radix-ui/react-dialog';
+import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import { useMutation, useQueryClient, useSuspenseQueries } from '@tanstack/react-query';
+import { getCookie } from 'cookies-next';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 export default React.memo(function Header() {
     const router = useRouter();
@@ -58,7 +59,10 @@ export default React.memo(function Header() {
                 accessToken: `${getCookie('accessToken')}`,
                 characterId: character?.id,
             }),
-        onSuccess: () => router.push(`/member/${member.memberId}`),
+        onSuccess: () => {
+            router.push(`/member/${member.memberId}`);
+            router.refresh();
+        },
     });
 
     const [draft, setDraft] = useState(character.name);
@@ -118,6 +122,7 @@ export default React.memo(function Header() {
                                 onClick={async (e) => {
                                     e.stopPropagation();
                                     mutateName();
+                                    sendGTMEvent({ event: 'editCharacterName' });
                                 }}
                                 className="h-[48px] flex-1 rounded-[8px] bg-primary-500  text-white disabled:bg-[#c4caf8]"
                             >
@@ -142,6 +147,7 @@ export default React.memo(function Header() {
                                 onClick={async (e) => {
                                     e.stopPropagation();
                                     deleteCharacter();
+                                    sendGTMEvent({ event: 'deleteCharacter' });
                                 }}
                                 className="h-[48px] flex-1 rounded-[8px] bg-[#F06371] text-white "
                             >

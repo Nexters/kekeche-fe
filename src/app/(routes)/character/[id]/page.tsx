@@ -1,20 +1,20 @@
+import NoteEditIcon from '@/assets/icons/note-edit_24x24.svg';
+import FixedBottomArea from '@/components/fixed-bottom-area';
 import { PageContainer } from '@/components/ui';
-import CharacterDetailContainer from './_components/character-detail-container';
-import Header from './_components/header';
-import { Suspense } from 'react';
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import CTAButton from '@/components/ui/cta-button';
 import getMember, { checkIsLoggedIn } from '@/services/auth/getMember';
 import getCharacterDetail from '@/services/character/getCharacterDetail';
-import { cookies } from 'next/headers';
-import Specialties from './_components/specialties';
-import CharacterMemos from './_components/character-memos';
-import CTAButton from '@/components/ui/cta-button';
 import { getCharacterMemos } from '@/services/character/getCharacterMemos';
-import FixedBottomArea from '@/components/fixed-bottom-area';
-import Link from 'next/link';
 import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
-import NoteEditIcon from '@/assets/icons/note-edit_24x24.svg';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { cookies } from 'next/headers';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
+import CharacterDetailContainer from './_components/character-detail-container';
+import CharacterMemos from './_components/character-memos';
+import Header from './_components/header';
+import Specialties from './_components/specialties';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
     const { isLoggedIn } = await checkIsLoggedIn({ accessToken: `${cookies().get('accessToken')?.value}` });

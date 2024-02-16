@@ -1,20 +1,21 @@
 'use client';
 
-import LeafIcon from '@/assets/icons/leaf_24x24.svg';
 import ExitIcon from '@/assets/icons/exit_24x24.svg';
+import LeafIcon from '@/assets/icons/leaf_24x24.svg';
 import PlusIcon from '@/assets/icons/plus_18x18.svg';
 import Modal from '@/components/ui/modal';
+import addCharacterSpecialties from '@/services/character/addCharacterSpecialties';
+import deleteCharacterSpecialty from '@/services/character/deleteCharacterSpecialty';
 import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
+import { NewSpecialty } from '@/types/specialty';
+import { sendGTMEvent } from '@next/third-parties/google';
 import { DialogClose } from '@radix-ui/react-dialog';
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import SpecialtyBox from './specialty-box';
-import deleteCharacterSpecialty from '@/services/character/deleteCharacterSpecialty';
 import SpecialtyInput from './specialty-input';
-import { NewSpecialty } from '@/types/specialty';
-import addCharacterSpecialties from '@/services/character/addCharacterSpecialties';
 
 export default function Specialties() {
     const pathname = usePathname();
@@ -89,6 +90,7 @@ export default function Specialties() {
             // 입력값이 없는 인풋은 뮤테이션에 포함시키지 않습니다.
             const copy = [...newSpecialties].filter((specialty) => specialty.content.length > 0);
             addSpecialties(copy);
+            sendGTMEvent({ event: 'addSpecialty' });
         }
     };
 
@@ -217,6 +219,7 @@ export default function Specialties() {
                                     e.stopPropagation();
                                     setIsModifyModalOpen(true);
                                     deleteSpecialty();
+                                    sendGTMEvent({ event: 'deleteSpecialty' });
                                 }}
                                 className="h-[48px] flex-1 rounded-[8px] bg-[#F06371] text-[16px] font-[600]  text-white "
                             >

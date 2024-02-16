@@ -1,7 +1,7 @@
 import { pretendard } from '@/assets/fonts/pretendard';
 import { Toaster } from '@/components/ui-shadcn/toast/toaster';
 import QueryClientContext from '@/context/query-client-context';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 
 import './globals.css';
@@ -46,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <QueryClientContext>{children}</QueryClientContext>
                 <Toaster />
                 <GoogleAnalytics gaId="G-3ZH553JMHM" />
+                <GoogleTagManager gtmId="GTM-MDK2WKJX" />
             </body>
         </html>
     );

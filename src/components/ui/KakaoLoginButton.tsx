@@ -1,5 +1,6 @@
 'use client';
 import KakaoLogo from '@/assets/images/kakao-logo.png';
+import { sendGTMEvent } from '@next/third-parties/google';
 import Image from 'next/image';
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 export default function KakaoLoginButton({ callbackUrl }: Props) {
     const handleLogin = async () => {
         window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${callbackUrl}`;
+        sendGTMEvent({ event: 'clickKakaoLogin' });
     };
 
     return (
