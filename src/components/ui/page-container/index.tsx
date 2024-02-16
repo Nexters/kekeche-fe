@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import BottomTabNavigator from './bottom-tab-navigator';
 import { twMerge } from 'tailwind-merge';
+import WriteMemoContainer from '@/components/create-memo/container';
 
 type Props = {
     children: ReactNode;
@@ -10,7 +11,7 @@ type Props = {
 
 export default function PageContainer({ children, hasNavigator, bgColor }: Props) {
     return (
-        <div className=" bg-[#f5f5f5]">
+        <div className=" relative bg-[#f5f5f5]">
             <div
                 className={twMerge(
                     ' mx-auto flex min-h-screen  min-w-[375px] max-w-[400px] flex-col bg-white',

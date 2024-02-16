@@ -5,6 +5,7 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 
 import './globals.css';
+import WriteMemoContainer from '@/components/create-memo/container';
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -43,7 +44,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <link rel="apple-touch-icon" sizes="192x192" href="/assets/icons/icon-192x192.png" />
             </head>
             <body className={pretendard.className}>
-                <QueryClientContext>{children}</QueryClientContext>
+                <QueryClientContext>
+                    {children}
+                    <WriteMemoContainer />
+                </QueryClientContext>
                 <Toaster />
                 <GoogleAnalytics gaId="G-3ZH553JMHM" />
                 <GoogleTagManager gtmId="GTM-MDK2WKJX" />

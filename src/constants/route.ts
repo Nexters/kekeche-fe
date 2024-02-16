@@ -1,5 +1,5 @@
 const ROUTES = {
-    memoCreate: '/memos/create',
+    memoCreate: '?write=on',
     memos: '/memos',
     my: '/my',
     characters: (memberId: number) => `/member/${memberId}`,
