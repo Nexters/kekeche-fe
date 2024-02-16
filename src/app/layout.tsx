@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta property="og:image:height" content="630" />
                 <meta name="apple-mobile-web-app-capable" content="yes"></meta>
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></meta>
-                <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
+                {/* <meta name="viewport" content="initial-scale=1, viewport-fit=cover" /> */}
                 <link rel="apple-touch-icon" sizes="192x192" href="/assets/icons/icon-192x192.png" />
             </head>
             <body className={pretendard.className}>
