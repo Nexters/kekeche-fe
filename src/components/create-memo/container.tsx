@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import EditMemo from '../edit-memo';
 import { AnimatePresence, Variant, Variants, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { Dialog } from '@radix-ui/react-dialog';
 
 export default function WriteMemoContainer() {
     const searchParams = useSearchParams();
@@ -26,17 +27,24 @@ export default function WriteMemoContainer() {
         }
     }, [searchParams.get('edit')]);
 
+    if (isOn !== null || editId !== null) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+
     return (
         <>
             <AnimatePresence>
                 {isOn !== null && (
                     <motion.div
                         key="modal"
-                        initial={{ opacity: 0, y: '100vh' }}
+                        initial={{ opacity: 0, y: '100dvh' }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: '100vh' }}
+                        exit={{ opacity: 0, y: '100dvh' }}
                         transition={{ duration: 0.2, type: 'just' }}
-                        className="fixed left-0 top-0 z-[10] h-[100vh] w-full bg-[#f5f5f5]"
+                        className="fixed left-0 top-0 z-[100] w-full bg-[#f5f5f5]"
+                        style={{ height: '100dhv' }}
                     >
                         <div className="mx-auto h-full w-[400px] bg-white">
                             <CreateMemo characterId={isOn === 'on' ? null : isOn} />
@@ -52,7 +60,8 @@ export default function WriteMemoContainer() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: '100vh' }}
                         transition={{ type: 'just' }}
-                        className="fixed left-0 top-0 z-[10] h-[100vh] w-full bg-[#f5f5f5]"
+                        className="fixed left-0 top-0 z-[100] w-full bg-[#f5f5f5]"
+                        style={{ height: '100dhv' }}
                     >
                         <div className="mx-auto h-full w-[400px] bg-white">
                             <EditMemo id={Number(editId)} />
