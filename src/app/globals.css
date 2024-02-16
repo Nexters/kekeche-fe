@@ -101,6 +101,6 @@ img {
     user-drag: none;
 }
 
-button:active {
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+.cta-button:active {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
