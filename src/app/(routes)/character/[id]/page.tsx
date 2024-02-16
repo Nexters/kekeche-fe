@@ -3,7 +3,7 @@ import CharacterDetailContainer from './_components/character-detail-container';
 import Header from './_components/header';
 import { Suspense } from 'react';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
-import getMember from '@/services/auth/getMember';
+import getMember, { checkIsLoggedIn } from '@/services/auth/getMember';
 import getCharacterDetail from '@/services/character/getCharacterDetail';
 import { cookies } from 'next/headers';
 import Specialties from './_components/specialties';
@@ -14,8 +14,12 @@ import FixedBottomArea from '@/components/fixed-bottom-area';
 import Link from 'next/link';
 import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
 import NoteEditIcon from '@/assets/icons/note-edit_24x24.svg';
+import { redirect } from 'next/navigation';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
+    const { isLoggedIn } = await checkIsLoggedIn({ accessToken: `${cookies().get('accessToken')?.value}` });
+    if (!isLoggedIn) redirect('/');
+
     const queryClient = new QueryClient();
 
     const characterId = Number(id);

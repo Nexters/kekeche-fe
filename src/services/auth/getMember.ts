@@ -29,3 +29,27 @@ export default async function getMember(request: GetMemberRequest): Promise<GetM
         throw new Error('접근할 수 없는 유저입니다.');
     }
 }
+
+export interface IsLoggedIn {
+    isLoggedIn: boolean;
+    member?: Member;
+}
+
+export async function checkIsLoggedIn(request: GetMemberRequest): Promise<IsLoggedIn> {
+    const authOption = {
+        headers: {
+            Authorization: `${request.accessToken}`,
+        },
+    };
+
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/member`,
+        request.accessToken ? authOption : undefined,
+    );
+    if (res.ok) {
+        const json: { data: Member } = await res.json();
+        return { isLoggedIn: true, member: json.data };
+    } else {
+        return { isLoggedIn: false };
+    }
+}

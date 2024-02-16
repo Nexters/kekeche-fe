@@ -1,17 +1,14 @@
 import { PageContainer } from '@/components/ui';
 import ROUTES from '@/constants/route';
-import CookieManager from '@/lib/utils-cookie';
-import getMember from '@/services/auth/getMember';
+import { checkIsLoggedIn } from '@/services/auth/getMember';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import MenuList from './menu-list';
+import { cookies } from 'next/headers';
 
 export default async function My() {
-    const member = await getMember({ accessToken: CookieManager.getServerAccessToken() });
-
-    if (!member) {
-        redirect('/');
-    }
+    const { isLoggedIn, member } = await checkIsLoggedIn({ accessToken: `${cookies().get('accessToken')?.value}` });
+    if (!isLoggedIn || member === undefined) redirect('/');
 
     return (
         <PageContainer hasNavigator>

@@ -4,10 +4,16 @@ import Safe from '@/assets/images/safe.png';
 import FixedBottomArea from '@/components/create-character/fixed-bottom-area';
 import { PageContainer } from '@/components/ui';
 import CtaButton from '@/components/ui/cta-button';
+import { checkIsLoggedIn } from '@/services/auth/getMember';
+import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
+export default async function Home() {
+    const { isLoggedIn, member } = await checkIsLoggedIn({ accessToken: `${cookies().get('accessToken')?.value}` });
+    if (isLoggedIn) redirect(`member/${member?.memberId}`);
+
     return (
         <PageContainer>
             <Image quality={100} priority alt={'홈 배경'} src={HomeBg} fill />
