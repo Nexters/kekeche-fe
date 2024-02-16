@@ -16,6 +16,7 @@ import { useToast } from '@/components/ui-shadcn/toast/use-toast';
 import ROUTES from '@/constants/route';
 import deregister from '@/services/auth/deregister';
 import { Member } from '@/services/auth/getMember';
+import { sendGTMEvent } from '@next/third-parties/google';
 import { deleteCookie, getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 
@@ -55,6 +56,7 @@ export default function MenuList({ member }: Props) {
                                 description: 'URL이 클립보드에 복사되었어요.',
                             });
                         }
+                        sendGTMEvent({ event: 'clickShare' });
                     }}
                     className="flex w-full items-center justify-between p-6"
                 >
@@ -63,17 +65,14 @@ export default function MenuList({ member }: Props) {
                 </button>
             </li>
             <li>
-                <button
-                    onClick={() => {
-                        toast({
-                            description: '준근 태환 윤서 경리 순영 은솔 만세 ✋',
-                        });
-                    }}
+                <a
+                    target="_blank"
+                    href="https://www.instagram.com/anotherme_official"
                     className="flex w-full items-center justify-between p-6"
                 >
                     <span className="text-regular16 text-[#4B4F58]">만든 사람</span>
                     <ChevronRightIcon />
-                </button>
+                </a>
             </li>
             <li>
                 <button
@@ -81,6 +80,7 @@ export default function MenuList({ member }: Props) {
                         deleteCookie('accessToken');
                         router.replace('/');
                         router.refresh();
+                        sendGTMEvent({ event: 'logout' });
                     }}
                     className="flex w-full items-center justify-between p-6"
                 >
@@ -90,7 +90,7 @@ export default function MenuList({ member }: Props) {
             </li>
             <li>
                 <Dialog>
-                    <DialogTrigger onClick={() => {}} className="flex w-full items-center justify-between p-6">
+                    <DialogTrigger className="flex w-full items-center justify-between p-6">
                         <span className="text-regular16 text-[#4B4F58]">회원탈퇴</span>
                         <ChevronRightIcon />
                     </DialogTrigger>
@@ -112,6 +112,7 @@ export default function MenuList({ member }: Props) {
                                         deleteCookie('accessToken');
                                         router.push('/');
                                         router.refresh();
+                                        sendGTMEvent({ event: 'deregister' });
                                     }}
                                     className="h-[48px] w-[118px] bg-[#ea2727] text-center text-semibold16 text-white"
                                 >
