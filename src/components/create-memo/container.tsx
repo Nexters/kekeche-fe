@@ -39,12 +39,11 @@ export default function WriteMemoContainer() {
                 {isOn !== null && (
                     <motion.div
                         key="modal"
-                        initial={{ opacity: 0, y: '100dvh' }}
+                        initial={{ opacity: 0, y: '100vh' }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: '100dvh' }}
+                        exit={{ opacity: 0, y: '100vh' }}
                         transition={{ duration: 0.2, type: 'just' }}
-                        className="fixed left-0 top-0 z-[100] w-full bg-[#f5f5f5]"
-                        style={{ height: '100dhv' }}
+                        className="fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
                     >
                         <div className="mx-auto h-full w-[400px] bg-white">
                             <CreateMemo characterId={isOn === 'on' ? null : isOn} />
@@ -60,8 +59,7 @@ export default function WriteMemoContainer() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: '100vh' }}
                         transition={{ type: 'just' }}
-                        className="fixed left-0 top-0 z-[100] w-full bg-[#f5f5f5]"
-                        style={{ height: '100dhv' }}
+                        className="fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
                     >
                         <div className="mx-auto h-full w-[400px] bg-white">
                             <EditMemo id={Number(editId)} />
