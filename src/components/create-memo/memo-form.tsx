@@ -30,6 +30,8 @@ export default function MemoForm({ characters }: Props) {
 
     if (!context) return;
 
+    context.selectedCharacterId !== undefined && context.setMemoInvalid(false);
+
     const isCharacterMemoInValid =
         !!context.selectedCharacterId &&
         !characters.find((c) => Number(context.selectedCharacterId) === c.id)?.isMemoValid;
@@ -56,6 +58,7 @@ export default function MemoForm({ characters }: Props) {
     return (
         <div>
             <Select
+                defaultValue={context.selectedCharacterId}
                 onValueChange={(value) => {
                     context.setMemoInvalid(false);
                     context.changeCharacter(value);

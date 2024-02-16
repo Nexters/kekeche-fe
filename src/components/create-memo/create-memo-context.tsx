@@ -17,12 +17,15 @@ export const CreateMemoContext = createContext<Context | null>(null);
 
 interface Props {
     children: ReactNode;
+    characterId: string | null;
 }
 
-export default function CreateMemoProvider({ children }: Props) {
+export default function CreateMemoProvider({ children, characterId }: Props) {
     const [keywords, setKeywords] = useState<number[]>([]);
     const [content, setContent] = useState('');
-    const [selectedCharacterId, setSelectedCharacterId] = useState<string | undefined>(undefined);
+    const [selectedCharacterId, setSelectedCharacterId] = useState<string | undefined>(
+        characterId === null ? undefined : characterId,
+    );
     const [memoInvalid, setMemoInvalid] = useState(false);
 
     const changeCharacter = (id: string) => {

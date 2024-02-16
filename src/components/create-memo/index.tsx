@@ -10,7 +10,11 @@ import NoCharacterHeader from './no-character-header';
 import { useEffect, useState } from 'react';
 import { getCookie } from 'cookies-next';
 
-export default function CreateMemo() {
+type Props = {
+    characterId: string | null;
+};
+
+export default function CreateMemo({ characterId }: Props) {
     const [charactersThumbnailResponse, setCharactersThumbnailResponse] =
         useState<null | GetCharactersThumbnailResponse>(null);
 
@@ -34,7 +38,7 @@ export default function CreateMemo() {
     return (
         <div className="fixed left-0 top-0 z-[10] h-[100vh]  w-full bg-[#f5f5f5]">
             <div className="mx-auto h-full w-[400px] bg-white">
-                <CreateMemoProvider>
+                <CreateMemoProvider characterId={characterId}>
                     <Header />
                     <MemoForm characters={charactersThumbnailResponse ?? []} />
                     <div className="mt-2 h-[12px] bg-[#F7F8F9]" />

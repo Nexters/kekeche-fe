@@ -9,14 +9,13 @@ import { useEffect, useState } from 'react';
 export default function WriteMemoContainer() {
     const searchParams = useSearchParams();
 
-    const [isOn, setIsOn] = useState(false);
+    const [isOn, setIsOn] = useState<null | string>(null);
     const [editId, setEditId] = useState<string | null>(null);
 
-    console.log(isOn);
     useEffect(() => {
-        if (searchParams.get('write') === 'on') {
-            setIsOn(true);
-        } else setIsOn(false);
+        if (searchParams.get('write') !== null) {
+            setIsOn(searchParams.get('write'));
+        } else setIsOn(null);
     }, [searchParams.get('write')]);
 
     useEffect(() => {
@@ -30,7 +29,7 @@ export default function WriteMemoContainer() {
     return (
         <>
             <AnimatePresence>
-                {isOn && (
+                {isOn !== null && (
                     <motion.div
                         key="modal"
                         initial={{ opacity: 0, y: '100vh' }}
@@ -40,7 +39,7 @@ export default function WriteMemoContainer() {
                         className="fixed left-0 top-0 z-[10] h-[100vh] w-full bg-[#f5f5f5]"
                     >
                         <div className="mx-auto h-full w-[400px] bg-white">
-                            <CreateMemo />
+                            <CreateMemo characterId={isOn === 'on' ? null : isOn} />
                         </div>
                     </motion.div>
                 )}
