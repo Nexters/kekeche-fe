@@ -89,7 +89,7 @@ export default function ShowResult() {
         if (step === '6') {
             setTimeout(() => {
                 setIsCreating(false);
-            }, 3000000);
+            }, 3000);
         }
     }, [step]);
 
