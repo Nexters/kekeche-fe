@@ -39,16 +39,11 @@ export default function Header() {
 
     if (!context) return;
 
-    const replace = pathname.split('?write')[0];
-
-    console.log(context?.memoInvalid || context?.content.length === 0 || !context?.selectedCharacterId || loading);
-    console.log(context?.content.length === 0);
-
     return (
         <div className="mb-[10px] flex justify-between gap-2">
             <button
                 onClick={() => {
-                    router.replace(replace);
+                    router.back();
                 }}
                 aria-label="뒤로 가기 버튼"
                 className="p-3"
