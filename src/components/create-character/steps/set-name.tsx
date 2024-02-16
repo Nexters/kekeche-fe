@@ -20,7 +20,7 @@ export default React.memo(function SetName() {
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const isValid = NAME_REGEX.test(e.currentTarget.value.trim());
         setIsError(!isValid);
-        setName(e.currentTarget.value.trim());
+        setName(e.currentTarget.value.trimStart());
     };
 
     const handleClick = () => {
