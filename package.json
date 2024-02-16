@@ -31,6 +31,7 @@
         "react": "^18",
         "react-contenteditable": "^3.3.7",
         "react-dom": "^18",
+        "react-lottie": "^1.2.4",
         "react-textarea-autosize": "^8.5.3",
         "tailwind-merge": "^2.2.0",
         "tailwindcss-animate": "^1.0.7"
@@ -40,6 +41,7 @@
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
+        "@types/react-lottie": "^1.2.10",
         "autoprefixer": "^10.0.1",
         "eslint": "^8",
         "eslint-config-next": "14.0.4",

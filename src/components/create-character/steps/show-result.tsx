@@ -11,6 +11,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import FixedBottomArea from '../fixed-bottom-area';
 import useCarousel from '../hooks/useCarousel';
+import LoadingLottie from '@/assets/lottie/create-character-loading.json';
+import Lottie from 'react-lottie';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -30,6 +32,15 @@ export default function ShowResult() {
     const step = searchParams.get('step');
 
     const createCharacterValues = useContext(CreateCharacterValuesContext);
+
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: LoadingLottie,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice',
+        },
+    };
 
     if (createCharacterValues === null) {
         alert('처음부터 하세요.');
@@ -78,7 +89,7 @@ export default function ShowResult() {
         if (step === '6') {
             setTimeout(() => {
                 setIsCreating(false);
-            }, 3000);
+            }, 3000000);
         }
     }, [step]);
 
@@ -87,8 +98,11 @@ export default function ShowResult() {
             {isCreating ? (
                 <>
                     <Image quality={100} alt="배경" src={HomeBg} fill className="opacity-50" />
-                    <div className="text-gray-700 z-[50] mt-[180px] h-full w-full text-center text-bold24">
+                    <div className="text-gray-700 h z-[50] mb-[40px] mt-[180px] w-full text-center text-bold24">
                         캐릭터 생성 중
+                    </div>
+                    <div>
+                        <Lottie options={defaultOptions} height={400} width={400} />
                     </div>
                 </>
             ) : (
@@ -104,62 +118,6 @@ export default function ShowResult() {
                         </button>
                     </FixedBottomArea>
                 </div>
-                // <div className="mx-auto flex h-full w-full flex-col items-center bg-[#F2F3FB]">
-                //     <Header />
-                //     <div className="mb-5 mt-[45px] flex w-[87px] items-center justify-center gap-1 rounded-full bg-[#C4CAF7]  px-[14px] py-[6px]">
-                //         <FlowerIcon fill={'#606FD8'} />
-                //         <span className="text-bold16 font-bold text-[#606FD8]">Lv.1</span>
-                //     </div>
-                //     <div>
-                //         <div className="relative mb-5 h-[280px] w-[280px] rounded-[20px] bg-[#F7F7FB]">
-                //             <Image
-                //                 priority
-                //                 width={280}
-                //                 height={280}
-                //                 src={characterImg}
-                //                 alt={'캐릭터 미리보기'}
-                //                 className="absolute left-0 top-0"
-                //             />
-                //             {itemImg && (
-                //                 <Image
-                //                     priority
-                //                     width={280}
-                //                     height={280}
-                //                     src={itemImg}
-                //                     alt={'아이템 미리보기'}
-                //                     className="absolute left-0 top-0"
-                //                 />
-                //             )}
-                //         </div>
-                //     </div>
-                //     <div className="mb-4 rounded-2xl p-5">
-                //         <div className="mb-[10px] flex items-center justify-center gap-2">
-                //             <p className="text-semibold24 text-gray-600">{name}</p>
-                //         </div>
-                //         <div className="flex gap-[6px] text-semibold14 text-gray-300">
-                //             {keywords?.map((keyword, i) => (
-                //                 <span key={i} className="rounded-full bg-gray-200 px-3 py-1">
-                //                     {Keywords[keyword].name}
-                //                 </span>
-                //             ))}
-                //         </div>
-                //     </div>
-                //     <div className="h-[24px]">
-                //         <div className="flex items-center gap-2">
-                //             <span className="text-bold16 text-[#8E939E]">0/10</span>
-                //             <span className="relative h-[18px] w-[210px] flex-1 rounded-full bg-gray-200"></span>
-                //         </div>
-                //     </div>
-                //     <FixedBottomArea className="mb-[31px]">
-                //         <CtaButton text="다음" onClick={handleNextBtnClick} />
-                //         <button
-                //             onClick={handleRecreateClick}
-                //             className="mt-[12px] text-semibold14 text-[#7D7D7D] text-purple-200 underline"
-                //         >
-                //             캐릭터 다시 만들래요
-                //         </button>
-                //     </FixedBottomArea>
-                // </div>
             )}
         </>
     );

@@ -26,6 +26,7 @@ export default React.memo(function Story() {
                 }}
                 withText={false}
             />
+
             {storyNum === 1 ? (
                 <FixedBottomArea className="mb-[31px] gap-[16px]">
                     <StoryBox text={'깊고 깊은 머릿속에는 \n 다양한 내가 살고 있어요.'} />
