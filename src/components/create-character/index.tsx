@@ -22,14 +22,13 @@ interface CarouselDispatch {
 export const CarouselDispatchContext = createContext<null | CarouselDispatch>(null);
 
 const STEPS: React.ReactNode[] = [
-    <ShowResult key={Steps.ShowResult} />,
     <Story key={Steps.Story} />,
     <SetName key={Steps.SetName} />,
     <SelectShape key={Steps.SelectShape} />,
     <SelectColor key={Steps.SelectColor} />,
     <SelectKeywords key={Steps.SelectKeywords} />,
     <SelectItem key={Steps.SelectItem} />,
-    // <ShowResult key={Steps.ShowResult} />,
+    <ShowResult key={Steps.ShowResult} />,
     <GuideToLogin key={Steps.GuideToLogin} />,
 ] as const;
 
