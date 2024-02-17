@@ -21,7 +21,7 @@ interface CarouselDispatch {
 
 export const CarouselDispatchContext = createContext<null | CarouselDispatch>(null);
 
-const STEPS: React.ReactNode[] = [
+const STEPS: readonly React.ReactNode[] = [
     <Story key={Steps.Story} />,
     <SetName key={Steps.SetName} />,
     <SelectShape key={Steps.SelectShape} />,
