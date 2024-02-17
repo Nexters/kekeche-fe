@@ -26,25 +26,21 @@ export default function CreateMemo({ characterId }: Props) {
 
     if (charactersThumbnailResponse?.length === 0) {
         return (
-            <div className="fixed left-0 top-0 z-[10] h-[100vh] w-full bg-[#f5f5f5]">
-                <div className="mx-auto h-full w-full bg-white">
-                    <NoCharacterHeader />
-                    <NoCharacter />
-                </div>
-            </div>
+            <>
+                <NoCharacterHeader />
+                <NoCharacter />
+            </>
         );
     }
 
     return (
-        <div className="fixed left-0 top-0 z-[10] h-[100vh]  w-full bg-[#f5f5f5]">
-            <div className="mx-auto h-full w-full bg-white">
-                <CreateMemoProvider characterId={characterId}>
-                    <Header />
-                    <MemoForm characters={charactersThumbnailResponse ?? []} />
-                    <div className="mt-2 h-[12px] bg-[#F7F8F9]" />
-                    <KeywordForm />
-                </CreateMemoProvider>
-            </div>
-        </div>
+        <>
+            <CreateMemoProvider characterId={characterId}>
+                <Header />
+                <MemoForm characters={charactersThumbnailResponse ?? []} />
+                <div className="mt-2 h-[12px] bg-[#F7F8F9]" />
+                <KeywordForm />
+            </CreateMemoProvider>
+        </>
     );
 }
