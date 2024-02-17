@@ -40,7 +40,7 @@ export default function Header() {
     if (!context) return;
 
     return (
-        <div className="mb-[10px] flex justify-between gap-2">
+        <div className="mb-[10px] flex justify-between gap-2 px-[12px]">
             <button
                 onClick={() => {
                     router.back();
