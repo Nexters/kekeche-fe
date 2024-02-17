@@ -4,7 +4,7 @@ import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
 import editMemo from '@/services/memo/editMemo';
 import { useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { CreateMemoContext } from './create-memo-context';
 

@@ -14,7 +14,7 @@ export default async function editMemo(request: EditMemoRequest) {
         },
         body: JSON.stringify({
             content: request.content,
-            specialtyIds: [],
+            specialtyIds: request.specialtyIds,
         }),
     };
 
