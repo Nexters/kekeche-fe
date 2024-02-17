@@ -3,9 +3,8 @@
 import CreateMemo from '.';
 import { useSearchParams } from 'next/navigation';
 import EditMemo from '../edit-memo';
-import { AnimatePresence, Variant, Variants, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Dialog } from '@radix-ui/react-dialog';
 
 export default function WriteMemoContainer() {
     const searchParams = useSearchParams();
@@ -38,7 +37,7 @@ export default function WriteMemoContainer() {
             <AnimatePresence>
                 {isOn !== null && (
                     <motion.div
-                        key="modal"
+                        key="create-modal"
                         initial={{ opacity: 0, y: '100vh' }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: '100vh' }}
@@ -54,7 +53,7 @@ export default function WriteMemoContainer() {
             <AnimatePresence>
                 {editId !== null && (
                     <motion.div
-                        key="modal"
+                        key="edit-modal"
                         initial={{ opacity: 0, y: '100vh' }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: '100vh' }}

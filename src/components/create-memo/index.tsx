@@ -27,7 +27,7 @@ export default function CreateMemo({ characterId }: Props) {
     if (charactersThumbnailResponse?.length === 0) {
         return (
             <div className="fixed left-0 top-0 z-[10] h-[100vh] w-full bg-[#f5f5f5]">
-                <div className="mx-auto h-full w-[400px] bg-white">
+                <div className="mx-auto h-full w-full bg-white">
                     <NoCharacterHeader />
                     <NoCharacter />
                 </div>
@@ -37,7 +37,7 @@ export default function CreateMemo({ characterId }: Props) {
 
     return (
         <div className="fixed left-0 top-0 z-[10] h-[100vh]  w-full bg-[#f5f5f5]">
-            <div className="mx-auto h-full w-[400px] bg-white">
+            <div className="mx-auto h-full w-full bg-white">
                 <CreateMemoProvider characterId={characterId}>
                     <Header />
                     <MemoForm characters={charactersThumbnailResponse ?? []} />
