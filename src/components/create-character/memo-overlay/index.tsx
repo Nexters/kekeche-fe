@@ -36,6 +36,7 @@ export default function MemoOverlay() {
     if (typeof document !== 'undefined') {
         if (isOn !== null || editId !== null) {
             document.body.style.overflow = 'hidden';
+            document.body.style.touchAction = 'none';
         } else {
             document.body.style.overflow = 'auto';
         }
