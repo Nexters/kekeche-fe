@@ -1,28 +1,18 @@
 'use client';
 
-import ExitIcon from '@/assets/icons/exit_24x24.svg';
 import LeafIcon from '@/assets/icons/leaf_24x24.svg';
 import PlusIcon from '@/assets/icons/plus_18x18.svg';
-import Modal from '@/components/ui/modal';
-import addCharacterSpecialties from '@/services/character/addCharacterSpecialties';
-import deleteCharacterSpecialty from '@/services/character/deleteCharacterSpecialty';
 import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
-import { NewSpecialty } from '@/types/specialty';
 import { sendGTMEvent } from '@next/third-parties/google';
-import { DialogClose } from '@radix-ui/react-dialog';
-import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { useState } from 'react';
-import SpecialtyBox from '../specialty-box';
-import SpecialtyInput from '../specialty-input';
 import useCharacterIdBypath from '../../hooks/useCharacterIdBypath';
 import SpecialtiesModal from './specialties-modal';
 import DeleteSpecialtyModal from './delete-specialty-modal';
 
 export default function Specialties() {
     const characterId = useCharacterIdBypath();
-
-    const queryClient = useQueryClient();
 
     // 캐릭터 주특기 불러오기
     const {
@@ -31,20 +21,6 @@ export default function Specialties() {
         queryKey: ['character', 'specialties', characterId],
         queryFn: () => getCharacterSpecialty({ accessToken: `${getCookie('accessToken')}`, characterId }),
         staleTime: 1000 * 60 * 5,
-    });
-
-    // 주특기 삭제
-    const { mutate: deleteSpecialty } = useMutation({
-        mutationFn: () =>
-            deleteCharacterSpecialty({
-                accessToken: `${getCookie('accessToken')}`,
-                characterId,
-                specialtyId: deleteId as number, //NOTE: deleteId가 null인 경우에 mutation이 일어날 수가 없음.
-            }),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['character', 'specialties', characterId] });
-            setDeleteId(null);
-        },
     });
 
     // 모달 상태
@@ -63,21 +39,22 @@ export default function Specialties() {
         }
     }
 
+    /**
+     * 외부에서 컨트롤해야 하는 값들은 함수를 통해 밖으로 빼서 모달에 주입해준다. (ex. delteId, modalOpen)
+     */
     const handleDelete = (id: number) => {
         setDeleteId(id);
         setIsModifyModalOpen(false);
         setIsDeleteModalOpen(true);
     };
 
-    const handleDeleteCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
+    const handleDeleteCancel = () => {
         setIsModifyModalOpen(true);
         setDeleteId(null);
     };
 
-    const handleDeleteConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleDeleteConfirm = () => {
         setIsModifyModalOpen(true);
-        deleteSpecialty();
         sendGTMEvent({ event: 'deleteSpecialty' });
     };
 
@@ -120,6 +97,7 @@ export default function Specialties() {
                 onOpenChange={setIsModifyModalOpen}
             />
             <DeleteSpecialtyModal
+                deleteId={deleteId as number} //NOTE: deleteId가 null인 경우에 mutation이 일어날 수가 없음.
                 onDeleteCancel={handleDeleteCancel}
                 onDeleteConfirm={handleDeleteConfirm}
                 open={isDeleteModalOpen && deleteId !== null}
