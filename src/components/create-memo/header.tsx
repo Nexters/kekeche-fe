@@ -74,7 +74,7 @@ export default function Header() {
                         return;
                     }
 
-                    router.push(`/memos`);
+                    router.push(`/character/${context.selectedCharacterId}`);
                     router.refresh();
                 }}
                 disabled={

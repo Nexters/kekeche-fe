@@ -46,7 +46,7 @@ export default function Header({ id }: Props) {
                     await queryClient.invalidateQueries({
                         queryKey: ['character', 'memos', Number(context.selectedCharacterId)],
                     });
-                    router.push(`/memos`);
+                    router.push(`/character/${context.selectedCharacterId}`);
                 }}
                 disabled={context?.content.length === 0 || !context?.selectedCharacterId}
                 className="p-3 text-semibold16 text-[#1E73F3] transition-colors disabled:pointer-events-none disabled:text-gray-300"
