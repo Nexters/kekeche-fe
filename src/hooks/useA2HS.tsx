@@ -5,6 +5,7 @@ import {
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
+    AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
@@ -19,6 +20,7 @@ export const useA2HS = () => {
     useEffect(() => {
         const handler = (e: any) => {
             e.preventDefault();
+            console.log(100);
             setDeferredPrompt(e);
         };
 
@@ -53,7 +55,7 @@ export default function A2HS() {
 
     return showDialog ? (
         <AlertDialog open={showDialog}>
-            <AlertDialogContent className="w-[328px] rounded-xl">
+            <AlertDialogContent className="w-[320px] rounded-xl">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="flex items-start gap-2 text-left">
                         <Image
@@ -67,12 +69,17 @@ export default function A2HS() {
                         <br /> 추가하시겠습니까?
                     </AlertDialogTitle>
                 </AlertDialogHeader>
+                <AlertDialogDescription>언제든 내 정보 탭에서 설치할 수 있어요</AlertDialogDescription>
                 <AlertDialogFooter>
                     <AlertDialogCancel asChild>
-                        <button onClick={clearPrompt}>취소</button>
+                        <button className="flex-1" onClick={clearPrompt}>
+                            취소
+                        </button>
                     </AlertDialogCancel>
                     <AlertDialogAction asChild>
-                        <button onClick={install}>홈 화면에 추가</button>
+                        <button className="flex-1" onClick={install}>
+                            홈 화면에 추가
+                        </button>
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
