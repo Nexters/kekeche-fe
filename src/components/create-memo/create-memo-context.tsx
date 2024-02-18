@@ -23,9 +23,7 @@ interface Props {
 export default function CreateMemoProvider({ children, characterId }: Props) {
     const [keywords, setKeywords] = useState<number[]>([]);
     const [content, setContent] = useState('');
-    const [selectedCharacterId, setSelectedCharacterId] = useState<string | undefined>(
-        characterId === null ? undefined : characterId,
-    );
+    const [selectedCharacterId, setSelectedCharacterId] = useState<string | undefined>(characterId);
     const [memoInvalid, setMemoInvalid] = useState(false);
 
     const changeCharacter = (id: string) => {

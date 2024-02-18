@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import BottomTabNavigator from './bottom-tab-navigator';
 import { twMerge } from 'tailwind-merge';
-import WriteMemoContainer from '@/components/create-memo/container';
 
 type Props = {
     children: ReactNode;
