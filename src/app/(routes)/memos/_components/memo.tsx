@@ -46,7 +46,7 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
                 <div dangerouslySetInnerHTML={{ __html: content }} />
             </div>
             {specialties.length > 0 && (
-                <ul className="mt-[12px] flex gap-[8px]">
+                <ul className=" mt-[12px] flex h-auto w-full flex-wrap  gap-[8px] ">
                     {specialties.map(({ id, content }) => (
                         <li
                             className="font-600 h-[30px] rounded-full bg-[#E0ECFF] px-[12px] py-[6px] text-[12px] text-[#2777EA]"
