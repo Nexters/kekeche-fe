@@ -77,7 +77,7 @@ export default function MemoForm({ characters }: Props) {
                     </SelectTrigger>
                     <span>의 말</span>
                 </div>
-                <SelectContent className="border-none bg-gray-100">
+                <SelectContent className="z-[102] border-none bg-gray-100">
                     <SelectGroup className="bg-gray-100">
                         {characters.map((chracter, i) => (
                             <SelectItem value={chracter.id + ''} key={i}>

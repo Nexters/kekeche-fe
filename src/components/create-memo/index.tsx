@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { getCookie } from 'cookies-next';
 
 type Props = {
-    characterId: string | null;
+    characterId: string | undefined;
 };
 
 export default function CreateMemo({ characterId }: Props) {

@@ -17,7 +17,7 @@ export const CreateMemoContext = createContext<Context | null>(null);
 
 interface Props {
     children: ReactNode;
-    characterId: string | null;
+    characterId: string | undefined;
 }
 
 export default function CreateMemoProvider({ children, characterId }: Props) {

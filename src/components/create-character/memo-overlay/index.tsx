@@ -51,7 +51,7 @@ export default function MemoOverlay() {
                         className="fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
                     >
                         <div className="mx-auto h-full min-w-[375px] max-w-[400px] bg-white">
-                            <CreateMemo characterId={isOn === 'on' ? null : isOn} />
+                            <CreateMemo characterId={isOn === 'on' ? undefined : isOn} />
                         </div>
                     </motion.div>
                 )}
