@@ -9,13 +9,16 @@ import FixedBottomArea from '../fixed-bottom-area';
 import Header from '../header';
 import useCarousel from '../hooks/useCarousel';
 import StoryBox from '../story-box';
+import Story1 from '@/assets/images/story-1.webp';
+import Story2 from '@/assets/images/story-2.webp';
+import Story3 from '@/assets/images/story-3.webp';
 
 export default React.memo(function Story() {
     const router = useRouter();
 
     const { handleNextClick } = useCarousel();
 
-    const [storyNum, setStoryNum] = useState<1 | 2>(1);
+    const [storyNum, setStoryNum] = useState<1 | 2 | 3>(1);
 
     return (
         <>
@@ -28,15 +31,35 @@ export default React.memo(function Story() {
             />
 
             {storyNum === 1 ? (
-                <FixedBottomArea className="mb-[31px] gap-[16px]">
-                    <StoryBox text={'깊고 깊은 머릿속에는 \n 다양한 내가 살고 있어요.'} />
-                    <CtaButton text="다음" onClick={() => setStoryNum(2)} />
-                </FixedBottomArea>
+                <>
+                    <Image height={536} priority alt={'1'} src={Story1} className="z-[2] mt-[10px]" />
+                    <FixedBottomArea className="mb-[31px] gap-[16px]">
+                        <StoryBox text={'내 안의 다양한 공룡들을 키워서, 나의 공룡들과\n함께 다같이 레벨업해요'} />
+                        <CtaButton text="다음" onClick={() => setStoryNum(2)} />
+                    </FixedBottomArea>
+                </>
+            ) : storyNum === 2 ? (
+                <>
+                    <Image height={536} priority alt={'2'} src={Story2} className="z-[2] mt-[10px]" />
+                    <FixedBottomArea className="mb-[31px] gap-[16px]">
+                        <StoryBox text={'키우고 싶은 능력을 주특기로 설정해요'} />
+                        <CtaButton text="다음" onClick={() => setStoryNum(3)} />
+                    </FixedBottomArea>
+                </>
             ) : (
-                <FixedBottomArea className="mb-[31px] gap-[16px]">
-                    <StoryBox text={'내 안의 다양한 공룡들을 키워서, 나의 공룡들과 \n 함께 다같이 레벨업해요.'} />
-                    <CtaButton text="다음" onClick={handleNextClick} />
-                </FixedBottomArea>
+                storyNum === 3 && (
+                    <>
+                        <Image width={259} height={536} priority alt={'3'} src={Story3} className="z-[2] mt-[10px]" />
+                        <FixedBottomArea className="mb-[31px] gap-[16px]">
+                            <StoryBox
+                                text={
+                                    '캐릭터에게 그 날의 일기 메모를 먹이로 줄 수 있어요. 메모는 하루에 3개까지 쓸 수 있어요.'
+                                }
+                            />
+                            <CtaButton text="다음" onClick={handleNextClick} />
+                        </FixedBottomArea>
+                    </>
+                )
             )}
         </>
     );
