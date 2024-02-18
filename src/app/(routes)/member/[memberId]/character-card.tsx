@@ -70,7 +70,13 @@ export default function CharacterCard({ character, component, href }: Props) {
 
     if (component === 'link' && href) {
         return (
-            <Link href={href} className={twMerge('shadow-slate-50 shadow-md', layoutClassNames)}>
+            <Link
+                href={href}
+                className={twMerge(
+                    'shadow-[0px_8px_24px_rgba(149,157,165,0.1)] active:shadow-[inset_0px_1px_3px_0px_rgba(0,0,0,0.1)]',
+                    layoutClassNames,
+                )}
+            >
                 {content}
             </Link>
         );
