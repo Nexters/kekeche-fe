@@ -14,6 +14,7 @@ import {
 } from '@/components/ui-shadcn/dialog';
 import { useToast } from '@/components/ui-shadcn/toast/use-toast';
 import ROUTES from '@/constants/route';
+import { useA2HS } from '@/hooks/useA2HS';
 import deregister from '@/services/auth/deregister';
 import { Member } from '@/services/auth/getMember';
 import { sendGTMEvent } from '@next/third-parties/google';
@@ -27,6 +28,13 @@ interface Props {
 export default function MenuList({ member }: Props) {
     const router = useRouter();
     const { toast } = useToast();
+    const { deferredPrompt } = useA2HS();
+
+    const showInstall = !!deferredPrompt;
+    const install = () => {
+        //@ts-ignore
+        deferredPrompt?.prompt();
+    };
 
     return (
         <ul>
@@ -64,6 +72,14 @@ export default function MenuList({ member }: Props) {
                     <ChevronRightIcon />
                 </button>
             </li>
+            {showInstall && (
+                <li>
+                    <button onClick={install} className="flex w-full items-center justify-between p-6">
+                        <span className="text-regular16 text-[#4B4F58]">앱 설치하기</span>
+                        <ChevronRightIcon />
+                    </button>
+                </li>
+            )}
             <li>
                 <a
                     target="_blank"

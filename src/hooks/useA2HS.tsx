@@ -5,15 +5,15 @@ import {
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
-    AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@/components/ui-shadcn/alert-dialog';
 import { getCookie } from 'cookies-next';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-const useA2HS = () => {
+export const useA2HS = () => {
     const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
 
     useEffect(() => {
@@ -34,12 +34,12 @@ const useA2HS = () => {
         //@ts-ignore
         deferredPrompt?.userChoice.then((choiceResult) => {
             clearPrompt();
-            document.cookie = 'a2hs=true; max-age=86400; path=/';
         });
     };
 
     const clearPrompt = () => {
         setDeferredPrompt(null);
+        document.cookie = 'a2hs=true; max-age=2592000; path=/';
     };
 
     return { deferredPrompt, install: installApp, clearPrompt };
@@ -53,13 +53,19 @@ export default function A2HS() {
 
     return showDialog ? (
         <AlertDialog open={showDialog}>
-            <AlertDialogContent>
+            <AlertDialogContent className="w-[328px] rounded-xl">
                 <AlertDialogHeader>
-                    <AlertDialogTitle>AnotherMe 바로가기를 추가하시겠습니까?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete your account and remove your data
-                        from our servers.
-                    </AlertDialogDescription>
+                    <AlertDialogTitle className="flex items-start gap-2 text-left">
+                        <Image
+                            src="/icons/icon-192x192.png"
+                            style={{ objectFit: 'cover' }}
+                            alt=""
+                            width={64}
+                            height={64}
+                        />
+                        AnotherMe 바로가기를
+                        <br /> 추가하시겠습니까?
+                    </AlertDialogTitle>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel asChild>

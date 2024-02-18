@@ -11,11 +11,6 @@ export default async function addCharacterSpecialties({
     accessToken,
     specialties: newSpecialty,
 }: AddCharacterSpecialtiesRequest) {
-    console.log({
-        body: JSON.stringify({
-            specialties: newSpecialty,
-        }),
-    });
     try {
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character/${characterId}/specialty`,
