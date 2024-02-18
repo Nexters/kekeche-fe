@@ -4,8 +4,8 @@ import QueryClientContext from '@/context/query-client-context';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 
-import './globals.css';
 import MemoOverlay from '@/components/create-character/memo-overlay';
+import './globals.css';
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -41,8 +41,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta property="og:image:height" content="630" />
                 <meta name="apple-mobile-web-app-capable" content="yes"></meta>
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></meta>
-                {/* <meta name="viewport" content="initial-scale=1, viewport-fit=cover" /> */}
                 <link rel="apple-touch-icon" sizes="192x192" href="/assets/icons/icon-192x192.png" />
+                <link rel="apple-touch-icon" sizes="512x512" href="/assets/icons/icon-512x512.png" />
             </head>
             <body className={pretendard.className}>
                 <QueryClientContext>
