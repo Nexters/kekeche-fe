@@ -9,6 +9,7 @@ export default function SearchBox() {
     const [value, setValue] = useState('');
     const [isDirty, setIsDirty] = useState(false);
     const queryValue = useDebounce(value, 300);
+    const [focused, setFocused] = useState(false);
 
     const setQueryParam = useSetQueryParam();
 
@@ -23,8 +24,16 @@ export default function SearchBox() {
 
     return (
         <section className="w-full px-[24px] py-[16px]">
-            <div className="flex h-[48px] w-full gap-[10px] rounded-[30px] border-[1.4px] border-solid border-[#-[#DFE2EA]] bg-[#FCFDFF] px-[16px] py-[12px]">
+            <div
+                className={`flex h-[48px] w-full gap-[10px] rounded-[30px] border-[1.4px] border-solid border-[#-[#DFE2EA]] bg-[#FCFDFF] px-[16px] py-[12px] ${focused && 'border border-newGray-700'}`}
+            >
                 <input
+                    onFocus={() => {
+                        setFocused(true);
+                    }}
+                    onBlur={() => {
+                        setFocused(false);
+                    }}
                     type="text"
                     className="h-full w-full border-none bg-[#FCFDFF] text-regular16 text-black outline-none"
                     placeholder="검색어를 입력하세요"

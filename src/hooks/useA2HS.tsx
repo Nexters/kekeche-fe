@@ -5,7 +5,6 @@ import {
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
-    AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
@@ -20,7 +19,7 @@ export const useA2HS = () => {
     useEffect(() => {
         const handler = (e: any) => {
             e.preventDefault();
-            console.log(100);
+
             setDeferredPrompt(e);
         };
 
@@ -69,7 +68,7 @@ export default function A2HS() {
                         <br /> 추가하시겠습니까?
                     </AlertDialogTitle>
                 </AlertDialogHeader>
-                <AlertDialogDescription>언제든 내 정보 탭에서 설치할 수 있어요</AlertDialogDescription>
+
                 <AlertDialogFooter>
                     <AlertDialogCancel asChild>
                         <button className="flex-1" onClick={clearPrompt}>
