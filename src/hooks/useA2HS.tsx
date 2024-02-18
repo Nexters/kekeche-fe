@@ -19,7 +19,7 @@ export const useA2HS = () => {
     useEffect(() => {
         const handler = (e: any) => {
             e.preventDefault();
-            console.log(100);
+
             setDeferredPrompt(e);
         };
 
