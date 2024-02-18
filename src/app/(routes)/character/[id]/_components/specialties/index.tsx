@@ -34,6 +34,7 @@ export default function Specialties() {
     if (typeof document !== 'undefined') {
         if (isModifyModalOpen === true || isDeleteModalOpen === true) {
             document.body.style.overflow = 'hidden';
+            document.body.style.touchAction = 'none';
         } else {
             document.body.style.overflow = 'auto';
         }
