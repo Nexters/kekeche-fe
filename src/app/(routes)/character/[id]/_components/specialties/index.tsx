@@ -46,20 +46,6 @@ export default function Specialties() {
         },
     });
 
-    // 주특기 생성(추가)
-    const { mutate: addSpecialties } = useMutation({
-        mutationFn: (newSpecialties: NewSpecialty[]) =>
-            addCharacterSpecialties({
-                accessToken: `${getCookie('accessToken')}`,
-                characterId,
-                specialties: newSpecialties,
-            }),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['character', 'specialties', characterId] });
-            setNewSpecialties([{ content: '' }]);
-        },
-    });
-
     // 모달 상태
     const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -67,59 +53,19 @@ export default function Specialties() {
     // 삭제 대상 저장
     const [deleteId, setDeleteId] = useState<null | number>(null);
 
-    // 추가할 새로운 주특기
-    const [newSpecialties, setNewSpecialties] = useState<NewSpecialty[]>(
-        specialties.length === 4 ? [] : [{ content: '' }],
-    );
-    // 모달에 새로운 주특기 입력 여부
-    const isNewSpecialtiesClean =
-        (newSpecialties.length === 1 && newSpecialties[0].content === '') || newSpecialties.length === 0;
-
-    // 주특기 인풋 추가 핸들
-    const handleAddSpecailtyInput = () => {
-        setNewSpecialties((prev) => [...prev, { content: '' }]);
-    };
-
-    // 주특기 인풋 제거 핸들
-    const handleDeleteSpecialtyInput = (idx: number) => {
-        setNewSpecialties((prev) => {
-            const copy = [...prev.slice(0, idx), ...prev.slice(idx + 1, prev.length)];
-            return copy;
-        });
-    };
-
-    // 주특기 인풋 입력 핸들
-    const handleNewSpecialty = (value: string, idx: number) => {
-        setNewSpecialties((prev) => {
-            const copy = [...prev];
-            copy[idx].content = value.trimStart();
-            return copy;
-        });
-    };
-
     // 모달 배경 스크롤 핸들
-    if (isModifyModalOpen === true || isDeleteModalOpen === true) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
+    if (typeof document !== 'undefined') {
+        if (isModifyModalOpen === true || isDeleteModalOpen === true) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
     }
-
-    /////////////
 
     const handleDelete = (id: number) => {
         setDeleteId(id);
         setIsModifyModalOpen(false);
         setIsDeleteModalOpen(true);
-    };
-
-    // 주특기 생성 ('완료' 클릭)
-    const handleSubmitNewSpecialties = () => {
-        if (!isNewSpecialtiesClean) {
-            // 입력값이 없는 인풋은 뮤테이션에 포함시키지 않습니다.
-            const copy = [...newSpecialties].filter((specialty) => specialty.content.length > 0);
-            addSpecialties(copy);
-            sendGTMEvent({ event: 'addSpecialty' });
-        }
     };
 
     return (

@@ -26,10 +26,12 @@ export default function WriteMemoContainer() {
         }
     }, [searchParams.get('edit')]);
 
-    if (isOn !== null || editId !== null) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
+    if (typeof document !== 'undefined') {
+        if (isOn !== null || editId !== null) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
     }
 
     return (
