@@ -8,12 +8,14 @@ import { getCookie } from 'cookies-next';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import ActionButton from './action-button';
+import { twMerge } from 'tailwind-merge';
 
 type Props = {
     memo: Memo;
+    className?: string;
 };
 
-export default function Memo({ memo: { content, createdAt, id, character, modified, specialties } }: Props) {
+export default function Memo({ memo: { content, createdAt, id, character, modified, specialties }, className }: Props) {
     const queryClient = useQueryClient();
     const router = useRouter();
 
@@ -30,7 +32,12 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
     });
 
     return (
-        <div className="flex h-auto w-full flex-col  gap-[12px] rounded-[16px] bg-white px-[24px] pb-[24px] pt-[10px] shadow-[0px_8px_24px_rgba(149,157,165,0.13)]">
+        <div
+            className={twMerge(
+                'flex h-auto w-full flex-col  gap-[12px] rounded-[16px] bg-white px-[24px] pb-[24px] pt-[10px] shadow-[0px_8px_24px_rgba(149,157,165,0.13)]',
+                className,
+            )}
+        >
             <div className=" flex items-center justify-between ">
                 <CharacterLabel character={character} />
                 <div>

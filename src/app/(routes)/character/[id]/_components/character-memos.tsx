@@ -30,7 +30,7 @@ export default function CharacterMemos() {
             {memos.length > 0 && (
                 <Memos>
                     {memos.map((memo) => (
-                        <Memo key={memo.id} memo={memo} />
+                        <Memo className="w-[327px]" key={memo.id} memo={memo} />
                     ))}
                 </Memos>
             )}
