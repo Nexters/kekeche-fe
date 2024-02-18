@@ -5,7 +5,7 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 
 import './globals.css';
-import WriteMemoContainer from '@/components/create-memo/container';
+import MemoOverlay from '@/components/create-character/memo-overlay';
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body className={pretendard.className}>
                 <QueryClientContext>
                     {children}
-                    <WriteMemoContainer />
+                    <MemoOverlay />
                 </QueryClientContext>
                 <Toaster />
                 <GoogleAnalytics gaId="G-3ZH553JMHM" />
