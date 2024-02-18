@@ -58,9 +58,9 @@ export default function WriteMemoContainer() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: '100vh' }}
                         transition={{ type: 'just' }}
-                        className="fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
+                        className="py-[20 fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
                     >
-                        <div className="mx-auto h-full w-[400px] bg-white">
+                        <div className="mx-auto h-full w-[400px] bg-white ">
                             <EditMemo id={Number(editId)} />
                         </div>
                     </motion.div>
