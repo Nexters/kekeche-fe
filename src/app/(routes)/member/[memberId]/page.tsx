@@ -1,4 +1,5 @@
 import { PageContainer } from '@/components/ui';
+import A2HS from '@/hooks/useA2HS';
 import getCharacters from '@/services/character/getCharacters';
 import { cookies } from 'next/headers';
 import CharacterCard from './character-card';
@@ -53,6 +54,7 @@ export default async function Home({ params: { memberId } }: { params: { memberI
                     <CharacterCreateLink />
                 </div>
             )}
+            <A2HS />
         </PageContainer>
     );
 }
