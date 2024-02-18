@@ -1,7 +1,7 @@
 {
     "id": "10",
     "start_url": "/",
-    "display": "standalone",
+    "display": "fullscreen",
     "scope": "/",
     "orientation": "portrait",
     "name": "AnotherMe",
@@ -24,13 +24,13 @@
         },
         {
             "src": "/icons/icon-512x512.png",
-            "sizes": "513x513",
+            "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
             "src": "/icons/icon-512x512.png",
-            "sizes": "513x513",
+            "sizes": "512x512",
             "type": "image/png",
             "purpose": "any"
         }
