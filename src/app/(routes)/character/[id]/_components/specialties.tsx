@@ -157,17 +157,18 @@ export default function Specialties() {
                             ))}
                         </div>
                         <div className="mt-[12px] flex w-full flex-col gap-[12px]">
-                            {newSpecialties.map(({ content }, idx) => (
-                                <SpecialtyInput
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                        handleNewSpecialty(e.currentTarget.value, idx)
-                                    }
-                                    onDelete={() => handleDeleteSpecialtyInput(idx)}
-                                    value={content}
-                                    key={idx}
-                                    canDelete={idx !== 0}
-                                />
-                            ))}
+                            {specialties.length < 4 &&
+                                newSpecialties.map(({ content }, idx) => (
+                                    <SpecialtyInput
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                            handleNewSpecialty(e.currentTarget.value, idx)
+                                        }
+                                        onDelete={() => handleDeleteSpecialtyInput(idx)}
+                                        value={content}
+                                        key={idx}
+                                        canDelete={idx !== 0}
+                                    />
+                                ))}
                             {newSpecialties.length + specialties.length < 4 && (
                                 <button
                                     onClick={handleAddSpecailtyInput}
