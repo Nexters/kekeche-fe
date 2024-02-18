@@ -17,6 +17,7 @@ import SpecialtyBox from '../specialty-box';
 import SpecialtyInput from '../specialty-input';
 import useCharacterIdBypath from '../../hooks/useCharacterIdBypath';
 import SpecialtiesModal from './specialties-modal';
+import DeleteSpecialtyModal from './delete-specialty-modal';
 
 export default function Specialties() {
     const characterId = useCharacterIdBypath();
@@ -68,6 +69,18 @@ export default function Specialties() {
         setIsDeleteModalOpen(true);
     };
 
+    const handleDeleteCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        setIsModifyModalOpen(true);
+        setDeleteId(null);
+    };
+
+    const handleDeleteConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setIsModifyModalOpen(true);
+        deleteSpecialty();
+        sendGTMEvent({ event: 'deleteSpecialty' });
+    };
+
     return (
         <>
             <div className="mx-auto mt-[16px] h-auto w-[327px] rounded-[16px] bg-white px-[24px] py-[12px]">
@@ -106,38 +119,11 @@ export default function Specialties() {
                 open={isModifyModalOpen}
                 onOpenChange={setIsModifyModalOpen}
             />
-            <Modal
+            <DeleteSpecialtyModal
+                onDeleteCancel={handleDeleteCancel}
+                onDeleteConfirm={handleDeleteConfirm}
                 open={isDeleteModalOpen && deleteId !== null}
                 onOpenChange={setIsDeleteModalOpen}
-                title="주특기를 삭제할까요?"
-                description="삭제한 주특기는 되돌릴 수 없어요"
-                contents={
-                    <>
-                        <div className=" flex w-full  gap-[8px]">
-                            <DialogClose
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setIsModifyModalOpen(true);
-                                    setDeleteId(null);
-                                }}
-                                className="h-[48px] flex-1 rounded-[8px] bg-newGray-200 text-[16px] font-[600] text-newGray-600 "
-                            >
-                                취소
-                            </DialogClose>
-                            <DialogClose
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setIsModifyModalOpen(true);
-                                    deleteSpecialty();
-                                    sendGTMEvent({ event: 'deleteSpecialty' });
-                                }}
-                                className="h-[48px] flex-1 rounded-[8px] bg-[#F06371] text-[16px] font-[600]  text-white "
-                            >
-                                삭제
-                            </DialogClose>
-                        </div>
-                    </>
-                }
             />
         </>
     );
