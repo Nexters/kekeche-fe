@@ -7,7 +7,7 @@ import { PencilIcon, TrashIcon } from 'lucide-react';
 export default function ActionButton({ onClick, onEdit }: { onClick: () => void; onEdit: () => void }) {
     return (
         <Popover>
-            <PopoverTrigger className="p-3">
+            <PopoverTrigger className="p-3 pr-0">
                 <MeatballIcon />
             </PopoverTrigger>
             <PopoverContent className="z-10 mr-[10px] w-fit rounded-[8px] border-none bg-[#fff] p-3 shadow-lg">

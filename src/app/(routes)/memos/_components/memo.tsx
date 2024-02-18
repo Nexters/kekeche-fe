@@ -38,16 +38,14 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
                 className,
             )}
         >
-            <div className=" flex items-center justify-between ">
+            <div className="flex items-center justify-between ">
                 <CharacterLabel character={character} />
-                <div>
-                    <ActionButton
-                        onClick={deleteMemos}
-                        onEdit={() => {
-                            router.push(`?edit=${id}`);
-                        }}
-                    />
-                </div>
+                <ActionButton
+                    onClick={deleteMemos}
+                    onEdit={() => {
+                        router.push(`?edit=${id}`);
+                    }}
+                />
             </div>
             <div className="text-regular16 leading-[24divx] text-[#4B4F58]">
                 <div dangerouslySetInnerHTML={{ __html: content }} />
