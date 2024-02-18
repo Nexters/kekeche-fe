@@ -86,7 +86,7 @@ export default function Header() {
             </button>
             {
                 <AlertDialog open={showDialog}>
-                    <AlertDialogContent className="w-[328px] border-0 px-0 py-9">
+                    <AlertDialogContent className="z-[999] w-[328px] border-0 px-0 py-9">
                         <AlertDialogHeader>
                             <AlertDialogTitle
                                 className={`mx-auto flex w-fit items-center gap-1 rounded-full px-4 py-[6px] text-center ${getColorFromUrl(character?.characterImage || '')}`}
