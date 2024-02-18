@@ -23,8 +23,8 @@ export default function DeleteSpecialtyModal({ deleteId, onDeleteCancel, onDelet
                 characterId,
                 specialtyId: deleteId,
             }),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['character', 'specialties', characterId] });
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: ['character', 'specialties', characterId] });
             onDeleteConfirm();
         },
     });
