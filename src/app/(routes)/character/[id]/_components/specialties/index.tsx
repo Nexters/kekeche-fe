@@ -12,17 +12,18 @@ import { sendGTMEvent } from '@next/third-parties/google';
 import { DialogClose } from '@radix-ui/react-dialog';
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
-import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import SpecialtyBox from './specialty-box';
-import SpecialtyInput from './specialty-input';
+import SpecialtyBox from '../specialty-box';
+import SpecialtyInput from '../specialty-input';
+import useCharacterIdBypath from '../../hooks/useCharacterIdBypath';
+import SpecialtiesModal from './specialties-modal';
 
 export default function Specialties() {
-    const pathname = usePathname();
-    const characterId = Number(pathname.split('character/')[1]);
+    const characterId = useCharacterIdBypath();
 
     const queryClient = useQueryClient();
 
+    // 캐릭터 주특기 불러오기
     const {
         data: { specialties },
     } = useSuspenseQuery({
@@ -31,6 +32,7 @@ export default function Specialties() {
         staleTime: 1000 * 60 * 5,
     });
 
+    // 주특기 삭제
     const { mutate: deleteSpecialty } = useMutation({
         mutationFn: () =>
             deleteCharacterSpecialty({
@@ -44,6 +46,7 @@ export default function Specialties() {
         },
     });
 
+    // 주특기 생성(추가)
     const { mutate: addSpecialties } = useMutation({
         mutationFn: (newSpecialties: NewSpecialty[]) =>
             addCharacterSpecialties({
@@ -57,19 +60,27 @@ export default function Specialties() {
         },
     });
 
+    // 모달 상태
     const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+    // 삭제 대상 저장
     const [deleteId, setDeleteId] = useState<null | number>(null);
+
+    // 추가할 새로운 주특기
     const [newSpecialties, setNewSpecialties] = useState<NewSpecialty[]>(
         specialties.length === 4 ? [] : [{ content: '' }],
     );
+    // 모달에 새로운 주특기 입력 여부
     const isNewSpecialtiesClean =
         (newSpecialties.length === 1 && newSpecialties[0].content === '') || newSpecialties.length === 0;
 
+    // 주특기 인풋 추가 핸들
     const handleAddSpecailtyInput = () => {
         setNewSpecialties((prev) => [...prev, { content: '' }]);
     };
 
+    // 주특기 인풋 제거 핸들
     const handleDeleteSpecialtyInput = (idx: number) => {
         setNewSpecialties((prev) => {
             const copy = [...prev.slice(0, idx), ...prev.slice(idx + 1, prev.length)];
@@ -77,6 +88,7 @@ export default function Specialties() {
         });
     };
 
+    // 주특기 인풋 입력 핸들
     const handleNewSpecialty = (value: string, idx: number) => {
         setNewSpecialties((prev) => {
             const copy = [...prev];
@@ -85,6 +97,22 @@ export default function Specialties() {
         });
     };
 
+    // 모달 배경 스크롤 핸들
+    if (isModifyModalOpen === true || isDeleteModalOpen === true) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+
+    /////////////
+
+    const handleDelete = (id: number) => {
+        setDeleteId(id);
+        setIsModifyModalOpen(false);
+        setIsDeleteModalOpen(true);
+    };
+
+    // 주특기 생성 ('완료' 클릭)
     const handleSubmitNewSpecialties = () => {
         if (!isNewSpecialtiesClean) {
             // 입력값이 없는 인풋은 뮤테이션에 포함시키지 않습니다.
@@ -93,12 +121,6 @@ export default function Specialties() {
             sendGTMEvent({ event: 'addSpecialty' });
         }
     };
-
-    if (isModifyModalOpen === true || isDeleteModalOpen === true) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
-    }
 
     return (
         <>
@@ -132,76 +154,11 @@ export default function Specialties() {
                     </div>
                 )}
             </div>
-            <Modal
-                className="h-auto w-[328px] px-[16px] pb-[32px] pt-[40px]"
+            <SpecialtiesModal
+                specialties={specialties}
+                handleDelete={handleDelete}
                 open={isModifyModalOpen}
                 onOpenChange={setIsModifyModalOpen}
-                contents={
-                    <>
-                        <div className="flex flex-col gap-[12px]">
-                            {specialties.map(({ id, content }) => (
-                                <SpecialtyBox key={id}>
-                                    <div className="flex w-full justify-between ">
-                                        <span className="text-Subtitle2 text-newGray-900">{content}</span>
-                                        <button
-                                            onClick={() => {
-                                                setDeleteId(id);
-                                                setIsModifyModalOpen(false);
-                                                setIsDeleteModalOpen(true);
-                                            }}
-                                        >
-                                            <ExitIcon />
-                                        </button>
-                                    </div>
-                                </SpecialtyBox>
-                            ))}
-                        </div>
-                        <div className="mt-[12px] flex w-full flex-col gap-[12px]">
-                            {specialties.length < 4 &&
-                                newSpecialties.map(({ content }, idx) => (
-                                    <SpecialtyInput
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                            handleNewSpecialty(e.currentTarget.value, idx)
-                                        }
-                                        onDelete={() => handleDeleteSpecialtyInput(idx)}
-                                        value={content}
-                                        key={idx}
-                                        canDelete={idx !== 0}
-                                    />
-                                ))}
-                            {newSpecialties.length + specialties.length < 4 && (
-                                <button
-                                    onClick={handleAddSpecailtyInput}
-                                    className="flex h-[48px] w-[296px] items-center justify-center rounded-[12px] bg-newGray-200 "
-                                >
-                                    <PlusIcon />
-                                </button>
-                            )}
-                        </div>
-                        <div className="mt-[24px] flex w-full gap-[8px]">
-                            <DialogClose
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setIsModifyModalOpen(false);
-                                    setNewSpecialties([{ content: '' }]);
-                                }}
-                                onKeyUp={(e) => e.preventDefault()}
-                                className="h-[48px] w-full flex-1 rounded-[8px] bg-newGray-200 text-[16px] font-[600] text-newGray-800 "
-                            >
-                                취소
-                            </DialogClose>
-                            <DialogClose
-                                onKeyUp={(e) => e.preventDefault()}
-                                onClick={handleSubmitNewSpecialties}
-                                className="h-[48px] w-full flex-1 rounded-[8px] bg-primary-500  text-[16px] font-[600] text-white disabled:bg-[#c4caf8]"
-                            >
-                                저장
-                            </DialogClose>
-                        </div>
-                    </>
-                }
-                title="주특기 관리"
-                description={'4개까지 생성 가능하고\n주특기 이름은 수정 불가합니다'}
             />
             <Modal
                 open={isDeleteModalOpen && deleteId !== null}

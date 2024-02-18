@@ -2,7 +2,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogClose } from '@radix-ui/rea
 import { Dispatch, SetStateAction } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-type Props = {
+export type ModalProps = {
     triggerElement?: React.ReactNode;
     title?: string;
     description?: string;
@@ -12,7 +12,15 @@ type Props = {
     className?: string;
 };
 
-export default function Modal({ open, onOpenChange, triggerElement, className, title, description, contents }: Props) {
+export default function Modal({
+    open,
+    onOpenChange,
+    triggerElement,
+    className,
+    title,
+    description,
+    contents,
+}: ModalProps) {
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             {triggerElement && <DialogTrigger asChild>{triggerElement}</DialogTrigger>}
