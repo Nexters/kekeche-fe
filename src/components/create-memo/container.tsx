@@ -44,7 +44,7 @@ export default function WriteMemoContainer() {
                         transition={{ duration: 0.2, type: 'just' }}
                         className="fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
                     >
-                        <div className="mx-auto h-full w-[400px] bg-white">
+                        <div className="mx-auto h-full min-w-[375px] max-w-[400px] bg-white">
                             <CreateMemo characterId={isOn === 'on' ? null : isOn} />
                         </div>
                     </motion.div>
@@ -60,7 +60,7 @@ export default function WriteMemoContainer() {
                         transition={{ type: 'just' }}
                         className="py-[20 fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
                     >
-                        <div className="mx-auto h-full w-[400px] bg-white ">
+                        <div className="mx-auto h-full min-w-[375px] max-w-[400px] bg-white ">
                             <EditMemo id={Number(editId)} />
                         </div>
                     </motion.div>
