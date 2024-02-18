@@ -30,7 +30,7 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
     });
 
     return (
-        <div className="shadow-slate-50 flex h-auto w-full flex-col  gap-[12px] rounded-[16px] bg-white px-[24px] pb-[24px] pt-[10px] shadow-md">
+        <div className="flex h-auto w-full flex-col  gap-[12px] rounded-[16px] bg-white px-[24px] pb-[24px] pt-[10px] shadow-[0px_8px_24px_rgba(149,157,165,0.13)]">
             <div className=" flex items-center justify-between ">
                 <CharacterLabel character={character} />
                 <div>
