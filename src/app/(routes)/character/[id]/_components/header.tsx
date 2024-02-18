@@ -143,7 +143,6 @@ export default React.memo(function Header() {
                         <div className="mt-[24px] flex w-full  gap-[8px]">
                             <DialogClose className="h-[48px] flex-1 rounded-[8px] bg-gray-200 ">취소</DialogClose>
                             <DialogClose
-                                disabled={!draft || draft.length > 6}
                                 onClick={async (e) => {
                                     e.stopPropagation();
                                     deleteCharacter();
