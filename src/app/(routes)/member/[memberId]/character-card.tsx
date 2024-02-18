@@ -3,6 +3,7 @@ import { Colors } from '@/constants/character-info';
 import { Character } from '@/types/character';
 import Image from 'next/image';
 import Link from 'next/link';
+import { twMerge } from 'tailwind-merge';
 
 interface Props {
     character: Character;
@@ -24,9 +25,7 @@ export default function CharacterCard({ character, component, href }: Props) {
 
     const content = (
         <>
-            <div
-                className={`mx-auto mb-2 flex w-fit items-center gap-[2px] rounded-full px-2 py-1 ${bgColor ?? 'bg-[#2777ea]'}`}
-            >
+            <div className={` flex w-fit items-center gap-[2px] rounded-full px-2 py-1  ${bgColor ?? 'bg-[#2777ea]'}`}>
                 <span className="h-4 w-4">
                     <BeanIcon />
                 </span>
@@ -71,7 +70,7 @@ export default function CharacterCard({ character, component, href }: Props) {
 
     if (component === 'link' && href) {
         return (
-            <Link href={href} className={layoutClassNames}>
+            <Link href={href} className={twMerge('shadow-slate-50 shadow-md', layoutClassNames)}>
                 {content}
             </Link>
         );

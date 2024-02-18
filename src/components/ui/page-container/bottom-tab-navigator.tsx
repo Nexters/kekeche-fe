@@ -28,7 +28,9 @@ export default function TabNavigator() {
     });
 
     const handleLocationChange = (label: LabelType, path: string) => () => {
-        setCurrentLocation(label);
+        if (label !== '작성') {
+            setCurrentLocation(label);
+        }
         router.push(path);
     };
 

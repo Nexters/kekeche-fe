@@ -4,7 +4,7 @@ import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
 import editMemo from '@/services/memo/editMemo';
 import { useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { CreateMemoContext } from './create-memo-context';
 
@@ -14,6 +14,7 @@ type Props = {
 
 export default function Header({ id }: Props) {
     const router = useRouter();
+    const pathname = usePathname();
     const context = useContext(CreateMemoContext);
     const queryClient = useQueryClient();
 
@@ -23,7 +24,7 @@ export default function Header({ id }: Props) {
         <header className="mb-[10px] flex justify-between gap-2">
             <button
                 onClick={() => {
-                    router.back();
+                    router.push(`${pathname.split('?edit')[0]}`);
                 }}
                 aria-label="뒤로 가기 버튼"
                 className="p-3"
@@ -45,7 +46,7 @@ export default function Header({ id }: Props) {
                     await queryClient.invalidateQueries({
                         queryKey: ['character', 'memos', Number(context.selectedCharacterId)],
                     });
-                    router.push(`/memos`);
+                    router.push(`/character/${context.selectedCharacterId}`);
                 }}
                 disabled={context?.content.length === 0 || !context?.selectedCharacterId}
                 className="p-3 text-semibold16 text-[#1E73F3] transition-colors disabled:pointer-events-none disabled:text-gray-300"

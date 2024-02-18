@@ -43,7 +43,7 @@ export default function Header() {
         <div className="mb-[10px] flex justify-between gap-2 px-[12px]">
             <button
                 onClick={() => {
-                    router.back();
+                    router.push(`${pathname.split('?write')[0]}`);
                 }}
                 aria-label="뒤로 가기 버튼"
                 className="p-3"
@@ -74,7 +74,7 @@ export default function Header() {
                         return;
                     }
 
-                    router.push(`/memos`);
+                    router.push(`/character/${context.selectedCharacterId}`);
                     router.refresh();
                 }}
                 disabled={
