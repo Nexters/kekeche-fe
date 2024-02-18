@@ -61,7 +61,7 @@ export default function MemoOverlay() {
                     <motion.div
                         key="edit-modal"
                         {...animationProps}
-                        className="py-[20 fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
+                        className="fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
                     >
                         <div className="mx-auto h-full min-w-[375px] max-w-[400px] bg-white ">
                             <EditMemo id={Number(editId)} />

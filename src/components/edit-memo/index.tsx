@@ -20,15 +20,13 @@ export default function EditMemo({ id }: { id: number }) {
     }, []);
 
     return (
-        <div className="fixed left-0 top-0 z-[10] h-[100vh] w-full bg-[#f5f5f5]">
-            <div className="mx-auto h-full w-[400px] bg-white">
-                <CreateMemoProvider id={id}>
-                    <Header id={id} />
-                    <MemoForm characters={charactersThumbnailResponse ?? []} />
-                    <div className="mt-2 h-[12px] bg-[#F7F8F9]" />
-                    <KeywordForm />
-                </CreateMemoProvider>
-            </div>
-        </div>
+        <>
+            <CreateMemoProvider id={id}>
+                <Header id={id} />
+                <MemoForm characters={charactersThumbnailResponse ?? []} />
+                <div className="mt-2 h-[12px] bg-[#F7F8F9]" />
+                <KeywordForm />
+            </CreateMemoProvider>
+        </>
     );
 }
