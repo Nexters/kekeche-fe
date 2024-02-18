@@ -1,5 +1,5 @@
 import ExitIcon from '@/assets/icons/exit_24x24.svg';
-import SpecialtyBox from './specialty-box';
+import SpecialtyBox from './specialties/specialty-box';
 
 type Props = {
     value: string;
@@ -23,7 +23,7 @@ export default function SpecialtyInput({ value, onChange, onDelete, canDelete }:
                     <button onClick={onDelete}>
                         <ExitIcon />
                     </button>
-                )}{' '}
+                )}
             </div>
         </SpecialtyBox>
     );

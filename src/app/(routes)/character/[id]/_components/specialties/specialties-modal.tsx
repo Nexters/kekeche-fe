@@ -2,7 +2,7 @@ import Modal, { ModalProps } from '@/components/ui/modal';
 import { DialogClose } from '@radix-ui/react-dialog';
 import ExitIcon from '@/assets/icons/exit_24x24.svg';
 import PlusIcon from '@/assets/icons/plus_18x18.svg';
-import SpecialtyBox from '../specialty-box';
+import SpecialtyBox from './specialty-box';
 import SpecialtyInput from '../specialty-input';
 import { CharacterSpecialty } from '@/types/character';
 import { useState } from 'react';
