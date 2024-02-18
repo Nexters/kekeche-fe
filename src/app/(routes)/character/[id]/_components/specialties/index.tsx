@@ -92,7 +92,7 @@ export default function Specialties() {
             </div>
             <SpecialtiesModal
                 specialties={specialties}
-                handleDelete={handleDelete}
+                onDelete={handleDelete}
                 open={isModifyModalOpen}
                 onOpenChange={setIsModifyModalOpen}
             />

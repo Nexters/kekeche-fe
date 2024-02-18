@@ -15,10 +15,10 @@ import useCharacterIdBypath from '../../hooks/useCharacterIdBypath';
 
 type Props = {
     specialties: CharacterSpecialty[];
-    handleDelete: (id: number) => void;
+    onDelete: (id: number) => void;
 } & Partial<ModalProps>;
 
-export default function SpecialtiesModal({ specialties, handleDelete, ...props }: Props) {
+export default function SpecialtiesModal({ specialties, onDelete, ...props }: Props) {
     const characterId = useCharacterIdBypath();
     const queryClient = useQueryClient();
 
@@ -88,7 +88,7 @@ export default function SpecialtiesModal({ specialties, handleDelete, ...props }
                                 <SpecialtyBox key={id}>
                                     <div className="flex w-full justify-between ">
                                         <span className="text-Subtitle2 text-newGray-900">{content}</span>
-                                        <button onClick={() => handleDelete(id)}>
+                                        <button onClick={() => onDelete(id)}>
                                             <ExitIcon />
                                         </button>
                                     </div>
