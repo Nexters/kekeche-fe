@@ -94,6 +94,12 @@ export default function Specialties() {
         }
     };
 
+    if (isModifyModalOpen === true || isDeleteModalOpen === true) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+
     return (
         <>
             <div className="mx-auto mt-[16px] h-auto w-[327px] rounded-[16px] bg-white px-[24px] py-[12px]">
