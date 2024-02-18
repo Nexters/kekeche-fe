@@ -18,7 +18,9 @@ const useA2HS = () => {
     }, []);
 
     const installApp = () => {
+        //@ts-ignore
         deferredPrompt?.prompt();
+        //@ts-ignore
         deferredPrompt?.userChoice.then((choiceResult) => {
             clearPrompt();
         });
