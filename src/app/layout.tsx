@@ -44,10 +44,55 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <link rel="apple-touch-icon" sizes="192x192" href="/assets/icons/icon-192x192.png" />
                 <link rel="apple-touch-icon" sizes="512x512" href="/assets/icons/icon-512x512.png" />
                 <link
+                    rel="apple-touch-startup-image"
+                    media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+                    href="/assets/splashscreens/iphonex_splash.png"
+                />
+                <link
+                    rel="apple-touch-startup-image"
+                    media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+                    href="/assets/splashscreens/iphonex_splash.png"
+                />
+                <link
+                    rel="apple-touch-startup-image"
+                    media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+                    href="/assets/splashscreens/iphonex_splash.png"
+                />
+                <link
+                    rel="apple-touch-startup-image"
+                    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)"
+                    href="/assets/splashscreens/iphonex_splash.png"
+                />
+                <link
+                    rel="apple-touch-startup-image"
+                    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+                    href="/assets/splashscreens/iphonex_splash.png"
+                />
+                <link
+                    rel="apple-touch-startup-image"
+                    media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+                    href="/assets/splashscreens/iphonex_splash.png"
+                />
+                <link
+                    rel="apple-touch-startup-image"
+                    media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
+                    href="/assets/splashscreens/iphonex_splash.png"
+                />
+                <link
+                    rel="apple-touch-startup-image"
+                    media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+                    href="/assets/splashscreens/iphonex_splash.png"
+                />
+                <link
+                    rel="apple-touch-startup-image"
+                    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+                    href="/assets/splashscreens/iphonex_splash.png"
+                />
+                {/* <link
+                    rel="apple-touch-startup-image"
                     href="/assets/splashscreens/iphonex_splash.png"
                     sizes="2048x2732"
-                    rel="apple-touch-startup-image"
-                />
+                /> */}
             </head>
             <body className={pretendard.className}>
                 <QueryClientContext>
