@@ -43,7 +43,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></meta>
                 <link rel="apple-touch-icon" sizes="192x192" href="/assets/icons/icon-192x192.png" />
                 <link rel="apple-touch-icon" sizes="512x512" href="/assets/icons/icon-512x512.png" />
-                <link href="/splashscreens/iphonex_splash.png" sizes="2048x2732" rel="apple-touch-startup-image" />
+                <link
+                    href="/assets/splashscreens/iphonex_splash.png"
+                    sizes="2048x2732"
+                    rel="apple-touch-startup-image"
+                />
             </head>
             <body className={pretendard.className}>
                 <QueryClientContext>
