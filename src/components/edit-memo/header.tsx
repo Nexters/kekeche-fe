@@ -24,7 +24,7 @@ export default function Header({ id }: Props) {
         <header className="mb-[10px] flex justify-between gap-2">
             <button
                 onClick={() => {
-                    router.push(`${pathname.split('?edit')[0]}`);
+                    router.replace(`${pathname.split('?edit')[0]}`);
                 }}
                 aria-label="뒤로 가기 버튼"
                 className="p-3"
