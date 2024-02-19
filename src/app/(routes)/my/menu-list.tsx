@@ -39,6 +39,7 @@ export default function MenuList({ member }: Props) {
     const install = () => {
         if (isIos()) {
             setIsModalOpen(true);
+            return;
         }
 
         //@ts-ignore
@@ -49,6 +50,14 @@ export default function MenuList({ member }: Props) {
     return (
         <>
             <ul>
+                {showInstall && (
+                    <li>
+                        <button onClick={install} className="flex w-full items-center justify-between p-6">
+                            <span className="text-regular16 text-[#4B4F58]">앱 설치하기</span>
+                            <ChevronRightIcon />
+                        </button>
+                    </li>
+                )}
                 <li>
                     <a
                         target="_blank"
@@ -83,14 +92,7 @@ export default function MenuList({ member }: Props) {
                         <ChevronRightIcon />
                     </button>
                 </li>
-                {showInstall && (
-                    <li>
-                        <button onClick={install} className="flex w-full items-center justify-between p-6">
-                            <span className="text-regular16 text-[#4B4F58]">앱 설치하기</span>
-                            <ChevronRightIcon />
-                        </button>
-                    </li>
-                )}
+
                 <li>
                     <a
                         target="_blank"
