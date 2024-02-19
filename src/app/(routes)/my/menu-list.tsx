@@ -15,6 +15,7 @@ import {
 import { useToast } from '@/components/ui-shadcn/toast/use-toast';
 import ROUTES from '@/constants/route';
 import { useA2HS } from '@/hooks/useA2HS';
+import useIsIos from '@/hooks/useIsIos';
 import deregister from '@/services/auth/deregister';
 import { Member } from '@/services/auth/getMember';
 import { sendGTMEvent } from '@next/third-parties/google';
@@ -29,8 +30,9 @@ export default function MenuList({ member }: Props) {
     const router = useRouter();
     const { toast } = useToast();
     const { deferredPrompt } = useA2HS();
+    const { showInstall: showIosInstall } = useIsIos();
 
-    const showInstall = !!deferredPrompt;
+    const showInstall = !!deferredPrompt || showIosInstall;
     const install = () => {
         //@ts-ignore
         deferredPrompt?.prompt();
