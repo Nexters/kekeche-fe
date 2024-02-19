@@ -34,26 +34,26 @@ export default function MenuList({ member }: Props) {
 
     const showInstall = !!deferredPrompt || showIosInstall;
     const install = () => {
-        if (!isIos) {
-            //@ts-ignore
-            deferredPrompt?.prompt();
+        if (isIos()) {
+            const shareData = {
+                title: '다양한 나를 키우는 AnotherMe',
+                text: '나의 캐릭터별 성장기록 서비스',
+                url: `${location.origin}${ROUTES.characters(member.memberId)}`,
+            };
+
+            if (navigator.canShare && navigator.canShare(shareData)) {
+                navigator.share(shareData);
+            } else {
+                toast({
+                    description: 'URL이 클립보드에 복사되었어요.',
+                });
+            }
+            sendGTMEvent({ event: 'clickShare' });
             return;
         }
 
-        const shareData = {
-            title: '다양한 나를 키우는 AnotherMe',
-            text: '나의 캐릭터별 성장기록 서비스',
-            url: `${location.origin}${ROUTES.characters(member.memberId)}`,
-        };
-
-        if (navigator.canShare && navigator.canShare(shareData)) {
-            navigator.share(shareData);
-        } else {
-            toast({
-                description: 'URL이 클립보드에 복사되었어요.',
-            });
-        }
-        sendGTMEvent({ event: 'clickShare' });
+        //@ts-ignore
+        deferredPrompt?.prompt();
         return;
     };
 

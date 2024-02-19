@@ -12,6 +12,8 @@ export default function useIsIos() {
     useEffect(() => {
         if (isIos() && !isInStandaloneMode()) {
             setShowInstall(true);
+        } else {
+            setShowInstall(false);
         }
     }, []);
 
