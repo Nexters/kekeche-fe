@@ -91,6 +91,7 @@ export default function MemoForm({ characters }: Props) {
                 </SelectContent>
             </Select>
             <TextareaAutosize
+                autoFocus={false}
                 ref={textareaRef}
                 cacheMeasurements
                 placeholder="메모를 입력해주세요"

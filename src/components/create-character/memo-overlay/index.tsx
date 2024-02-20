@@ -51,7 +51,7 @@ export default function MemoOverlay() {
                         {...animationProps}
                         className="fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
                     >
-                        <div className="mx-auto h-full min-w-[375px] max-w-[400px] bg-white">
+                        <div className="mx-auto h-full w-auto bg-white lg:w-[400px]">
                             <CreateMemo characterId={isOn === 'on' ? undefined : isOn} />
                         </div>
                     </motion.div>
@@ -64,7 +64,7 @@ export default function MemoOverlay() {
                         {...animationProps}
                         className="fixed left-0 top-0 z-[100] h-[100vh] w-full bg-[#f5f5f5]"
                     >
-                        <div className="mx-auto h-full min-w-[375px] max-w-[400px] bg-white ">
+                        <div className="mx-auto h-full w-auto bg-white lg:w-[400px] ">
                             <EditMemo id={Number(editId)} />
                         </div>
                     </motion.div>

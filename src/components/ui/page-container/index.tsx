@@ -13,7 +13,7 @@ export default function PageContainer({ children, hasNavigator, bgColor }: Props
         <div className=" relative bg-[#f5f5f5]">
             <div
                 className={twMerge(
-                    ' mx-auto flex min-h-screen  min-w-[375px] max-w-[400px] flex-col bg-white',
+                    ' mx-auto flex min-h-screen w-auto  min-w-[350px] flex-col bg-white lg:w-[400px]',
                     bgColor,
                 )}
                 style={{ minHeight: '100dvh' }}

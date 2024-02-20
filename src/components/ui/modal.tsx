@@ -33,7 +33,7 @@ export default function Modal({
                 >
                     <div className="fixed right-0 top-0 z-[999] h-[100vh] w-full">
                         <div
-                            className="mx-auto flex min-h-screen  w-[400px] flex-col items-center justify-center bg-[#0a0a0c4d] shadow-lg "
+                            className="mx-auto flex min-h-screen  w-auto flex-col items-center justify-center bg-[#0a0a0c4d] shadow-lg lg:w-[400px] "
                             style={{ minHeight: '100dvh' }}
                         >
                             <div
