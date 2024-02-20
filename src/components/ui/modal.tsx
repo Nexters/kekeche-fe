@@ -26,6 +26,7 @@ export default function Modal({
             {triggerElement && <DialogTrigger asChild>{triggerElement}</DialogTrigger>}
             <DialogClose onKeyUp={(e) => e.preventDefault()}>
                 <DialogContent
+                    onOpenAutoFocus={(e) => e.preventDefault()}
                     onCloseAutoFocus={(e) => e.preventDefault()}
                     onKeyDown={(e) => e.stopPropagation()}
                     onEscapeKeyDown={(e) => e.preventDefault()}

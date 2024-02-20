@@ -7,10 +7,10 @@ import EditMemo from '@/components/edit-memo';
 import CreateMemo from '@/components/create-memo';
 
 const animationProps: AnimationProps = {
-    initial: { opacity: 0, y: '100vh' },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: '100vh' },
-    transition: { duration: 0.2, type: 'just' },
+    initial: { y: '100vh' },
+    animate: { y: 0 },
+    exit: { y: '100vh' },
+    transition: { duration: 0.2 },
 };
 
 export default function MemoOverlay() {
