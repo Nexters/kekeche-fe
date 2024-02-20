@@ -94,7 +94,7 @@ export default React.memo(function Header() {
                 </TopBar.Left>
                 <TopBar.Text>성장 기록지</TopBar.Text>
                 <TopBar.Right>
-                    <Popover>
+                    <Popover modal>
                         <PopoverTrigger className="p-3">
                             <MeatballIcon />
                         </PopoverTrigger>
