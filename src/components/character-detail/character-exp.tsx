@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogOverlay } from '../ui-shadcn/dialog';
 
 type Props = {
@@ -21,8 +21,9 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
 
             setTimeout(() => setExpAnimating(true), 1500);
             setTimeout(() => setIsAnimating(false), 4000);
+            setExpAnimating(false);
         }
-    }, [isAnimating, animate, expAnimating]);
+    }, [isAnimating, animate, expAnimating, currentExp]);
 
     return (
         <>
@@ -52,7 +53,7 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
             )}
             <Dialog open={isAnimating}>
                 <DialogOverlay className="fixed left-0 top-0 flex h-screen w-screen items-center justify-center">
-                    <DialogContent className="border-none bg-transparent">
+                    <DialogContent className="w-auto min-w-[350px] border-none bg-transparent lg:w-[400px]">
                         <motion.div
                             layoutId="1"
                             className="z-[999]  flex h-[66px] w-[327px] items-center justify-center gap-[20px] rounded-[20px]  bg-white"
@@ -60,7 +61,6 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
                             <span className="text-[16px] font-bold text-primary-500">{`LV.${level}`}</span>
                             <div className="rounded-l-0 relative h-[40px] w-[250px] rounded-[20px] bg-newGray-400">
                                 <motion.div
-                                    // { width: `${((currentExp - 1) / nextExp) * 100}%` },
                                     layout
                                     transition={{ duration: 2 }}
                                     style={{
