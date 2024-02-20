@@ -69,6 +69,15 @@ export default React.memo(function Header() {
     const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+    if (typeof document !== 'undefined') {
+        if (isModifyModalOpen === true || isDeleteModalOpen === true) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.touchAction = 'none';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }
+
     return (
         <>
             <TopBar>
