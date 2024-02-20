@@ -31,7 +31,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="ko">
             <head>
-                <meta name="naver-site-verification" content="6f87b8170cef8604157538c5f66fffce3e688bc2" />
+                <meta name="naver-site-verification" content="27021c1201777dda6eba7dac943312f3fe0ded6d" />
+                <meta name="google-site-verification" content="kfsu-qL9KWB5qPTFSjZf1a6Toq3dd0cd3j0DLdP3b0I" />
                 <meta property="og:title" content={'다양한 나를 키우는 AnotherMe'} />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content={'https://anotherme.today'} />
