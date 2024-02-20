@@ -22,12 +22,6 @@ export default function MemoForm({ characters }: Props) {
     const context = useContext(CreateMemoContext);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    useEffect(() => {
-        if (textareaRef.current) {
-            textareaRef.current.focus();
-        }
-    }, []);
-
     if (!context) return;
 
     const errorText = (() => {

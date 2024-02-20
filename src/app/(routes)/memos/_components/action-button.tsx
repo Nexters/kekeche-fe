@@ -6,18 +6,7 @@ import { PencilIcon, TrashIcon } from 'lucide-react';
 
 export default function ActionButton({ onClick, onEdit }: { onClick: () => void; onEdit: () => void }) {
     return (
-        <Popover
-            onOpenChange={(open) => {
-                if (typeof document !== 'undefined') {
-                    if (open) {
-                        document.body.style.overflow = 'hidden';
-                        document.body.style.touchAction = 'none';
-                    } else {
-                        document.body.style.overflow = 'auto';
-                    }
-                }
-            }}
-        >
+        <Popover>
             <PopoverTrigger className="p-3 pr-0">
                 <MeatballIcon />
             </PopoverTrigger>
