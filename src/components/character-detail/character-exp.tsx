@@ -30,6 +30,7 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
             {!isAnimating && (
                 <motion.div
                     layoutId="exp"
+                    transition={{ duration: 2 }}
                     className="mt-[20px] flex h-[56px] w-[327px] items-center justify-center gap-[20px] rounded-[16px] bg-white"
                 >
                     <span className="text-[16px] font-bold text-primary-500">{`LV.${level}`}</span>
