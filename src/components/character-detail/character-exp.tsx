@@ -27,10 +27,10 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
 
     return (
         <>
-            {!isAnimating && (
+            {!isAnimating ? (
                 <motion.div
                     layoutId="exp"
-                    transition={{ duration: 2 }}
+                    layout
                     className="mt-[20px] flex h-[56px] w-[327px] items-center justify-center gap-[20px] rounded-[16px] bg-white"
                 >
                     <span className="text-[16px] font-bold text-primary-500">{`LV.${level}`}</span>
@@ -52,19 +52,19 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
                         </div>
                     </div>
                 </motion.div>
-            )}
-            <Dialog open={isAnimating}>
-                <DialogOverlay className="fixed left-0 top-0 flex h-screen ">
-                    <DialogContent className="h-full w-auto min-w-[350px] items-center justify-center border-none bg-transparent lg:w-[400px]">
+            ) : (
+                <div className="fixed inset-0 left-0 top-0 z-50 h-screen w-screen bg-black/80  ">
+                    <div className="mx-auto flex h-full w-auto min-w-[350px] items-center justify-center border-none bg-transparent lg:w-[400px]">
                         <motion.div
                             layoutId="exp"
+                            layout
                             className="z-[999] flex h-[66px] w-[327px] items-center justify-center gap-[20px] rounded-[20px]  bg-white"
                         >
                             <span className="text-[16px] font-bold text-primary-500">{`LV.${level}`}</span>
                             <div className="rounded-l-0 relative h-[40px] w-[250px] rounded-[20px] bg-newGray-400">
                                 <motion.div
                                     layout
-                                    transition={{ duration: 2 }}
+                                    transition={{ duration: 2, delay: 0.5 }}
                                     style={{
                                         width: expAnimating
                                             ? `${(currentExp / nextExp) * 100}%`
@@ -77,9 +77,9 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
                                 </div>
                             </div>
                         </motion.div>
-                    </DialogContent>
-                </DialogOverlay>
-            </Dialog>
+                    </div>
+                </div>
+            )}
         </>
     );
 }
