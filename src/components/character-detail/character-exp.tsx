@@ -36,6 +36,8 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
                     <span className="text-[16px] font-bold text-primary-500">{`LV.${level}`}</span>
                     <div className="relative h-[24px] w-[233px] rounded-full bg-newGray-400">
                         <motion.div
+                            layout
+                            transition={{ delay: 1.5 }}
                             style={{
                                 width: animate
                                     ? expAnimating
@@ -67,7 +69,6 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
                                         width: expAnimating
                                             ? `${(currentExp / nextExp) * 100}%`
                                             : `${((currentExp - 1) / nextExp) * 100}%`,
-                                        borderRadius: '20px',
                                     }}
                                     className={`rounded-l-0 absolute left-0 top-0 h-full rounded-[20px] bg-primary-500 `}
                                 />
