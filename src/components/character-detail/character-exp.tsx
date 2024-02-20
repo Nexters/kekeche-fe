@@ -30,7 +30,6 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
             {!isAnimating && (
                 <motion.div
                     layoutId="1"
-                    transition={{ duration: 0.8 }}
                     className="mt-[20px] flex h-[56px] w-[327px] items-center justify-center gap-[20px] rounded-[16px] bg-white"
                 >
                     <span className="text-[16px] font-bold text-primary-500">{`LV.${level}`}</span>
@@ -54,11 +53,11 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
                 </motion.div>
             )}
             <Dialog open={isAnimating}>
-                <DialogOverlay className="fixed left-0 top-0 flex h-screen w-screen items-center justify-center">
-                    <DialogContent className="w-auto min-w-[350px] border-none bg-transparent lg:w-[400px]">
+                <DialogOverlay className="fixed left-0 top-0 flex h-screen w-auto min-w-[350px] items-center justify-center border-none bg-transparent lg:w-[400px]">
+                    <DialogContent className="border-none bg-transparent">
                         <motion.div
                             layoutId="1"
-                            className="z-[999]  flex h-[66px] w-[327px] items-center justify-center gap-[20px] rounded-[20px]  bg-white"
+                            className="z-[999] flex h-[66px] w-[327px] items-center justify-center gap-[20px] rounded-[20px]  bg-white"
                         >
                             <span className="text-[16px] font-bold text-primary-500">{`LV.${level}`}</span>
                             <div className="rounded-l-0 relative h-[40px] w-[250px] rounded-[20px] bg-newGray-400">
