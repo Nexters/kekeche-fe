@@ -40,13 +40,13 @@ export async function checkIsLoggedIn(request: GetMemberRequest): Promise<IsLogg
     const authOption = {
         headers: {
             Authorization: `${request.accessToken}`,
-            Cookie: `${request.accessToken}`,
         },
     };
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/member`, {
         headers: {
             Authorization: `${request.accessToken}`,
+            Cookie: `${request.accessToken}`,
         },
         method: 'GET',
         credentials: 'include',
