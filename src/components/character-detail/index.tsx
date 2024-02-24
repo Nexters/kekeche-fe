@@ -44,28 +44,6 @@ const CharacterDetail = forwardRef<HTMLDivElement, Props>(({ character, classNam
                 ))}
             </ul>
             <CharacterImage itemImage={itemImage} characterImage={characterImage} hasBubble={hasBubble} />
-            {/* <div className="relative h-[299px] w-[328px]">
-                <Image
-                    quality={100}
-                    priority
-                    alt="캐릭터 이미지"
-                    src={characterImage}
-                    width={328}
-                    height={299}
-                    className="absolute left-0 top-0"
-                />
-                {itemImage && (
-                    <Image
-                        quality={100}
-                        priority
-                        alt="아이템 이미지"
-                        src={itemImage}
-                        width={328}
-                        height={299}
-                        className="absolute left-0 top-0"
-                    />
-                )}
-            </div> */}
             <CharacterExp
                 animate={isExpUP && currentExp !== 0}
                 currentExp={currentExp}
