@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers';
+
 export type Member = {
     memberId: number;
     characterCount: number;
@@ -14,6 +16,7 @@ export default async function getMember(request: GetMemberRequest): Promise<GetM
     const authOption = {
         headers: {
             Authorization: `${request.accessToken}`,
+            Cookie: `${request.accessToken}`,
         },
     };
 
@@ -41,6 +44,7 @@ export async function checkIsLoggedIn(request: GetMemberRequest): Promise<IsLogg
             Authorization: `${request.accessToken}`,
         },
     };
+    cookies().set('accessToken', `${request.accessToken}`);
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/member`, {
         headers: {
