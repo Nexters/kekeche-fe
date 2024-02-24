@@ -40,6 +40,7 @@ export async function checkIsLoggedIn(request: GetMemberRequest): Promise<IsLogg
         headers: {
             Authorization: `${request.accessToken}`,
         },
+        credential: 'include',
     };
 
     const res = await fetch(
