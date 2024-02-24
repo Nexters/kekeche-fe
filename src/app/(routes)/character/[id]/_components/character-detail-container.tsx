@@ -7,7 +7,11 @@ import { getCookie } from 'cookies-next';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
-export default function CharacterDetailContainer() {
+type Props = {
+    hasBubble?: boolean;
+};
+
+export default function CharacterDetailContainer({ hasBubble = false }: Props) {
     const pathname = usePathname();
     const characterId = Number(pathname.split('character/')[1]);
 
@@ -19,5 +23,5 @@ export default function CharacterDetailContainer() {
         staleTime: 1000 * 60 * 5,
     });
 
-    return <CharacterDetail ref={ref} character={character} className="mt-[24px]" />;
+    return <CharacterDetail ref={ref} character={character} className="mt-[24px]" hasBubble={hasBubble} />;
 }

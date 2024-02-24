@@ -14,7 +14,6 @@ export default async function getMember(request: GetMemberRequest): Promise<GetM
     const authOption = {
         headers: {
             Authorization: `${request.accessToken}`,
-            Cookie: `${request.accessToken}`,
         },
     };
 
@@ -43,14 +42,10 @@ export async function checkIsLoggedIn(request: GetMemberRequest): Promise<IsLogg
         },
     };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/member`, {
-        headers: {
-            Authorization: `${request.accessToken}`,
-            Cookie: `${request.accessToken}`,
-        },
-        method: 'GET',
-        credentials: 'include',
-    });
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/member`,
+        request.accessToken ? authOption : undefined,
+    );
     if (res.ok) {
         const json: { data: Member } = await res.json();
         return { isLoggedIn: true, member: json.data };

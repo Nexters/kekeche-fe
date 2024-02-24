@@ -56,7 +56,7 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
                         <Header />
                     </Suspense>
                     <Suspense>
-                        <CharacterDetailContainer />
+                        <CharacterDetailContainer hasBubble={true} />
                     </Suspense>
                     <Suspense>
                         <Specialties />

@@ -7,13 +7,15 @@ import { twMerge } from 'tailwind-merge';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import CharacterExp from './character-exp';
+import CharacterImage from './character-image';
 
 type Props = {
     className?: string;
     character: Character;
+    hasBubble?: boolean;
 };
 
-const CharacterDetail = forwardRef<HTMLDivElement, Props>(({ character, className }, ref) => {
+const CharacterDetail = forwardRef<HTMLDivElement, Props>(({ character, className, hasBubble = false }, ref) => {
     const { name, keywords, characterImage, currentExp, nextExp, level, itemImage } = character;
     const isExpUP = useSearchParams().get('exp') === 'true';
     const pathname = usePathname();
@@ -41,7 +43,8 @@ const CharacterDetail = forwardRef<HTMLDivElement, Props>(({ character, classNam
                     </li>
                 ))}
             </ul>
-            <div className="relative h-[299px] w-[328px]">
+            <CharacterImage itemImage={itemImage} characterImage={characterImage} hasBubble={hasBubble} />
+            {/* <div className="relative h-[299px] w-[328px]">
                 <Image
                     quality={100}
                     priority
@@ -62,7 +65,7 @@ const CharacterDetail = forwardRef<HTMLDivElement, Props>(({ character, classNam
                         className="absolute left-0 top-0"
                     />
                 )}
-            </div>
+            </div> */}
             <CharacterExp
                 animate={isExpUP && currentExp !== 0}
                 currentExp={currentExp}
