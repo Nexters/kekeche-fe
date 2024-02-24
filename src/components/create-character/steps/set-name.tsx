@@ -32,7 +32,7 @@ export default React.memo(function SetName() {
 
     return (
         <>
-            {/* <Header onGoBack={() => router.push('/')} /> */}
+            <div className="h-[52px] w-full" />
             <Intro title="캐릭터의 이름을 정해 주세요." description="한글, 영문 대소문자. 공백 포함 최대 8자로." />
             <div className="flex w-[375px] flex-col gap-[8px] pl-[24px]">
                 <input
