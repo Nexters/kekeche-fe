@@ -3,6 +3,7 @@ import Text from './text';
 import Left from './left';
 import Right from './right';
 import { ReactElement } from 'react';
+import { motion } from 'framer-motion';
 
 type Props = {
     className?: string;
@@ -11,9 +12,12 @@ type Props = {
 
 export default function TopBar({ children, className }: Props) {
     return (
-        <div className={twMerge(' relative left-0 top-0 flex h-[48px] w-full items-center justify-center', className)}>
+        <motion.div
+            layout
+            className={twMerge(' relative left-0 top-0 flex h-[48px] w-full items-center justify-center', className)}
+        >
             {children}
-        </div>
+        </motion.div>
     );
 }
 

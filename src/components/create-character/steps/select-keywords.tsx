@@ -10,7 +10,7 @@ import { Keywords } from '@/constants/character-info';
 type KeywordId = (typeof Keywords)[number]['id'];
 
 export default React.memo(function SelectKeywords() {
-    const { handlePrevClick, handleNextClick } = useCarousel();
+    const { handleNextClick } = useCarousel();
 
     const { setValue } = useCreateCharacter();
 
@@ -39,7 +39,6 @@ export default React.memo(function SelectKeywords() {
 
     return (
         <>
-            <Header onGoBack={handlePrevClick} />
             <Intro title="캐릭터의 성격을 고르세요" description="최소 1개, 최대 3개 골라주세요." />
             <div className="flex w-[327px] flex-wrap gap-[16px] ">
                 {Keywords.map(({ id, name }) => (

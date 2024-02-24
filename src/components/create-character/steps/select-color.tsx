@@ -28,11 +28,6 @@ export default React.memo(function SelectColor() {
 
     return (
         <>
-            <Header
-                onGoBack={() => {
-                    carouselDispatch?.handlePrevClick();
-                }}
-            />
             <Intro title="캐릭터의 컬러를 고르세요" />
             <div className="grid grid-cols-2 gap-[16px]">
                 {Colors.map(({ id, hexClassName }) => (

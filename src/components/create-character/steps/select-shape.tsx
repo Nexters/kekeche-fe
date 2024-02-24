@@ -15,7 +15,7 @@ export default React.memo(function SelectShape() {
     const [selected, setSelected] = useState<null | ShapeId>(null);
 
     const { setValue } = useCreateCharacter();
-    const { handlePrevClick, handleNextClick } = useCarousel();
+    const { handleNextClick } = useCarousel();
 
     const handleSelect = (id: ShapeId) => {
         setSelected((prev) => (prev === id ? null : id));
@@ -30,7 +30,6 @@ export default React.memo(function SelectShape() {
 
     return (
         <>
-            <Header onGoBack={handlePrevClick} />
             <Intro title="캐릭터의 모습을 고르세요" />
             <div className="flex flex-col gap-[16px]">
                 {Shapes.map(({ id, image }) => (

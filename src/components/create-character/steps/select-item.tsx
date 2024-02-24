@@ -12,7 +12,7 @@ type ItemId = (typeof Items)[number]['id'];
 export default React.memo(function SelectItem() {
     const [selected, setSelected] = useState<null | ItemId>(null);
     const { setValue } = useCreateCharacter();
-    const { handleNextClick, handlePrevClick } = useCarousel();
+    const { handleNextClick } = useCarousel();
 
     const handleClick = () => {
         setValue('itemIdx', selected === null ? NO_ITEM_IDX : selected);
@@ -25,7 +25,6 @@ export default React.memo(function SelectItem() {
 
     return (
         <>
-            <Header onGoBack={handlePrevClick} />
             <Intro title={'(선택) 캐릭터의 능력을 올려줄 \n 아이템을 고르세요 '} />
             <div className="flex flex-col gap-[16px]">
                 {Items.map(({ id, name }) => (

@@ -13,6 +13,7 @@ import SetName from './steps/set-name';
 import ShowResult from './steps/show-result';
 import Story from './steps/story';
 import { Steps } from './types/steps';
+import StepperHeader from './stepper-header';
 
 interface CarouselDispatch {
     handlePrevClick: () => void;
@@ -45,8 +46,12 @@ export default function CreateCharacter() {
     const startIndex = useMemo(() => (searchParams.get('step') === '1' ? Steps.SetName : Steps.Story), []);
 
     const handlePrevClick = useCallback(() => {
+        if (api?.selectedScrollSnap() === 1) {
+            router.push('/');
+            return;
+        }
         api?.scrollPrev();
-    }, [api]);
+    }, [api, router]);
     const handleNextClick = useCallback(() => {
         api?.scrollNext();
     }, [api]);
@@ -59,8 +64,6 @@ export default function CreateCharacter() {
     useEffect(() => {
         if (!api) return;
 
-        //     setStep(api.selectedScrollSnap() + 1);
-        // });
         api.on('select', () => {
             router.push(pathname + `?step=${api.selectedScrollSnap()}`);
         });
@@ -69,14 +72,17 @@ export default function CreateCharacter() {
 
         if (step > api.selectedScrollSnap()) {
             // 앞선 과정을 뛰어넘는 것을 방지(ex. 새로고침)
-
+            if (step === 1) {
+                api.scrollTo(1, true);
+                return;
+            }
             router.push(pathname + `?step=${api.selectedScrollSnap()}`);
         }
         if (step < api.selectedScrollSnap()) {
             // 브라우저 상의 뒤로가기 처리
             api.scrollTo(step, true);
         }
-    }, [api?.selectedScrollSnap(), searchParams, pathname, router, api]);
+    }, [api?.selectedScrollSnap, searchParams, pathname, router, api]);
 
     return (
         <>
@@ -90,6 +96,7 @@ export default function CreateCharacter() {
                             startIndex,
                         }}
                     >
+                        <StepperHeader />
                         <CarouselContent style={{ minHeight: '100dvh' }} className="m-0 p-0">
                             {STEPS.map((step, idx) => (
                                 <StepContainer key={idx}>{step}</StepContainer>

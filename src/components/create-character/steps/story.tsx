@@ -55,7 +55,7 @@ export default React.memo(function Story() {
                                     '캐릭터에게 그 날의 일기 메모를 먹이로 줄 수 있어요. 메모는 하루에 3개까지 쓸 수 있어요.'
                                 }
                             />
-                            <CtaButton text="다음" onClick={handleNextClick} />
+                            <CtaButton text="다음" onClick={() => router.push('/create?step=1')} />
                         </FixedBottomArea>
                     </>
                 )
