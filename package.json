@@ -6,7 +6,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "test": "vitest"
     },
     "dependencies": {
         "@ducanh2912/next-pwa": "^10.2.2",
@@ -39,18 +40,23 @@
     },
     "devDependencies": {
         "@svgr/webpack": "^8.1.0",
+        "@testing-library/react": "^14.2.1",
+        "@testing-library/user-event": "^14.5.2",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
         "@types/react-lottie": "^1.2.10",
+        "@vitejs/plugin-react": "^4.2.1",
         "autoprefixer": "^10.0.1",
         "eslint": "^8",
         "eslint-config-next": "14.0.4",
         "eslint-config-prettier": "^9.1.0",
+        "jsdom": "^24.0.0",
         "postcss": "^8",
         "prettier": "3.2.4",
         "prettier-plugin-tailwindcss": "^0.5.11",
         "tailwindcss": "^3.3.0",
-        "typescript": "^5"
+        "typescript": "^5",
+        "vitest": "^1.3.1"
     }
 }
