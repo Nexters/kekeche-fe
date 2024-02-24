@@ -46,6 +46,7 @@ export async function checkIsLoggedIn(request: GetMemberRequest): Promise<IsLogg
         headers: {
             Authorization: `${request.accessToken}`,
         },
+        method: 'GET',
         credentials: 'include',
     });
     if (res.ok) {
