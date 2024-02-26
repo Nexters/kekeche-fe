@@ -43,7 +43,7 @@ export default function CreateCharacter() {
     /**
      * 로그인한 유저는 스토리(step=1)을 건너뛰도록 합니다.
      */
-    const startIndex = useMemo(() => (searchParams.get('step') === '1' ? Steps.SetName : Steps.Story), [searchParams]);
+    const startIndex = useMemo(() => (searchParams.get('step') === '1' ? Steps.SetName : Steps.Story), []);
 
     const handlePrevClick = useCallback(() => {
         if (api?.selectedScrollSnap() === 1) {
