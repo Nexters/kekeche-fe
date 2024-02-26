@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CtaButton from '../../ui/cta-button';
+import CtaButton from '@/components/ui/cta-button';
 
 export default {
     title: 'Components/CtaButton', // story 이름
