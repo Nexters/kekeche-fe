@@ -28,6 +28,7 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
 
     if (isAnimating) {
         document.body.style.overflow = 'hidden';
+        document.body.style.height = '100%';
     } else {
         document.body.style.overflow = 'auto';
     }
