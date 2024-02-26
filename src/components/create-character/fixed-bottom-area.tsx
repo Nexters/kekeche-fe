@@ -7,7 +7,7 @@ type Props = {
 export default function FixedBottomArea({ className, children, style }: Props) {
     return (
         <div
-            className={`absolute bottom-0 flex h-[auto] w-full flex-col items-center pt-[16px] ${className}`}
+            className={`fixed bottom-0 flex h-[auto] w-full flex-col items-center pt-[16px] ${className}`}
             style={style}
         >
             {children}

@@ -41,7 +41,7 @@ export default React.memo(function SelectKeywords() {
         <>
             <div className="h-[52px] w-full" />
             <Intro title="캐릭터의 성격을 고르세요" description="최소 1개, 최대 3개 골라주세요." />
-            <div className="flex w-[327px] flex-wrap gap-[16px] ">
+            <div className="flex w-[327px] flex-wrap gap-[16px] pb-[100px] ">
                 {Keywords.map(({ id, name }) => (
                     <button
                         className={`flex h-auto w-auto items-center justify-center rounded-[8px] rounded-full px-[12px] py-[8px] text-semibold14 ${selected.includes(id) ? 'bg-primary-500 text-[#F6F8FC]' : 'bg-[#ECEFF5] text-[#C6CBD8] '}`}
