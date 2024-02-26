@@ -1,6 +1,7 @@
 'use client';
 
 import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
+import FanfareLottie from '@/assets/lottie/fanfare_rainbow.json';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -17,6 +18,7 @@ import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useContext, useState } from 'react';
+import Lottie from 'react-lottie';
 import { CreateMemoContext } from './create-memo-context';
 
 export default function Header() {
@@ -129,6 +131,23 @@ export default function Header() {
                                                 className="absolute left-0 top-0"
                                             />
                                         )}
+                                        <Lottie
+                                            options={{
+                                                loop: true,
+                                                autoplay: true,
+                                                animationData: FanfareLottie,
+                                                rendererSettings: {
+                                                    preserveAspectRatio: 'xMidYMid slice',
+                                                },
+                                            }}
+                                            height={'auto'}
+                                            width={'auto'}
+                                            style={{
+                                                position: 'absolute',
+                                                inset: 0,
+                                                zIndex: 10000,
+                                            }}
+                                        />
                                     </div>
                                     <h3 className="mt-4 text-H1 text-black">{character?.name}</h3>
                                     <ul className="mt-[6px] flex gap-[4px]">
