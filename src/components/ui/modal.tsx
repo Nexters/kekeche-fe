@@ -21,8 +21,13 @@ export default function Modal({
     description,
     contents,
 }: ModalProps) {
+    if (open) {
+        window.document.body.style.overflow = 'hidden';
+    } else {
+        window.document.body.style.overflow = 'auto';
+    }
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog modal open={open} onOpenChange={onOpenChange}>
             {triggerElement && <DialogTrigger asChild>{triggerElement}</DialogTrigger>}
             <DialogClose onKeyUp={(e) => e.preventDefault()}>
                 <DialogContent

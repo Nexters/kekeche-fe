@@ -23,6 +23,7 @@ export default function MemoOverlay() {
         if (searchParams.get('write') !== null) {
             setIsOn(searchParams.get('write'));
         } else setIsOn(null);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams.get('write')]);
 
     useEffect(() => {
@@ -31,6 +32,7 @@ export default function MemoOverlay() {
         } else {
             setEditId(null);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams.get('edit')]);
 
     if (typeof document !== 'undefined') {

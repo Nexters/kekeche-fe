@@ -53,12 +53,7 @@ export default React.memo(function SelectKeywords() {
                 ))}
             </div>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton
-                    shadow={false}
-                    disabled={selected.length === 0}
-                    text="다음"
-                    onClick={handleNextButtonClick}
-                />
+                <CtaButton disabled={selected.length === 0} text="다음" onClick={handleNextButtonClick} />
             </FixedBottomArea>
         </>
     );

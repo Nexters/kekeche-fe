@@ -112,7 +112,7 @@ export default function ShowResult() {
                 <div className="mx-auto mt-[56px] flex h-full w-full flex-col items-center bg-white">
                     <CharacterDetail character={previewCharacter} />
                     <FixedBottomArea className="mb-[31px]">
-                        <CtaButton shadow={false} text="다음" onClick={handleNextBtnClick} />
+                        <CtaButton text="다음" onClick={handleNextBtnClick} />
                         <button
                             onClick={handleRecreateClick}
                             className="mt-[12px] text-semibold14 text-[#7D7D7D] text-purple-200 underline"
