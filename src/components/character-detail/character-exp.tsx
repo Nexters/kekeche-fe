@@ -2,8 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Dialog, DialogContent, DialogOverlay } from '../ui-shadcn/dialog';
-import { DialogPortal } from '@radix-ui/react-dialog';
 
 type Props = {
     animate?: boolean;
