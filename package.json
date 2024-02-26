@@ -37,6 +37,7 @@
         "react-dom": "^18",
         "react-lottie": "^1.2.4",
         "react-textarea-autosize": "^8.5.3",
+        "sharp": "^0.33.2",
         "tailwind-merge": "^2.2.0",
         "tailwindcss-animate": "^1.0.7"
     },
