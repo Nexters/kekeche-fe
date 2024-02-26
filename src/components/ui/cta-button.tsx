@@ -3,10 +3,9 @@
 type Props = {
     text?: string;
     children?: React.ReactNode;
-    shadow?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function CTAButton({ children, text, shadow = true, disabled, ...props }: Props) {
+export default function CTAButton({ children, text, disabled, ...props }: Props) {
     return (
         <button
             {...props}
