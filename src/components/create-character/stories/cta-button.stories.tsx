@@ -8,5 +8,9 @@ export default {
 
 type Story = StoryObj<typeof CtaButton>;
 export const Basic: Story = {
-    render: () => <CtaButton text="테스트" />,
+    argTypes: {
+        text: { control: 'text' },
+        disabled: { control: 'boolean' },
+    },
+    render: (props) => <CtaButton {...props} />,
 };
