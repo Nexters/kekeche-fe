@@ -14,49 +14,77 @@ interface Props {
     component: 'div' | 'button';
 }
 
-export function LikeButtonWithTooltip({ cheerCount, component }: Props) {
-    return (
-        <TooltipProvider>
-            <Tooltip defaultOpen>
-                <TooltipTrigger asChild>
-                    <div>
-                        <LikeButton component={component} cheerCount={cheerCount} />
-                    </div>
-                </TooltipTrigger>
-                <TooltipContent
-                    alignOffset={-10}
-                    sideOffset={4}
-                    align="end"
-                    className="rounded-none bg-transparent p-0"
-                >
-                    <p className="rounded-2xl bg-[#2777ea] px-4 py-2 text-semibold14 text-white">
-                        하트를 눌러 응원해주세요!
-                    </p>
-                    <TooltipArrow width={12} height={10} fill="#2777ea" />
-                </TooltipContent>
-            </Tooltip>
-        </TooltipProvider>
-    );
-}
+const LOTTIE_DURATION = 5500;
 
-export function LikeButton({ cheerCount, component = 'div' }: Props) {
-    const [count, setCount] = useState(cheerCount);
-    const { memberId } = useParams();
-    const [lottieStart, setLottieStart] = useState(false);
+export function LikeButtonWithTooltip({ cheerCount, component }: Props) {
+    const [lottieStart, setLottieStart] = useState(true);
 
     useEffect(() => {
         let timeoutId: NodeJS.Timeout;
 
-        if (lottieStart) {
+        if (!lottieStart) {
             timeoutId = setTimeout(() => {
-                setLottieStart(false);
-            }, 1000);
+                setLottieStart(true);
+            }, LOTTIE_DURATION);
         }
 
         return () => {
             clearTimeout(timeoutId);
         };
     }, [lottieStart]);
+
+    return (
+        <>
+            <TooltipProvider>
+                <Tooltip defaultOpen>
+                    <TooltipTrigger asChild>
+                        <div
+                            onClick={() => {
+                                setLottieStart(false);
+                            }}
+                        >
+                            <LikeButton component={component} cheerCount={cheerCount} />
+                        </div>
+                    </TooltipTrigger>
+                    <TooltipContent
+                        alignOffset={-10}
+                        sideOffset={4}
+                        align="end"
+                        className="rounded-none bg-transparent p-0"
+                    >
+                        <p className="rounded-2xl bg-[#2777ea] px-4 py-2 text-semibold14 text-white">
+                            하트를 눌러 응원해주세요!
+                        </p>
+                        <TooltipArrow width={12} height={10} fill="#2777ea" />
+                    </TooltipContent>
+                </Tooltip>
+            </TooltipProvider>
+            <Lottie
+                options={{
+                    loop: 1,
+                    autoplay: false,
+                    animationData: HeartLottie,
+                    rendererSettings: {
+                        preserveAspectRatio: 'xMidYMid slice',
+                    },
+                }}
+                height={'auto'}
+                width={'auto'}
+                style={{
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 100,
+                    pointerEvents: 'none',
+                }}
+                isStopped={lottieStart}
+            />
+        </>
+    );
+}
+
+export function LikeButton({ cheerCount, component = 'div' }: Props) {
+    const [count, setCount] = useState(cheerCount);
+    const { memberId } = useParams();
 
     const countNumberMinWidth = () => {
         const baseWidth = 20;
@@ -68,7 +96,7 @@ export function LikeButton({ cheerCount, component = 'div' }: Props) {
 
     const handleLikeClick = async () => {
         setCount((prev) => prev + 1);
-        setLottieStart(true);
+
         await IncreaseCheerCount({ accessToken: `${getCookie('accessToken')}`, memberId: +memberId });
     };
 
@@ -85,34 +113,14 @@ export function LikeButton({ cheerCount, component = 'div' }: Props) {
             >
                 {count}
             </span>
-            <Lottie
-                options={{
-                    loop: false,
-                    autoplay: false,
-                    animationData: HeartLottie,
-                    rendererSettings: {
-                        preserveAspectRatio: 'xMidYMid slice',
-                    },
-                }}
-                height={'auto'}
-                width={'auto'}
-                style={{
-                    position: 'absolute',
-                    inset: 0,
-                    zIndex: 10000,
-                }}
-                isStopped={lottieStart}
-            />
         </>
     );
 
     if (component === 'button') {
         return (
-            <>
-                <button onClick={handleLikeClick} aria-label="좋아요 버튼" className={layoutClassNames}>
-                    {content}
-                </button>
-            </>
+            <button onClick={handleLikeClick} aria-label="좋아요 버튼" className={layoutClassNames}>
+                {content}
+            </button>
         );
     }
     return (
