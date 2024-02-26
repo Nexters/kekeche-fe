@@ -1,12 +1,14 @@
 'use client';
 
 import HeartFilled from '@/assets/icons/heart_filled_20x20.svg';
+import HeartLottie from '@/assets/lottie/heart.json';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui-shadcn/tooltip';
 import IncreaseCheerCount from '@/services/member/increaseCheerCount';
 import { TooltipArrow } from '@radix-ui/react-tooltip';
 import { getCookie } from 'cookies-next';
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Lottie from 'react-lottie';
 interface Props {
     cheerCount: number;
     component: 'div' | 'button';
@@ -40,6 +42,21 @@ export function LikeButtonWithTooltip({ cheerCount, component }: Props) {
 export function LikeButton({ cheerCount, component = 'div' }: Props) {
     const [count, setCount] = useState(cheerCount);
     const { memberId } = useParams();
+    const [lottieStart, setLottieStart] = useState(false);
+
+    useEffect(() => {
+        let timeoutId: NodeJS.Timeout;
+
+        if (lottieStart) {
+            timeoutId = setTimeout(() => {
+                setLottieStart(false);
+            }, 1000);
+        }
+
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [lottieStart]);
 
     const countNumberMinWidth = () => {
         const baseWidth = 20;
@@ -51,6 +68,7 @@ export function LikeButton({ cheerCount, component = 'div' }: Props) {
 
     const handleLikeClick = async () => {
         setCount((prev) => prev + 1);
+        setLottieStart(true);
         await IncreaseCheerCount({ accessToken: `${getCookie('accessToken')}`, memberId: +memberId });
     };
 
@@ -67,14 +85,34 @@ export function LikeButton({ cheerCount, component = 'div' }: Props) {
             >
                 {count}
             </span>
+            <Lottie
+                options={{
+                    loop: false,
+                    autoplay: false,
+                    animationData: HeartLottie,
+                    rendererSettings: {
+                        preserveAspectRatio: 'xMidYMid slice',
+                    },
+                }}
+                height={'auto'}
+                width={'auto'}
+                style={{
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 10000,
+                }}
+                isStopped={lottieStart}
+            />
         </>
     );
 
     if (component === 'button') {
         return (
-            <button onClick={handleLikeClick} aria-label="좋아요 버튼" className={layoutClassNames}>
-                {content}
-            </button>
+            <>
+                <button onClick={handleLikeClick} aria-label="좋아요 버튼" className={layoutClassNames}>
+                    {content}
+                </button>
+            </>
         );
     }
     return (
