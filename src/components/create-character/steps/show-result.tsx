@@ -14,6 +14,7 @@ import { useContext, useEffect, useState } from 'react';
 import Lottie from 'react-lottie';
 import FixedBottomArea from '../fixed-bottom-area';
 import useCarousel from '../hooks/useCarousel';
+import EggImg from '@/assets/images/egg.webp';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -33,15 +34,6 @@ export default function ShowResult() {
     const step = searchParams.get('step');
 
     const createCharacterValues = useContext(CreateCharacterValuesContext);
-
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: LoadingLottie,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice',
-        },
-    };
 
     if (createCharacterValues === null) {
         alert('처음부터 하세요.');
@@ -99,15 +91,13 @@ export default function ShowResult() {
     return (
         <>
             {isCreating ? (
-                <>
+                <div className="mx-auto flex h-[100vh] w-full flex-col items-center">
                     <Image quality={100} alt="배경" src={HomeBg} fill className="opacity-50" />
                     <div className="text-gray-700 h z-[50] mb-[40px] mt-[180px] w-full text-center text-bold24">
                         캐릭터 생성 중
                     </div>
-                    <div>
-                        <Lottie options={defaultOptions} height={400} width={400} />
-                    </div>
-                </>
+                    <Image priority src={EggImg} alt="알" className="z-[99] mt-[50px]" />
+                </div>
             ) : (
                 <div className="mx-auto mt-[56px] flex h-full w-full flex-col items-center bg-white">
                     <CharacterDetail character={previewCharacter} />
