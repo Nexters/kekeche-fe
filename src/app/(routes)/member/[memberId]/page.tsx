@@ -1,7 +1,11 @@
+import EggImage from '@/assets/images/egg.png';
+import PencilImage from '@/assets/images/pencil.png';
 import { PageContainer } from '@/components/ui';
 import A2HS from '@/hooks/useA2HS';
+import getMember from '@/services/auth/getMember';
 import getCharacters from '@/services/character/getCharacters';
 import { cookies } from 'next/headers';
+import Image from 'next/image';
 import CharacterCard from './character-card';
 import CharacterCreateButton from './character-create-button';
 import CharacterCreateLink from './character-create-link';
@@ -17,35 +21,64 @@ export default async function Home({ params: { memberId } }: { params: { memberI
         accessToken,
     });
 
+    const member = await getMember({ accessToken });
+
     const isMyPage = characters?.isMe;
     const headerText = `${characters?.memberNickname}의 도감`;
     const showCharacterCreateButton = isMyPage && characters.characters.length < MAXIMUM_CHARACTER;
 
     return (
         <PageContainer hasNavigator={characters?.isMe}>
-            <div className="flex-1 bg-[#F6F8FC]">
+            <div className="flex-1">
                 <header className="flex items-center justify-between py-5 pl-6 pr-7">
-                    <h1 className="text-bold24">{headerText}</h1>
+                    <h1 className="text-bold24 text-[#494E59]">{headerText}</h1>
                     {isMyPage ? (
                         <LikeButton component="div" cheerCount={characters.cheerCount} />
                     ) : (
                         <LikeButtonWithTooltip component="button" cheerCount={characters?.cheerCount ?? 0} />
                     )}
                 </header>
-                <section className="grid grid-cols-2 gap-3 px-6 pb-[90px] pt-4">
-                    {characters?.characters?.map((character) => {
-                        if (isMyPage)
-                            return (
-                                <CharacterCard
-                                    key={character.id}
-                                    component="link"
-                                    href={`/character/${character.id}`}
-                                    character={character}
-                                />
-                            );
-                        return <CharacterCard key={character.id} component="div" character={character} />;
-                    })}
-                    {showCharacterCreateButton && <CharacterCreateButton />}
+                <section className="mb-5 px-6">
+                    <h2 className="mb-[10px] pt-5 text-[20px] font-bold leading-[32px] text-[#494E59]">성장과정</h2>
+                    <div className="flex justify-between gap-[10px] py-[6px]">
+                        <div className="flex flex-1 items-center justify-between rounded-xl bg-[#F6F8FC] px-5 py-[18px]">
+                            <div>
+                                <div className="text-[12px] font-medium leading-[18px] text-[#8B92A0]">성장한지</div>
+                                <div className="text-[20px] font-bold leading-[30px] text-[#2777EA]">
+                                    {member.joinDays}일
+                                </div>
+                            </div>
+                            <Image alt="" priority width={50} height={50} src={EggImage} className="rounded-lg" />
+                        </div>
+                        <div className="flex flex-1 items-center justify-between rounded-xl  bg-[#F6F8FC] px-5 py-[18px]">
+                            <div>
+                                <div className="text-[12px] font-medium leading-[18px] text-[#8B92A0]">총 메모</div>
+                                <div className="text-[20px] font-bold leading-[30px] text-[#2777EA]">
+                                    {member.memoCount}개
+                                </div>
+                            </div>
+                            <Image alt="" priority width={50} height={50} src={PencilImage} className="rounded-lg" />
+                        </div>
+                    </div>
+                </section>
+                <section className="bg-[#F6F8FC] px-6 pb-[90px]">
+                    <h2 className="mb-[10px] pt-5 text-[20px] font-bold leading-[32px] text-[#494E59]">성장 기록지</h2>
+                    <div className="grid grid-cols-2 gap-3">
+                        {characters?.characters?.map((character, i) => {
+                            if (isMyPage)
+                                return (
+                                    <CharacterCard
+                                        key={character.id}
+                                        component="link"
+                                        href={`/character/${character.id}`}
+                                        character={character}
+                                        order={i}
+                                    />
+                                );
+                            return <CharacterCard order={i} key={character.id} component="div" character={character} />;
+                        })}
+                        {showCharacterCreateButton && <CharacterCreateButton />}
+                    </div>
                 </section>
             </div>
 

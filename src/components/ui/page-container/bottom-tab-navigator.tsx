@@ -31,6 +31,12 @@ export default function TabNavigator() {
         if (label !== '작성') {
             setCurrentLocation(label);
         }
+        if (label === '홈') {
+            router.push(path);
+            router.refresh();
+
+            return;
+        }
         router.push(path);
     };
 

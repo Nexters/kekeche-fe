@@ -1,5 +1,3 @@
-import BeanIcon from '@/assets/icons/bean_16x16.svg';
-import { Colors } from '@/constants/character-info';
 import { Character } from '@/types/character';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,60 +6,114 @@ import { twMerge } from 'tailwind-merge';
 interface Props {
     character: Character;
     component: 'div' | 'link';
+    order: number;
     href?: string;
 }
 
-export default function CharacterCard({ character, component, href }: Props) {
+const Colors = [
+    {
+        id: 0,
+        name: 'orange',
+        hexClassName: 'text-[#FF7864]',
+        hexBgClassName: 'bg-[#FFF4F2]',
+    },
+    {
+        id: 1,
+        name: 'violet',
+        hexClassName: 'text-[#757EF7]',
+        hexBgClassName: 'bg-[#EAEBFF]',
+    },
+    {
+        id: 2,
+        name: 'yellow',
+        hexClassName: 'text-[#FFD557]',
+        hexBgClassName: 'bg-[#FFFCF2]',
+    },
+    {
+        id: 3,
+        name: 'purple',
+        hexClassName: 'text-[#BF6DFF]',
+        hexBgClassName: 'bg-[#F5E9FF]',
+    },
+    {
+        id: 4,
+        name: 'green',
+        hexClassName: 'text-[#A6EC49]',
+        hexBgClassName: 'bg-[#F7FFED]',
+    },
+    {
+        id: 5,
+        name: 'pink',
+        hexClassName: 'text-[#EC6BDF]',
+        hexBgClassName: 'bg-[#FFEEFD]',
+    },
+] as const;
+
+const characterTagStrings = ['첫번째 나', '두번째 나', '세번째 나', '네번째 나', '다섯번째 나', '여섯번째 나'];
+
+export default function CharacterCard({ character, component, href, order }: Props) {
     const getColorFromUrl = (url: string) => {
         const match = url.match(/\/(\d+)\.webp$/);
 
         if (!match) return;
 
         const colorEnum = parseInt(match[1], 10);
-        return Colors[colorEnum].hexClassName;
+        return Colors[colorEnum];
     };
 
-    const bgColor = getColorFromUrl(character.characterImage);
+    const color = getColorFromUrl(character.characterImage);
 
     const content = (
         <>
-            <div className={` flex w-fit items-center gap-[2px] rounded-full px-2 py-1  ${bgColor ?? 'bg-[#2777ea]'}`}>
-                <span className="h-4 w-4">
-                    <BeanIcon />
+            <div className={`flex w-fit items-center gap-[2px] rounded-full px-2 py-1 ${color?.hexBgClassName}`}>
+                <span className={`text-[10px] font-semibold leading-[11px] ${color?.hexClassName}`}>
+                    {characterTagStrings[order]}
                 </span>
-                <span className="text-[12px] font-semibold leading-[11px] text-white">{`Lv.${character.level}`}</span>
             </div>
-            <div className="mb-1 h-[120px] w-[120px] rounded-lg bg-white">
-                <div className="relative mx-auto h-[100px] w-[100px]">
+
+            <div className="relative mx-auto my-[10px] h-[100px] w-[100px]">
+                <Image
+                    priority
+                    quality={100}
+                    width={100}
+                    height={100}
+                    alt={character.name}
+                    style={{
+                        objectFit: 'cover',
+                    }}
+                    src={character.characterImage}
+                    className="absolute left-0 right-0"
+                />
+                {character.itemImage && (
                     <Image
-                        priority
                         quality={100}
-                        width={100}
-                        height={100}
-                        alt={character.name}
+                        priority
                         style={{
                             objectFit: 'cover',
                         }}
-                        src={character.characterImage}
-                        className="absolute left-0 right-0"
+                        src={character.itemImage}
+                        alt={character.name}
+                        className="absolute left-0 top-0"
+                        width={100}
+                        height={100}
                     />
-                    {character.itemImage && (
-                        <Image
-                            quality={100}
-                            priority
+                )}
+            </div>
+
+            <div>
+                <p className="mb-1 text-center text-bold14 text-contentPrimaryLight">{character.name}</p>
+                <div className="flex items-center gap-1">
+                    <p className="text-semibold10 text-[#2777ea]">Lv.{character.level}</p>
+                    <div className="w-[90px] rounded-full bg-[#ECEFF5]">
+                        <div
+                            className="h-2  rounded-full bg-[#2777EA]"
                             style={{
-                                objectFit: 'cover',
+                                width: `${(character.currentExp / character.nextExp) * 100}%`,
                             }}
-                            src={character.itemImage}
-                            alt={character.name}
-                            className="absolute left-0 top-0"
-                            width={100}
-                            height={100}
                         />
-                    )}
+                    </div>
                 </div>
             </div>
-            <p className="text-bold14 text-contentPrimaryLight">{character.name}</p>
         </>
     );
 
