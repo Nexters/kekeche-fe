@@ -24,7 +24,7 @@ export default function CharacterMemos() {
     });
 
     return (
-        <div className=" flex h-auto w-full flex-col items-center rounded-t-[24px] bg-newGray-100  pb-[160px] pt-[24px]">
+        <div className=" mt-[16px] flex h-auto w-full flex-col items-center rounded-t-[24px] bg-newGray-100  pb-[160px] pt-[24px]">
             <h3 className="mb-[20px] w-full px-[24px] text-left text-Subtitle1 text-newGray-900">{`메모 ${totalCount > 0 ? totalCount : ''}`}</h3>
             {memos.length === 0 && <NoMemoFallback />}
             {memos.length > 0 && (

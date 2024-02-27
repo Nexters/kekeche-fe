@@ -23,7 +23,7 @@ export default async function Home() {
             </div>
             <FixedBottomArea className="mb-[31px] gap-[16px]">
                 <Link href="/create">
-                    <CtaButton shadow={false} text="내 캐릭터 만들기" />
+                    <CtaButton text="내 캐릭터 만들기" />
                 </Link>
                 <div className="semibold-14 text-gray-400 ">
                     {'이미 도감이 있으면 '}

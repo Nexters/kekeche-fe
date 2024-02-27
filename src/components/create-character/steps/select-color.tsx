@@ -46,7 +46,7 @@ export default React.memo(function SelectColor() {
                 ))}
             </div>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton shadow={false} disabled={selected === null} text="다음" onClick={handleClick} />
+                <CtaButton disabled={selected === null} text="다음" onClick={handleClick} />
             </FixedBottomArea>
         </>
     );

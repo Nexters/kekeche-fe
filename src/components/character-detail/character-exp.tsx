@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Dialog, DialogContent, DialogOverlay } from '../ui-shadcn/dialog';
 
 type Props = {
     animate?: boolean;
@@ -24,6 +23,13 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
             setExpAnimating(false);
         }
     }, [isAnimating, animate, expAnimating, currentExp]);
+
+    if (isAnimating) {
+        document.body.style.overflow = 'hidden';
+        document.body.style.height = '100%';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
 
     return (
         <>

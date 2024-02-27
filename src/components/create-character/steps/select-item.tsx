@@ -39,7 +39,7 @@ export default React.memo(function SelectItem() {
                 ))}
             </div>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton shadow={false} text="완료" onClick={handleClick} />
+                <CtaButton text="완료" onClick={handleClick} />
             </FixedBottomArea>
         </>
     );

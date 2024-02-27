@@ -1,7 +1,7 @@
 'use client';
 
 import MeatballIcon from '@/assets/icons/meatball_20x20.svg';
-import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '@radix-ui/react-popover';
 import { PencilIcon, TrashIcon } from 'lucide-react';
 
 export default function ActionButton({ onClick, onEdit }: { onClick: () => void; onEdit: () => void }) {

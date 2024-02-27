@@ -50,7 +50,7 @@ export default React.memo(function SetName() {
                 {'슈퍼디자이너, 맛집덕후, 헬스쪼렙, 착한 효녀'}
             </p>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton shadow={false} disabled={isError || name.length === 0} text="다음" onClick={handleClick} />
+                <CtaButton disabled={isError || name.length === 0} text="다음" onClick={handleClick} />
             </FixedBottomArea>
         </>
     );
