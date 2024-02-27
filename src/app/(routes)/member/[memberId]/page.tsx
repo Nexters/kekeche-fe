@@ -29,7 +29,7 @@ export default async function Home({ params: { memberId } }: { params: { memberI
 
     return (
         <PageContainer hasNavigator={characters?.isMe}>
-            <div className="flex-1">
+            <div className="flex flex-1 flex-col">
                 <header className="flex items-center justify-between py-5 pl-6 pr-7">
                     <h1 className="text-bold24 text-[#494E59]">{headerText}</h1>
                     {isMyPage ? (
@@ -48,7 +48,17 @@ export default async function Home({ params: { memberId } }: { params: { memberI
                                     {characters?.joinDays}일
                                 </div>
                             </div>
-                            <Image alt="" priority width={50} height={50} src={EggImage} className="rounded-lg" />
+                            <div className="flex h-[50px] w-[50px] rounded-lg bg-white">
+                                <Image
+                                    alt=""
+                                    objectFit="cover"
+                                    priority
+                                    width={50}
+                                    height={50}
+                                    src={EggImage}
+                                    className="rounded-lg"
+                                />
+                            </div>
                         </div>
                         <div className="flex flex-1 items-center justify-between rounded-xl  bg-[#F6F8FC] px-5 py-[18px]">
                             <div>
@@ -57,11 +67,21 @@ export default async function Home({ params: { memberId } }: { params: { memberI
                                     {characters?.memoCount}개
                                 </div>
                             </div>
-                            <Image alt="" priority width={50} height={50} src={PencilImage} className="rounded-lg" />
+                            <div className="flex h-[50px] w-[50px] rounded-lg bg-white">
+                                <Image
+                                    alt=""
+                                    objectFit="cover"
+                                    priority
+                                    width={50}
+                                    height={50}
+                                    src={PencilImage}
+                                    className="rounded-lg"
+                                />
+                            </div>
                         </div>
                     </div>
                 </section>
-                <section className="bg-[#F6F8FC] px-6 pb-[90px]">
+                <section className="flex-1 bg-[#F6F8FC] px-6 pb-[90px]">
                     <h2 className="mb-[10px] pt-5 text-[20px] font-bold leading-[32px] text-[#494E59]">성장 기록지</h2>
                     <div className="grid grid-cols-2 gap-3">
                         {characters?.characters?.map((character, i) => {
