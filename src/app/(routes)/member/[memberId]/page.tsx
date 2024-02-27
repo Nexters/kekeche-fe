@@ -45,7 +45,7 @@ export default async function Home({ params: { memberId } }: { params: { memberI
                             <div>
                                 <div className="text-[12px] font-medium leading-[18px] text-[#8B92A0]">성장한지</div>
                                 <div className="text-[20px] font-bold leading-[30px] text-[#2777EA]">
-                                    {member.joinDays}일
+                                    {characters?.joinDays}일
                                 </div>
                             </div>
                             <Image alt="" priority width={50} height={50} src={EggImage} className="rounded-lg" />
@@ -54,7 +54,7 @@ export default async function Home({ params: { memberId } }: { params: { memberI
                             <div>
                                 <div className="text-[12px] font-medium leading-[18px] text-[#8B92A0]">총 메모</div>
                                 <div className="text-[20px] font-bold leading-[30px] text-[#2777EA]">
-                                    {member.memoCount}개
+                                    {characters?.memoCount}개
                                 </div>
                             </div>
                             <Image alt="" priority width={50} height={50} src={PencilImage} className="rounded-lg" />

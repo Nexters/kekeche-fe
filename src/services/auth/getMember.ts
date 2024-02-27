@@ -2,7 +2,6 @@ export type Member = {
     memberId: number;
     characterCount: number;
     memoCount: number;
-    joinDays: number;
 };
 
 export type GetMemberResponse = Member;

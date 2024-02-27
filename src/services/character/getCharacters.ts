@@ -6,6 +6,8 @@ export type GetCharactersResponse = {
     isMe: boolean;
     memberNickname: string;
     cheerCount: number;
+    memoCount: number;
+    joinDays: number;
 };
 
 export type GetCharactersRequest = {
