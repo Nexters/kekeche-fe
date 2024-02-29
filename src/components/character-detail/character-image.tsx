@@ -43,7 +43,7 @@ export default function CharacterImage({ characterImage, itemImage, hasBubble = 
     };
 
     return (
-        <div className="flex h-auto w-full flex-col items-center">
+        <div onClick={handleSetNewBubble} className="flex h-auto w-full cursor-pointer flex-col items-center">
             <AnimatePresence initial={false} mode="wait">
                 {hasBubble && (
                     <motion.div
@@ -58,7 +58,7 @@ export default function CharacterImage({ characterImage, itemImage, hasBubble = 
                     </motion.div>
                 )}
             </AnimatePresence>
-            <div onClick={handleSetNewBubble} className="relative h-[299px] w-[328px] cursor-pointer">
+            <div className="relative h-[299px] w-[328px] ">
                 <Image
                     quality={100}
                     priority

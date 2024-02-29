@@ -16,8 +16,6 @@ import Story3 from '@/assets/images/story-3.webp';
 export default React.memo(function Story() {
     const router = useRouter();
 
-    const { handleNextClick } = useCarousel();
-
     const [storyNum, setStoryNum] = useState<1 | 2 | 3>(1);
 
     return (
