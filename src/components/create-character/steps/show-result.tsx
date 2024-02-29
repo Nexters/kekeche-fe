@@ -83,9 +83,9 @@ export default function ShowResult() {
         <>
             {isCreating ? (
                 <div className="mx-auto flex h-[100vh] w-full flex-col items-center">
-                    <Image quality={100} alt="배경" src={HomeBg} fill className="opacity-50" />
-                    <div className="text-gray-700 h z-[50] mb-[40px] mt-[180px] w-full text-center text-bold24">
-                        캐릭터 생성 중
+                    <Image quality={100} alt="배경" src={HomeBg} fill />
+                    <div className="z-[50] mb-[40px] mt-[80px] flex h-[80px] w-[329px] items-center justify-center rounded-[16px] bg-white text-bold24 text-[#5B616E]">
+                        알에서 깨어나고 있어요!
                     </div>
                     <motion.img
                         initial={{ scale: 1 }}
