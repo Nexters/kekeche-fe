@@ -6,9 +6,8 @@ import useCreateCharacter from '../hooks/useCreateCharacter';
 import FixedBottomArea from '../fixed-bottom-area';
 import { useRouter } from 'next/navigation';
 
-const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;
-
 export default React.memo(function SetName() {
+    const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;
     const { setValue } = useCreateCharacter();
     const { handleNextClick } = useCarousel();
 
