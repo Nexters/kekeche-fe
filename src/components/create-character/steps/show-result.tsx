@@ -51,18 +51,6 @@ export default function ShowResult() {
 
     const [isCreating, setIsCreating] = useState(true);
 
-    const previewCharacter: Character = {
-        id: 0,
-        name: name as string,
-        characterImage: characterImg,
-        itemImage: itemImg as string,
-        currentExp: 0,
-        nextExp: 12,
-        keywords: keywords as number[],
-        level: 1,
-        totalExp: 0,
-    };
-
     const handleNextBtnClick = async () => {
         try {
             // 캐릭터 생성 api...
@@ -83,6 +71,7 @@ export default function ShowResult() {
     };
 
     useEffect(() => {
+        setIsCreating(true);
         if (step === '6') {
             setTimeout(() => {
                 setIsCreating(false);
