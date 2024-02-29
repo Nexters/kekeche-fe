@@ -5,12 +5,11 @@ import {
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
-    AlertDialogFooter,
+    AlertDialogDescription,
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@/components/ui-shadcn/alert-dialog';
-import { getCookie } from 'cookies-next';
-import Image from 'next/image';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 
 export const useA2HS = () => {
@@ -40,7 +39,6 @@ export const useA2HS = () => {
 
     const clearPrompt = () => {
         setDeferredPrompt(null);
-        document.cookie = 'a2hs=true; max-age=2592000; path=/';
     };
 
     return { deferredPrompt, install: installApp, clearPrompt };
@@ -52,35 +50,58 @@ export default function A2HS() {
 
     const showDialog = deferredPrompt && !as2hsCookie;
 
+    const [check, setCheck] = useState(false);
+
     return showDialog ? (
         <AlertDialog open={showDialog}>
             <AlertDialogContent className="w-[320px] rounded-xl">
                 <AlertDialogHeader>
-                    <AlertDialogTitle className="flex items-start gap-2 text-left">
-                        <Image
-                            src="/icons/icon-192x192.png"
-                            style={{ objectFit: 'cover' }}
-                            alt=""
-                            width={64}
-                            height={64}
-                        />
-                        AnotherMe 바로가기를
-                        <br /> 추가하시겠습니까?
+                    <AlertDialogTitle className="text-center text-[20px] text-bold18">
+                        홈 화면에 앱설치 할까요?
                     </AlertDialogTitle>
-                </AlertDialogHeader>
+                    <AlertDialogDescription>언제든 내 정보 탭에서 설치할 수 있어요</AlertDialogDescription>
+                    <label className="mx-auto mb-5 flex items-center gap-1 text-[#3D4350]">
+                        <input
+                            className="rounded-[6px] border border-[#C6CBD8] bg-[#F7F8F9] bg-none caret-[#C6CBD8] accent-white"
+                            onChange={(e) => {
+                                if (e.target.checked) {
+                                    document.cookie = 'a2hs=true; max-age=2592000; path=/';
 
-                <AlertDialogFooter>
-                    <AlertDialogCancel asChild>
-                        <button className="flex-1" onClick={clearPrompt}>
-                            취소
-                        </button>
-                    </AlertDialogCancel>
-                    <AlertDialogAction asChild>
-                        <button className="flex-1" onClick={install}>
-                            홈 화면에 추가
-                        </button>
-                    </AlertDialogAction>
-                </AlertDialogFooter>
+                                    return;
+                                }
+                                deleteCookie('a2hs');
+                            }}
+                            type="checkbox"
+                        />
+                        이 알람 다시 보지 않기
+                    </label>
+                    <div className="pt-[12px]">
+                        <div className="flex items-center gap-3">
+                            <AlertDialogCancel
+                                asChild
+                                className="ml-auto mt-0 bg-[#ECEFF5] hover:bg-[#ECEFF5] hover:text-[#8B92A0] focus-visible:ring-0"
+                            >
+                                <button
+                                    className="h-[48px] w-[118px] rounded-[16px] px-6 py-[14px] text-center text-semibold18 text-[#8B92A0]"
+                                    onClick={clearPrompt}
+                                >
+                                    취소
+                                </button>
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                                asChild
+                                className="mr-auto mt-0 bg-[#2777ea] hover:bg-[#2777ea] hover:text-white focus-visible:ring-0"
+                            >
+                                <button
+                                    className="h-[48px] w-[118px] rounded-[16px]  px-6 py-[14px] text-center text-semibold18 text-white"
+                                    onClick={install}
+                                >
+                                    설치
+                                </button>
+                            </AlertDialogAction>
+                        </div>
+                    </div>
+                </AlertDialogHeader>
             </AlertDialogContent>
         </AlertDialog>
     ) : (
