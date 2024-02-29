@@ -19,7 +19,7 @@ export default function StepperHeader() {
     return (
         <>
             {step !== null && step >= 1 && step <= 5 && (
-                <div className="fixed z-[999] mx-auto flex w-screen  min-w-[350px] flex-col items-center bg-white lg:w-[400px]">
+                <div className="absolute z-[999] mx-auto flex w-screen  min-w-[350px] flex-col items-center bg-white lg:w-[400px]">
                     <TopBar>
                         <TopBar.Left>
                             <button className="flex h-full w-[16px] items-center " onClick={handlePrevClick}>
