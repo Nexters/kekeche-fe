@@ -112,45 +112,46 @@ export default function ShowResult() {
                     />
                 </div>
             ) : (
-                <div className="mx-auto  flex h-full w-full flex-col items-center bg-white gradation-bg">
-                    <div className={twMerge('mt-[50px] flex h-auto w-full flex-col items-center')}>
-                        <h3 className="text-H1 text-black">{name}</h3>
-                        <ul className="mt-[6px] flex gap-[4px]">
-                            {keywords?.map((keywordIdx) => (
-                                <li
-                                    className={twMerge(
-                                        'rounded-[8px] px-[12px] py-[4px] text-[12px] font-[500]',
-                                        Keywords[keywordIdx].colorClassname,
-                                    )}
-                                    key={keywordIdx}
-                                >
-                                    {Keywords[keywordIdx].name}
-                                </li>
-                            ))}
-                        </ul>
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1, duration: 4 }}
-                        >
-                            <CharacterImage
-                                itemImage={itemImg as string}
-                                characterImage={characterImg}
-                                hasBubble={true}
-                            />
-                        </motion.div>
-                        <CharacterExp animate={false} currentExp={0} nextExp={12} level={1} />
+                <>
+                    <div className="mx-auto flex h-auto min-h-screen w-full flex-col items-center bg-white pb-[200px] gradation-bg">
+                        <div className={twMerge('mt-[20px] flex h-auto w-full flex-col items-center')}>
+                            <h3 className="text-H1 text-black">{name}</h3>
+                            <ul className="mt-[6px] flex gap-[4px]">
+                                {keywords?.map((keywordIdx) => (
+                                    <li
+                                        className={twMerge(
+                                            'rounded-[8px] px-[12px] py-[4px] text-[12px] font-[500]',
+                                            Keywords[keywordIdx].colorClassname,
+                                        )}
+                                        key={keywordIdx}
+                                    >
+                                        {Keywords[keywordIdx].name}
+                                    </li>
+                                ))}
+                            </ul>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 1, duration: 4 }}
+                            >
+                                <CharacterImage
+                                    itemImage={itemImg as string}
+                                    characterImage={characterImg}
+                                    hasBubble={true}
+                                />
+                            </motion.div>
+                        </div>
+                        <FixedBottomArea className="mb-[31px]">
+                            <CtaButton text="다음" onClick={handleNextBtnClick} />
+                            <button
+                                onClick={handleRecreateClick}
+                                className="mt-[12px] text-semibold14 text-primary-500  underline"
+                            >
+                                캐릭터 다시 만들래요
+                            </button>
+                        </FixedBottomArea>
                     </div>
-                    <FixedBottomArea className="mb-[31px]">
-                        <CtaButton text="다음" onClick={handleNextBtnClick} />
-                        <button
-                            onClick={handleRecreateClick}
-                            className="mt-[12px] text-semibold14 text-primary-500  underline"
-                        >
-                            캐릭터 다시 만들래요
-                        </button>
-                    </FixedBottomArea>
-                </div>
+                </>
             )}
         </>
     );
