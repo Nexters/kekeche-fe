@@ -1,11 +1,9 @@
 'use client';
 
 import HomeBg from '@/assets/images/homeBg.jpg';
-import CharacterDetail from '@/components/character-detail';
 import CtaButton from '@/components/ui/cta-button';
 import { Keywords, NO_ITEM_IDX } from '@/constants/character-info';
 import { CreateCharacterValues, CreateCharacterValuesContext } from '@/context/create-character-provider';
-import { Character } from '@/types/character';
 import { sendGTMEvent } from '@next/third-parties/google';
 import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
@@ -15,8 +13,8 @@ import { motion } from 'framer-motion';
 import FixedBottomArea from '../fixed-bottom-area';
 import useCarousel from '../hooks/useCarousel';
 import { twMerge } from 'tailwind-merge';
-import CharacterExp from '@/components/character-detail/character-exp';
 import CharacterImage from '@/components/character-detail/character-image';
+import CharacterExp from '@/components/character-detail/character-exp';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -129,6 +127,7 @@ export default function ShowResult() {
                                     hasBubble={true}
                                 />
                             </motion.div>
+                            <CharacterExp animate={false} currentExp={0} nextExp={12} level={1} />
                         </div>
                         <FixedBottomArea className="mb-[31px]">
                             <CtaButton text="다음" onClick={handleNextBtnClick} />
