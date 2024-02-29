@@ -15,6 +15,8 @@ import useCarousel from '../hooks/useCarousel';
 import { twMerge } from 'tailwind-merge';
 import CharacterImage from '@/components/character-detail/character-image';
 import CharacterExp from '@/components/character-detail/character-exp';
+import FanfareLottie from '@/assets/lottie/fanfare_purple.json';
+import Lottie from 'react-lottie';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -101,7 +103,25 @@ export default function ShowResult() {
             ) : (
                 <>
                     <div className="mx-auto flex h-auto min-h-screen w-full flex-col items-center bg-white pb-[200px] gradation-bg">
-                        <div className={twMerge('mt-[20px] flex h-auto w-full flex-col items-center')}>
+                        <Lottie
+                            isClickToPauseDisabled={true}
+                            options={{
+                                loop: true,
+                                autoplay: true,
+                                animationData: FanfareLottie,
+                                rendererSettings: {
+                                    preserveAspectRatio: 'xMidYMid slice',
+                                },
+                            }}
+                            height={'auto'}
+                            width={'auto'}
+                            style={{
+                                position: 'absolute',
+                                inset: 0,
+                                zIndex: 2,
+                            }}
+                        />
+                        <div className={twMerge('z-[4] mt-[20px] flex h-auto w-full flex-col items-center')}>
                             <h3 className="text-H1 text-black">{name}</h3>
                             <ul className="mt-[6px] flex gap-[4px]">
                                 {keywords?.map((keywordIdx) => (
@@ -129,7 +149,7 @@ export default function ShowResult() {
                             </motion.div>
                             <CharacterExp animate={false} currentExp={0} nextExp={12} level={1} />
                         </div>
-                        <FixedBottomArea className="mb-[31px]">
+                        <FixedBottomArea className="z-[4] mb-[31px]">
                             <CtaButton text="다음" onClick={handleNextBtnClick} />
                             <button
                                 onClick={handleRecreateClick}

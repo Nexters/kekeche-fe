@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import FanfareLottie from '@/assets/lottie/fanfare_purple.json';
+import Lottie from 'react-lottie';
 
 type Props = {
     animate?: boolean;
@@ -60,6 +62,24 @@ export default function CharacterExp({ animate = false, currentExp, nextExp, lev
                 </motion.div>
             ) : (
                 <div className="fixed inset-0 left-0 top-0 z-50 h-screen w-screen bg-black/80  ">
+                    <Lottie
+                        isClickToPauseDisabled={true}
+                        options={{
+                            loop: true,
+                            autoplay: true,
+                            animationData: FanfareLottie,
+                            rendererSettings: {
+                                preserveAspectRatio: 'xMidYMid slice',
+                            },
+                        }}
+                        height={'auto'}
+                        width={'auto'}
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            zIndex: 998,
+                        }}
+                    />
                     <div className="mx-auto flex h-full w-auto min-w-[350px] items-center justify-center border-none bg-transparent lg:w-[400px]">
                         <motion.div
                             layoutId="exp"
