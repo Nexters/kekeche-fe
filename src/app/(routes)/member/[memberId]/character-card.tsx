@@ -14,38 +14,32 @@ const Colors = [
     {
         id: 0,
         name: 'orange',
-        hexClassName: 'text-[#FF7864]',
-        hexBgClassName: 'bg-[#FFF4F2]',
+        hexClassName: 'bg-[#FF7864]',
     },
     {
         id: 1,
         name: 'violet',
-        hexClassName: 'text-[#757EF7]',
-        hexBgClassName: 'bg-[#EAEBFF]',
+        hexClassName: 'bg-[#757EF7]',
     },
     {
         id: 2,
         name: 'yellow',
-        hexClassName: 'text-[#FFD557]',
-        hexBgClassName: 'bg-[#FFFCF2]',
+        hexClassName: 'bg-[#E7B110]',
     },
     {
         id: 3,
         name: 'purple',
-        hexClassName: 'text-[#BF6DFF]',
-        hexBgClassName: 'bg-[#F5E9FF]',
+        hexClassName: 'bg-[#BF6DFF]',
     },
     {
         id: 4,
         name: 'green',
-        hexClassName: 'text-[#A6EC49]',
-        hexBgClassName: 'bg-[#F7FFED]',
+        hexClassName: 'bg-[#6DBD05]',
     },
     {
         id: 5,
         name: 'pink',
-        hexClassName: 'text-[#EC6BDF]',
-        hexBgClassName: 'bg-[#FFEEFD]',
+        hexClassName: 'bg-[#EC6BDF]',
     },
 ] as const;
 
@@ -65,8 +59,8 @@ export default function CharacterCard({ character, component, href, order }: Pro
 
     const content = (
         <>
-            <div className={`flex w-fit items-center gap-[2px] rounded-full px-2 py-1 ${color?.hexBgClassName}`}>
-                <span className={`text-[10px] font-semibold leading-[11px] ${color?.hexClassName}`}>
+            <div className={`flex w-fit items-center gap-[2px] rounded-full px-2 py-1 ${color?.hexClassName}`}>
+                <span className={`text-[10px] font-semibold leading-[11px] text-white`}>
                     {characterTagStrings[order]}
                 </span>
             </div>
