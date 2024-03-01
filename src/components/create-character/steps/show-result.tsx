@@ -118,10 +118,10 @@ export default function ShowResult() {
                             style={{
                                 position: 'absolute',
                                 inset: 0,
-                                zIndex: 2,
+                                zIndex: 4,
                             }}
                         />
-                        <div className={twMerge('z-[4] mt-[20px] flex h-auto w-full flex-col items-center')}>
+                        <div className={twMerge('z-[3] mt-[20px] flex h-auto w-full flex-col items-center')}>
                             <h3 className="text-H1 text-black">{name}</h3>
                             <ul className="mt-[6px] flex gap-[4px]">
                                 {keywords?.map((keywordIdx) => (
@@ -149,7 +149,7 @@ export default function ShowResult() {
                             </motion.div>
                             <CharacterExp animate={false} currentExp={0} nextExp={12} level={1} />
                         </div>
-                        <FixedBottomArea className="z-[4] mb-[31px]">
+                        <FixedBottomArea className="z-[5] mb-[31px]">
                             <CtaButton text="다음" onClick={handleNextBtnClick} />
                             <button
                                 onClick={handleRecreateClick}
