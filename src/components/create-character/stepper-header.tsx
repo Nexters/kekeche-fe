@@ -26,7 +26,7 @@ export default function StepperHeader() {
                                 <ArrowLeft />
                             </button>
                         </TopBar.Left>
-                        <TopBar.Text>{'캐릭터 만들기'}</TopBar.Text>
+                        <TopBar.Text>{'나의 캐릭터 생성'}</TopBar.Text>
                     </TopBar>
                     <div className="relative h-[4px] w-full bg-[#D9D9D9]">
                         <motion.div

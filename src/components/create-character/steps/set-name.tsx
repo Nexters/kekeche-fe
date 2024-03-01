@@ -30,7 +30,15 @@ export default React.memo(function SetName() {
     return (
         <>
             <div className="h-[52px] w-full" />
-            <Intro title="캐릭터의 이름을 정해 주세요." description="한글, 영문 대소문자. 공백 포함 최대 8자로." />
+            <Intro
+                title={
+                    <span>
+                        {'내 안에 또 다른 나를 꺼낼 시간!\n'} <span className="text-primary-500">또 다른 나</span>의
+                        이름을 지어주세요.
+                    </span>
+                }
+                description="한글, 영문 대소문자. 공백 포함 최대 8자로."
+            />
             <div className="flex w-[375px] flex-col gap-[8px] pl-[24px]">
                 <input
                     className={`h-[48px] w-[312px]  rounded-[12px] border bg-[#F7F8F9] px-[16px] py-[12px] outline-none ${isError ? 'border-2 border-[#F68277]' : 'border border-[#E8EAEE]'}`}

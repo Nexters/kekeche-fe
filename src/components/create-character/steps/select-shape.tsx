@@ -31,7 +31,13 @@ export default React.memo(function SelectShape() {
     return (
         <>
             <div className="h-[52px] w-full" />
-            <Intro title="캐릭터의 모습을 고르세요" />
+            <Intro
+                title={
+                    <span>
+                        <span className="text-primary-500">또 다른 나</span>의 모습을 고르세요.
+                    </span>
+                }
+            />
             <div className="flex flex-col gap-[16px]">
                 {Shapes.map(({ id, image }) => (
                     <button

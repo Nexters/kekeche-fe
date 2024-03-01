@@ -26,7 +26,15 @@ export default React.memo(function SelectItem() {
     return (
         <>
             <div className="h-[52px] w-full" />
-            <Intro title={'(선택) 캐릭터의 능력을 올려줄 \n 아이템을 고르세요 '} />
+            <Intro
+                title={
+                    <span>
+                        <span className="text-[#8B92A0]">{'(선택) '}</span>
+                        <span className="text-primary-500">또 다른 나</span>
+                        {'의 능력을 올려줄\n아이템을 고르세요.'}
+                    </span>
+                }
+            />
             <div className="flex flex-col gap-[16px]">
                 {Items.map(({ id, name }) => (
                     <button

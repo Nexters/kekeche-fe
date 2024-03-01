@@ -16,7 +16,7 @@ export default function Header({ onGoBack, withText = true }: Props) {
                     </button>
                 )}
             </TopBar.Left>
-            <TopBar.Text>{withText && '캐릭터 생성'}</TopBar.Text>
+            <TopBar.Text>{withText && '나의 캐릭터 생성'}</TopBar.Text>
         </TopBar>
     );
 }

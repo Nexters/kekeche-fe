@@ -29,7 +29,13 @@ export default React.memo(function SelectColor() {
     return (
         <>
             <div className="h-[52px] w-full" />
-            <Intro title="캐릭터의 컬러를 고르세요" />
+            <Intro
+                title={
+                    <span>
+                        <span className="text-primary-500">또 다른 나</span>의 컬러를 고르세요.
+                    </span>
+                }
+            />
             <div className="grid grid-cols-2 gap-[16px]">
                 {Colors.map(({ id, hexClassName }) => (
                     <button

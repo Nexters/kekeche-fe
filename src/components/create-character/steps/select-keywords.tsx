@@ -40,7 +40,14 @@ export default React.memo(function SelectKeywords() {
     return (
         <>
             <div className="h-[52px] w-full" />
-            <Intro title="캐릭터의 성격을 고르세요" description="최소 1개, 최대 3개 골라주세요." />
+            <Intro
+                title={
+                    <span>
+                        <span className="text-primary-500">또 다른 나</span>의 성격을 고르세요.
+                    </span>
+                }
+                description="최소 1개, 최대 3개 골라주세요."
+            />
             <div className="flex w-[327px] flex-wrap gap-[16px] pb-[100px] ">
                 {Keywords.map(({ id, name }) => (
                     <button
