@@ -1,8 +1,9 @@
 'use client';
 
 import MeatballIcon from '@/assets/icons/meatball_20x20.svg';
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '@radix-ui/react-popover';
-import { PencilIcon, TrashIcon } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import PencilIcon from '@/assets/icons/pencil_24x24.svg';
+import TrashIcon from '@/assets/icons/trash_24x24.svg';
 
 export default function ActionButton({ onClick, onEdit }: { onClick: () => void; onEdit: () => void }) {
     return (
@@ -18,15 +19,15 @@ export default function ActionButton({ onClick, onEdit }: { onClick: () => void;
                 <ul>
                     <li>
                         <button onClick={onEdit} className="flex items-center gap-1">
-                            <PencilIcon stroke="#4B4F58" />
-                            <span className="text-semibold16 text-gray-600">기록 수정</span>
+                            <PencilIcon className="fill-[#4B4F58]" />
+                            <span className="text-semibold16 text-gray-600">수정</span>
                         </button>
                     </li>
                     <div className="mx-[-12px] my-1 h-[1px] bg-gray-200" />
                     <li>
                         <button onClick={onClick} className="flex items-center gap-1">
                             <TrashIcon stroke="#F04141" />
-                            <span className="text-semibold16 text-[#F04141]">기록 삭제</span>
+                            <span className="text-semibold16 text-[#F04141]">삭제</span>
                         </button>
                     </li>
                 </ul>
