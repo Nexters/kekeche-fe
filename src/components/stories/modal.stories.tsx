@@ -30,12 +30,3 @@ export const Basic: Story = {
         </PageContainer>
     ),
 };
-// export const BottomFixed: Story = {
-//     args,
-//     argTypes,
-//     render: (props) => (
-//         <PageContainer>
-//             <Modal {...props} className="mb-[31px]" />
-//         </PageContainer>
-//     ),
-// };

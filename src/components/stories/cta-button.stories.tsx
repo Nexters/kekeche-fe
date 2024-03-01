@@ -16,7 +16,7 @@ const args = {
 };
 const argTypes = {
     text: { description: '버튼의 텍스트', control: 'text' },
-    disabled: { description: '버튼의 활성화 여부', control: 'boolean' },
+    disabled: { description: '버튼의 비활성화 여부', control: 'boolean' },
 };
 
 export const Basic: Story = {
