@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import CreateCharacter from '@/components/create-character';
 import { PageContainer } from '@/components/ui';
 

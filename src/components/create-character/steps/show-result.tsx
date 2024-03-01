@@ -1,20 +1,22 @@
 'use client';
+
 import HomeBg from '@/assets/images/homeBg.jpg';
-import LoadingLottie from '@/assets/lottie/create-character-loading.json';
-import CharacterDetail from '@/components/character-detail';
 import CtaButton from '@/components/ui/cta-button';
-import { NO_ITEM_IDX } from '@/constants/character-info';
+import { Keywords, NO_ITEM_IDX } from '@/constants/character-info';
 import { CreateCharacterValues, CreateCharacterValuesContext } from '@/context/create-character-provider';
-import { Character } from '@/types/character';
 import { sendGTMEvent } from '@next/third-parties/google';
 import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
-import Lottie from 'react-lottie';
+import { motion } from 'framer-motion';
 import FixedBottomArea from '../fixed-bottom-area';
 import useCarousel from '../hooks/useCarousel';
-import EggImg from '@/assets/images/egg.webp';
+import { twMerge } from 'tailwind-merge';
+import CharacterImage from '@/components/character-detail/character-image';
+import CharacterExp from '@/components/character-detail/character-exp';
+import FanfareLottie from '@/assets/lottie/fanfare_purple.json';
+import Lottie from 'react-lottie';
 
 export const createCharacter = async (createCharacterValues: CreateCharacterValues, accessToken: string) =>
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/character`, {
@@ -49,18 +51,6 @@ export default function ShowResult() {
 
     const [isCreating, setIsCreating] = useState(true);
 
-    const previewCharacter: Character = {
-        id: 0,
-        name: name as string,
-        characterImage: characterImg,
-        itemImage: itemImg as string,
-        currentExp: 0,
-        nextExp: 12,
-        keywords: keywords as number[],
-        level: 1,
-        totalExp: 0,
-    };
-
     const handleNextBtnClick = async () => {
         try {
             // 캐릭터 생성 api...
@@ -81,6 +71,7 @@ export default function ShowResult() {
     };
 
     useEffect(() => {
+        setIsCreating(true);
         if (step === '6') {
             setTimeout(() => {
                 setIsCreating(false);
@@ -92,25 +83,83 @@ export default function ShowResult() {
         <>
             {isCreating ? (
                 <div className="mx-auto flex h-[100vh] w-full flex-col items-center">
-                    <Image quality={100} alt="배경" src={HomeBg} fill className="opacity-50" />
-                    <div className="text-gray-700 h z-[50] mb-[40px] mt-[180px] w-full text-center text-bold24">
-                        캐릭터 생성 중
+                    <Image quality={100} alt="배경" src={HomeBg} fill />
+                    <div className="z-[50] mb-[40px] mt-[80px] flex h-[80px] w-[329px] items-center justify-center rounded-[16px] bg-white text-bold24 text-[#5B616E]">
+                        알에서 깨어나고 있어요!
                     </div>
-                    <Image priority src={EggImg} alt="알" className="z-[99] mt-[50px]" />
+                    <motion.img
+                        initial={{ scale: 1 }}
+                        animate={{ scale: [1, 1.4, 1] }}
+                        transition={{
+                            ease: 'linear',
+                            duration: 1.7,
+                            repeat: Infinity,
+                        }}
+                        src={'/egg.webp'}
+                        alt="알"
+                        className="z-[99] mt-[10px]"
+                    />
                 </div>
             ) : (
-                <div className="mx-auto mt-[56px] flex h-full w-full flex-col items-center bg-white">
-                    <CharacterDetail character={previewCharacter} />
-                    <FixedBottomArea className="mb-[31px]">
-                        <CtaButton text="다음" onClick={handleNextBtnClick} />
-                        <button
-                            onClick={handleRecreateClick}
-                            className="mt-[12px] text-semibold14 text-[#7D7D7D] text-purple-200 underline"
-                        >
-                            캐릭터 다시 만들래요
-                        </button>
-                    </FixedBottomArea>
-                </div>
+                <>
+                    <div className="mx-auto flex h-auto min-h-screen w-full flex-col items-center bg-white pb-[200px] gradation-bg">
+                        <Lottie
+                            isClickToPauseDisabled={true}
+                            options={{
+                                loop: true,
+                                autoplay: true,
+                                animationData: FanfareLottie,
+                                rendererSettings: {
+                                    preserveAspectRatio: 'xMidYMid slice',
+                                },
+                            }}
+                            height={'auto'}
+                            width={'auto'}
+                            style={{
+                                position: 'absolute',
+                                inset: 0,
+                                zIndex: 2,
+                            }}
+                        />
+                        <div className={twMerge('z-[4] mt-[20px] flex h-auto w-full flex-col items-center')}>
+                            <h3 className="text-H1 text-black">{name}</h3>
+                            <ul className="mt-[6px] flex gap-[4px]">
+                                {keywords?.map((keywordIdx) => (
+                                    <li
+                                        className={twMerge(
+                                            'rounded-[8px] px-[12px] py-[4px] text-[12px] font-[500]',
+                                            Keywords[keywordIdx].colorClassname,
+                                        )}
+                                        key={keywordIdx}
+                                    >
+                                        {Keywords[keywordIdx].name}
+                                    </li>
+                                ))}
+                            </ul>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 1, duration: 4 }}
+                            >
+                                <CharacterImage
+                                    itemImage={itemImg as string}
+                                    characterImage={characterImg}
+                                    hasBubble={true}
+                                />
+                            </motion.div>
+                            <CharacterExp animate={false} currentExp={0} nextExp={12} level={1} />
+                        </div>
+                        <FixedBottomArea className="z-[4] mb-[31px]">
+                            <CtaButton text="다음" onClick={handleNextBtnClick} />
+                            <button
+                                onClick={handleRecreateClick}
+                                className="mt-[12px] text-semibold14 text-primary-500  underline"
+                            >
+                                캐릭터 다시 만들래요
+                            </button>
+                        </FixedBottomArea>
+                    </div>
+                </>
             )}
         </>
     );

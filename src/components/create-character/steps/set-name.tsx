@@ -5,13 +5,10 @@ import useCarousel from '../hooks/useCarousel';
 import useCreateCharacter from '../hooks/useCreateCharacter';
 import FixedBottomArea from '../fixed-bottom-area';
 import { useRouter } from 'next/navigation';
-import Header from '../header';
-
-const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;
 
 export default React.memo(function SetName() {
+    const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;
     const { setValue } = useCreateCharacter();
-    const router = useRouter();
     const { handleNextClick } = useCarousel();
 
     const [name, setName] = useState('');
