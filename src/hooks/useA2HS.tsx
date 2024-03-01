@@ -73,7 +73,7 @@ export default function A2HS() {
                             }}
                             type="checkbox"
                         />
-                        이 알람 다시 보지 않기
+                        이 알림 다시 보지 않기
                     </label>
                     <div className="pt-[12px]">
                         <div className="flex items-center gap-3">
