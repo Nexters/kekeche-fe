@@ -1,7 +1,7 @@
 'use client';
 
 import CharacterLabel from '@/components/character-label';
-import deleteMemo from '@/services/memo/deleteMemo';
+import deleteMemoFn from '@/services/memo/deleteMemo';
 import { Memo } from '@/types/memo';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import Modal from '@/components/ui/modal';
 import { sendGTMEvent } from '@next/third-parties/google';
 import { DialogClose } from '@radix-ui/react-dialog';
+import AlertDialog from '@/components/dialog/alert-dialog';
 
 type Props = {
     memo: Memo;
@@ -25,9 +26,9 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const { mutate: deleteMemos } = useMutation({
+    const { mutate: deleteMemo } = useMutation({
         mutationFn: () =>
-            deleteMemo({
+            deleteMemoFn({
                 accessToken: `${getCookie('accessToken')}`,
                 memoId: id,
             }),
@@ -83,28 +84,14 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
                     {dayjs(createdAt).format('YYYY. MM. DD')} {modified && '(수정 됨)'}
                 </div>
             </div>
-            <Modal
+            <AlertDialog
                 open={isModalOpen}
                 onOpenChange={setIsModalOpen}
+                onConfirm={deleteMemo}
                 title="기록을 삭제할까요?"
                 description="삭제한 기록은 되돌릴 수 없어요."
-                contents={
-                    <>
-                        <div className="mt-[24px] flex w-full  gap-[8px]">
-                            <DialogClose className="h-[48px] flex-1 rounded-[8px] bg-gray-200 ">취소</DialogClose>
-                            <DialogClose
-                                onClick={async (e) => {
-                                    e.stopPropagation();
-                                    deleteMemos();
-                                    sendGTMEvent({ event: 'deleteMemo' });
-                                }}
-                                className="h-[48px] flex-1 rounded-[8px] bg-[#F06371] text-white "
-                            >
-                                완료
-                            </DialogClose>
-                        </div>
-                    </>
-                }
+                leftText="취소"
+                rightText="삭제"
             />
         </>
     );

@@ -4,6 +4,7 @@ import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
 import MeatballIcon from '@/assets/icons/meatball_20x20.svg';
 import PencilIcon from '@/assets/icons/pencil_24x24.svg';
 import TrashIcon from '@/assets/icons/trash_24x24.svg';
+import AlertDialog from '@/components/dialog/alert-dialog';
 import Modal from '@/components/ui/modal';
 import TopBar from '@/components/ui/top-bar';
 import ROUTES from '@/constants/route';
@@ -69,15 +70,6 @@ export default React.memo(function Header() {
     const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-    if (typeof document !== 'undefined') {
-        if (isModifyModalOpen === true || isDeleteModalOpen === true) {
-            document.body.style.overflow = 'hidden';
-            document.body.style.touchAction = 'none';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-    }
-
     return (
         <>
             <TopBar>
@@ -142,28 +134,14 @@ export default React.memo(function Header() {
                 }
                 title="이름 수정"
             />
-            <Modal
+            <AlertDialog
                 open={isDeleteModalOpen}
                 onOpenChange={setIsDeleteModalOpen}
+                onConfirm={deleteCharacter}
                 title="캐릭터 삭제"
                 description="삭제한 캐릭터는 되돌릴 수 없어요."
-                contents={
-                    <>
-                        <div className="mt-[24px] flex w-full  gap-[8px]">
-                            <DialogClose className="h-[48px] flex-1 rounded-[8px] bg-gray-200 ">취소</DialogClose>
-                            <DialogClose
-                                onClick={async (e) => {
-                                    e.stopPropagation();
-                                    deleteCharacter();
-                                    sendGTMEvent({ event: 'deleteCharacter' });
-                                }}
-                                className="h-[48px] flex-1 rounded-[8px] bg-[#F06371] text-white "
-                            >
-                                완료
-                            </DialogClose>
-                        </div>
-                    </>
-                }
+                leftText="취소"
+                rightText="삭제"
             />
         </>
     );

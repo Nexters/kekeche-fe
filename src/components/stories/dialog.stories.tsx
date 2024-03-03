@@ -3,6 +3,7 @@ import { PageContainer } from '@/components/ui';
 import CTAButton from '../ui/cta-button';
 import { useState } from 'react';
 import Dialog from '../dialog';
+import AlertDialog from '../dialog/alert-dialog';
 
 export default {
     title: 'Components/다이얼로그', // story 이름
@@ -19,7 +20,7 @@ export const Alert: Story = {
                 <div style={{ height: '1000vh', width: '100%' }}>
                     <CTAButton onClick={() => setIsOpen(true)}>다이얼로그 띄우기</CTAButton>
                 </div>
-                <Dialog
+                <AlertDialog
                     open={isOpen}
                     onOpenChange={setIsOpen}
                     title="다이얼로그"

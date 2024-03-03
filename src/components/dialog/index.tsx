@@ -3,6 +3,7 @@ import { AnimationProps, motion } from 'framer-motion';
 import Button from './compounds/button';
 
 export type DialogProps = {
+    type: 'basic' | 'alert';
     open: boolean;
     onOpenChange(open: boolean): void;
     onConfirm?(): void;
@@ -24,7 +25,17 @@ const animationProps: AnimationProps = {
     },
 };
 
-function Dialog({ open, onOpenChange, title, description, contents, onConfirm, leftText, rightText }: DialogProps) {
+function Dialog({
+    open,
+    onOpenChange,
+    title,
+    description,
+    contents,
+    onConfirm,
+    leftText,
+    rightText,
+    type,
+}: DialogProps) {
     return (
         <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
             <RadixDialog.Portal>
@@ -58,7 +69,11 @@ function Dialog({ open, onOpenChange, title, description, contents, onConfirm, l
                                     {contents}
                                     <div className=" mt-[20px] flex  w-full gap-[8px]">
                                         <Dialog.Button text={leftText} color="gray" />
-                                        <Dialog.Button text={rightText} color="red" onClick={() => alert('clicked')} />
+                                        <Dialog.Button
+                                            text={rightText}
+                                            color={type === 'alert' ? 'red' : 'blue'}
+                                            onClick={onConfirm}
+                                        />
                                     </div>
                                 </motion.div>
                             </RadixDialog.Content>

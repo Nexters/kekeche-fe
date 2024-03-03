@@ -8,7 +8,7 @@ export type ModalProps = {
     description?: string;
     contents?: React.ReactNode;
     open?: boolean;
-    onOpenChange?: Dispatch<SetStateAction<boolean>>;
+    onOpenChange?(open: boolean): void;
     className?: string;
 };
 

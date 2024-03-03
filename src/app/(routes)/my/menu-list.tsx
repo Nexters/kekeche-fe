@@ -1,6 +1,7 @@
 'use client';
 
 import ChevronRightIcon from '@/assets/icons/chevron-right_20x20.svg';
+import AlertDialog from '@/components/dialog/alert-dialog';
 import { Button } from '@/components/ui-shadcn/button';
 import {
     Dialog,
@@ -34,6 +35,7 @@ export default function MenuList({ member }: Props) {
     const { deferredPrompt } = useA2HS();
     const { isIos, showInstall: showIosInstall } = useIsIos();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteAccountModalOpen, setIsDeleteAccountModalOpen] = useState(false);
 
     const showInstall = !!deferredPrompt || showIosInstall;
     const install = () => {
@@ -118,7 +120,15 @@ export default function MenuList({ member }: Props) {
                     </button>
                 </li>
                 <li>
-                    <Dialog>
+                    <button
+                        onClick={() => setIsDeleteAccountModalOpen(true)}
+                        className="flex w-full items-center justify-between p-6"
+                    >
+                        <span className="text-regular16 text-[#4B4F58]">회원탈퇴</span>
+                        <ChevronRightIcon />
+                    </button>
+
+                    {/* <Dialog>
                         <DialogTrigger className="flex w-full items-center justify-between p-6">
                             <span className="text-regular16 text-[#4B4F58]">회원탈퇴</span>
                             <ChevronRightIcon />
@@ -150,7 +160,7 @@ export default function MenuList({ member }: Props) {
                                 </div>
                             </DialogFooter>
                         </DialogContent>
-                    </Dialog>
+                    </Dialog> */}
                 </li>
             </ul>
             {
@@ -176,6 +186,21 @@ export default function MenuList({ member }: Props) {
                     }
                 />
             }
+            <AlertDialog
+                open={isDeleteAccountModalOpen}
+                onOpenChange={setIsDeleteAccountModalOpen}
+                title="회원탈퇴 하시겠습니까?"
+                description="기존의 데이터가 모두 삭제됩니다."
+                leftText="취소"
+                rightText="삭제"
+                onConfirm={async () => {
+                    await deregister({ accessToken: `${getCookie('accessToken')}` });
+                    deleteCookie('accessToken');
+                    router.push('/');
+                    router.refresh();
+                    sendGTMEvent({ event: 'deregister' });
+                }}
+            />
         </>
     );
 }

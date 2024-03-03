@@ -30,16 +30,6 @@ export default function Specialties() {
     // 삭제 대상 저장
     const [deleteId, setDeleteId] = useState<null | number>(null);
 
-    // 모달 배경 스크롤 핸들
-    if (typeof document !== 'undefined') {
-        if (isModifyModalOpen === true || isDeleteModalOpen === true) {
-            document.body.style.overflow = 'hidden';
-            document.body.style.touchAction = 'none';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-    }
-
     /**
      * 외부에서 컨트롤해야 하는 값들은 함수를 통해 밖으로 빼서 모달에 주입해준다. (ex. delteId, modalOpen)
      */
