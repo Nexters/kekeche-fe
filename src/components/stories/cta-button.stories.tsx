@@ -4,7 +4,7 @@ import { PageContainer } from '@/components/ui';
 import FixedBottomArea from '@/components/fixed-bottom-area';
 
 export default {
-    title: 'Components/CtaButton', // story 이름
+    title: 'Components/CTA 버튼', // story 이름
     component: CtaButton,
 } as Meta<typeof CtaButton>;
 

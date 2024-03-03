@@ -3,7 +3,7 @@ import { PageContainer } from '@/components/ui';
 import Modal from '@/components/ui/modal';
 
 export default {
-    title: 'Components/Modal', // story 이름
+    title: 'Components/다이어로그', // story 이름
     component: Modal,
 } as Meta<typeof Modal>;
 

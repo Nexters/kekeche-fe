@@ -1,6 +1,8 @@
 import { twMerge } from 'tailwind-merge';
 import Name from './compounds/name';
 import Keywords from './compounds/keywords';
+import CharacterImage from './compounds/character-image';
+import Exp from './compounds/exp';
 
 type Props = {
     className?: string;
@@ -12,5 +14,7 @@ function CharacterDetail({ className, children }: Props) {
 }
 CharacterDetail.Name = Name;
 CharacterDetail.Keywords = Keywords;
+CharacterDetail.Image = CharacterImage;
+CharacterDetail.Exp = Exp;
 
 export default CharacterDetail;

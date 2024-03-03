@@ -22,3 +22,10 @@ export interface CharacterSpecialty {
     content: string;
     memoCnt: number;
 }
+
+export type CharacterImageProps = {
+    characterImage: string;
+    itemImage: string;
+    size: 'small' | 'large';
+    className?: string;
+};
