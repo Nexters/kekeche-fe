@@ -3,30 +3,45 @@ import { PageContainer } from '@/components/ui';
 import CharacterDetail from '../new-character-detail';
 
 export default {
-    title: 'Components/캐릭터 상세',
-} as Meta<typeof CharacterDetail>;
+    title: 'Compounds/캐릭터 상세',
+    args: {
+        name: '캐릭터 이름',
+        shape: 1,
+        level: 1,
+        color: 1,
+        item: 1,
+        hasBubble: true,
+    },
 
-type Story = StoryObj<typeof CharacterDetail>;
+    argTypes: {
+        name: { description: '캐릭터 이름', controls: 'text' },
+        shape: { description: '캐릭터 모양', options: [1, 2, 3], control: { type: 'radio' } },
+        color: {
+            description: '캐릭터 색깔',
+            options: ['빨강', '파랑', '노랑', '보라', '초록', '분홍'],
+            mapping: {
+                빨강: 1,
+                파랑: 2,
+                노랑: 3,
+                보라: 4,
+                초록: 5,
+                분홍: 6,
+            },
+            control: { type: 'radio' },
+        },
+        level: { description: '캐릭터 레벨', options: [1, 2, 3], control: { type: 'radio' } },
+        item: {
+            description: '캐릭터 아이템',
+            options: ['없음', 1, 2, 3, 4, 5],
+            control: { type: 'radio' },
+        },
+        hasBubble: { description: '말풍선 존재 여부', control: 'boolean' },
+    },
+} as Meta;
 
-const args: Args = {
-    name: '캐릭터 이름',
-    shape: 1,
-    level: 1,
-    color: 1,
-    hasBubble: true,
-};
-
-const argTypes: ArgTypes = {
-    name: { description: '캐릭터 이름', controls: 'text' },
-    shape: { description: '캐릭터 모양', options: [1, 2, 3], control: { type: 'radio' } },
-    color: { description: '캐릭터 색깔', options: [1, 2, 3], control: { type: 'radio' } },
-    level: { description: '캐릭터 레벨', options: [1, 2, 3], control: { type: 'radio' } },
-    hasBubble: { description: '말풍선 존재 여부', control: 'boolean' },
-};
+type Story = StoryObj;
 
 export const Basic: Story = {
-    args,
-    argTypes,
     render: ({ hasBubble, shape, level, name, color }: Args) => {
         return (
             <PageContainer>
