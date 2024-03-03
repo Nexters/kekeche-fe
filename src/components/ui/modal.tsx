@@ -12,15 +12,7 @@ export type ModalProps = {
     className?: string;
 };
 
-export default function Modal({
-    open,
-    onOpenChange,
-    triggerElement,
-    className,
-    title,
-    description,
-    contents,
-}: ModalProps) {
+function Modal({ open, onOpenChange, triggerElement, className, title, description, contents }: ModalProps) {
     return (
         <Dialog modal open={open} onOpenChange={onOpenChange}>
             <DialogPortal>
@@ -62,3 +54,7 @@ export default function Modal({
         </Dialog>
     );
 }
+
+Modal.Close = DialogClose;
+
+export default Modal;

@@ -1,6 +1,8 @@
-import { ArgTypes, Args, Meta, StoryObj } from '@storybook/react';
+import { Args, Meta, StoryObj } from '@storybook/react';
 import { PageContainer } from '@/components/ui';
 import CharacterDetail from '../new-character-detail';
+
+const IMG_STORAGE_BASE_URL = 'https://kr.object.ncloudstorage.com/kekeche-character';
 
 export default {
     title: 'Compounds/캐릭터 상세',
@@ -53,26 +55,24 @@ export const Basic: Story = {
     render: ({ hasBubble, shape, level, name, color, item }: Args) => {
         return (
             <PageContainer>
-                <CharacterDetail>
-                    <CharacterDetail.Name className="mt-[30px]">{name}</CharacterDetail.Name>
-                    <CharacterDetail.Keywords keywordIds={[1, 10, 20]} />
-                    <CharacterDetail.Image
-                        hasBubble={hasBubble}
-                        characterImage={`https://kr.object.ncloudstorage.com/kekeche-character/character/${shape - 1}/${level - 1}/${color - 1}.webp`}
-                        itemImage={
-                            item !== null
-                                ? `https://kr.object.ncloudstorage.com/kekeche-character/item/${item - 1}.webp`
-                                : undefined
-                        }
-                    />
-                    <CharacterDetail.Exp
-                        animate={false}
-                        expAnimating={false}
-                        currentExp={4}
-                        nextExp={12}
-                        level={level}
-                    />
-                </CharacterDetail>
+                <div className="h-screen w-full gradation-bg">
+                    <CharacterDetail>
+                        <CharacterDetail.Name className="mt-[30px]">{name}</CharacterDetail.Name>
+                        <CharacterDetail.Keywords keywordIds={[1, 10, 20]} />
+                        <CharacterDetail.Image
+                            hasBubble={hasBubble}
+                            characterImage={`${IMG_STORAGE_BASE_URL}/character/${shape - 1}/${level - 1}/${color - 1}.webp`}
+                            itemImage={item !== null ? `${IMG_STORAGE_BASE_URL}/item/${item - 1}.webp` : undefined}
+                        />
+                        <CharacterDetail.Exp
+                            animate={false}
+                            expAnimating={false}
+                            currentExp={4}
+                            nextExp={12}
+                            level={level}
+                        />
+                    </CharacterDetail>
+                </div>
             </PageContainer>
         );
     },
