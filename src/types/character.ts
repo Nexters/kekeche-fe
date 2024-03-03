@@ -25,7 +25,7 @@ export interface CharacterSpecialty {
 
 export type CharacterImageProps = {
     characterImage: string;
-    itemImage: string;
+    itemImage?: string;
     size: 'small' | 'large';
     className?: string;
 };

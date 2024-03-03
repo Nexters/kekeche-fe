@@ -32,7 +32,15 @@ export default {
         level: { description: '캐릭터 레벨', options: [1, 2, 3], control: { type: 'radio' } },
         item: {
             description: '캐릭터 아이템',
-            options: ['없음', 1, 2, 3, 4, 5],
+            options: ['(없음)', '노트북', '아령', '돈', '연필', '책'],
+            mapping: {
+                '(없음)': null,
+                노트북: 1,
+                아령: 2,
+                돈: 3,
+                연필: 4,
+                책: 5,
+            },
             control: { type: 'radio' },
         },
         hasBubble: { description: '말풍선 존재 여부', control: 'boolean' },
@@ -42,7 +50,7 @@ export default {
 type Story = StoryObj;
 
 export const Basic: Story = {
-    render: ({ hasBubble, shape, level, name, color }: Args) => {
+    render: ({ hasBubble, shape, level, name, color, item }: Args) => {
         return (
             <PageContainer>
                 <CharacterDetail>
@@ -51,7 +59,11 @@ export const Basic: Story = {
                     <CharacterDetail.Image
                         hasBubble={hasBubble}
                         characterImage={`https://kr.object.ncloudstorage.com/kekeche-character/character/${shape - 1}/${level - 1}/${color - 1}.webp`}
-                        itemImage={'https://kr.object.ncloudstorage.com/kekeche-character/item/1.webp'}
+                        itemImage={
+                            item !== null
+                                ? `https://kr.object.ncloudstorage.com/kekeche-character/item/${item - 1}.webp`
+                                : undefined
+                        }
                     />
                     <CharacterDetail.Exp
                         animate={false}
