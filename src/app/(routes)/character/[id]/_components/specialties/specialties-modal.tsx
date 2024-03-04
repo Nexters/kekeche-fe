@@ -1,5 +1,3 @@
-import Modal, { ModalProps } from '@/components/ui/modal';
-import { DialogClose } from '@radix-ui/react-dialog';
 import ExitIcon from '@/assets/icons/exit_24x24.svg';
 import PlusIcon from '@/assets/icons/plus_18x18.svg';
 import SpecialtyBox from './specialty-box';
@@ -12,13 +10,14 @@ import { sendGTMEvent } from '@next/third-parties/google';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import useCharacterIdBypath from '../../hooks/useCharacterIdBypath';
+import Dialog, { DialogProps } from '@/components/dialog';
 
 type Props = {
     specialties: CharacterSpecialty[];
     onDelete: (id: number) => void;
-} & Partial<ModalProps>;
+} & Pick<DialogProps, 'open' | 'onOpenChange'>;
 
-export default function SpecialtiesModal({ specialties, onDelete, ...props }: Props) {
+export default function SpecialtiesModal({ open, onOpenChange, specialties, onDelete, ...props }: Props) {
     const characterId = useCharacterIdBypath();
     const queryClient = useQueryClient();
 
@@ -78,12 +77,18 @@ export default function SpecialtiesModal({ specialties, onDelete, ...props }: Pr
 
     return (
         <>
-            <Modal
-                className="h-auto w-[328px] px-[16px] pb-[32px] pt-[40px]"
-                {...props}
+            <Dialog
+                onConfirm={handleSubmitNewSpecialties}
+                open={open}
+                onOpenChange={onOpenChange}
+                size="large"
+                title="주특기 관리"
+                description={'4개까지 생성 가능하고\n주특기 이름은 수정 불가합니다'}
+                leftText="취소"
+                rightText="저장"
                 contents={
                     <>
-                        <div className="flex flex-col gap-[12px]">
+                        <div className="mt-[24px] flex flex-col gap-[12px]">
                             {specialties.map(({ id, content }) => (
                                 <SpecialtyBox key={id}>
                                     <div className="flex w-full justify-between ">
@@ -117,28 +122,8 @@ export default function SpecialtiesModal({ specialties, onDelete, ...props }: Pr
                                 </button>
                             )}
                         </div>
-                        <div className="mt-[24px] flex w-full gap-[8px]">
-                            <DialogClose
-                                onClick={() => {
-                                    setNewSpecialties([{ content: '' }]);
-                                }}
-                                onKeyUp={(e) => e.preventDefault()}
-                                className="h-[48px] w-full flex-1 rounded-[8px] bg-newGray-200 text-[16px] font-[600] text-newGray-800 "
-                            >
-                                취소
-                            </DialogClose>
-                            <DialogClose
-                                onKeyUp={(e) => e.preventDefault()}
-                                onClick={handleSubmitNewSpecialties}
-                                className="h-[48px] w-full flex-1 rounded-[8px] bg-primary-500  text-[16px] font-[600] text-white disabled:bg-[#c4caf8]"
-                            >
-                                저장
-                            </DialogClose>
-                        </div>
                     </>
                 }
-                title="주특기 관리"
-                description={'4개까지 생성 가능하고\n주특기 이름은 수정 불가합니다'}
             />
         </>
     );

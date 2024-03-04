@@ -1,20 +1,9 @@
 'use client';
 
 import ChevronRightIcon from '@/assets/icons/chevron-right_20x20.svg';
+import Dialog from '@/components/dialog';
 import AlertDialog from '@/components/dialog/alert-dialog';
-import { Button } from '@/components/ui-shadcn/button';
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui-shadcn/dialog';
 import { useToast } from '@/components/ui-shadcn/toast/use-toast';
-import Modal from '@/components/ui/modal';
 import ROUTES from '@/constants/route';
 import { useA2HS } from '@/hooks/useA2HS';
 import useIsIos from '@/hooks/useIsIos';
@@ -127,65 +116,23 @@ export default function MenuList({ member }: Props) {
                         <span className="text-regular16 text-[#4B4F58]">회원탈퇴</span>
                         <ChevronRightIcon />
                     </button>
-
-                    {/* <Dialog>
-                        <DialogTrigger className="flex w-full items-center justify-between p-6">
-                            <span className="text-regular16 text-[#4B4F58]">회원탈퇴</span>
-                            <ChevronRightIcon />
-                        </DialogTrigger>
-                        <DialogContent className="grid w-[296px] items-center rounded-[20px]">
-                            <DialogHeader className="pt-4">
-                                <DialogTitle className="text-center">회원탈퇴 하시겠습니까?</DialogTitle>
-                                <DialogDescription className="text-center">
-                                    기존의 데이터가 모두 삭제됩니다.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <DialogFooter className="pb-4">
-                                <div className="flex gap-3">
-                                    <DialogClose className="h-[48px] w-[118px] bg-[#eceff5] text-center text-semibold16 text-[#8b92a0]">
-                                        취소
-                                    </DialogClose>
-                                    <Button
-                                        onClick={async () => {
-                                            await deregister({ accessToken: `${getCookie('accessToken')}` });
-                                            deleteCookie('accessToken');
-                                            router.push('/');
-                                            router.refresh();
-                                            sendGTMEvent({ event: 'deregister' });
-                                        }}
-                                        className="h-[48px] w-[118px] bg-[#ea2727] text-center text-semibold16 text-white"
-                                    >
-                                        회원탈퇴
-                                    </Button>
-                                </div>
-                            </DialogFooter>
-                        </DialogContent>
-                    </Dialog> */}
                 </li>
             </ul>
-            {
-                <Modal
-                    open={isModalOpen}
-                    onOpenChange={setIsModalOpen}
-                    title="이렇게 설치해주세요!"
-                    contents={
-                        <>
-                            <ul className="ml-0 flex flex-col gap-[8px] text-left">
-                                <li>{'1. 사파리 하단에 공유 버튼 클릭'}</li>
-                                <li>{'2. "홈 화면에 추가" 메뉴 선택'}</li>
-                                <li>{'3. 앱 이름 확인'}</li>
-                                <li>{'4. 추가 버튼 클릭'}</li>
-                            </ul>
-                            <DialogClose
-                                autoFocus={false}
-                                className="mt-[14px] h-[45px] w-[80%] rounded-[12px] bg-primary-500 text-white"
-                            >
-                                확인
-                            </DialogClose>
-                        </>
-                    }
-                />
-            }
+            <Dialog
+                open={isModalOpen}
+                onOpenChange={setIsModalOpen}
+                title="이렇게 설치해주세요!"
+                leftText="취소"
+                rightText="확인"
+                contents={
+                    <ul className="ml-0 mt-[24px] flex flex-col gap-[8px] text-left">
+                        <li>{'1. 사파리 하단에 공유 버튼 클릭'}</li>
+                        <li>{'2. "홈 화면에 추가" 메뉴 선택'}</li>
+                        <li>{'3. 앱 이름 확인'}</li>
+                        <li>{'4. 추가 버튼 클릭'}</li>
+                    </ul>
+                }
+            />
             <AlertDialog
                 open={isDeleteAccountModalOpen}
                 onOpenChange={setIsDeleteAccountModalOpen}

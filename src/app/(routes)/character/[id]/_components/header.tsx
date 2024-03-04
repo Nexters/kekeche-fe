@@ -4,16 +4,14 @@ import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
 import MeatballIcon from '@/assets/icons/meatball_20x20.svg';
 import PencilIcon from '@/assets/icons/pencil_24x24.svg';
 import TrashIcon from '@/assets/icons/trash_24x24.svg';
+import Dialog from '@/components/dialog';
 import AlertDialog from '@/components/dialog/alert-dialog';
-import Modal from '@/components/ui/modal';
 import TopBar from '@/components/ui/top-bar';
 import ROUTES from '@/constants/route';
 import getMember from '@/services/auth/getMember';
 import removeCharacterName from '@/services/character/deleteCharacterName';
 import editCharacterName from '@/services/character/editCharacterName';
 import getCharacterDetail from '@/services/character/getCharacterDetail';
-import { sendGTMEvent } from '@next/third-parties/google';
-import { DialogClose } from '@radix-ui/react-dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { useMutation, useQueryClient, useSuspenseQueries } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
@@ -104,36 +102,24 @@ export default React.memo(function Header() {
                     </Popover>
                 </TopBar.Right>
             </TopBar>
-            <Modal
+            <Dialog
                 open={isModifyModalOpen}
                 onOpenChange={setIsModifyModalOpen}
-                contents={
-                    <>
-                        <input
-                            className="h-[48px] w-full rounded-lg px-4 outline outline-newGray-200"
-                            value={draft}
-                            onChange={(e) => {
-                                setDraft(e.target.value);
-                            }}
-                        />
-                        <div className="mt-[24px] flex w-full  gap-[8px]">
-                            <DialogClose className="h-[48px]  flex-1 rounded-[8px] bg-gray-200 ">취소</DialogClose>
-                            <DialogClose
-                                disabled={!draft || draft.length > 6}
-                                onClick={async (e) => {
-                                    e.stopPropagation();
-                                    mutateName();
-                                    sendGTMEvent({ event: 'editCharacterName' });
-                                }}
-                                className="h-[48px] flex-1 rounded-[8px] bg-primary-500  text-white disabled:bg-[#c4caf8]"
-                            >
-                                완료
-                            </DialogClose>
-                        </div>
-                    </>
-                }
+                leftText="취소"
+                rightText="완료"
                 title="이름 수정"
+                onConfirm={mutateName}
+                contents={
+                    <input
+                        className="mt-[24px] h-[48px] w-full rounded-lg px-4 outline outline-newGray-200 focus:outline-primary-500"
+                        value={draft}
+                        onChange={(e) => {
+                            setDraft(e.target.value);
+                        }}
+                    />
+                }
             />
+
             <AlertDialog
                 open={isDeleteModalOpen}
                 onOpenChange={setIsDeleteModalOpen}

@@ -9,10 +9,7 @@ import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import ActionButton from './action-button';
 import { twMerge } from 'tailwind-merge';
-import { useEffect, useState } from 'react';
-import Modal from '@/components/ui/modal';
-import { sendGTMEvent } from '@next/third-parties/google';
-import { DialogClose } from '@radix-ui/react-dialog';
+import { useState } from 'react';
 import AlertDialog from '@/components/dialog/alert-dialog';
 
 type Props = {
