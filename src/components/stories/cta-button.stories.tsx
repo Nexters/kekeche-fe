@@ -20,9 +20,7 @@ const argTypes = {
 };
 
 export const Basic: Story = {
-    args,
-    argTypes,
-    render: (args) => <CtaButton {...args} className="mb-[31px]" />,
+    args: { text: '테스트', disabled: true },
 };
 export const BottomFixed: Story = {
     args,
