@@ -2,8 +2,6 @@ BRANCH="storybook/$(date +%s)"
 
 git switch -c $BRANCH
 
-pnpm 
-
 git push origin HEAD
 
 git switch -
