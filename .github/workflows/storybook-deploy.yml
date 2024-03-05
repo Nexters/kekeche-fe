@@ -6,43 +6,49 @@ on:
             - storybook/**
 
 jobs:
-    build:
-        runs-on: ubuntu-22.04
-        defaults:
-            run:
-                working-directory: ./
-        concurrency:
-            group: ${{ github.workflow }}
-            cancel-in-progress: true
-
+    storybook:
+        runs-on: ubuntu-latest
+        outputs:
+            status: ${{job.status}}
+        permissions:
+            id-token: write
+            contents: read
         steps:
-            - name: Use repository source
-              uses: actions/checkout@v3
+            - name: checkout repositoty
+              uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
 
-            - name: Use node.js
+            - name: setup node
               uses: actions/setup-node@v3
               with:
-                  node-version: 18.x
+                  node-version: 16
+
+            - name: configure aws credentials ARN
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws-region: ap-northeast-2
+
+            - name: setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
             - uses: pnpm/action-setup@v3
               with:
                   version: 8
-            - name: Install dependencies
+
+            - name: install dependencies
               run: pnpm install
 
-            - name: Build Storybook
+            - name: build storybook
               run: pnpm build-storybook
 
-    deploy:
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-            - name: Deploy to S3
-              env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  AWS_REGION: ap-northeast-2
+            - name: bucket sync
               run: |
                   aws s3 sync \
                   --region ap-northeast-2 \
-                  storybook-static s3://anotherme-storybook \
+                  ./storybook-static s3://anotherme-storybook \
                   --delete
