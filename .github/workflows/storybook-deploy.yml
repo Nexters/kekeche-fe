@@ -44,5 +44,5 @@ jobs:
               run: |
                   aws s3 sync \
                   --region ap-northeast-2 \
-                  ./storybook-static s3://anotherme-storybook \
+                  storybook-static s3://anotherme-storybook \
                   --delete
