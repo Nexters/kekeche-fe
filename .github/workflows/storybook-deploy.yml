@@ -34,9 +34,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Deploy to S3
-        env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            AWS_REGION: ap-northeast-2
-        run: |
-            aws s3 sync ./storybook-static s3://anotherme-storybook/storybook-static
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_REGION: ap-northeast-2
+              run: |
+                  aws s3 sync ./storybook-static s3://anotherme-storybook/storybook-static
