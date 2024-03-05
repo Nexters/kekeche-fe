@@ -42,4 +42,4 @@ jobs:
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                   AWS_REGION: ap-northeast-2
               run: |
-                  aws s3 sync ./storybook-static s3://anotherme-storybook/storybook-static
+                  aws s3 sync ./storybook-static s3://anotherme-storybook/ --delete
