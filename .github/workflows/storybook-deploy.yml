@@ -1,0 +1,43 @@
+name: 스토리북 S3 배포 ✌️
+
+on:
+    push:
+        branches:
+            - storybook/**
+
+jobs:
+    build:
+        runs-on: ubuntu-22.04
+        defaults:
+            run:
+                working-directory: ./
+        concurrency:
+            group: ${{ github.workflow }}
+            cancel-in-progress: true
+
+        steps:
+            - name: Use repository source
+              uses: actions/checkout@v3
+
+            - name: Use node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18.x
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Build Storybook
+              run: pnpm build-storybook
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: keithweaver/aws-s3-github-action@v1.0.0
+        with:
+            command: cp
+            source: ./storybook-static
+            destination: s3://anotherme-storybook/storybook-static
+            aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY }}
+            aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws_region: ap-northeast-2
