@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
-import ActionButton from './action-button';
+import ActionButtonPopover from '../../../../components/popover/action-button-popover';
 import { twMerge } from 'tailwind-merge';
 import { useState } from 'react';
 import AlertDialog from '@/components/dialog/alert-dialog';
@@ -35,16 +35,6 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
         },
     });
 
-    // 모달 배경 스크롤 핸들
-    if (typeof document !== 'undefined') {
-        if (isModalOpen === true) {
-            document.body.style.overflow = 'hidden';
-            document.body.style.touchAction = 'none';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-    }
-
     return (
         <>
             <div
@@ -55,7 +45,7 @@ export default function Memo({ memo: { content, createdAt, id, character, modifi
             >
                 <div className="flex items-center justify-between ">
                     <CharacterLabel character={character} />
-                    <ActionButton
+                    <ActionButtonPopover
                         onClick={() => setIsModalOpen(true)}
                         onEdit={() => {
                             router.push(`?edit=${id}`);

@@ -1,5 +1,6 @@
 'use client';
 
+import ActionButtonPopover from '@/components/popover/action-button-popover';
 import BackArrowIcon from '@/assets/icons/arrow-left_24x24.svg';
 import MeatballIcon from '@/assets/icons/meatball_20x20.svg';
 import PencilIcon from '@/assets/icons/pencil_24x24.svg';
@@ -84,22 +85,10 @@ export default React.memo(function Header() {
                 </TopBar.Left>
                 <TopBar.Text>성장 기록지</TopBar.Text>
                 <TopBar.Right>
-                    <Popover modal>
-                        <PopoverTrigger className="p-3">
-                            <MeatballIcon />
-                        </PopoverTrigger>
-                        <PopoverContent className="shadow-[0_4px_16px_0_rgba(0, 0, 0, 0.16)] translate-x-[-15px] rounded-[8px]  border-none bg-white p-3">
-                            <button onClick={() => setIsModifyModalOpen(true)} className="flex items-center gap-1">
-                                <PencilIcon className="fill-[#4B4F58]" />
-                                <span className="text-semibold16 text-gray-600">수정</span>
-                            </button>
-                            <div className="mx-[-12px] my-1 h-[1px] bg-gray-200" />
-                            <button onClick={() => setIsDeleteModalOpen(true)} className="flex items-center gap-1">
-                                <TrashIcon stroke="#F04141" />
-                                <span className="text-semibold16 text-[#F04141]">삭제</span>
-                            </button>
-                        </PopoverContent>
-                    </Popover>
+                    <ActionButtonPopover
+                        onEdit={() => setIsModifyModalOpen(true)}
+                        onClick={() => setIsDeleteModalOpen(true)}
+                    />
                 </TopBar.Right>
             </TopBar>
             <Dialog
