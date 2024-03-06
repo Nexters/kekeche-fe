@@ -5,7 +5,7 @@ import CharacterDetail from '../new-character-detail';
 const IMG_STORAGE_BASE_URL = 'https://kr.object.ncloudstorage.com/kekeche-character';
 
 export default {
-    title: 'Compounds/캐릭터 상세',
+    title: 'Compounds/Character',
     args: {
         name: '캐릭터 이름',
         shape: 1,
@@ -51,7 +51,7 @@ export default {
 
 type Story = StoryObj;
 
-export const Basic: Story = {
+export const Detail: Story = {
     render: ({ hasBubble, shape, level, name, color, item }: Args) => {
         return (
             <PageContainer>

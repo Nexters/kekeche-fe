@@ -4,7 +4,7 @@ import { PageContainer } from '@/components/ui';
 import FixedBottomArea from '@/components/fixed-bottom-area';
 
 export default {
-    title: 'Components/CTA 버튼', // story 이름
+    title: 'Components/CTAButton', // story 이름
     component: CtaButton,
 } as Meta<typeof CtaButton>;
 
@@ -27,9 +27,11 @@ export const BottomFixed: Story = {
     argTypes,
     render: (props) => (
         <PageContainer>
-            <FixedBottomArea>
-                <CtaButton {...props} className="mb-[31px]" />
-            </FixedBottomArea>
+            <div className="h-screen w-full gradation-bg">
+                <FixedBottomArea>
+                    <CtaButton {...props} className="mb-[31px]" />
+                </FixedBottomArea>
+            </div>
         </PageContainer>
     ),
 };

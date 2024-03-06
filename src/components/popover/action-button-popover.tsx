@@ -21,7 +21,7 @@ export default function ActionButtonPopover({
                 <RadixPopOver.Content
                     onCloseAutoFocus={(e) => e.preventDefault()}
                     onOpenAutoFocus={(e) => e.preventDefault()}
-                    className="z-10 mr-[40px] w-fit rounded-[8px] border-none bg-[#fff] p-3 shadow-2xl"
+                    className="z-10 mr-[10px] w-fit rounded-[8px] border-none bg-[#fff] p-3 shadow-2xl"
                 >
                     <ul>
                         <li>

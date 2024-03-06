@@ -16,7 +16,9 @@ const Toast = (props: Props) => {
     return (
         <>
             <PageContainer>
-                <button onClick={handleClick}>토스트 띄우기</button>
+                <button className="mx-auto mt-[40px] text-[20px] font-[700]" onClick={handleClick}>
+                    토스트 띄우기
+                </button>
             </PageContainer>
             <Toaster />
         </>
@@ -24,7 +26,7 @@ const Toast = (props: Props) => {
 };
 
 export default {
-    title: 'Components/토스트', // story 이름
+    title: 'Components/Toast', // story 이름
     component: Toast,
 } as Meta<typeof Toast>;
 
