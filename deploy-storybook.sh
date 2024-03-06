@@ -2,8 +2,6 @@ BRANCH="storybook/$(date +%s)"
 
 git switch -c $BRANCH
 
-pnpm build-storybook
-
 git push origin HEAD
 
 git switch -
@@ -11,4 +9,4 @@ git switch -
 git branch -D $BRANCH
 
 
-echo "🚚 배포가 완료되면 종달새에서 알려드릴게요 🎉"
+echo "🚚 $BRANCH 에서 배포가 시작됐어요! 🎉"
