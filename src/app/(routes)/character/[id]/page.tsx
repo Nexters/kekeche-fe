@@ -69,7 +69,7 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
                     <Link href={`?write=${characterId}`}>
                         <CTAButton>
                             <div className=" flex w-full items-center justify-center gap-[8px]">
-                                <NoteEditIcon /> <span>먹이주기</span>
+                                <NoteEditIcon /> <span>{'먹이주기'}</span>
                             </div>
                         </CTAButton>
                     </Link>

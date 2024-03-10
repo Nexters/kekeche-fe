@@ -19,7 +19,7 @@ import { getCookie } from 'cookies-next';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-export default React.memo(function Header() {
+export default function Header() {
     const router = useRouter();
     const pathname = usePathname();
 
@@ -120,4 +120,4 @@ export default React.memo(function Header() {
             />
         </>
     );
-});
+}

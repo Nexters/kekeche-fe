@@ -1,7 +1,7 @@
 import { BubbleTexts } from '@/constants/bubble-texts';
 import { Character } from '@/types/character';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Polygon from '@/assets/icons/polygon.svg';
 import { AnimatePresence, AnimationProps, motion } from 'framer-motion';
 
