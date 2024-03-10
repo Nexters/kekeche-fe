@@ -4,19 +4,6 @@ import { screen } from '@testing-library/react';
 import { redirect } from 'next/navigation';
 import { IsLoggedIn, checkIsLoggedIn } from '@/services/auth/getMember';
 
-vi.mock('next/headers', async () => {
-    return {
-        cookies: () => {
-            return {
-                get: (name: string) => {
-                    return {
-                        value: 'cookie',
-                    };
-                },
-            };
-        },
-    };
-});
 vi.mock('@/services/auth/getMember');
 
 describe('홈 페이지 테스트', () => {

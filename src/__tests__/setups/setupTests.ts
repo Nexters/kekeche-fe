@@ -1,6 +1,21 @@
 import '@testing-library/jest-dom';
+import 'vitest-canvas-mock';
 
-beforeAll(() => {});
+beforeAll(() => {
+    vi.mock('next/headers', async () => {
+        return {
+            cookies: () => {
+                return {
+                    get: (name: string) => {
+                        return {
+                            value: 'cookie',
+                        };
+                    },
+                };
+            },
+        };
+    });
+});
 
 afterEach(() => {
     vi.clearAllMocks();

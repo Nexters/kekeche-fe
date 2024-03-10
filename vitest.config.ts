@@ -8,6 +8,13 @@ export default defineConfig({
         environment: 'jsdom',
         globals: true,
         setupFiles: './src/__tests__/setups/setupTests.ts',
+        deps: {
+            optimizer: {
+                web: {
+                    include: ['vitest-canvas-mock'],
+                },
+            },
+        },
     },
     resolve: {
         alias: {
