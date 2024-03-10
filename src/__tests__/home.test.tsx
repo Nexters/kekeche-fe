@@ -26,7 +26,6 @@ describe('홈 페이지 테스트', () => {
         const button = screen.getByText('로그인하기');
 
         expect(button).toBeInTheDocument();
-        vi.resetAllMocks();
     });
 
     it('로그인 했을 때는 유저의 홈으로 리다이렉트 합니다.', async () => {
@@ -43,6 +42,6 @@ describe('홈 페이지 테스트', () => {
 
         render(await Home());
 
-        expect(redirect).toHaveBeenCalledWith(`member/2`);
+        expect(redirect).toHaveBeenCalledWith(`member/${member.memberId}`);
     });
 });
