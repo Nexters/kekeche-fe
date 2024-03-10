@@ -13,11 +13,10 @@ import { redirect } from 'next/navigation';
 export default async function Home() {
     const { isLoggedIn, member } = await checkIsLoggedIn({ accessToken: `${cookies().get('accessToken')?.value}` });
     if (isLoggedIn) redirect(`member/${member?.memberId}`);
-
     return (
         <PageContainer>
             <Image quality={100} priority alt={'홈 배경'} src={HomeBg} fill />
-            <Image quality={100} alt={'safe'} src={Safe} width={540} className="absolute top-0 " />
+            <Image quality={100} alt={'safe'} src={Safe} width={540} height={100} className="absolute top-0 " />
             <div className="z-[2] mt-[200px] flex w-full justify-center">
                 <Image quality={100} alt={'로고'} src={Logo} width={256} height={77} />
             </div>
@@ -31,7 +30,7 @@ export default async function Home() {
                         href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}`}
                         className="text-[#445Aff] underline underline-offset-2"
                     >
-                        {'로그인하기'}
+                        로그인하기
                     </a>
                 </div>
             </FixedBottomArea>

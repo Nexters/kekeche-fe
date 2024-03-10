@@ -41,9 +41,9 @@ export async function checkIsLoggedIn(request: GetMemberRequest): Promise<IsLogg
             Authorization: `${request.accessToken}`,
         },
     };
-
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/v1/member`,
+        `${process.env.VITE_SERVER_BASE_URL}/api/v1/member`,
+        // `https://api.anotherme.today/api/v1/member`,
         request.accessToken ? authOption : undefined,
     );
     if (res.ok) {
