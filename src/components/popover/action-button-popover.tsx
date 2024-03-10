@@ -15,7 +15,7 @@ export default function ActionButtonPopover({
     return (
         <RadixPopOver.Root modal>
             <RadixPopOver.Trigger className="p-3 pr-0">
-                <MeatballIcon />
+                <MeatballIcon data-testid="meatball-icon" />
             </RadixPopOver.Trigger>
             <RadixPopOver.Portal>
                 <RadixPopOver.Content

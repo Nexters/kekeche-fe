@@ -10,7 +10,7 @@ import AlertDialog from '@/components/dialog/alert-dialog';
 import TopBar from '@/components/ui/top-bar';
 import ROUTES from '@/constants/route';
 import getMember from '@/services/auth/getMember';
-import removeCharacterName from '@/services/character/deleteCharacterName';
+import { removeCharacterName } from '@/services/character/deleteCharacterName';
 import editCharacterName from '@/services/character/editCharacterName';
 import getCharacterDetail from '@/services/character/getCharacterDetail';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';

@@ -21,7 +21,7 @@ describe('홈 페이지 테스트', () => {
             Promise.resolve({ isLoggedIn: true, member }) as Promise<IsLoggedIn>,
         );
 
-        vi.mock('next/navigation', async () => {
+        vi.mock('next/navigation', () => {
             return {
                 redirect: vi.fn(),
             };

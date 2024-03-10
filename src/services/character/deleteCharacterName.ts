@@ -3,7 +3,7 @@ export type RemoveCharacterNameRequest = {
     characterId: number;
 };
 
-export default async function removeCharacterName(request: RemoveCharacterNameRequest) {
+export async function removeCharacterName(request: RemoveCharacterNameRequest) {
     const option = {
         method: 'DELETE',
         headers: {

@@ -3,22 +3,29 @@ import render from './setups/render';
 import getCharacterDetail from '@/services/character/getCharacterDetail';
 import { getCharacterMemos } from '@/services/character/getCharacterMemos';
 import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
-import getMember, { IsLoggedIn, checkIsLoggedIn } from '@/services/auth/getMember';
+import getMember, { checkIsLoggedIn } from '@/services/auth/getMember';
 import { redirect } from 'next/navigation';
-import { act, renderHook, screen, waitFor } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import Header from '@/app/(routes)/character/[id]/_components/header';
 import { Suspense } from 'react';
+import { removeCharacterName } from '@/services/character/deleteCharacterName';
+import editCharacterName from '@/services/character/editCharacterName';
 
+const pushFn = vi.fn();
+const refreshFn = vi.fn();
+const removeFn = vi.fn();
 vi.mock('@/services/auth/getMember');
 vi.mock('@/services/character/getCharacterDetail');
 vi.mock('@/services/character/getCharacterMemos');
 vi.mock('@/services/character/getCharacterSpecialty');
+vi.mock('@/services/character/editCharacterName');
+vi.mock('@/services/character/deleteCharacterName');
 
 vi.mock('next/navigation', async () => {
     const actual = await vi.importActual('next/navigation');
     return {
         ...actual,
-        useRouter: vi.fn(),
+        useRouter: () => ({ push: pushFn, refresh: refreshFn }),
         usePathname: () => 'chracter/5',
         redirect: vi.fn(),
         useSearchParams: () => ({ get: () => vi.fn() }),
@@ -66,20 +73,31 @@ describe('로그인 안한 경우', () => {
 
 describe('Header', () => {
     it('헤더가 올바르게 렌더링 됩니다.', async () => {
-        vi.mocked(getMember).mockResolvedValue({ memberId: 2, characterCount: 3, memoCount: 5 });
-        vi.mocked(getCharacterDetail).mockResolvedValue({
-            id: 5,
-            name: '테스트 캐릭터',
-            level: 4,
-            totalExp: 2,
-            currentExp: 2,
-            nextExp: 12,
-            characterImage: '',
-            itemImage: '', // NOTE: 아이템 선택 안한 경우, 해당 필드가 없을 수 있음.
-            keywords: [1, 2, 3],
-        });
         render(<Header />);
-        const text = await screen.findByText('성장 기록지');
-        expect(text).toBeInTheDocument();
+
+        waitFor(() => {
+            const text = screen.getByText('성장 기록지');
+            expect(text).toBeInTheDocument();
+        });
+    });
+    it('캐릭터를 삭제합니다.', async () => {
+        const { user } = await render(<Header />);
+
+        /**
+         * 1. 미트볼 클릭
+         * 2. 팝오버에서 '삭제 클릭'
+         * 3. 다이얼로그에서 '삭제' 클릭
+         */
+
+        await waitFor(async () => {
+            const meatballIcon = screen.getByTestId('meatball-icon');
+            await user.click(meatballIcon);
+            const popoverDeleteText = screen.getByText('삭제');
+            await user.click(popoverDeleteText);
+            const dialogDeleteText = screen.getByRole('button', { name: '삭제' });
+            expect(dialogDeleteText).toBeInTheDocument();
+            await user.click(dialogDeleteText);
+            expect(removeCharacterName).toHaveBeenCalled();
+        });
     });
 });
