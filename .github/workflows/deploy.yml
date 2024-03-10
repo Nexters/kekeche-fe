@@ -13,7 +13,7 @@ jobs:
             - name: Install mustache (to update the date)
               run: apk add ruby && gem install mustache
             - name: creates output
-              run: sh ./build.sh
+              run: sh ./scripts/build.sh
             - name: Pushes to another repository
               id: push_directory
               uses: cpina/github-action-push-to-another-repository@main

@@ -10,7 +10,7 @@
         "test": "vitest",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
-        "deploy-storybook": "sh ./deploy-storybook.sh"
+        "deploy-storybook": "sh ./scripts/deploy-storybook.sh"
     },
     "dependencies": {
         "@ducanh2912/next-pwa": "^10.2.2",
