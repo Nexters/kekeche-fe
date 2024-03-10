@@ -7,8 +7,6 @@ import FixedBottomArea from '../fixed-bottom-area';
 import { useRouter } from 'next/navigation';
 
 export default React.memo(function SetName() {
-    const NAME_REGEX = new RegExp(/^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/);
-
     const { setValue } = useCreateCharacter();
     const { handleNextClick } = useCarousel();
 
@@ -16,8 +14,6 @@ export default React.memo(function SetName() {
     const [isError, setIsError] = useState(false);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const isValid = NAME_REGEX.test(e.currentTarget.value.trim());
-        setIsError(!isValid);
         setName(e.currentTarget.value.trimStart());
     };
 
