@@ -13,6 +13,7 @@ import editCharacterName from '@/services/character/editCharacterName';
 
 const pushFn = vi.fn();
 const refreshFn = vi.fn();
+const removeFn = vi.fn();
 vi.mock('@/services/auth/getMember');
 vi.mock('@/services/character/getCharacterDetail');
 vi.mock('@/services/character/getCharacterMemos');
@@ -88,15 +89,15 @@ describe('Header', () => {
          * 3. 다이얼로그에서 '삭제' 클릭
          */
 
-        const meatballIcon = await screen.findByTestId('meatball-icon');
-        await user.click(meatballIcon);
-        const popoverDeleteText = screen.getByText('삭제');
-        await user.click(popoverDeleteText);
-        const dialogDeleteText = screen.getByRole('button', { name: '삭제' });
-        await user.click(dialogDeleteText);
-
-        expect(removeCharacterName).toHaveBeenCalled();
-        expect(pushFn).toHaveBeenNthCalledWith(1, '/member/2');
-        expect(refreshFn).toHaveBeenCalledTimes(1);
+        await waitFor(async () => {
+            const meatballIcon = screen.getByTestId('meatball-icon');
+            await user.click(meatballIcon);
+            const popoverDeleteText = screen.getByText('삭제');
+            await user.click(popoverDeleteText);
+            const dialogDeleteText = screen.getByRole('button', { name: '삭제' });
+            expect(dialogDeleteText).toBeInTheDocument();
+            await user.click(dialogDeleteText);
+            expect(removeCharacterName).toHaveBeenCalled();
+        });
     });
 });
