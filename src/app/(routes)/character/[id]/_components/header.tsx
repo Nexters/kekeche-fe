@@ -18,6 +18,7 @@ import { useMutation, useQueryClient, useSuspenseQueries } from '@tanstack/react
 import { getCookie } from 'cookies-next';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { toast, useToast } from '@/components/ui-shadcn/toast/use-toast';
 
 export default function Header() {
     const router = useRouter();
@@ -97,7 +98,13 @@ export default function Header() {
                 leftText="취소"
                 rightText="완료"
                 title="이름 수정"
-                onConfirm={mutateName}
+                onConfirm={() => {
+                    if (draft.length < 1 || draft.length > 10) {
+                        toast({ description: '한글, 영문 대소문자. 공백 포함 최대 8글자로 입력해주세요.' });
+                        return;
+                    }
+                    mutateName();
+                }}
                 contents={
                     <input
                         className="mt-[24px] h-[48px] w-full rounded-lg px-4 outline outline-newGray-200 focus:outline-primary-500"
@@ -105,6 +112,8 @@ export default function Header() {
                         onChange={(e) => {
                             setDraft(e.target.value);
                         }}
+                        minLength={1}
+                        maxLength={10}
                     />
                 }
             />
