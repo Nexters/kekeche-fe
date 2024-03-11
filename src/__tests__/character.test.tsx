@@ -5,9 +5,8 @@ import { getCharacterMemos } from '@/services/character/getCharacterMemos';
 import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
 import getMember, { checkIsLoggedIn } from '@/services/auth/getMember';
 import { redirect } from 'next/navigation';
-import { act, screen, waitFor } from '@testing-library/react';
+import { act, screen, within } from '@testing-library/react';
 import Header from '@/app/(routes)/character/[id]/_components/header';
-import { Suspense } from 'react';
 import { removeCharacterName } from '@/services/character/deleteCharacterName';
 import editCharacterName from '@/services/character/editCharacterName';
 import { UserEvent } from '@testing-library/user-event';
@@ -15,17 +14,20 @@ import { UserEvent } from '@testing-library/user-event';
 const pushFn = vi.fn();
 const refreshFn = vi.fn();
 
+vi.mock('cookies-next', () => ({
+    getCookie: () => {
+        return 'accessToken';
+    },
+}));
+
 vi.mock('next/navigation', async () => {
-    const actual = await vi.importActual('next/navigation');
     return {
-        ...actual,
         useRouter: () => ({ push: pushFn, refresh: refreshFn }),
         usePathname: () => 'chracter/5',
         redirect: vi.fn(),
         useSearchParams: () => ({ get: () => vi.fn() }),
     };
 });
-
 vi.mocked(getMember).mockResolvedValue({ memberId: 2, characterCount: 3, memoCount: 5 });
 vi.mocked(getCharacterDetail).mockResolvedValue({
     id: 5,
@@ -80,12 +82,13 @@ describe('Header', () => {
     });
 
     it('캐릭터를 삭제합니다.', async () => {
+        if (user === undefined) return;
+
         /**
          * 1. 미트볼 클릭
-         * 2. 팝오버에서 '삭제 클릭'
+         * 2. 팝오버에서 '삭제' 클릭
          * 3. 다이얼로그에서 '삭제' 클릭
          */
-        if (user === undefined) return;
 
         const meatballIcon = screen.getByTestId('meatball-icon');
         await user.click(meatballIcon);
@@ -94,6 +97,36 @@ describe('Header', () => {
         const dialogDeleteText = screen.getByRole('button', { name: '삭제' });
         expect(dialogDeleteText).toBeInTheDocument();
         await user.click(dialogDeleteText);
-        expect(removeCharacterName).toHaveBeenCalled();
+        expect(removeCharacterName).toHaveBeenCalledWith({ accessToken: 'accessToken', characterId: 5 });
+    });
+
+    it('캐릭터 이름 수정합니다.', async () => {
+        if (user === undefined) return;
+
+        /**
+         * 1. 미트볼 클릭
+         * 2. 팝오버에서 '수정' 클릭
+         * 3. 다이얼로그에서 input 클릭
+         * 4. input clear 후 새로운 이름 입력
+         * 5. '완료' 클릭
+         */
+
+        const meatballIcon = screen.getByTestId('meatball-icon');
+        await user.click(meatballIcon);
+        const popoverEditText = screen.getByText('수정');
+        await user.click(popoverEditText);
+        const dialog = screen.getByRole('dialog');
+        const input = screen.getByRole('textbox');
+        await user.click(input);
+        await user.clear(input);
+        await user.type(input, '새로운 이름');
+        const confirmButton = within(dialog).getByRole('button', { name: '완료' });
+        await user.click(confirmButton);
+
+        expect(editCharacterName).toHaveBeenCalledWith({
+            accessToken: 'accessToken',
+            characterId: 5,
+            characterName: '새로운 이름',
+        });
     });
 });

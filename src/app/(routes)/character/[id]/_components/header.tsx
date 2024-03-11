@@ -46,7 +46,7 @@ export default function Header() {
         mutationFn: () =>
             editCharacterName({
                 accessToken: `${getCookie('accessToken')}`,
-                characterId,
+                characterId: character?.id,
                 characterName: draft,
             }),
         onSuccess: () => {
