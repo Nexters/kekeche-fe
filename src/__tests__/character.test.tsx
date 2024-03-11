@@ -10,6 +10,7 @@ import Header from '@/app/(routes)/character/[id]/_components/header';
 import { Suspense } from 'react';
 import { removeCharacterName } from '@/services/character/deleteCharacterName';
 import editCharacterName from '@/services/character/editCharacterName';
+import { UserEvent } from '@testing-library/user-event';
 
 const pushFn = vi.fn();
 const refreshFn = vi.fn();
@@ -58,30 +59,35 @@ describe('로그인 안한 경우', () => {
     it('홈 페이지로 리다이렉트 합니다.', async () => {
         vi.mocked(checkIsLoggedIn).mockResolvedValue({ isLoggedIn: false });
         await act(async () => {
-            render(<Suspense>{await CharacterDetailPage({ params: { id: 2 } })}</Suspense>);
+            render(await CharacterDetailPage({ params: { id: 2 } }));
         });
         expect(redirect).toHaveBeenNthCalledWith(1, '/');
     });
 });
 
 describe('Header', () => {
-    it('헤더가 올바르게 렌더링 됩니다.', async () => {
-        await render(<Header />);
+    let user: UserEvent | undefined;
 
+    beforeEach(async () => {
+        const { user: userEvent } = await render(<Header />);
+        user = userEvent;
+    });
+
+    it('헤더가 올바르게 렌더링 됩니다.', async () => {
         const text = await screen.findByText('성장 기록지');
 
         expect(text).toBeInTheDocument();
     });
-    it('캐릭터를 삭제합니다.', async () => {
-        const { user } = await render(<Header />);
 
+    it('캐릭터를 삭제합니다.', async () => {
         /**
          * 1. 미트볼 클릭
          * 2. 팝오버에서 '삭제 클릭'
          * 3. 다이얼로그에서 '삭제' 클릭
          */
+        if (user === undefined) return;
 
-        const meatballIcon = await screen.findByTestId('meatball-icon');
+        const meatballIcon = screen.getByTestId('meatball-icon');
         await user.click(meatballIcon);
         const popoverDeleteText = screen.getByText('삭제');
         await user.click(popoverDeleteText);

@@ -47,7 +47,7 @@ function Dialog({
         <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
             <RadixDialog.Portal>
                 <RadixDialog.Overlay onKeyUp={(e) => e.preventDefault()}>
-                    <RadixDialog.Close className="fixed right-0 top-0 z-[999] h-[100vh] w-full cursor-default">
+                    <div className="fixed right-0 top-0 z-[999] h-[100vh] w-full cursor-default">
                         <div
                             className={
                                 'mx-auto flex min-h-screen  w-auto flex-col items-center justify-center bg-[#0a0a0c4d] shadow-lg lg:w-[400px] '
@@ -91,7 +91,7 @@ function Dialog({
                                 </motion.div>
                             </RadixDialog.Content>
                         </div>
-                    </RadixDialog.Close>
+                    </div>
                 </RadixDialog.Overlay>
             </RadixDialog.Portal>
         </RadixDialog.Root>
