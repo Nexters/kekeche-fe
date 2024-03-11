@@ -4,8 +4,6 @@ import { screen } from '@testing-library/react';
 import { redirect } from 'next/navigation';
 import { IsLoggedIn, Member, checkIsLoggedIn } from '@/services/auth/getMember';
 
-vi.mock('@/services/auth/getMember');
-
 describe('홈 페이지 테스트', () => {
     it('로그인 안했을 때 홈 페이지를 렌더링 합니다.', async () => {
         vi.mocked(checkIsLoggedIn).mockResolvedValue({ isLoggedIn: false });

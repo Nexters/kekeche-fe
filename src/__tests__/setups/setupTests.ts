@@ -1,21 +1,27 @@
 import '@testing-library/jest-dom';
 import 'vitest-canvas-mock';
 
-beforeAll(() => {
-    vi.mock('next/headers', async () => {
-        return {
-            cookies: () => {
-                return {
-                    get: (name: string) => {
-                        return {
-                            value: 'cookie',
-                        };
-                    },
-                };
-            },
-        };
-    });
+vi.mock('@/services/auth/getMember');
+vi.mock('@/services/character/getCharacterDetail');
+vi.mock('@/services/character/getCharacterMemos');
+vi.mock('@/services/character/getCharacterSpecialty');
+vi.mock('@/services/character/editCharacterName');
+vi.mock('@/services/character/deleteCharacterName');
+vi.mock('next/headers', async () => {
+    return {
+        cookies: () => {
+            return {
+                get: (name: string) => {
+                    return {
+                        value: 'cookie',
+                    };
+                },
+            };
+        },
+    };
 });
+
+beforeAll(() => {});
 
 afterEach(() => {
     vi.clearAllMocks();

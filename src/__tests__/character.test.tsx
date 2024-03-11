@@ -13,13 +13,6 @@ import editCharacterName from '@/services/character/editCharacterName';
 
 const pushFn = vi.fn();
 const refreshFn = vi.fn();
-const removeFn = vi.fn();
-vi.mock('@/services/auth/getMember');
-vi.mock('@/services/character/getCharacterDetail');
-vi.mock('@/services/character/getCharacterMemos');
-vi.mock('@/services/character/getCharacterSpecialty');
-vi.mock('@/services/character/editCharacterName');
-vi.mock('@/services/character/deleteCharacterName');
 
 vi.mock('next/navigation', async () => {
     const actual = await vi.importActual('next/navigation');
