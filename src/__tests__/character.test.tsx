@@ -68,10 +68,9 @@ describe('Header', () => {
     it('헤더가 올바르게 렌더링 됩니다.', async () => {
         render(<Header />);
 
-        waitFor(() => {
-            const text = screen.getByText('성장 기록지');
-            expect(text).toBeInTheDocument();
-        });
+        const text = await screen.findByText('성장 기록지');
+
+        expect(text).toBeInTheDocument();
     });
     it('캐릭터를 삭제합니다.', async () => {
         const { user } = await render(<Header />);
@@ -82,15 +81,13 @@ describe('Header', () => {
          * 3. 다이얼로그에서 '삭제' 클릭
          */
 
-        await waitFor(async () => {
-            const meatballIcon = screen.getByTestId('meatball-icon');
-            await user.click(meatballIcon);
-            const popoverDeleteText = screen.getByText('삭제');
-            await user.click(popoverDeleteText);
-            const dialogDeleteText = screen.getByRole('button', { name: '삭제' });
-            expect(dialogDeleteText).toBeInTheDocument();
-            await user.click(dialogDeleteText);
-            expect(removeCharacterName).toHaveBeenCalled();
-        });
+        const meatballIcon = screen.getByTestId('meatball-icon');
+        await user.click(meatballIcon);
+        const popoverDeleteText = screen.getByText('삭제');
+        await user.click(popoverDeleteText);
+        const dialogDeleteText = screen.getByRole('button', { name: '삭제' });
+        expect(dialogDeleteText).toBeInTheDocument();
+        await user.click(dialogDeleteText);
+        expect(removeCharacterName).toHaveBeenCalled();
     });
 });
