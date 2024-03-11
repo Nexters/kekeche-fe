@@ -66,7 +66,7 @@ describe('로그인 안한 경우', () => {
 
 describe('Header', () => {
     it('헤더가 올바르게 렌더링 됩니다.', async () => {
-        render(<Header />);
+        await render(<Header />);
 
         const text = await screen.findByText('성장 기록지');
 
@@ -81,7 +81,7 @@ describe('Header', () => {
          * 3. 다이얼로그에서 '삭제' 클릭
          */
 
-        const meatballIcon = screen.getByTestId('meatball-icon');
+        const meatballIcon = await screen.findByTestId('meatball-icon');
         await user.click(meatballIcon);
         const popoverDeleteText = screen.getByText('삭제');
         await user.click(popoverDeleteText);
