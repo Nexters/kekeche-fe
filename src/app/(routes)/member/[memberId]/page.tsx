@@ -22,7 +22,7 @@ export default async function Home({ params: { memberId } }: { params: { memberI
     });
 
     const isMyPage = characters?.isMe;
-    const headerText = `${characters?.memberNickname}의 도감`;
+    const headerText = `${characters?.memberNickname}의 도감 `;
     const showCharacterCreateButton = isMyPage && characters.characters.length < MAXIMUM_CHARACTER;
 
     return (
