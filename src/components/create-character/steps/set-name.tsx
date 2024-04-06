@@ -7,7 +7,7 @@ import { useCreateCharacterContext } from '@/context/create-character-provider';
 
 const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;
 
-export default function SetName() {
+export function SetName() {
     console.log('name rerender');
     const { setValue } = useCreateCharacterContext();
     const { handleNextClick } = useCarousel();

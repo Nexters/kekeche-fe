@@ -7,12 +7,12 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import FixedBottomArea from '../fixed-bottom-area';
 import Header from '../header';
-import StoryBox from '../story-box';
+import Badge from '@/assets/images/badgeSm.png';
 import Story1 from '@/assets/images/story-1.webp';
 import Story2 from '@/assets/images/story-2.webp';
 import Story3 from '@/assets/images/story-3.webp';
 
-export default React.memo(function Story() {
+export function Story() {
     const router = useRouter();
 
     const [storyNum, setStoryNum] = useState<1 | 2 | 3>(1);
@@ -66,4 +66,26 @@ export default React.memo(function Story() {
             )}
         </>
     );
-});
+}
+
+type Props = {
+    text: string;
+};
+
+export default function StoryBox({ text }: Props) {
+    return (
+        <div className="relative">
+            <div className="h-auto w-[343px] whitespace-pre-line rounded-[16px] bg-[#3C3A43] p-[24px] text-regular16 text-gray-100 opacity-80">
+                {text}
+            </div>
+            <Image
+                quality={100}
+                alt="배지"
+                src={Badge}
+                width={66.5}
+                height={66.5}
+                className="absolute right-0 top-[-49px]"
+            />
+        </div>
+    );
+}

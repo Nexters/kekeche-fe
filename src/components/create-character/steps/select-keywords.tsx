@@ -9,7 +9,7 @@ import { useCreateCharacterContext } from '@/context/create-character-provider';
 
 type KeywordId = (typeof Keywords)[number]['id'];
 
-export default React.memo(function SelectKeywords() {
+export function SelectKeywords() {
     const { handleNextClick } = useCarousel();
 
     const { setValue } = useCreateCharacterContext();
@@ -63,4 +63,4 @@ export default React.memo(function SelectKeywords() {
             </FixedBottomArea>
         </>
     );
-});
+}

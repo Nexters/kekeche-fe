@@ -4,14 +4,7 @@ import CreateCharacterProvider from '@/context/create-character-provider';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import StepContainer from './step-container';
-import GuideToLogin from './steps/guide-to-login';
-import SelectColor from './steps/select-color';
-import SelectItem from './steps/select-item';
-import SelectKeywords from './steps/select-keywords';
-import SelectShape from './steps/select-shape';
-import SetName from './steps/set-name';
-import ShowResult from './steps/show-result';
-import Story from './steps/story';
+import * as CreateCharacterSteps from './steps';
 import { Steps } from './types/steps';
 import StepperHeader from './stepper-header';
 
@@ -23,14 +16,14 @@ interface CarouselDispatch {
 export const CarouselDispatchContext = createContext<null | CarouselDispatch>(null);
 
 const STEPS: readonly React.ReactNode[] = [
-    <Story key={Steps.Story} />,
-    <SetName key={Steps.SetName} />,
-    <SelectShape key={Steps.SelectShape} />,
-    <SelectColor key={Steps.SelectColor} />,
-    <SelectKeywords key={Steps.SelectKeywords} />,
-    <SelectItem key={Steps.SelectItem} />,
-    <ShowResult key={Steps.ShowResult} />,
-    <GuideToLogin key={Steps.GuideToLogin} />,
+    <CreateCharacterSteps.Story key={Steps.Story} />,
+    <CreateCharacterSteps.SetName key={Steps.SetName} />,
+    <CreateCharacterSteps.SelectShape key={Steps.SelectShape} />,
+    <CreateCharacterSteps.SelectColor key={Steps.SelectColor} />,
+    <CreateCharacterSteps.SelectKeywords key={Steps.SelectKeywords} />,
+    <CreateCharacterSteps.SelectItem key={Steps.SelectItem} />,
+    <CreateCharacterSteps.ShowResult key={Steps.ShowResult} />,
+    <CreateCharacterSteps.GuideToLogin key={Steps.GuideToLogin} />,
 ] as const;
 
 export default function CreateCharacter() {

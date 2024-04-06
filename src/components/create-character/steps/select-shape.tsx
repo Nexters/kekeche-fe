@@ -11,7 +11,7 @@ import { useCreateCharacterContext } from '@/context/create-character-provider';
 
 type ShapeId = (typeof Shapes)[number]['id'];
 
-export default React.memo(function SelectShape() {
+export function SelectShape() {
     const [selected, setSelected] = useState<null | ShapeId>(null);
 
     const { setValue } = useCreateCharacterContext();
@@ -59,4 +59,4 @@ export default React.memo(function SelectShape() {
             </FixedBottomArea>
         </>
     );
-});
+}

@@ -34,7 +34,7 @@ export const createCharacter = async (createCharacterValues: CreateCharacterValu
         .then((res) => res.json())
         .then((body) => body.data);
 
-export default function ShowResult() {
+export function ShowResult() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const step = searchParams.get('step');

@@ -9,7 +9,7 @@ import { Colors } from '@/constants/character-info';
 
 type ColorId = (typeof Colors)[number]['id'];
 
-export default React.memo(function SelectColor() {
+export function SelectColor() {
     const [selected, setSelected] = useState<null | ColorId>(null);
     const { setValue } = useCreateCharacterContext();
     const carouselDispatch = useContext(CarouselDispatchContext);
@@ -55,4 +55,4 @@ export default React.memo(function SelectColor() {
             </FixedBottomArea>
         </>
     );
-});
+}

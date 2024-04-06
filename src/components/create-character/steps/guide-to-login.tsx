@@ -7,7 +7,7 @@ import Header from '../header';
 import useCarousel from '../hooks/useCarousel';
 import Intro from '../intro';
 
-export default React.memo(function GuideToLogin() {
+export function GuideToLogin() {
     const { handlePrevClick } = useCarousel();
 
     return (
@@ -21,4 +21,4 @@ export default React.memo(function GuideToLogin() {
             </FixedBottomArea>
         </>
     );
-});
+}

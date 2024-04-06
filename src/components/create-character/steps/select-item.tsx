@@ -9,7 +9,7 @@ import { useCreateCharacterContext } from '@/context/create-character-provider';
 
 type ItemId = (typeof Items)[number]['id'];
 
-export default React.memo(function SelectItem() {
+export function SelectItem() {
     const [selected, setSelected] = useState<null | ItemId>(null);
     const { setValue } = useCreateCharacterContext();
     const { handleNextClick } = useCarousel();
@@ -51,4 +51,4 @@ export default React.memo(function SelectItem() {
             </FixedBottomArea>
         </>
     );
-});
+}
