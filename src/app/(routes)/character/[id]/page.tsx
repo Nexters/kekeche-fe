@@ -6,7 +6,7 @@ import { checkIsLoggedIn } from '@/services/auth/getMember';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { Suspense, useMemo } from 'react';
+import { Suspense } from 'react';
 import CharacterDetailContainer from './_components/character-detail-container';
 import CharacterMemos from './_components/character-memos';
 import Header from './_components/header';

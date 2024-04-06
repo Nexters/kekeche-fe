@@ -1,5 +1,6 @@
-import { FetchQueryOptions } from '@tanstack/react-query';
+import { FetchQueryOptions, UseQueryOptions, UseSuspenseQueryOptions } from '@tanstack/react-query';
 
 export type PrefetchOptions = Pick<FetchQueryOptions, 'queryKey' | 'queryFn'>;
 
-export type BasicQueryOptions = PrefetchOptions;
+export type BasicSuspenseQueryOptions<T> = Pick<UseSuspenseQueryOptions<T>, 'queryKey' | 'queryFn'>;
+export type BasicQueryOptions<T> = Pick<UseQueryOptions<T>, 'queryKey' | 'queryFn'>;

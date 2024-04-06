@@ -1,29 +1,25 @@
 import { PageContainer } from '@/components/ui';
-import { getAllMemos } from '@/services/memo/getAllMemos';
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import { cookies } from 'next/headers';
 import { Suspense } from 'react';
 import Header from './_components/header';
 import MemosContainer from './_components/memos-container';
 import SearchBox from './_components/search-box';
+import { allMemosQueryOptions } from '@/store/query/useAllMemosQuery';
+import { PrefetchBoundary } from '@/context/prefetch-boundary';
 
 export default async function MemosPage() {
-    const queryClient = new QueryClient();
-    const accessToken = cookies().get('accessToken')?.value;
+    const accessToken = `${cookies().get('accessToken')?.value}`;
 
-    await queryClient.prefetchQuery({
-        queryKey: ['allMemos'],
-        queryFn: () => getAllMemos(`${accessToken}`, 0, 'DESC', 'createdAt'),
-    });
+    const prefetchOptions = allMemosQueryOptions(accessToken);
 
     return (
         <PageContainer bgColor="bg-[#F8F8FB]" hasNavigator>
             <Header text="기록" />
             <SearchBox />
             <Suspense>
-                <HydrationBoundary state={dehydrate(queryClient)}>
+                <PrefetchBoundary prefetchOptions={prefetchOptions}>
                     <MemosContainer />
-                </HydrationBoundary>
+                </PrefetchBoundary>
             </Suspense>
         </PageContainer>
     );
