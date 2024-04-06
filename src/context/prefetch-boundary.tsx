@@ -1,6 +1,5 @@
-import { FetchQueryOptions, HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
-
-type PrefetchOptions = Pick<FetchQueryOptions, 'queryKey' | 'queryFn'>;
+import { PrefetchOptions } from '@/types/query';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
 type Props = {
     prefetchOptions: PrefetchOptions[] | PrefetchOptions;

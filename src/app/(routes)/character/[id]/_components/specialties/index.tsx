@@ -10,6 +10,7 @@ import { useState } from 'react';
 import useCharacterIdBypath from '../../hooks/useCharacterIdBypath';
 import SpecialtiesModal from './specialties-modal';
 import DeleteSpecialtyModal from './delete-specialty-modal';
+import { useCharacterSpecialtyQuery } from '@/store/query/useCharacterSpecialtyQuery';
 
 export default function Specialties() {
     const characterId = useCharacterIdBypath();
@@ -17,11 +18,7 @@ export default function Specialties() {
     // 캐릭터 주특기 불러오기
     const {
         data: { specialties },
-    } = useSuspenseQuery({
-        queryKey: ['character', 'specialties', characterId],
-        queryFn: () => getCharacterSpecialty({ accessToken: `${getCookie('accessToken')}`, characterId }),
-        staleTime: 1000 * 60 * 5,
-    });
+    } = useCharacterSpecialtyQuery(characterId);
 
     // 모달 상태
     const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);

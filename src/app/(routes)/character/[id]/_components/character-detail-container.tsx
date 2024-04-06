@@ -1,11 +1,9 @@
 'use client';
 
 import CharacterDetail from '@/components/character-detail';
-import getCharacterDetail from '@/services/character/getCharacterDetail';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { getCookie } from 'cookies-next';
+import { useCharacterDetailQueries } from '@/store/query/useCharacterDetailQueries';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 type Props = {
     hasBubble?: boolean;
@@ -17,11 +15,7 @@ export default function CharacterDetailContainer({ hasBubble = false }: Props) {
 
     const ref = useRef<HTMLDivElement>(null);
 
-    const { data: character } = useSuspenseQuery({
-        queryKey: ['character', 'detail', characterId],
-        queryFn: () => getCharacterDetail({ accessToken: `${getCookie('accessToken')}`, characterId }),
-        staleTime: 1000 * 60 * 5,
-    });
+    const [_, { data: character }] = useCharacterDetailQueries(characterId);
 
     return <CharacterDetail ref={ref} character={character} className="mt-[24px]" hasBubble={hasBubble} />;
 }

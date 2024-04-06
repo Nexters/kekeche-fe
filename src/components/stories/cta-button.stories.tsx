@@ -28,9 +28,7 @@ export const BottomFixed: Story = {
     render: (props) => (
         <PageContainer>
             <div className="h-screen w-full gradation-bg">
-                <FixedBottomArea>
-                    <CtaButton {...props} className="mb-[31px]" />
-                </FixedBottomArea>
+                <FixedBottomArea contents={<CtaButton {...props} className="mb-[31px]" />} />
             </div>
         </PageContainer>
     ),

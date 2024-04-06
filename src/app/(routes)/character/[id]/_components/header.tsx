@@ -13,12 +13,12 @@ import getMember from '@/services/auth/getMember';
 import { removeCharacterName } from '@/services/character/deleteCharacterName';
 import editCharacterName from '@/services/character/editCharacterName';
 import getCharacterDetail from '@/services/character/getCharacterDetail';
-import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
-import { useMutation, useQueryClient, useSuspenseQueries } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast, useToast } from '@/components/ui-shadcn/toast/use-toast';
+import { useCharacterDetailQueries } from '@/store/query/useCharacterDetailQueries';
 
 export default function Header() {
     const router = useRouter();
@@ -28,19 +28,7 @@ export default function Header() {
 
     const characterId = Number(pathname.split('character/')[1]);
 
-    const [{ data: member }, { data: character }] = useSuspenseQueries({
-        queries: [
-            {
-                queryKey: ['auth'],
-                queryFn: () => getMember({ accessToken: `${getCookie('accessToken')}` }),
-            },
-            {
-                queryKey: ['character', 'detail', characterId],
-                queryFn: () => getCharacterDetail({ accessToken: `${getCookie('accessToken')}`, characterId }),
-                staleTime: 1000 * 60 * 5,
-            },
-        ],
-    });
+    const [{ data: member }, { data: character }] = useCharacterDetailQueries(characterId);
 
     const { mutate: mutateName } = useMutation({
         mutationFn: () =>

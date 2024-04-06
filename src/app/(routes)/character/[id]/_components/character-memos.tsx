@@ -2,11 +2,9 @@
 
 import Memo from '@/app/(routes)/memos/_components/memo';
 import Memos from '@/components/memos';
-import { getCharacterMemos } from '@/services/character/getCharacterMemos';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { getCookie } from 'cookies-next';
 import { usePathname } from 'next/navigation';
 import NoMemoFallback from '@/components/no-memo-fallback';
+import { useCharacterMemosQuery } from '@/store/query/useCharacterMemosQuery';
 
 export default function CharacterMemos() {
     const pathname = usePathname();
@@ -14,14 +12,7 @@ export default function CharacterMemos() {
 
     const {
         data: { memos, totalCount },
-    } = useSuspenseQuery({
-        queryKey: ['character', 'memos', characterId],
-        queryFn: () =>
-            getCharacterMemos({
-                accessToken: `${getCookie('accessToken')}`,
-                characterId,
-            }),
-    });
+    } = useCharacterMemosQuery(characterId);
 
     return (
         <div className=" mt-[16px] flex h-auto w-full flex-col items-center rounded-t-[24px] bg-newGray-100  pb-[160px] pt-[24px]">
