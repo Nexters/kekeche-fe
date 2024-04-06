@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 type BaseProps = {
-    text: string;
+    text?: string;
     children?: React.ReactNode;
 };
 
