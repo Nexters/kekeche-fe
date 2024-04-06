@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useCallback, useMemo, useRef, useState } from 'react';
+import { createContext, useCallback, useContext, useMemo, useRef } from 'react';
 
 type Props = {
     children: React.ReactNode;
@@ -15,12 +15,13 @@ export interface CreateCharacterValues {
     itemIdx?: number | null;
 }
 
-interface CreateCharacterDispatch {
+interface CreateCharacterContext {
     setValue<T extends keyof CreateCharacterValues>(target: T, value: CreateCharacterValues[T]): void;
+    getValue<T extends keyof CreateCharacterValues>(target: T): CreateCharacterValues[T];
+    getValues(): CreateCharacterValues;
 }
 
-export const CreateCharacterValuesContext = createContext<null | CreateCharacterValues>(null);
-export const CreateCharacterDispatchContext = createContext<null | CreateCharacterDispatch>(null);
+export const CreateCharacterContext = createContext<null | CreateCharacterContext>(null);
 
 export default function CreateCharacterProvider({ children }: Props) {
     const createCharacterValues = useRef<CreateCharacterValues>({});
@@ -35,13 +36,25 @@ export default function CreateCharacterProvider({ children }: Props) {
         [],
     );
 
-    const memoizedSetValue = useMemo(() => ({ setValue }), [setValue]);
+    const getValue = useCallback(<T extends keyof CreateCharacterValues>(target: T) => {
+        return createCharacterValues.current[target];
+    }, []);
 
-    return (
-        <CreateCharacterValuesContext.Provider value={createCharacterValues.current}>
-            <CreateCharacterDispatchContext.Provider value={memoizedSetValue}>
-                {children}
-            </CreateCharacterDispatchContext.Provider>
-        </CreateCharacterValuesContext.Provider>
-    );
+    const getValues = useCallback(() => {
+        return createCharacterValues.current;
+    }, []);
+
+    const memoizedValue = useMemo(() => ({ setValue, getValue, getValues }), [getValue, getValues, setValue]);
+
+    return <CreateCharacterContext.Provider value={memoizedValue}>{children}</CreateCharacterContext.Provider>;
+}
+
+export function useCreateCharacterContext() {
+    const createCharacterContext = useContext(CreateCharacterContext);
+
+    if (createCharacterContext === null) {
+        throw new Error('CreateCharacterContext를 감싸서 사용하세요.');
+    }
+
+    return createCharacterContext;
 }

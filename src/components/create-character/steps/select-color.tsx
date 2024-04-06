@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { CarouselDispatchContext } from '..';
-import Header from '../header';
 import Intro from '../intro';
-import { CreateCharacterDispatchContext } from '@/context/create-character-provider';
+import { useCreateCharacterContext } from '@/context/create-character-provider';
 import CtaButton from '@/components/ui/cta-button';
 import CheckCircle from '@/assets/icons/check-circle.svg';
 import FixedBottomArea from '../fixed-bottom-area';
@@ -12,13 +11,13 @@ type ColorId = (typeof Colors)[number]['id'];
 
 export default React.memo(function SelectColor() {
     const [selected, setSelected] = useState<null | ColorId>(null);
-    const createCharacterDispatch = useContext(CreateCharacterDispatchContext);
+    const { setValue } = useCreateCharacterContext();
     const carouselDispatch = useContext(CarouselDispatchContext);
 
     const handleClick = () => {
         if (selected === null) return;
 
-        createCharacterDispatch?.setValue('colorIdx', selected);
+        setValue('colorIdx', selected);
         carouselDispatch?.handleNextClick();
     };
 

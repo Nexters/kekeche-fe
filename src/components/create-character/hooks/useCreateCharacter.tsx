@@ -1,10 +1,10 @@
 'use client';
 
 import { useContext } from 'react';
-import { CreateCharacterDispatchContext } from '@/context/create-character-provider';
+import { CreateCharacterContext } from '@/context/create-character-provider';
 
 export default function useCreateCharacter() {
-    const createCharacterDispatch = useContext(CreateCharacterDispatchContext);
+    const createCharacterDispatch = useContext(CreateCharacterContext);
 
     if (createCharacterDispatch === null) throw new Error('CreateCharacter Provider를 감싸서 사용하세요');
 

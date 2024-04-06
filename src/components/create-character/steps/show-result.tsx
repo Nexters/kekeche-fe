@@ -3,7 +3,11 @@
 import HomeBg from '@/assets/images/homeBg.jpg';
 import CtaButton from '@/components/ui/cta-button';
 import { Keywords, NO_ITEM_IDX } from '@/constants/character-info';
-import { CreateCharacterValues, CreateCharacterValuesContext } from '@/context/create-character-provider';
+import {
+    CreateCharacterContext,
+    CreateCharacterValues,
+    useCreateCharacterContext,
+} from '@/context/create-character-provider';
 import { sendGTMEvent } from '@next/third-parties/google';
 import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
@@ -35,15 +39,10 @@ export default function ShowResult() {
     const searchParams = useSearchParams();
     const step = searchParams.get('step');
 
-    const createCharacterValues = useContext(CreateCharacterValuesContext);
+    const { getValues } = useCreateCharacterContext();
+    const values = getValues();
 
-    if (createCharacterValues === null) {
-        alert('처음부터 하세요.');
-        router.push('/');
-        throw new Error('');
-    }
-
-    const { colorIdx, shapeIdx, name, keywords, itemIdx } = createCharacterValues;
+    const { colorIdx, shapeIdx, name, keywords, itemIdx } = values;
     const characterImg = `https://kr.object.ncloudstorage.com/kekeche-character/character/${shapeIdx}/0/${colorIdx}.webp`;
     const itemImg =
         itemIdx !== NO_ITEM_IDX ? `https://kr.object.ncloudstorage.com/kekeche-character/item/${itemIdx}.webp` : null;
@@ -54,14 +53,14 @@ export default function ShowResult() {
     const handleNextBtnClick = async () => {
         try {
             // 캐릭터 생성 api...
-            const { id } = await createCharacter(createCharacterValues, `${getCookie('accessToken')}`);
+            const { id } = await createCharacter(values, `${getCookie('accessToken')}`);
             router.push(`/character/${id}`);
             router.refresh();
             sendGTMEvent({ event: 'createCharacter' });
         } catch (err) {
             // 로그인 안 한 사람->'앗' 페이지
             console.log(err);
-            setCookie('create-character', JSON.stringify(createCharacterValues));
+            setCookie('create-character', JSON.stringify(values));
             handleNextClick();
         }
     };

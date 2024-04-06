@@ -6,15 +6,15 @@ import React, { useState } from 'react';
 import FixedBottomArea from '../fixed-bottom-area';
 import Header from '../header';
 import useCarousel from '../hooks/useCarousel';
-import useCreateCharacter from '../hooks/useCreateCharacter';
 import Intro from '../intro';
+import { useCreateCharacterContext } from '@/context/create-character-provider';
 
 type ShapeId = (typeof Shapes)[number]['id'];
 
 export default React.memo(function SelectShape() {
     const [selected, setSelected] = useState<null | ShapeId>(null);
 
-    const { setValue } = useCreateCharacter();
+    const { setValue } = useCreateCharacterContext();
     const { handleNextClick } = useCarousel();
 
     const handleSelect = (id: ShapeId) => {

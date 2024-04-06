@@ -4,15 +4,15 @@ import React, { useState } from 'react';
 import CtaButton from '@/components/ui/cta-button';
 import useCarousel from '../hooks/useCarousel';
 import FixedBottomArea from '../fixed-bottom-area';
-import useCreateCharacter from '../hooks/useCreateCharacter';
 import { Keywords } from '@/constants/character-info';
+import { useCreateCharacterContext } from '@/context/create-character-provider';
 
 type KeywordId = (typeof Keywords)[number]['id'];
 
 export default React.memo(function SelectKeywords() {
     const { handleNextClick } = useCarousel();
 
-    const { setValue } = useCreateCharacter();
+    const { setValue } = useCreateCharacterContext();
 
     const [selected, setSelected] = useState<Array<KeywordId>>([]);
 
@@ -28,7 +28,6 @@ export default React.memo(function SelectKeywords() {
 
     const handleNextButtonClick = () => {
         if (selected.length === 0) {
-            // TODO: 나중에 toast로 바꾸기
             alert('키워드를 한 개 이상 선택해 주세요.');
             return;
         }
