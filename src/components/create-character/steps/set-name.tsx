@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import CtaButton from '@/components/ui/cta-button';
 import Intro from '../intro';
 import useCarousel from '../hooks/useCarousel';
 import useCreateCharacter from '../hooks/useCreateCharacter';
 import FixedBottomArea from '../fixed-bottom-area';
-import { useRouter } from 'next/navigation';
+
+const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;
 
 export default React.memo(function SetName() {
     const { setValue } = useCreateCharacter();
     const { handleNextClick } = useCarousel();
+    const nameRef = useRef<HTMLInputElement | null>(null);
 
-    const [name, setName] = useState('');
     const [isError, setIsError] = useState(false);
-
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setName(e.currentTarget.value.trimStart());
+    const [isDirty, setIsDirty] = useState(false);
+    const handleNameChange = () => {
+        if (nameRef.current === null) {
+            return;
+        }
+        setIsDirty(true);
+        const isValid = NAME_REGEX.test(nameRef.current.value.trim());
+        setIsError(!isValid);
     };
 
     const handleClick = () => {
-        if (name.length === 0) return;
+        if (nameRef.current === null) {
+            return;
+        }
 
-        setValue('name', name);
+        if (nameRef.current.value.length === 0) return;
+
+        setValue('name', nameRef.current.value);
         handleNextClick();
     };
 
@@ -39,7 +49,7 @@ export default React.memo(function SetName() {
             <div className="flex w-[375px] flex-col gap-[8px] pl-[24px]">
                 <input
                     className={`h-[48px] w-[312px]  rounded-[12px] border bg-[#F7F8F9] px-[16px] py-[12px] outline-none ${isError ? 'border-2 border-[#F68277]' : 'border border-[#E8EAEE]'}`}
-                    value={name}
+                    ref={nameRef}
                     onChange={handleNameChange}
                     placeholder="이름 작성"
                 />
@@ -52,7 +62,7 @@ export default React.memo(function SetName() {
                 {'슈퍼디자이너, 맛집덕후, 헬스쪼렙, 착한 효녀'}
             </p>
             <FixedBottomArea className="mb-[31px]">
-                <CtaButton disabled={isError || name.length === 0} text="다음" onClick={handleClick} />
+                <CtaButton disabled={isError || !isDirty} text="다음" onClick={handleClick} />
             </FixedBottomArea>
         </>
     );
