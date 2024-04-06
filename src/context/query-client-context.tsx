@@ -9,7 +9,18 @@ type Props = {
 };
 
 export default function QueryClientContext({ children }: Props) {
-    const [queryClient] = useState(() => new QueryClient());
+    const [queryClient] = useState(
+        () =>
+            new QueryClient({
+                defaultOptions: {
+                    queries: {
+                        refetchOnWindowFocus: false,
+                        refetchOnMount: false,
+                        retry: 2,
+                    },
+                },
+            }),
+    );
 
     return (
         <QueryClientProvider client={queryClient}>

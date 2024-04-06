@@ -6,7 +6,6 @@ import getMember, { checkIsLoggedIn } from '@/services/auth/getMember';
 import getCharacterDetail from '@/services/character/getCharacterDetail';
 import { getCharacterMemos } from '@/services/character/getCharacterMemos';
 import getCharacterSpecialty from '@/services/character/getCharacterSpecialty';
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -15,58 +14,56 @@ import CharacterDetailContainer from './_components/character-detail-container';
 import CharacterMemos from './_components/character-memos';
 import Header from './_components/header';
 import Specialties from './_components/specialties';
+import { PrefetchBoundary } from './_components/prefetch-boundary';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
     const { isLoggedIn } = await checkIsLoggedIn({ accessToken: `${cookies().get('accessToken')?.value}` });
     if (!isLoggedIn) redirect('/');
 
-    const queryClient = new QueryClient();
-
     const characterId = Number(id);
 
-    await Promise.all([
-        queryClient.prefetchQuery({
+    const options = [
+        {
             queryKey: ['auth'],
             queryFn: () => getMember({ accessToken: `${cookies().get('accessToken')?.value}` }),
-        }),
-        queryClient.prefetchQuery({
+        },
+        {
             queryKey: ['character', 'detail', characterId],
             queryFn: () => getCharacterDetail({ accessToken: `${cookies().get('accessToken')?.value}`, characterId }),
-        }),
-        queryClient.prefetchQuery({
+        },
+        {
             queryKey: ['character', 'specialties', characterId],
             queryFn: () =>
                 getCharacterSpecialty({ accessToken: `${cookies().get('accessToken')?.value}`, characterId }),
-        }),
-        queryClient.prefetchQuery({
+        },
+        {
             queryKey: ['character', 'memos', characterId],
             queryFn: () =>
                 getCharacterMemos({
                     accessToken: `${cookies().get('accessToken')?.value}`,
                     characterId,
                 }),
-        }),
-    ]);
+        },
+    ];
 
     return (
         <PageContainer>
             <div className={`relative min-h-screen p-0 text-[18px]  font-[600] gradation-bg`}>
-                <HydrationBoundary state={dehydrate(queryClient)}>
-                    <Suspense>
+                <Suspense fallback={<div>loading2</div>}>
+                    <PrefetchBoundary prefetchOptions={[options[0], options[1]]}>
                         <Header />
-                    </Suspense>
-                    <Suspense>
                         <CharacterDetailContainer hasBubble={true} />
-                    </Suspense>
-                    <Suspense>
+                    </PrefetchBoundary>
+                </Suspense>
+                <Suspense fallback={<div>loading1</div>}>
+                    <PrefetchBoundary prefetchOptions={options}>
                         <Specialties />
-                    </Suspense>
-                    <Suspense>
                         <CharacterMemos />
-                    </Suspense>
-                </HydrationBoundary>
+                    </PrefetchBoundary>
+                </Suspense>
+                <div>여긴 나타나야 함</div>
                 <FixedBottomArea>
-                    <Link href={`?write=${characterId}`}>
+                    <Link href={`?write=${1}`}>
                         <CTAButton>
                             <div className=" flex w-full items-center justify-center gap-[8px]">
                                 <NoteEditIcon /> <span>{'먹이주기'}</span>
