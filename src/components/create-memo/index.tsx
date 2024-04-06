@@ -18,6 +18,7 @@ export default function CreateMemo({ characterId }: Props) {
     const [charactersThumbnailResponse, setCharactersThumbnailResponse] =
         useState<null | GetCharactersThumbnailResponse>(null);
 
+    console.log(characterId);
     useEffect(() => {
         getCharactersThumbnail({ accessToken: `${getCookie('accessToken')}` }).then((res) =>
             setCharactersThumbnailResponse(res as GetCharactersThumbnailResponse),

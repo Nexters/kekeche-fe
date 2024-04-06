@@ -4,7 +4,7 @@ import QueryClientContext from '@/context/query-client-context';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 
-import MemoOverlay from '@/components/create-character/memo-overlay';
+import MemoOverlay from '@/components/memo-overlay';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -89,11 +89,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
                     href="/assets/splashscreens/iphonex_splash.png"
                 />
-                {/* <link
-                    rel="apple-touch-startup-image"
-                    href="/assets/splashscreens/iphonex_splash.png"
-                    sizes="2048x2732"
-                /> */}
             </head>
             <body className={pretendard.className}>
                 <QueryClientContext>
