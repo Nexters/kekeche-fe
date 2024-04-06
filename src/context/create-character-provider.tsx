@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useCallback, useMemo, useState } from 'react';
+import { createContext, useCallback, useMemo, useRef, useState } from 'react';
 
 type Props = {
     children: React.ReactNode;
@@ -17,35 +17,28 @@ export interface CreateCharacterValues {
 
 interface CreateCharacterDispatch {
     setValue<T extends keyof CreateCharacterValues>(target: T, value: CreateCharacterValues[T]): void;
-    reset(): void;
 }
 
 export const CreateCharacterValuesContext = createContext<null | CreateCharacterValues>(null);
 export const CreateCharacterDispatchContext = createContext<null | CreateCharacterDispatch>(null);
 
 export default function CreateCharacterProvider({ children }: Props) {
-    const [createCharacterValues, setCreateCharacterValues] = useState<CreateCharacterValues>({});
+    const createCharacterValues = useRef<CreateCharacterValues>({});
 
     const setValue = useCallback(
         <T extends keyof CreateCharacterValues>(target: T, value: CreateCharacterValues[T]) => {
-            setCreateCharacterValues((prevValues) => {
-                const newValues = { ...prevValues };
-                newValues[target] = value;
-                return newValues;
-            });
+            const prevValues = createCharacterValues.current;
+            const newValues = { ...prevValues };
+            newValues[target] = value;
+            createCharacterValues.current = newValues;
         },
         [],
     );
 
-    const reset = useCallback(() => {
-        setCreateCharacterValues({});
-    }, []);
-
-    // 렌더링 최적화
-    const memoizedSetValue = useMemo(() => ({ setValue, reset }), [setValue, reset]);
+    const memoizedSetValue = useMemo(() => ({ setValue }), [setValue]);
 
     return (
-        <CreateCharacterValuesContext.Provider value={createCharacterValues}>
+        <CreateCharacterValuesContext.Provider value={createCharacterValues.current}>
             <CreateCharacterDispatchContext.Provider value={memoizedSetValue}>
                 {children}
             </CreateCharacterDispatchContext.Provider>
