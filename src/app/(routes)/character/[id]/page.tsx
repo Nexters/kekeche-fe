@@ -61,7 +61,6 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
                         <CharacterMemos />
                     </PrefetchBoundary>
                 </Suspense>
-                <div>여긴 나타나야 함</div>
                 <FixedBottomArea>
                     <Link href={`?write=${1}`}>
                         <CTAButton>
