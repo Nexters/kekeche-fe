@@ -14,7 +14,7 @@ import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import FixedBottomArea from '../fixed-bottom-area';
+import FixedBottomArea from '../../fixed-bottom-area/fixed-bottom-area';
 import useCarousel from '../hooks/useCarousel';
 import { twMerge } from 'tailwind-merge';
 import CharacterImage from '@/components/character-detail/character-image';

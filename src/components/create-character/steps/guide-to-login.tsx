@@ -2,7 +2,7 @@ import HomeBg from '@/assets/images/homeBg.jpg';
 import KakaoLoginButton from '@/components/ui/KakaoLoginButton';
 import Image from 'next/image';
 import React from 'react';
-import FixedBottomArea from '../fixed-bottom-area';
+import FixedBottomArea from '../../fixed-bottom-area/fixed-bottom-area';
 import Header from '../header';
 import useCarousel from '../hooks/useCarousel';
 import Intro from '../intro';

@@ -5,7 +5,7 @@ import CtaButton from '@/components/ui/cta-button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import FixedBottomArea from '../fixed-bottom-area';
+import FixedBottomArea from '../../fixed-bottom-area/fixed-bottom-area';
 import Header from '../header';
 import Badge from '@/assets/images/badgeSm.png';
 import Story1 from '@/assets/images/story-1.webp';

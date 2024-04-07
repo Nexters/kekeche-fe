@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import CtaButton from '@/components/ui/cta-button';
-import FixedBottomArea from '@/components/fixed-bottom-area';
 import { PageContainer } from '@/components/ui';
+import FixedBottomArea from '@/components/fixed-bottom-area/fixed-bottom-area';
 
 export default {
     title: 'Components/CTAButton', // story 이름
@@ -28,7 +28,9 @@ export const BottomFixed: Story = {
     render: (props) => (
         <PageContainer>
             <div className="h-screen w-full gradation-bg">
-                <FixedBottomArea contents={<CtaButton {...props} className="mb-[31px]" />} />
+                <FixedBottomArea className="mb-[31px]">
+                    <CtaButton {...props} />
+                </FixedBottomArea>
             </div>
         </PageContainer>
     ),

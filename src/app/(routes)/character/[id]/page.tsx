@@ -1,5 +1,4 @@
 import NoteEditIcon from '@/assets/icons/note-edit_24x24.svg';
-import FixedBottomArea from '@/components/fixed-bottom-area';
 import CTAButton from '@/components/ui/cta-button';
 import { checkIsLoggedIn } from '@/services/auth/getMember';
 import { cookies } from 'next/headers';
@@ -16,6 +15,7 @@ import { characterSpecialtyOptions } from '@/store/query/useCharacterSpecialtyQu
 import { characterMemosOptions } from '@/store/query/useCharacterMemosQuery';
 import { PrefetchOptions } from '@/types/query';
 import PageContainerV2 from '@/components/page-container-v2/page-container-v2';
+import FixedBottomArea from '@/components/fixed-bottom-area/fixed-bottom-area';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
     const accessToken = `${cookies().get('accessToken')?.value}`;
@@ -43,17 +43,13 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
                         <CharacterMemos />
                     </PrefetchBoundary>
                 </Suspense>
-                <FixedBottomArea
-                    contents={
-                        <Link href={`?write=${characterId}`}>
-                            <CTAButton>
-                                <div className=" flex w-full items-center justify-center gap-[8px]">
-                                    <NoteEditIcon /> <span>{'먹이주기'}</span>
-                                </div>
-                            </CTAButton>
-                        </Link>
-                    }
-                />
+                <FixedBottomArea className="pb-[34px] ">
+                    <CTAButton as={Link} href={`?write=${characterId}`}>
+                        <div className=" flex w-full items-center justify-center gap-[8px]">
+                            <NoteEditIcon /> <span>{'먹이주기'}</span>
+                        </div>
+                    </CTAButton>
+                </FixedBottomArea>
             </div>
         </PageContainerV2>
     );

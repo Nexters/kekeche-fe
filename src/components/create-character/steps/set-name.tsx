@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import CtaButton from '@/components/ui/cta-button';
 import Intro from '../intro';
 import useCarousel from '../hooks/useCarousel';
-import FixedBottomArea from '../fixed-bottom-area';
+import FixedBottomArea from '../../fixed-bottom-area/fixed-bottom-area';
 import { useCreateCharacterContext } from '@/context/create-character-provider';
 
 const NAME_REGEX = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]{1,8}$/;

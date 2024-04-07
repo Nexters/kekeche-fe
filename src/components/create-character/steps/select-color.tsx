@@ -4,7 +4,7 @@ import Intro from '../intro';
 import { useCreateCharacterContext } from '@/context/create-character-provider';
 import CtaButton from '@/components/ui/cta-button';
 import CheckCircle from '@/assets/icons/check-circle.svg';
-import FixedBottomArea from '../fixed-bottom-area';
+import FixedBottomArea from '../../fixed-bottom-area/fixed-bottom-area';
 import { Colors } from '@/constants/character-info';
 
 type ColorId = (typeof Colors)[number]['id'];

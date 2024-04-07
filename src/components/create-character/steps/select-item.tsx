@@ -1,7 +1,7 @@
 import Intro from '../intro';
 import React, { useState } from 'react';
 import useCarousel from '../hooks/useCarousel';
-import FixedBottomArea from '../fixed-bottom-area';
+import FixedBottomArea from '../../fixed-bottom-area/fixed-bottom-area';
 import { Items, NO_ITEM_IDX } from '@/constants/character-info';
 import CtaButton from '@/components/ui/cta-button';
 import { useCreateCharacterContext } from '@/context/create-character-provider';

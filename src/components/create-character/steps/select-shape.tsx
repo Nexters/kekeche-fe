@@ -3,7 +3,7 @@ import CtaButton from '@/components/ui/cta-button';
 import { Shapes } from '@/constants/character-info';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import FixedBottomArea from '../fixed-bottom-area';
+import FixedBottomArea from '../../fixed-bottom-area/fixed-bottom-area';
 import useCarousel from '../hooks/useCarousel';
 import Intro from '../intro';
 import { useCreateCharacterContext } from '@/context/create-character-provider';

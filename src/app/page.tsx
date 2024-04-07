@@ -1,7 +1,7 @@
 import HomeBg from '@/assets/images/homeBg.jpg';
 import Logo from '@/assets/images/logo.png';
 import Safe from '@/assets/images/safe.png';
-import FixedBottomArea from '@/components/create-character/fixed-bottom-area';
+import FixedBottomArea from '@/components/fixed-bottom-area/fixed-bottom-area';
 import PageContainerV2 from '@/components/page-container-v2/page-container-v2';
 import CtaButton from '@/components/ui/cta-button';
 import { checkIsLoggedIn } from '@/services/auth/getMember';

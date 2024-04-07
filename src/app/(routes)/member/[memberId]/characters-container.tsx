@@ -1,6 +1,5 @@
 'use client';
 
-import FixedBottomArea from '@/components/fixed-bottom-area';
 import CTAButton from '@/components/ui/cta-button';
 import { Member } from '@/services/auth/getMember';
 import { useCharactersQuery } from '@/store/query/useCharactersQuery';
@@ -8,6 +7,7 @@ import { Characters } from './characters';
 import { Header } from './header';
 import { MemberData } from './member-data';
 import Link from 'next/link';
+import FixedBottomArea from '@/components/fixed-bottom-area/fixed-bottom-area';
 
 type Props = {
     memberId: Member['memberId'];
@@ -27,7 +27,11 @@ export function CharactersContainer({ memberId }: Props) {
                 <MemberData joinDays={joinDays} memoCount={memoCount} />
                 <Characters isMyPage={isMyPage} characters={characters} />
             </div>
-            {!isMyPage && <FixedBottomArea contents={<CTAButton as={Link} href="/" text="내 캐릭터 만들러 가기" />} />}
+            {!isMyPage && (
+                <FixedBottomArea className="pb-[34px]">
+                    <CTAButton as={Link} href="/" text="내 캐릭터 만들러 가기" />
+                </FixedBottomArea>
+            )}
         </>
     );
 }
