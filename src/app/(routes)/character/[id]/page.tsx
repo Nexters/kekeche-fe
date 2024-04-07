@@ -1,6 +1,5 @@
 import NoteEditIcon from '@/assets/icons/note-edit_24x24.svg';
 import FixedBottomArea from '@/components/fixed-bottom-area';
-import { PageContainer } from '@/components/ui';
 import CTAButton from '@/components/ui/cta-button';
 import { checkIsLoggedIn } from '@/services/auth/getMember';
 import { cookies } from 'next/headers';
@@ -16,6 +15,7 @@ import { characterDetailQueryOptions, memberQueryOptions } from '@/store/query/u
 import { characterSpecialtyOptions } from '@/store/query/useCharacterSpecialtyQuery';
 import { characterMemosOptions } from '@/store/query/useCharacterMemosQuery';
 import { PrefetchOptions } from '@/types/query';
+import PageContainerV2 from '@/components/page-container-v2/page-container-v2';
 
 export default async function CharacterDetailPage({ params: { id } }: { params: { id: number } }) {
     const accessToken = `${cookies().get('accessToken')?.value}`;
@@ -33,7 +33,7 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
     ];
 
     return (
-        <PageContainer>
+        <PageContainerV2>
             <div className={`relative min-h-screen p-0 text-[18px]  font-[600] gradation-bg`}>
                 <Suspense>
                     <PrefetchBoundary prefetchOptions={options}>
@@ -55,6 +55,6 @@ export default async function CharacterDetailPage({ params: { id } }: { params: 
                     }
                 />
             </div>
-        </PageContainer>
+        </PageContainerV2>
     );
 }

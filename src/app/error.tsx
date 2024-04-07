@@ -17,13 +17,13 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
                 <div className=" text-H1 text-black">{'네트워크에 문제가 생겼어요!'}</div>
                 <div className="flex-2 mt-[40px] flex gap-[10px]">
                     <button
-                        className="bg-newGray-600 text-Subtitle1 h-[40px] w-[100px] rounded-[10px] text-white"
+                        className="h-[40px] w-[100px] rounded-[10px] bg-newGray-600 text-Subtitle1 text-white"
                         onClick={() => router.push('/')}
                     >
                         홈
                     </button>
                     <button
-                        className="bg-primary-500 text-Subtitle1 h-[40px] w-[100px] rounded-[10px] text-white"
+                        className="h-[40px] w-[100px] rounded-[10px] bg-primary-500 text-Subtitle1 text-white"
                         onClick={() => reset()}
                     >
                         다시 시도

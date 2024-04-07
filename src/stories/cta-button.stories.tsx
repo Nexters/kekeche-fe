@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import CtaButton from '@/components/ui/cta-button';
-import { PageContainer } from '@/components/ui';
 import FixedBottomArea from '@/components/fixed-bottom-area';
+import { PageContainer } from '@/components/ui';
 
 export default {
     title: 'Components/CTAButton', // story 이름

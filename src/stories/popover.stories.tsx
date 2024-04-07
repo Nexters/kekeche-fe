@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { PageContainer } from '@/components/ui';
 import ActionButtonPopover from '../components/popover/action-button-popover';
+import PageContainerV2 from '@/components/page-container-v2/page-container-v2';
+import { PageContainer } from '@/components/ui';
 
 export default {
     title: 'Components/Popover', // story 이름

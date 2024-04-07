@@ -5,13 +5,14 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import MenuList from './menu-list';
 import { cookies } from 'next/headers';
+import PageContainerV2 from '@/components/page-container-v2/page-container-v2';
 
 export default async function My() {
     const { isLoggedIn, member } = await checkIsLoggedIn({ accessToken: `${cookies().get('accessToken')?.value}` });
     if (!isLoggedIn || member === undefined) redirect('/');
 
     return (
-        <PageContainer hasNavigator>
+        <PageContainerV2 hasNavigator>
             <div className="mb-2 px-6 py-2 text-bold24">내 정보</div>
             <section>
                 <div className="flex h-[100px] justify-between gap-3 px-6 py-3">
@@ -33,6 +34,6 @@ export default async function My() {
             </section>
             <div className="h-3 bg-[#F7F8F9]" role="presentation" />
             <MenuList member={member} />
-        </PageContainer>
+        </PageContainerV2>
     );
 }

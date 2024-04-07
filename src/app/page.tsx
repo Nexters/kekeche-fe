@@ -2,7 +2,7 @@ import HomeBg from '@/assets/images/homeBg.jpg';
 import Logo from '@/assets/images/logo.png';
 import Safe from '@/assets/images/safe.png';
 import FixedBottomArea from '@/components/create-character/fixed-bottom-area';
-import { PageContainer } from '@/components/ui';
+import PageContainerV2 from '@/components/page-container-v2/page-container-v2';
 import CtaButton from '@/components/ui/cta-button';
 import { checkIsLoggedIn } from '@/services/auth/getMember';
 import { cookies } from 'next/headers';
@@ -14,7 +14,7 @@ export default async function Home() {
     const { isLoggedIn, member } = await checkIsLoggedIn({ accessToken: `${cookies().get('accessToken')?.value}` });
     if (isLoggedIn) redirect(`member/${member?.memberId}`);
     return (
-        <PageContainer>
+        <PageContainerV2>
             <Image quality={100} priority alt={'홈 배경'} src={HomeBg} fill />
             <Image quality={100} alt={'safe'} src={Safe} width={540} height={100} className="absolute top-0 " />
             <div className="z-[2] mt-[200px] flex w-full justify-center">
@@ -34,6 +34,6 @@ export default async function Home() {
                     </a>
                 </div>
             </FixedBottomArea>
-        </PageContainer>
+        </PageContainerV2>
     );
 }

@@ -10,6 +10,7 @@ import CharacterCard from './character-card';
 import CharacterCreateButton from './character-create-button';
 import CharacterCreateLink from './character-create-link';
 import { LikeButton, LikeButtonWithTooltip } from './like-button';
+import PageContainerV2 from '@/components/page-container-v2/page-container-v2';
 
 const MAXIMUM_CHARACTER = 6;
 
@@ -26,7 +27,7 @@ export default async function Home({ params: { memberId } }: { params: { memberI
     const showCharacterCreateButton = isMyPage && characters.characters.length < MAXIMUM_CHARACTER;
 
     return (
-        <PageContainer hasNavigator={characters?.isMe}>
+        <PageContainerV2 hasNavigator={characters?.isMe}>
             <div className="flex flex-1 flex-col">
                 <header className="flex items-center justify-between py-5 pl-6 pr-7">
                     <h1 className="text-bold24 text-[#494E59]">{headerText}</h1>
@@ -106,6 +107,6 @@ export default async function Home({ params: { memberId } }: { params: { memberI
                 </div>
             )}
             <A2HS />
-        </PageContainer>
+        </PageContainerV2>
     );
 }
