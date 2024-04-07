@@ -19,6 +19,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast, useToast } from '@/components/ui-shadcn/toast/use-toast';
 import { useCharacterDetailQueries } from '@/store/query/useCharacterDetailQueries';
+import Link from 'next/link';
 
 export default function Header() {
     const router = useRouter();
@@ -62,15 +63,9 @@ export default function Header() {
         <>
             <TopBar>
                 <TopBar.Left>
-                    <button
-                        onClick={() => {
-                            router.push(ROUTES.characters(member.memberId));
-                        }}
-                        aria-label="뒤로 가기 버튼"
-                        className="p-3"
-                    >
+                    <Link href={ROUTES.characters(member.memberId)} className="flex items-center justify-center p-3">
                         <BackArrowIcon fill="#3D4350" />
-                    </button>
+                    </Link>
                 </TopBar.Left>
                 <TopBar.Text>성장 기록지</TopBar.Text>
                 <TopBar.Right>

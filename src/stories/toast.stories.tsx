@@ -1,7 +1,7 @@
 import { Args, Meta, StoryObj } from '@storybook/react';
 import { PageContainer } from '@/components/ui';
 import { useToast } from '@/components/ui-shadcn/toast/use-toast';
-import { Toaster } from '../ui-shadcn/toast/toaster';
+import { Toaster } from '../components/ui-shadcn/toast/toaster';
 
 interface Props {
     description: string;

@@ -1,4 +1,3 @@
-import Header from '../header';
 import Intro from '../intro';
 import React, { useState } from 'react';
 import CtaButton from '@/components/ui/cta-button';

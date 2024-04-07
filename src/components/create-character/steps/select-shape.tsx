@@ -4,7 +4,6 @@ import { Shapes } from '@/constants/character-info';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import FixedBottomArea from '../fixed-bottom-area';
-import Header from '../header';
 import useCarousel from '../hooks/useCarousel';
 import Intro from '../intro';
 import { useCreateCharacterContext } from '@/context/create-character-provider';

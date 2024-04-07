@@ -1,6 +1,6 @@
 import { Args, Meta, StoryObj } from '@storybook/react';
 import { PageContainer } from '@/components/ui';
-import CharacterDetail from '../new-character-detail';
+import CharacterDetail from '../components/new-character-detail';
 
 const IMG_STORAGE_BASE_URL = 'https://kr.object.ncloudstorage.com/kekeche-character';
 

@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { PageContainer } from '@/components/ui';
-import CTAButton from '../ui/cta-button';
+import CTAButton from '../components/ui/cta-button';
 import { useState } from 'react';
-import Dialog from '../dialog';
-import AlertDialog from '../dialog/alert-dialog';
+import Dialog from '../components/dialog';
+import AlertDialog from '../components/dialog/alert-dialog';
 
 export default {
     title: 'Components/Dialog', // story 이름

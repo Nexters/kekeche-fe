@@ -1,12 +1,13 @@
-import getMember from '@/services/auth/getMember';
+import getMember, { Member } from '@/services/auth/getMember';
 import getCharacterDetail from '@/services/character/getCharacterDetail';
+import { BasicSuspenseQueryOptions } from '@/types/query';
 import { useSuspenseQueries } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 
 const MEMBER_STALE_TIME = 1000 * 60 * 1;
 const CHARACTER_DETAIL_STALE_TIME = 1000 * 60 * 5;
 
-export const memberQueryOptions = (accessToken: string) => ({
+export const memberQueryOptions = (accessToken: string): BasicSuspenseQueryOptions<Member> => ({
     queryKey: ['auth'],
     queryFn: () => getMember({ accessToken }),
 });
