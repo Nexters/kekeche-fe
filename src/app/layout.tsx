@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     href="/assets/splashscreens/iphonex_splash.png"
                 />
             </head>
-            <body className={pretendard.className}>
+            <body className={`${pretendard.variable} font-pretendard`}>
                 <QueryClientContext>
                     {children}
                     <MemoOverlay />
