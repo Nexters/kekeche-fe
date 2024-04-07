@@ -21,9 +21,7 @@ export default async function Home() {
                 <Image quality={100} alt={'로고'} src={Logo} width={256} height={77} />
             </div>
             <FixedBottomArea className="mb-[31px] gap-[16px]">
-                <Link href="/create">
-                    <CtaButton text="내 캐릭터 만들기" />
-                </Link>
+                <CtaButton as={Link} text="내 캐릭터 만들기" href="/create" />
                 <div className="semibold-14 text-gray-400 ">
                     {'이미 도감이 있으면 '}
                     <a

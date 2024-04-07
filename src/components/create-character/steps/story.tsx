@@ -11,6 +11,7 @@ import Badge from '@/assets/images/badgeSm.png';
 import Story1 from '@/assets/images/story-1.webp';
 import Story2 from '@/assets/images/story-2.webp';
 import Story3 from '@/assets/images/story-3.webp';
+import Link from 'next/link';
 
 export function Story() {
     const router = useRouter();
@@ -59,7 +60,7 @@ export function Story() {
                                     '캐릭터에게 그 날의 일기 메모를 먹이로 줄 수 있어요. 메모는 하루에 3개까지 쓸 수 있어요.'
                                 }
                             />
-                            <CtaButton as="Link" text="다음" href="/create?step=1" />
+                            <CtaButton as={Link} text="다음" href="/create?step=1" />
                         </FixedBottomArea>
                     </>
                 )

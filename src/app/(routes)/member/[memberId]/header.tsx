@@ -1,5 +1,5 @@
-import { LikeButton, LikeButtonWithTooltip } from './like-button';
 import { GetCharactersResponse } from '@/services/character/getCharacters';
+import { LikeButtonWithTooltip, LikeButton } from './like-button';
 
 type Props = {
     isMyPage: boolean;

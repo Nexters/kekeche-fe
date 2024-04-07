@@ -1,53 +1,25 @@
 'use client';
 
-import Link from 'next/link';
-import { twMerge } from 'tailwind-merge';
+import { ComponentPropsWithoutRef, ElementType } from 'react';
 
-type BaseProps = {
+type ExtendedProps<C extends ElementType = 'button'> = {
     text?: string;
+    as?: C;
     children?: React.ReactNode;
-    className?: string;
 };
 
-type LinkProps = {
-    as?: 'Link';
-    href: string;
-    disabled?: boolean;
-} & BaseProps;
+type Props<C extends ElementType = 'button'> = ExtendedProps<C> &
+    Omit<ComponentPropsWithoutRef<C>, keyof ExtendedProps>;
 
-type ButtonProps = {
-    as?: 'button';
-} & BaseProps &
-    React.ButtonHTMLAttributes<HTMLButtonElement>;
-
-type Props = LinkProps | ButtonProps;
-
-const isLink = (props: Props): props is LinkProps => {
-    return props.as === 'Link';
-};
-
-export default function CTAButton(props: Props) {
+export default function CTAButton<C extends ElementType = 'button'>({ text, as, children, ...props }: Props<C>) {
+    const Component = as ?? 'button';
     return (
-        <>
-            {isLink(props) ? (
-                <Link
-                    className={`flex h-[56px] w-[343px] items-center justify-center rounded-[16px] text-[18px] font-[600] text-white shadow-[0_0_4px_0_rgba(0,0,0,0.25)]  ${props.disabled ? 'bg-[#7D7D7D] shadow-none active:shadow-none ' : ' bg-primary-500 active:shadow-[inset_2px_2px_5px_rgba(0,0,0,0.5)]'}`}
-                    href={props.href}
-                >
-                    {props.text}
-                </Link>
-            ) : (
-                <button
-                    {...props}
-                    className={twMerge(
-                        `h-[56px] w-[343px] rounded-[16px] text-[18px] font-[600] text-white shadow-[0_0_4px_0_rgba(0,0,0,0.25)]  ${props.disabled ? 'bg-[#7D7D7D] shadow-none active:shadow-none ' : ' bg-primary-500 active:shadow-[inset_2px_2px_5px_rgba(0,0,0,0.5)]'}`,
-                        props.className,
-                    )}
-                >
-                    {props.text}
-                    {props.children}
-                </button>
-            )}
-        </>
+        <Component
+            className={`flex h-[56px] w-[343px] items-center justify-center rounded-[16px] text-[18px] font-[600] text-white shadow-[0_0_4px_0_rgba(0,0,0,0.25)]  ${props.disabled ? 'bg-[#7D7D7D] shadow-none active:shadow-none ' : ' bg-primary-500 active:shadow-[inset_2px_2px_5px_rgba(0,0,0,0.5)]'}`}
+            {...props}
+        >
+            {text}
+            {children}
+        </Component>
     );
 }
