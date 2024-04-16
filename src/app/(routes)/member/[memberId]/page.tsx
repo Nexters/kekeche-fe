@@ -5,6 +5,8 @@ import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query
 import { charactersQueryOptions } from '@/store/query/useCharactersQuery';
 import { CharactersContainer } from './characters-container';
 
+export const runtime = 'edge';
+
 export default async function Home({ params: { memberId } }: { params: { memberId: number } }) {
     const accessToken = `${cookies().get('accessToken')?.value}`;
 
