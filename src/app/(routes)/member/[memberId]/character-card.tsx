@@ -67,21 +67,21 @@ export default function CharacterCard({ character, component, href, order }: Pro
 
             <div className="relative mx-auto my-[10px] h-[100px] w-[100px]">
                 <Image
+                    priority
                     width={100}
                     height={100}
                     alt={character.name}
                     src={character.characterImage}
                     className="absolute left-0 right-0"
-                    loading="lazy"
                 />
                 {character.itemImage && (
                     <Image
+                        priority
                         src={character.itemImage}
                         alt={character.name}
                         className="absolute left-0 top-0"
                         width={100}
                         height={100}
-                        loading="lazy"
                     />
                 )}
             </div>
