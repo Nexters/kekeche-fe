@@ -15,15 +15,7 @@ export function MemberData({ joinDays, memoCount }: Props) {
                         <div className="text-[20px] font-bold leading-[30px] text-[#2777EA]">{joinDays}일</div>
                     </div>
                     <div className="flex h-[50px] w-[50px] rounded-lg bg-white">
-                        <Image
-                            alt=""
-                            objectFit="cover"
-                            priority
-                            width={50}
-                            height={50}
-                            src={EggImage}
-                            className="rounded-lg"
-                        />
+                        <Image alt="" priority width={50} height={50} src={EggImage} className="rounded-lg" />
                     </div>
                 </div>
                 <div className="flex flex-1 items-center justify-between rounded-xl  bg-[#F6F8FC] px-5 py-[18px]">
@@ -32,15 +24,7 @@ export function MemberData({ joinDays, memoCount }: Props) {
                         <div className="text-[20px] font-bold leading-[30px] text-[#2777EA]">{memoCount}개</div>
                     </div>
                     <div className="flex h-[50px] w-[50px] rounded-lg bg-white">
-                        <Image
-                            alt=""
-                            objectFit="cover"
-                            priority
-                            width={50}
-                            height={50}
-                            src={PencilImage}
-                            className="rounded-lg"
-                        />
+                        <Image alt="" priority width={50} height={50} src={PencilImage} className="rounded-lg" />
                     </div>
                 </div>
             </div>
