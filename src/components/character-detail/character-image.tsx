@@ -1,15 +1,12 @@
-import { BubbleTexts } from '@/constants/bubble-texts';
 import { Character } from '@/types/character';
 import Image from 'next/image';
-import { useState } from 'react';
 import Polygon from '@/assets/icons/polygon.svg';
 import { AnimatePresence, AnimationProps, motion } from 'framer-motion';
+import { useBubble } from './useBubble';
 
 interface Props extends Pick<Character, 'characterImage' | 'itemImage'> {
     hasBubble?: boolean;
 }
-
-type BubbleTextId = (typeof BubbleTexts)[number]['id'];
 
 const animationProps: AnimationProps = {
     initial: { y: 50, scale: 0.2 },
@@ -18,41 +15,20 @@ const animationProps: AnimationProps = {
     transition: { duration: 0.3, ease: 'easeOut' },
 };
 
-const getRandomBubbleTextId = () => {
-    return Math.floor(Math.random() * BubbleTexts.length) as BubbleTextId;
-};
-
 export default function CharacterImage({ characterImage, itemImage, hasBubble = false }: Props) {
-    const [bubbleId, setBubbleId] = useState<BubbleTextId>(getRandomBubbleTextId());
-    const [disabled, setDisabled] = useState(false);
-
-    const handleSetNewBubble = () => {
-        if (disabled) return;
-
-        setDisabled(true);
-        setBubbleId((prev) => {
-            let newId = getRandomBubbleTextId();
-            while (prev === newId) {
-                newId = getRandomBubbleTextId();
-            }
-            return newId;
-        });
-        setTimeout(() => {
-            setDisabled(false);
-        }, 700);
-    };
+    const { onBubbleChange, bubbleText, bubbleId } = useBubble();
 
     return (
-        <div onClick={handleSetNewBubble} className="flex h-auto w-full cursor-pointer flex-col items-center">
+        <div onClick={onBubbleChange} className="flex h-auto w-full cursor-pointer flex-col items-center">
             <AnimatePresence initial={false} mode="wait">
                 {hasBubble && (
                     <motion.div
                         {...animationProps}
                         key={bubbleId}
-                        className="mb-[-10px] mt-[12px] flex flex h-[73px] w-full flex-col items-center justify-center p-[8px] "
+                        className="mb-[-10px] mt-[12px] flex h-[73px] w-full flex-col items-center justify-center p-[8px] "
                     >
                         <div className=" w-auto rounded-[8px] bg-primary-500 px-[16px] py-[10px] text-[14px] font-[600] text-white">
-                            {BubbleTexts[bubbleId].text}
+                            {bubbleText}
                         </div>
                         <Polygon />
                     </motion.div>

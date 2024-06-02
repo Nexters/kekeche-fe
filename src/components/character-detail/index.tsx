@@ -1,8 +1,6 @@
 import { Keywords } from '@/constants/character-info';
 import { Character } from '@/types/character';
-import Image from 'next/image';
-import { forwardRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { Suspense, forwardRef, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
