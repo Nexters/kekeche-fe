@@ -1,7 +1,7 @@
 import CharacterImageWithItem from '@/components/character-image-with-item';
 import { CharacterImageProps } from '@/types/character';
-import useBubbleText from '../hooks/useBubbleText';
 import BubbleText from '../bubble-text';
+import { useBubble } from '@/components/character-detail/useBubble';
 
 type Props = Omit<CharacterImageProps, 'size'> & {
     /**
@@ -11,13 +11,13 @@ type Props = Omit<CharacterImageProps, 'size'> & {
 };
 
 export default function CharacterImage({ hasBubble: withBubble = false, ...props }: Props) {
-    const { handleSetNewBubble, bubbleId } = useBubbleText();
+    const { onBubbleChange, bubbleText, bubbleId } = useBubble();
 
     return (
         <>
             {withBubble ? (
-                <div onClick={handleSetNewBubble} className="flex h-auto w-full cursor-pointer flex-col items-center">
-                    <BubbleText bubbleId={bubbleId} />
+                <div onClick={onBubbleChange} className="flex h-auto w-full cursor-pointer flex-col items-center">
+                    <BubbleText bubbleId={bubbleId} bubbleText={bubbleText} />
                     <CharacterImageWithItem size="large" {...props} />
                 </div>
             ) : (
