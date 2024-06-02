@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { BottomTabNavigatorV2 } from './bottom-tab-navigator-v2';
 
@@ -20,7 +20,7 @@ export default function PageContainerV2({ children, hasNavigator, bgColor }: Pro
                 style={{ minHeight: '100dvh' }}
             >
                 <div className=" relative flex h-full flex-1 flex-col overflow-auto">{children}</div>
-                {hasNavigator && <BottomTabNavigatorV2 />}
+                <Suspense>{hasNavigator && <BottomTabNavigatorV2 />}</Suspense>
             </div>
         </div>
     );

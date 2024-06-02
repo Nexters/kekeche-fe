@@ -4,8 +4,8 @@ import { redirect } from 'next/navigation';
 import { PropsWithChildren } from 'react';
 
 export default async function MemosLayout({ children }: PropsWithChildren) {
-    const { isLoggedIn } = await checkIsLoggedIn({ accessToken: `${cookies().get('accessToken')?.value}` });
-    if (!isLoggedIn) redirect('/');
+    // const { isLoggedIn } = await checkIsLoggedIn({ accessToken: `${cookies().get('accessToken')?.value}` });
+    // if (!isLoggedIn) redirect('/');
 
     return <>{children}</>;
 }

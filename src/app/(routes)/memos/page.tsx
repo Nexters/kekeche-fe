@@ -6,6 +6,7 @@ import SearchBox from './_components/search-box';
 import { allMemosQueryOptions } from '@/store/query/useAllMemosQuery';
 import { PrefetchBoundary } from '@/context/prefetch-boundary';
 import PageContainerV2 from '@/components/page-container-v2/page-container-v2';
+import { AuthProvider } from './_components/auth';
 
 export default async function MemosPage() {
     const accessToken = `${cookies().get('accessToken')?.value}`;
@@ -18,6 +19,7 @@ export default async function MemosPage() {
             <SearchBox />
             <Suspense>
                 <PrefetchBoundary prefetchOptions={prefetchOptions}>
+                    <AuthProvider />
                     <MemosContainer />
                 </PrefetchBoundary>
             </Suspense>

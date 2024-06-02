@@ -3,6 +3,7 @@ import { NavigatorItem } from './navigator-item';
 import { QueryClient } from '@tanstack/react-query';
 import { memberQueryOptions } from '@/store/query/useCharacterDetailQueries';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export const Menus = [
     { label: '홈', path: 'member/' },
@@ -14,8 +15,13 @@ export const Menus = [
 export async function BottomTabNavigatorV2() {
     const queryClient = new QueryClient();
 
-    const memeberId = (await queryClient.ensureQueryData(memberQueryOptions(`${cookies().get('accessToken')?.value}`)))
-        .memberId;
+    let memeberId: number;
+    try {
+        memeberId = (await queryClient.ensureQueryData(memberQueryOptions(`${cookies().get('accessToken')?.value}`)))
+            .memberId;
+    } catch (error) {
+        redirect('/');
+    }
 
     return (
         <div className="border-top nav-bar sticky bottom-0 left-0 right-0 z-10 border-t border-t-[#E8EAEE] bg-white">
