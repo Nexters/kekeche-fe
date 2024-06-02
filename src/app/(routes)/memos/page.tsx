@@ -16,11 +16,11 @@ export default async function MemosPage() {
         <PageContainerV2 bgColor="bg-[#F8F8FB]" hasNavigator>
             <Header text="기록" />
             <SearchBox />
-            {/* <Suspense> */}
-            <PrefetchBoundary prefetchOptions={prefetchOptions}>
-                <MemosContainer />
-            </PrefetchBoundary>
-            {/* </Suspense> */}
+            <Suspense>
+                <PrefetchBoundary prefetchOptions={prefetchOptions}>
+                    <MemosContainer />
+                </PrefetchBoundary>
+            </Suspense>
         </PageContainerV2>
     );
 }
