@@ -16,7 +16,15 @@ export default async function Home() {
     return (
         <PageContainerV2>
             <Image quality={100} priority alt={'홈 배경'} src={HomeBg} fill />
-            <Image quality={100} alt={'safe'} src={Safe} width={540} height={100} className="absolute top-0 " />
+            <Image
+                quality={100}
+                priority
+                alt={'safe'}
+                src={Safe}
+                width={540}
+                height={100}
+                className="absolute top-0 "
+            />
             <div className="z-[2] mt-[200px] flex w-full justify-center">
                 <Image quality={100} alt={'로고'} src={Logo} width={256} height={77} />
             </div>
